@@ -4,6 +4,7 @@ var croupierFinished = false
 var playerFinished = false
 var aiFinished = false
 var cardPos = {}
+var revolver_pressed = false
 
 var cardDict = {
 	"Ace_of_Clubs": {"value": 1, "image_path": "res://Cards/ace_of_clubs.png"},
@@ -76,5 +77,3 @@ func _ready():
 			}
 		else:
 			print("Warning: Node place", i, " not found.")
-
-	print(positions_dict)  # Debug print to check values
