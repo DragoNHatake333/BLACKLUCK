@@ -1,2 +1,1 @@
 Latest: https://github.com/DragoNHatake333/BlackLuck/releases
-HELLO GUYS THIS IS MY FIRST VIDEO ON THE YOUTUBE PLEASE SUBSCRIBE AND LIKE THE VIDEO
