@@ -27,17 +27,15 @@ func _on_game_manager_call_croupier() -> void:
 	print("Croupier: The croupier is here!")
 	randomizeDict()
 	
-	if Globals.revolver_press == true:
+	if Globals.revolver_pressed == true:
 		centerHand = {
 			1: {"placement": 6, "card": ""},
 			2: {"placement": 7, "card": ""}, 
 			3: {"placement": 8, "card": ""},
-			4: {"placement": 9, "card": ""},
-			5: {"placement": 10, "card": ""}
 		}
 		centerCards = 0
 	
-	centerGive = (centerCards - 5) * -1
+	centerGive = (centerCards - 3) * -1
 	
 	#Adding the amount of cards missing to the list newcardGive
 	for i in range(centerGive):
@@ -46,7 +44,7 @@ func _on_game_manager_call_croupier() -> void:
 	#Adding the values to the dictionary
 	var idx = 1
 	for i in newcardGive:
-		while idx <= centerGive + 1 and idx<= 5:
+		while idx <= centerGive + 1 and idx<= 3:
 			if centerHand[idx]["card"] == "":
 				centerHand[idx]["card"] = i
 				idx += 1
@@ -61,7 +59,7 @@ func _on_game_manager_call_croupier() -> void:
 			var sprite = Sprite2D.new()
 			sprite.texture = load(Globals.cardDict[card_name]["image_path"])
 			
-			var adjust_key = key + 5
+			var adjust_key = key + 6
 			
 			if key in Globals.positions_dict:
 				var position = Globals.positions_dict[adjust_key]
