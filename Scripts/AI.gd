@@ -1,6 +1,8 @@
 extends Node
 
 func _on_game_manager_call_ai() -> void:
-	print("AI: AI is here.")
-	Globals.aiFinished = true
-	print("AI: AI is finished.")
+	Globals.aiTurn = true
+	print("AI: Start.")
+	while Globals.aiTurn == true:
+		await get_tree().create_timer(1).timeout
+	print("AI: Done.")
