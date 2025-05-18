@@ -5,7 +5,7 @@
 GitHub és una plataforma per guardar i mantenir actualitzat el teu programa de manera neta i organitzada.
 
 ### Que es pot veure a través del nostre GitHub:
-1. Quan actualitzem el nostre joc a [*activity*](https://github.com/DragoNHatake333/BlackLuck/activity). Per exemple, si avui hagués arreglat un error que deixa obrir el joc, pujaria una actualització que es digués "*Fixed: Game not opening*".
+1. Quan actualitzem el nostre joc a [*activity*](https://github.com/DragoNHatake333/BlackLuck/activity). Per exemple, si avui hagués arreglat un error que no deixa obrir el joc, pujaria una actualització que es digués "*Fixed: Game not opening*".
 2. Versions **temporals** del nostre joc a [*releases*](https://github.com/DragoNHatake333/BlackLuck/releases). Aquestes versions estan pensades només per motius de **desenvolupament**.
 3. L'organització del projecte respecte a la producció del videojoc es pot trobar a [*project*](https://github.com/users/DragoNHatake333/projects/1).
 
