@@ -6,14 +6,14 @@ func randomizeDict():
 	print("Croupier: Shuffling deck...")
 	shuffledDeck = Globals.cardDict.keys()  # Refresh the deck from current available cards
 	shuffledDeck.shuffle()
-func _ready() -> void:
-	pass
-	
-func _process(delta: float) -> void:
-	pass
 
 func _on_game_manager_call_croupier() -> void:
+	Globals.croupierTurn = true
 	print("Croupier: Start")
+	if Globals.cardDict.size() < 2 :
+		print("Croupier: Deck is empty. Resetting...")
+		Globals.cardDict = Globals.fullDeck.duplicate(true)
+	
 	
 	randomizeDict()
 	
@@ -33,7 +33,6 @@ func _on_game_manager_call_croupier() -> void:
 				break
 			else:
 				idx += 1
-	print(Globals.centerHand)
 	
 	#Showing the cards
 	for key in Globals.centerHand:
@@ -56,5 +55,5 @@ func _on_game_manager_call_croupier() -> void:
 		if card_key != "":
 			Globals.cardDict.erase(card_key)
 	
-	Globals.croupierFinished = true
 	print("Croupier: Done")
+	Globals.croupierTurn = false

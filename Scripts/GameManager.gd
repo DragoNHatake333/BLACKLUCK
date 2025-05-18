@@ -36,16 +36,14 @@ var AI = "/root/Main/AI"
 func callingCroupier():
 	callCroupier.emit()
 	print("GameManager: Croupier done")
-	Globals.croupierFinished = false
 func callingPlayer():
 	callPlayer.emit()
-	while Globals.playerFinished == false:
+	while Globals.playerTurn == true:
 			await get_tree().create_timer(1).timeout
 	print("GameManager: Player is done!")
-	Globals.playerFinished = false
 func callingAI():
 	callAI.emit()
-	while Globals.aiFinished == false:
+	while Globals.aiTurn == true:
 		await get_tree().create_timer(1).timeout
 	print("GameManager: AI done")
 	Globals.aiFinished = false
@@ -53,18 +51,40 @@ func playing():
 	callingCroupier()
 	if ownsTurn == false:
 		callingPlayer()
-		while Globals.playerFinished == false:
+		while Globals.playerTurn == true:
 			await get_tree().create_timer(1).timeout
 	elif ownsTurn == true:
 		callingAI()
-		while Globals.aiFinished == false:
+		while Globals.aiTurn == true:
 			await get_tree().create_timer(1).timeout
 	turnNumber += 1
 	ownsTurn = !ownsTurn
-	_ready()
+	game_logic()
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	Engine.set_max_fps(240)
+	print("GameManager: Start")
+	game_logic()
+
+func game_logic():
+	if Globals.healthP1 == 0:
+		print("Player 1 dies...")
+		endgame = true
+	elif Globals.healthP2 == 0:
+		print("Player 2 dies...")
+		endgame = true
+	else:
+		if cardAmountP2 == 5 or cardAmountP1 == 5:
+			if saveRound == true:
+				if cardSumP1 > cardSumP2:
+					Globals.healthP2 -= 1
+				elif cardSumP2 > cardSumP1:
+					Globals.healthP1 -= 1
+				saveRound = false
+			elif firstRound == true and cardAmountP2 == 5 or cardAmountP1 == 5 and firstRound == false:
+				saveRound = true
+		playing()
 	Engine.set_max_fps(240)
 	
 	print("GameManager: Start")
@@ -90,8 +110,3 @@ func _ready() -> void:
 				playing()
 		else:
 			playing()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
