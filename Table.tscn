@@ -1,11 +1,11 @@
 [gd_scene load_steps=9 format=3 uid="uid://byadrotxvbue2"]
 
-[ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://MESA.png" id="1_std8q"]
+[ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
 [ext_resource type="Script" uid="uid://gvvf37bdvkx1" path="res://Scripts/Croupier.gd" id="3_ubgcr"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
 [ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
-[ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://HPP.gd" id="6_amdel"]
+[ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/HPP.gd" id="6_amdel"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
 radius = 38.2884
