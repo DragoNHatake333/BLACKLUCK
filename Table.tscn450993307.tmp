@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=8 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -9,8 +9,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
 radius = 38.2884
-
-[sub_resource type="LabelSettings" id="LabelSettings_amdel"]
 
 [node name="Main" type="Node2D"]
 
@@ -100,17 +98,13 @@ offset_bottom = 583.0
 text = "Revolver"
 
 [node name="Label" type="Label" parent="."]
-offset_left = 100.0
-offset_top = 951.0
-offset_right = 193.0
-offset_bottom = 1008.0
-label_settings = SubResource("LabelSettings_amdel")
-horizontal_alignment = 1
-vertical_alignment = 1
+offset_left = 86.0
+offset_top = 86.0
+offset_right = 251.0
+offset_bottom = 140.0
 script = ExtResource("6_amdel")
 
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
 [connection signal="callCroupier" from="GameManager" to="Croupier" method="_on_game_manager_call_croupier"]
-[connection signal="callCroupier" from="GameManager" to="Player" method="_on_game_manager_call_croupier"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
 [connection signal="pressed" from="Button" to="Player" method="_on_button_pressed"]

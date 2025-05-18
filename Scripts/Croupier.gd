@@ -1,60 +1,43 @@
 extends Node
 
-var centerHand = {
-	1: {"placement": 6, "card": ""},
-	2: {"placement": 7, "card": ""}, 
-	3: {"placement": 8, "card": ""},
-	4: {"placement": 9, "card": ""},
-	5: {"placement": 10, "card": ""}
-}
-	
-var centerCards = 0
-var centerGive = 0
-var newcardGive = []
-
 var shuffledDeck = Globals.cardDict.keys()
 
 func randomizeDict():
-	print("Croupier: Randomizing keys!")
+	print("Croupier: Shuffling deck...")
+	shuffledDeck = Globals.cardDict.keys()  # Refresh the deck from current available cards
 	shuffledDeck.shuffle()
 func _ready() -> void:
-	print("Croupier: Croupier is on.")
-	_on_game_manager_call_croupier()
+	pass
+	
 func _process(delta: float) -> void:
 	pass
 
 func _on_game_manager_call_croupier() -> void:
-	print("Croupier: The croupier is here!")
+	print("Croupier: Start")
+	
 	randomizeDict()
 	
-	if Globals.revolver_pressed == true:
-		centerHand = {
-			1: {"placement": 6, "card": ""},
-			2: {"placement": 7, "card": ""}, 
-			3: {"placement": 8, "card": ""},
-		}
-		centerCards = 0
-	
-	centerGive = (centerCards - 3) * -1
+	Globals.centerGive = (Globals.centerCards - 3) * -1
 	
 	#Adding the amount of cards missing to the list newcardGive
-	for i in range(centerGive):
-		newcardGive.append(shuffledDeck[i])
-	
+	for i in range(Globals.centerGive):
+		Globals.newcardGive.append(shuffledDeck[i])
+
 	#Adding the values to the dictionary
 	var idx = 1
-	for i in newcardGive:
-		while idx <= centerGive + 1 and idx<= 3:
-			if centerHand[idx]["card"] == "":
-				centerHand[idx]["card"] = i
+	for i in Globals.newcardGive:
+		while idx <= Globals.centerGive + 1 and idx<= 3:
+			if Globals.centerHand[idx]["card"] == "":
+				Globals.centerHand[idx]["card"] = i
 				idx += 1
 				break
 			else:
 				idx += 1
+	print(Globals.centerHand)
 	
 	#Showing the cards
-	for key in centerHand:
-		var card_name = centerHand[key]["card"]
+	for key in Globals.centerHand:
+		var card_name = Globals.centerHand[key]["card"]
 		if card_name in Globals.cardDict:
 			var sprite = Sprite2D.new()
 			sprite.texture = load(Globals.cardDict[card_name]["image_path"])
@@ -68,9 +51,10 @@ func _on_game_manager_call_croupier() -> void:
 			add_child(sprite)
 	
 	#Erasing the cards from cardDict
-	for key in centerHand.keys():
-		var card_key = centerHand[key]["card"]
+	for key in Globals.centerHand.keys():
+		var card_key = Globals.centerHand[key]["card"]
 		if card_key != "":
 			Globals.cardDict.erase(card_key)
 	
 	Globals.croupierFinished = true
+	print("Croupier: Done")

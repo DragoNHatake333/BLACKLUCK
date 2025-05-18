@@ -1,7 +1,5 @@
 extends Node
 #Health
-var healthP1 = 0
-var healthP2 = 3
 #Who owns the turn
 var ownsTurn = false
 #Amount of cards on players hand
@@ -37,31 +35,30 @@ var AI = "/root/Main/AI"
 
 func callingCroupier():
 	callCroupier.emit()
-	while Globals.croupierFinished == false:
-		await get_tree().create_timer(4.0).timeout
-		print("Waiting 4 second...")
-	print("GameManager: Croupier is done!")
+	print("GameManager: Croupier done")
 	Globals.croupierFinished = false
 func callingPlayer():
 	callPlayer.emit()
 	while Globals.playerFinished == false:
-		await get_tree().create_timer(4.0).timeout
-		print("Waiting 4 second...")
+			await get_tree().create_timer(1).timeout
 	print("GameManager: Player is done!")
 	Globals.playerFinished = false
 func callingAI():
 	callAI.emit()
 	while Globals.aiFinished == false:
-		await get_tree().create_timer(4.0).timeout
-		print("Waiting 4 second...")
-	print("GameManager: AI is done!")
+		await get_tree().create_timer(1).timeout
+	print("GameManager: AI done")
 	Globals.aiFinished = false
 func playing():
 	callingCroupier()
 	if ownsTurn == false:
 		callingPlayer()
+		while Globals.playerFinished == false:
+			await get_tree().create_timer(1).timeout
 	elif ownsTurn == true:
 		callingAI()
+		while Globals.aiFinished == false:
+			await get_tree().create_timer(1).timeout
 	turnNumber += 1
 	ownsTurn = !ownsTurn
 	_ready()
@@ -70,20 +67,20 @@ func playing():
 func _ready() -> void:
 	Engine.set_max_fps(240)
 	
-	print("GameManager: GameManager is on.")
-	if healthP1 == 0:
+	print("GameManager: Start")
+	if Globals.healthP1 == 0:
 		print("Player 1 dies...")
 		endgame = true
-	elif healthP2 == 0:
+	elif Globals.healthP2 == 0:
 		print("Player 2 dies...")
 		endgame = true
 	else:
 		if cardAmountP2 or cardAmountP1 == 5:
 			if saveRound == true:
 				if cardSumP1 > cardSumP2:
-					healthP2 -= 1
+					Globals.healthP2 -= 1
 				elif cardSumP2 > cardSumP1:
-					healthP1 -= 1
+					Globals.healthP1 -= 1
 				saveRound = false
 				playing()
 			elif firstRound == true and cardAmountP2 == 5 or cardAmountP1 == 5 and firstRound == false:
@@ -93,6 +90,7 @@ func _ready() -> void:
 				playing()
 		else:
 			playing()
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:

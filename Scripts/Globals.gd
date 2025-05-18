@@ -1,10 +1,19 @@
 extends Node
-
+var pressed_revolver = false
+var healthP1 = 3
+var healthP2 = 3
 var croupierFinished = false
 var playerFinished = false
 var aiFinished = false
 var cardPos = {}
-var revolver_pressed = false
+var centerHand = {
+	1: {"placement": 6, "card": ""},
+	2: {"placement": 7, "card": ""}, 
+	3: {"placement": 8, "card": ""},
+}
+var centerCards = 0
+var centerGive = 0
+var newcardGive = []
 
 var cardDict = {
 	"Ace_of_Clubs": {"value": 1, "image_path": "res://Cards/ace_of_clubs.png"},
