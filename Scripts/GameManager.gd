@@ -25,10 +25,21 @@ var Croupier = "/root/Main/Croupier"
 var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
 
+
+
 # Startup
 func _ready() -> void:
 	Engine.set_max_fps(240)
 	print("GameManager: Start")
+	for i in range(1, 16):
+		var node = get_tree().root.find_child("place" + str(i), true, false)   
+		if node:
+			Globals.positions_dict[i] = {
+				"posx": node.global_position.x,
+				"posy": node.global_position.y
+			}
+		else:
+			print("Warning: Node place", i, " not found.")
 	game_logic()
 
 # Main game loop

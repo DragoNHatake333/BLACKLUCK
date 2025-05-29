@@ -11,9 +11,10 @@ config_version=5
 [application]
 
 config/name="BlackLuck"
-run/main_scene="res://Table.tscn"
+run/main_scene="uid://by7tqp72mpn2f"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
+config/volume=1.0
 
 [autoload]
 

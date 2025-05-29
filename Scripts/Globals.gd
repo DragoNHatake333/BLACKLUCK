@@ -133,13 +133,6 @@ var fullDeck = {
 var shuffledDeck = {}
 
 var positions_dict = {}
+
 func _ready():
-	for i in range(1, 16):
-		var node = get_tree().current_scene.find_child("place" + str(i), true, false)   
-		if node:
-			positions_dict[i] = {
-				"posx": node.global_position.x,
-				"posy": node.global_position.y
-			}
-		else:
-			print("Warning: Node place", i, " not found.")
+	pass
