@@ -1,10 +1,28 @@
 extends Node
+
+var playerPickedCard := false
 var croupierTurn = false
 var playerTurn = false
 var aiTurn = false
 var pressed_revolver = false
+var playerSum = 0
+var iaSum = 0
 var healthP1 = 3
 var healthP2 = 3
+var playerHand = {
+	1: {"placement": 1, "card": ""},
+	2: {"placement": 2, "card": ""},
+	3: {"placement": 3, "card": ""},
+	4: {"placement": 4, "card": ""},
+	5: {"placement": 5, "card": ""}
+}
+var aiHand = {
+	1: {"placement": 11, "card": ""},
+	2: {"placement": 12, "card": ""},
+	3: {"placement": 13, "card": ""},
+	4: {"placement": 14, "card": ""},
+	5: {"placement": 15, "card": ""}
+}
 var aiFinished = false
 var cardPos = {}
 var centerHand = {

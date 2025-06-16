@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=11 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
 [ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/HPP.gd" id="6_amdel"]
+[ext_resource type="PackedScene" uid="uid://c3qji651xjyo2" path="res://Scenes/DropZone.tscn" id="7_pr2o7"]
+[ext_resource type="Script" uid="uid://dbq6tb2gtd1lc" path="res://Scripts/CardsSumLabel.gd" id="8_wmey4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
 radius = 38.2884
@@ -30,65 +32,65 @@ script = ExtResource("5_626q0")
 position = Vector2(960, 540)
 texture = ExtResource("1_std8q")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Spawns" type="Area2D" parent="."]
 
-[node name="place1" type="CollisionShape2D" parent="Area2D"]
+[node name="place1" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(385, 202)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place2" type="CollisionShape2D" parent="Area2D"]
+[node name="place2" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(672, 202)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place3" type="CollisionShape2D" parent="Area2D"]
+[node name="place3" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(958, 202)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place4" type="CollisionShape2D" parent="Area2D"]
+[node name="place4" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1255, 202)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place5" type="CollisionShape2D" parent="Area2D"]
+[node name="place5" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1545, 202)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place6" type="CollisionShape2D" parent="Area2D"]
+[node name="place6" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(385, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place7" type="CollisionShape2D" parent="Area2D"]
+[node name="place7" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(672, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place8" type="CollisionShape2D" parent="Area2D"]
+[node name="place8" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(958, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place9" type="CollisionShape2D" parent="Area2D"]
+[node name="place9" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1255, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place10" type="CollisionShape2D" parent="Area2D"]
+[node name="place10" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1545, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place11" type="CollisionShape2D" parent="Area2D"]
+[node name="place11" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(385, 886)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place12" type="CollisionShape2D" parent="Area2D"]
+[node name="place12" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(672, 886)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place13" type="CollisionShape2D" parent="Area2D"]
+[node name="place13" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(958, 886)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place14" type="CollisionShape2D" parent="Area2D"]
+[node name="place14" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1255, 886)
 shape = SubResource("CircleShape2D_cwtje")
 
-[node name="place15" type="CollisionShape2D" parent="Area2D"]
+[node name="place15" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1545, 886)
 shape = SubResource("CircleShape2D_cwtje")
 
@@ -108,6 +110,30 @@ label_settings = SubResource("LabelSettings_amdel")
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("6_amdel")
+
+[node name="Drops" type="Node" parent="."]
+
+[node name="DropZone" parent="Drops" instance=ExtResource("7_pr2o7")]
+position = Vector2(382, 878)
+
+[node name="DropZone2" parent="Drops" instance=ExtResource("7_pr2o7")]
+position = Vector2(673, 879)
+
+[node name="DropZone3" parent="Drops" instance=ExtResource("7_pr2o7")]
+position = Vector2(960, 883)
+
+[node name="DropZone4" parent="Drops" instance=ExtResource("7_pr2o7")]
+position = Vector2(1247, 881)
+
+[node name="DropZone5" parent="Drops" instance=ExtResource("7_pr2o7")]
+position = Vector2(1537, 883)
+
+[node name="CardsSum" type="Label" parent="."]
+offset_left = 100.0
+offset_top = 951.0
+offset_right = 140.0
+offset_bottom = 974.0
+script = ExtResource("8_wmey4")
 
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
 [connection signal="callCroupier" from="GameManager" to="Croupier" method="_on_game_manager_call_croupier"]

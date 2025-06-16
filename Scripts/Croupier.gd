@@ -1,6 +1,7 @@
 extends Node
 
-var shuffledDeck = []
+var shuffled_deck: Array = []
+var card_scene := preload("res://Scenes/Card.tscn")
 
 func _on_game_manager_call_croupier() -> void:
 	Globals.croupierTurn = true
@@ -15,13 +16,13 @@ func _on_game_manager_call_croupier() -> void:
 	_randomize_deck()
 
 	# Determine how many cards to deal to center
-	Globals.centerGive = max(0, (Globals.centerCards - 3) * -1)
+	Globals.centerGive = max(0, 3 - Globals.centerCards)
 	Globals.newcardGive.clear()
 
-	# Pick cards from deck
+	# Pick and assign cards to center hand
 	_deal_new_cards_to_center()
 
-	# Render the cards visually
+	# Display the cards visually
 	_display_center_cards()
 
 	# Remove dealt cards from deck
@@ -35,41 +36,41 @@ func _on_game_manager_call_croupier() -> void:
 
 func _randomize_deck() -> void:
 	print("Croupier: Shuffling deck...")
-	shuffledDeck = Globals.cardDict.keys()
-	shuffledDeck.shuffle()
+	shuffled_deck = Globals.cardDict.keys()
+	shuffled_deck.shuffle()
 
 
 func _deal_new_cards_to_center() -> void:
-	for i in range(Globals.centerGive):
-		Globals.newcardGive.append(shuffledDeck[i])
+	var dealt_count := 0
+	var sorted_keys := Globals.centerHand.keys()
+	sorted_keys.sort()
 
-	var idx = 1
-	for card_name in Globals.newcardGive:
-		while idx <= 3:
-			if Globals.centerHand.has(idx) and Globals.centerHand[idx]["card"] == "":
-				Globals.centerHand[idx]["card"] = card_name
-				idx += 1
-				break
-			idx += 1
+	for key in sorted_keys:
+		if dealt_count >= Globals.centerGive:
+			break
+		if Globals.centerHand[key]["card"] == "":
+			var card_name = shuffled_deck[dealt_count]
+			Globals.centerHand[key]["card"] = card_name
+			Globals.newcardGive.append(card_name)
+			dealt_count += 1
 
 
 func _display_center_cards() -> void:
 	for key in Globals.centerHand:
 		var card_name = Globals.centerHand[key]["card"]
 		if card_name in Globals.cardDict:
-			var sprite = Sprite2D.new()
-			sprite.texture = load(Globals.cardDict[card_name]["image_path"])
-			sprite.scale = Vector2(0.38, 0.38)
+			var card = card_scene.instantiate()
+			card.name = card_name
+			card.get_node("CardSprite").texture = load(Globals.cardDict[card_name]["image_path"])
+			card.scale = Vector2(0.38, 0.38)
 
 			var adjust_key = key + 6
 			if adjust_key in Globals.positions_dict:
 				var pos = Globals.positions_dict[adjust_key]
-				sprite.position = Vector2(pos["posx"], pos["posy"])
-			add_child(sprite)
+				card.position = Vector2(pos["posx"], pos["posy"])
+			add_child(card)
 
 
 func _remove_used_cards_from_deck() -> void:
-	for key in Globals.centerHand.keys():
-		var card_name = Globals.centerHand[key]["card"]
-		if card_name != "":
-			Globals.cardDict.erase(card_name)
+	for card_name in Globals.newcardGive:
+		Globals.cardDict.erase(card_name)
