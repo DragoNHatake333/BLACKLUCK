@@ -1,38 +1,159 @@
 extends Control
 
 @onready var play_button = $VBoxContainer/PlayButton
-@onready var settings_button = $VBoxContainer/SettingsButton
+@onready var settings_button = $VBoxContainer/OptionsButton
 @onready var quit_button = $VBoxContainer/QuitButton
-@onready var settings_panel = $SettingsPanel
-@onready var volume_slider = $SettingsPanel/VBoxContainer/HBoxContainer/VolumeSlider
+@onready var settings_panel = $OptionsPanel
+@onready var menu_buttons = $VBoxContainer
+
+# Volumen
+@onready var volume_slider = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/MasterSlider
+@onready var volume_label = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/VolumeLabel
+var _target_volume := 1.0
+var _current_volume := 1.0
+var _fade_speed := 5.0
+var _last_percent_displayed := -1
+var _is_dragging_volume := false
+
+# Gráficos
+@onready var window_mode_label = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer/WindowModeLabel
+@onready var display_monitor_label = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorLabel
+@onready var apply_button = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/ApplyContainer/Apply
+
+var window_modes := ["Windowed", "Fullscreen", "Borderless"]
+var window_mode_index := 1
+var display_index := 0
+
+# ------------------------
+# Ready
+# ------------------------
 
 func _ready():
 	if OS.has_feature("web"):
 		quit_button.visible = false
+
 	play_button.pressed.connect(_on_play_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
-	$SettingsPanel/VBoxContainer/Back.pressed.connect(_on_back_pressed)
+	$OptionsPanel/VBoxContainer/Back.pressed.connect(_on_back_pressed)
 	volume_slider.value_changed.connect(_on_volume_changed)
+	apply_button.pressed.connect(_on_apply_pressed)
 
-	# Load saved volume or default
+	# Volumen inicial desde Project Settings
 	var vol = ProjectSettings.get_setting("application/config/volume", 0.5)
 	volume_slider.value = vol
-	AudioServer.set_bus_volume_db(0, linear_to_db(vol))
+	_apply_volume(vol)
+	volume_label.text = "%d%%" % int(round(vol * 100))
+	_current_volume = vol
+	_target_volume = vol
+	_last_percent_displayed = int(round(vol * 100))
+
+	display_index = DisplayServer.window_get_current_screen()
+	_update_graphics_labels()
+
+# ------------------------
+# Detectar drag manualmente
+# ------------------------
+
+func _unhandled_input(event):
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed and volume_slider.get_global_rect().has_point(get_global_mouse_position()):
+			_is_dragging_volume = true
+		elif not event.pressed and _is_dragging_volume:
+			_is_dragging_volume = false
+			_apply_volume(volume_slider.value)
+
+# ------------------------
+# Fade volumen si no está en drag
+# ------------------------
+
+func _process(delta):
+	if not _is_dragging_volume and abs(_current_volume - _target_volume) > 0.001:
+		_current_volume = lerp(_current_volume, _target_volume, delta * _fade_speed)
+	else:
+		_current_volume = _target_volume
+	
+	var clamped_volume = max(_current_volume, 0.01)
+	AudioServer.set_bus_volume_db(0, linear_to_db(clamped_volume))
+	AudioServer.set_bus_mute(0, _current_volume <= 0.01)
+
+# ------------------------
+# Audio
+# ------------------------
+
+func _on_volume_changed(value):
+	var percent = int(round(value * 100))
+	if percent != _last_percent_displayed:
+		volume_label.text = "%d%%" % percent
+		_last_percent_displayed = percent
+
+	if not _is_dragging_volume:
+		_apply_volume(value)
+
+func _apply_volume(value: float):
+	_target_volume = value
+	ProjectSettings.set_setting("application/config/volume", value)
+
+# ------------------------
+# Botones principales
+# ------------------------
 
 func _on_play_pressed():
 	get_tree().change_scene_to_file("res://Table.tscn")
 
 func _on_settings_pressed():
 	settings_panel.visible = true
+	menu_buttons.visible = false
 
 func _on_quit_pressed():
 	get_tree().quit()
 
 func _on_back_pressed():
 	settings_panel.visible = false
+	menu_buttons.visible = true
 
-func _on_volume_changed(value):
-	AudioServer.set_bus_volume_db(0, linear_to_db(value))
-	ProjectSettings.set_setting("application/config/volume", value)
-	ProjectSettings.save()
+# ------------------------
+# Gráficos
+# ------------------------
+
+func _update_graphics_labels():
+	var mode = window_modes[window_mode_index]
+	window_mode_label.text = " %s " % mode
+	display_monitor_label.text = " %d " % [display_index + 1]
+
+func _on_apply_pressed():
+	match window_modes[window_mode_index]:
+		"Windowed":
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+		"Borderless":
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
+		"Fullscreen":
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
+
+	display_index = clamp(display_index, 0, DisplayServer.get_screen_count() - 1)
+	DisplayServer.window_set_current_screen(display_index)
+	_update_graphics_labels()
+
+func _on_display_monitor_left_button_pressed() -> void:
+	if DisplayServer.get_screen_count() <= 1:
+		return
+	display_index = max(display_index - 1, 0)
+	_update_graphics_labels()
+
+func _on_display_monitor_right_button_pressed() -> void:
+	var screen_count = DisplayServer.get_screen_count()
+	if screen_count <= 1:
+		return
+	display_index = min(display_index + 1, screen_count - 1)
+	_update_graphics_labels()
+
+func _on_window_mode_left_button_pressed() -> void:
+	window_mode_index = (window_mode_index - 1 + window_modes.size()) % window_modes.size()
+	_update_graphics_labels()
+
+func _on_window_mode_right_button_pressed() -> void:
+	window_mode_index = (window_mode_index + 1) % window_modes.size()
+	_update_graphics_labels()
