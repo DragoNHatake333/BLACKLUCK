@@ -186,9 +186,10 @@ value = 1.0
 
 [node name="VolumeLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 4
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.37
 theme_override_font_sizes/font_size = 24
-text = "75"
+text = "100"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="OptionsPanel/VBoxContainer"]
