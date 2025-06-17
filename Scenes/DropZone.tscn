@@ -3,8 +3,9 @@
 [ext_resource type="Script" uid="uid://dk7y4qg2do5ey" path="res://Scripts/drop_zone.gd" id="1_ohmfm"]
 [ext_resource type="Texture2D" uid="uid://dasdbah8n4sl5" path="res://Cards/2_of_clubs.png" id="1_wb5sp"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_aciqr"]
-size = Vector2(114, 152)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ohmfm"]
+radius = 43.0
+height = 86.0
 
 [node name="DropZone" type="Area2D" groups=["drop_zone"]]
 collision_layer = 2
@@ -15,4 +16,5 @@ visible = false
 texture = ExtResource("1_wb5sp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_aciqr")
+shape = SubResource("CapsuleShape2D_ohmfm")
+debug_color = Color(0.92745, 0.127409, 0.586844, 0.42)

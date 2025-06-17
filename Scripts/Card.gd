@@ -4,6 +4,7 @@ var current_drop_zone: Area2D = null
 var dragging := false
 var drag_offset := Vector2.ZERO
 var original_position := Vector2.ZERO
+const DropZone := preload("res://Scripts/drop_zone.gd")
 
 func _ready():
 	input_pickable = true
@@ -27,34 +28,46 @@ func _try_snap_to_drop_zone():
 	for area in get_overlapping_areas():
 		if not area.is_in_group("drop_zone"):
 			continue
-		if area.occupied and area.occupying_card != self:
+
+		# Safely cast to DropZone
+		var drop_zone := area as DropZone
+		if drop_zone == null:
+			continue
+
+		if drop_zone.occupied and drop_zone.occupying_card != self:
 			continue
 
 		# Release previous drop zone
-		if current_drop_zone and current_drop_zone != area:
+		if current_drop_zone and current_drop_zone != drop_zone:
 			current_drop_zone.occupied = false
 			current_drop_zone.occupying_card = null
 
 		# Snap and claim new drop zone
-		global_position = area.global_position
-		current_drop_zone = area
-		area.occupied = true
-		area.occupying_card = self
+		global_position = drop_zone.global_position
+		current_drop_zone = drop_zone
+		drop_zone.occupied = true
+		drop_zone.occupying_card = self
 
-		# Update hand states
 		Globals.playerPickedCard = true
 
+		# Remove from previous slots
+		for i in Globals.playerHand:
+			if Globals.playerHand[i]["card"] == name:
+				Globals.playerHand[i]["card"] = ""
+
+		# Assign to new slot
 		for i in Globals.playerHand:
 			if Globals.playerHand[i]["card"] == "":
 				Globals.playerHand[i]["card"] = name
 				break
 
+		# Remove from center
 		for k in Globals.centerHand:
 			if Globals.centerHand[k]["card"] == name:
 				Globals.centerHand[k]["card"] = ""
 				break
 
-		# Reparent under Player node
+		# Reparent under Player
 		var player_node = get_node_or_null("/root/Main/Player")
 		if player_node:
 			get_parent().remove_child(self)
@@ -64,5 +77,11 @@ func _try_snap_to_drop_zone():
 		print(Globals.playerHand)
 		return
 
-	# Fallback to current drop zone or original position
+	# Fallback to current or original
 	global_position = current_drop_zone.global_position if current_drop_zone else original_position
+
+func _exit_tree():
+	if current_drop_zone:
+		current_drop_zone.occupied = false
+		current_drop_zone.occupying_card = null
+		current_drop_zone = null

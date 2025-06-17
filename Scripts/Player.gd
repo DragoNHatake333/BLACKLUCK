@@ -3,17 +3,35 @@ extends Node
 const CROUPIER_PATH := "/root/Main/Croupier"
 const GAME_MANAGER_PATH := "/root/Main/GameManager"
 
+var shot: AudioStreamPlayer
+
 func _on_button_pressed() -> void:
 	if not Globals.playerTurn:
 		return
 
-	print("Player: Revolver")
+	if Globals.current_chamber >= 6:
+		print("Revolver is empty. Spin again to reload.")
+		return
+
+	var chamber_index = Globals.current_chamber
+	var has_bullet = Globals.revolver_chambers[chamber_index]
+	print("Firing chamber", chamber_index + 1, "- Bullet?", has_bullet)
+
+	if has_bullet:
+		shot.play()
+		Globals.healthP1 -= 1
+		get_node(GAME_MANAGER_PATH).reset_round()
+	else:
+		print("Click. Chamber was empty.")
+
+	Globals.current_chamber += 1
 
 	_reset_croupier_scene()
 	_reset_center_cards()
 
 	get_node(GAME_MANAGER_PATH).callingCroupier()
 	Globals.playerTurn = false
+
 
 
 func _reset_croupier_scene() -> void:
@@ -46,10 +64,27 @@ func _on_game_manager_call_player() -> void:
 	print("Player: Start")
 
 	while Globals.playerTurn:
-		await get_tree().create_timer(1).timeout
+		await get_tree().process_frame
 
+	print(Globals.playerHand)
 	print("Player: Player is finished!")
-
+	print(Globals.playerSum)
 
 func _process(_delta: float) -> void:
-	pass  # Placeholder for frame-based logic if needed
+	var total := 0
+	var count := 0
+
+	for i in Globals.playerHand:
+		var card_name = Globals.playerHand[i]["card"]
+		if card_name != "":
+			count += 1
+			if Globals.fullDeck.has(card_name):
+				total += Globals.fullDeck[card_name]["value"]
+			else:
+				print("Card not found in fullDeck:", card_name)
+
+	Globals.playerSum = total
+	Globals.playerAmount = count
+
+func _ready() -> void:
+	shot = get_node("/root/Main/Sounds/shot")

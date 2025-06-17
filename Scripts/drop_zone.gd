@@ -1,15 +1,31 @@
 extends Area2D
+class_name DropZone  # Makes it usable with `as DropZone`
 
-var occupied := false
+var occupied: bool = false
 var occupying_card: Area2D = null
+@export var hand_index := 1  # If you're tracking hand slots
 
-func get_card_name() -> String:
-	if occupying_card:
-		return occupying_card.name
-	return ""
 
-func get_card_value() -> int:
-	var card_name = get_card_name()
-	if card_name != "" and Globals.cardDict.has(card_name):
-		return Globals.cardDict[card_name]["value"]
-	return 0
+func _on_area_entered(area: Area2D) -> void:
+	if not area.name.begins_with("Card"):
+		return
+
+	# Remove this card from any other slots
+	for i in Globals.playerHand.keys():
+		if Globals.playerHand[i]["card"] == area.name:
+			Globals.playerHand[i]["card"] = ""
+			print("Removed", area.name, "from slot", i)
+
+	# Assign this card to the current hand slot
+	Globals.playerHand[hand_index]["card"] = area.name
+	occupying_card = area
+	print("Assigned", area.name, "to slot", hand_index)
+
+
+func _on_area_exited(area: Area2D) -> void:
+	# If card exits this zone, and it's the one occupying it, clear it
+	if area == occupying_card:
+		print("Card", area.name, "left slot", hand_index)
+		if Globals.playerHand[hand_index]["card"] == area.name:
+			Globals.playerHand[hand_index]["card"] = ""
+		occupying_card = null

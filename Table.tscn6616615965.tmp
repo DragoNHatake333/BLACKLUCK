@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=16 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -8,13 +8,11 @@
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/Labels/Player/PHPLabel.gd" id="6_amdel"]
 [ext_resource type="PackedScene" uid="uid://c3qji651xjyo2" path="res://Scenes/DropZone.tscn" id="7_pr2o7"]
 [ext_resource type="Script" uid="uid://claeblc1cbfub" path="res://Scripts/Labels/Player/TurnLabel.gd" id="7_vtq4u"]
-[ext_resource type="Script" uid="uid://183maronmbmi" path="res://Scripts/Labels/AI/aiSum.gd" id="8_rspgj"]
 [ext_resource type="Script" uid="uid://dbq6tb2gtd1lc" path="res://Scripts/Labels/Player/CardsSumLabel.gd" id="8_wmey4"]
 [ext_resource type="Script" uid="uid://ddimr2wheyrh4" path="res://Scripts/Labels/AI/aiHP.gd" id="10_ugpjo"]
 [ext_resource type="Script" uid="uid://biixoi4puv1vu" path="res://Scripts/Labels/AI/aiTurn.gd" id="11_6ulvv"]
 [ext_resource type="Texture2D" uid="uid://cssa3hn7jc1t6" path="res://Assets/maxresdefault-752548946.jpg" id="12_6ulvv"]
 [ext_resource type="AudioStream" uid="uid://d1y38x1mlrw5g" path="res://Assets/Sound/death.mp3" id="13_x72e7"]
-[ext_resource type="AudioStream" uid="uid://cwn2fm4lc0vd5" path="res://Assets/Sound/gunshot.mp3" id="14_hbdwd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
 radius = 38.2884
@@ -113,23 +111,6 @@ position = Vector2(1247, 881)
 [node name="DropZone5" parent="drop_zone" instance=ExtResource("7_pr2o7")]
 position = Vector2(1537, 883)
 
-[node name="drop_zone_ai" type="Node" parent="."]
-
-[node name="DropZone6" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
-position = Vector2(384, 204)
-
-[node name="DropZone7" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
-position = Vector2(671, 200)
-
-[node name="DropZone8" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
-position = Vector2(960, 202)
-
-[node name="DropZone9" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
-position = Vector2(1252, 202)
-
-[node name="DropZone10" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
-position = Vector2(1544, 202)
-
 [node name="playerLabels" type="Node" parent="."]
 
 [node name="playerHP" type="Label" parent="playerLabels"]
@@ -197,7 +178,7 @@ text = "aiSum
 "
 horizontal_alignment = 1
 vertical_alignment = 1
-script = ExtResource("8_rspgj")
+script = ExtResource("8_wmey4")
 
 [node name="PlayerDeath" type="Sprite2D" parent="."]
 visible = false
@@ -222,9 +203,6 @@ script = ExtResource("5_626q0")
 
 [node name="deathsound" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("13_x72e7")
-
-[node name="shot" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("14_hbdwd")
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]

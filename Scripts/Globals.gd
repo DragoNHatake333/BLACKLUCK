@@ -1,5 +1,16 @@
 extends Node
 
+
+var revolver_chambers := []
+var current_chamber := 0
+
+func spin_revolver():
+	revolver_chambers = [false, false, false, false, false, false]
+	var bullet_index = randi() % 6
+	revolver_chambers[bullet_index] = true
+	current_chamber = 0
+	print("Revolver loaded. Bullet is in chamber", bullet_index + 1)
+		
 var playerPickedCard := false
 var croupierTurn = false
 var playerTurn = false
@@ -7,6 +18,8 @@ var aiTurn = false
 var pressed_revolver = false
 var playerSum = 0
 var iaSum = 0
+var playerAmount = 0
+var aiAmount = 0
 var healthP1 = 3
 var healthP2 = 3
 var playerHand = {
