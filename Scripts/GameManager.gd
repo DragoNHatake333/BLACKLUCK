@@ -138,7 +138,7 @@ func process_round_winner():
 		Globals.healthP2 -= 1
 	elif cardSumP2 > cardSumP1:
 		Globals.healthP1 -= 1
-	#get_node("/root/Main/GameManager").reset_round()
+	get_node("/root/Main/GameManager").reset_round()
 
 func callingCroupier():
 	callCroupier.emit()
