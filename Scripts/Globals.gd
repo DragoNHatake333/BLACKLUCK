@@ -17,11 +17,11 @@ var playerTurn = false
 var aiTurn = false
 var pressed_revolver = false
 var playerSum = 0
-var iaSum = 0
+var aiSum = 0
 var playerAmount = 0
 var aiAmount = 0
-var healthP1 = 3
-var healthP2 = 3
+var playerHP = 3
+var aiHP = 3
 var playerHand = {
 	1: {"placement": 1, "card": ""},
 	2: {"placement": 2, "card": ""},
@@ -160,10 +160,5 @@ var fullDeck = {
 	"Queen_of_Spades": {"value": 12, "image_path": "res://Cards/queen_of_spades.png"},
 	"King_of_Spades": {"value": 13, "image_path": "res://Cards/king_of_spades.png"}
 }
-
 var shuffledDeck = {}
-
 var positions_dict = {}
-
-func _ready():
-	pass

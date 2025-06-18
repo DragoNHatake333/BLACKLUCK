@@ -18,8 +18,7 @@ func _on_button_pressed() -> void:
 	print("Firing chamber", chamber_index + 1, "- Bullet?", has_bullet)
 
 	if has_bullet:
-		shot.play()
-		Globals.healthP1 -= 1
+		Globals.playerHP -= 1
 		get_node(GAME_MANAGER_PATH).reset_round()
 	else:
 		print("Click. Chamber was empty.")
@@ -54,14 +53,13 @@ func _reset_center_cards() -> void:
 
 
 func _on_game_manager_call_player() -> void:
+	print("Player: Start")
 	Globals.playerTurn = true
 	Globals.playerPickedCard = false
 
 	for child in get_children():
 		if child is Area2D:
 			child.input_pickable = true
-
-	print("Player: Start")
 
 	while Globals.playerTurn:
 		await get_tree().process_frame
@@ -87,4 +85,4 @@ func _process(_delta: float) -> void:
 	Globals.playerAmount = count
 
 func _ready() -> void:
-	shot = get_node("/root/Main/Sounds/shot")
+	pass

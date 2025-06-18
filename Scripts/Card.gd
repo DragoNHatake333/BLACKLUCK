@@ -1,23 +1,23 @@
 extends Area2D
 
-var current_drop_zone: Area2D = null
-var dragging := false
-var drag_offset := Vector2.ZERO
-var original_position := Vector2.ZERO
+@export_enum("player", "ai") var card_owner := "player"
 const DropZone := preload("res://Scripts/drop_zone.gd")
 
-func _ready():
-	input_pickable = true
-	original_position = global_position
+var dragging := false
+var drag_offset := Vector2.ZERO
+var current_drop_zone: Area2D = null
+var last_valid_position: Vector2 = Vector2.ZERO
 
-func _input_event(viewport, event, shape_idx):
+func _ready():
+	last_valid_position = global_position
+	input_pickable = true
+
+func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Globals.playerTurn:
 		dragging = event.pressed
-		if dragging:
-			drag_offset = global_position - get_global_mouse_position()
-			z_index = 100
-		else:
-			z_index = 1
+		drag_offset = global_position - get_global_mouse_position()
+		z_index = 100 if dragging else 1
+		if not dragging:
 			_try_snap_to_drop_zone()
 
 func _process(_delta):
@@ -26,59 +26,47 @@ func _process(_delta):
 
 func _try_snap_to_drop_zone():
 	for area in get_overlapping_areas():
-		if not area.is_in_group("drop_zone"):
-			continue
+		if area is DropZone and area.is_player_zone:
+			if area.occupied and area.occupying_card != self:
+				continue
 
-		# Safely cast to DropZone
-		var drop_zone := area as DropZone
-		if drop_zone == null:
-			continue
+			if current_drop_zone and current_drop_zone != area:
+				current_drop_zone.occupied = false
+				current_drop_zone.occupying_card = null
 
-		if drop_zone.occupied and drop_zone.occupying_card != self:
-			continue
+			global_position = area.global_position
+			last_valid_position = global_position
+			current_drop_zone = area
+			area.occupied = true
+			area.occupying_card = self
 
-		# Release previous drop zone
-		if current_drop_zone and current_drop_zone != drop_zone:
-			current_drop_zone.occupied = false
-			current_drop_zone.occupying_card = null
+			_update_hand_assignment()
+			_reparent_to_player()
+			Globals.playerTurn = false
+			return
 
-		# Snap and claim new drop zone
-		global_position = drop_zone.global_position
-		current_drop_zone = drop_zone
-		drop_zone.occupied = true
-		drop_zone.occupying_card = self
+	# Fallback to last valid
+	global_position = last_valid_position
 
-		Globals.playerPickedCard = true
+func _update_hand_assignment():
+	var name = self.name
+	for i in Globals.playerHand:
+		if Globals.playerHand[i]["card"] == name:
+			Globals.playerHand[i]["card"] = ""
+	for i in Globals.playerHand:
+		if Globals.playerHand[i]["card"] == "":
+			Globals.playerHand[i]["card"] = name
+			break
+	for k in Globals.centerHand:
+		if Globals.centerHand[k]["card"] == name:
+			Globals.centerHand[k]["card"] = ""
+			break
 
-		# Remove from previous slots
-		for i in Globals.playerHand:
-			if Globals.playerHand[i]["card"] == name:
-				Globals.playerHand[i]["card"] = ""
-
-		# Assign to new slot
-		for i in Globals.playerHand:
-			if Globals.playerHand[i]["card"] == "":
-				Globals.playerHand[i]["card"] = name
-				break
-
-		# Remove from center
-		for k in Globals.centerHand:
-			if Globals.centerHand[k]["card"] == name:
-				Globals.centerHand[k]["card"] = ""
-				break
-
-		# Reparent under Player
-		var player_node = get_node_or_null("/root/Main/Player")
-		if player_node:
-			get_parent().remove_child(self)
-			player_node.add_child(self)
-
-		Globals.playerTurn = false
-		print(Globals.playerHand)
-		return
-
-	# Fallback to current or original
-	global_position = current_drop_zone.global_position if current_drop_zone else original_position
+func _reparent_to_player():
+	var player_node = get_node_or_null("/root/Main/Player")
+	if player_node:
+		get_parent().remove_child(self)
+		player_node.add_child(self)
 
 func _exit_tree():
 	if current_drop_zone:

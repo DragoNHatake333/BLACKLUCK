@@ -2,12 +2,6 @@ extends Node
 
 # Game State
 var ownsTurn = false
-var cardHandP1 = {}
-var cardHandP2 = {}
-var cardSumP1 = 0
-var cardSumP2 = 0
-var turnNumber = 0
-var roundNumber = 0
 var saveRound = false
 var saveRoundHappened = false
 var firstRound = 0
@@ -15,6 +9,7 @@ var endgame = false
 var winP1 = false
 var winP2 = false
 
+#region Signals
 # Signals and node paths
 signal callCroupier
 signal callPlayer
@@ -22,28 +17,37 @@ signal callAI
 var Croupier = "/root/Main/Croupier"
 var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
+#endregion
+#region Calls
+func callingCroupier():
+	callCroupier.emit()
+	while Globals.croupierTurn:
+		await get_tree().process_frame
+	print("GameManager: Croupier done")
 
-var player_death_sprite: Sprite2D
-var deathsound: AudioStreamPlayer
+func callingPlayer():
+	callPlayer.emit()
+	while Globals.playerTurn:
+		await get_tree().process_frame
+	print("GameManager: Player is done!")
 
-func show_player_death_effect():
-	player_death_sprite.visible = true
-	player_death_sprite.modulate.a = 0.0
+func callingAI():
+	callAI.emit()
+	while Globals.aiTurn:
+		await get_tree().process_frame
+	print("GameManager: AI done")
+	Globals.aiFinished = false
+#endregion
 
-	var tween = create_tween()
-	tween.tween_property(player_death_sprite, "modulate:a", 1.0, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-	tween.tween_interval(2.0)
-	deathsound.play()
-	tween.tween_property(player_death_sprite, "modulate:a", 0.0, 3.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
-
-# Startup
 func _ready() -> void:
 	Engine.set_max_fps(240)
 	print("GameManager: Start")
+	randomize()
 	Globals.spin_revolver()
-	player_death_sprite = get_node("/root/Main/PlayerDeath")
-	deathsound = get_node("/root/Main/Sounds/deathsound")
-	player_death_sprite.visible = false
+	spawns()
+	game_logic()
+	
+func spawns():
 	for i in range(1, 16):
 		var node = get_tree().root.find_child("place" + str(i), true, false)   
 		if node:
@@ -53,8 +57,48 @@ func _ready() -> void:
 			}
 		else:
 			print("Warning: Node place", i, " not found.")
-	game_logic()
-	
+
+# Main game loop
+func game_logic():
+	if Globals.playerHP <= 0:
+		print("Player dies...")
+		endgame = true
+		return
+	elif Globals.aiHP <= 0:
+		print("AI dies...")
+		endgame = true
+		return
+
+	# Round-end logic
+	if Globals.playerAmount == 5 or Globals.aiAmount == 5:
+		if saveRound == true:
+			process_round_winner()
+			saveRound = false
+		elif (firstRound and Globals.aiAmount == 5) or (not firstRound and Globals.playerAmount == 5):
+			saveRound = true
+
+	await playing()
+
+# Turn-based logic
+func process_round_winner():
+	if Globals.playerSum > Globals.aiSum:
+		Globals.aiHP -= 1
+	elif Globals.aiSum > Globals.playerSum:
+		Globals.playerHP -= 1
+	get_node("/root/Main/GameManager").reset_round()
+
+# Manage a full turn
+func playing():
+	callingCroupier()
+
+	if ownsTurn:
+		await callingAI()
+	else:
+		await callingPlayer()
+
+	ownsTurn = !ownsTurn
+	await game_logic()
+
 func reset_round():
 	print("GameManager: Resetting round...")
 
@@ -106,66 +150,3 @@ func reset_round():
 
 	# Begin new round
 	game_logic()
-
-# Main game loop
-func game_logic():
-	if endgame:
-		return
-
-	if Globals.healthP1 <= 0:
-		print("Player dies...")
-		endgame = true
-		show_player_death_effect()
-		return
-	elif Globals.healthP2 <= 0:
-		print("AI dies...")
-		endgame = true
-		return
-
-	# Round-end logic
-	if Globals.playerAmount == 5 or Globals.aiAmount == 5:
-		if saveRound:
-			process_round_winner()
-			saveRound = false
-		elif (firstRound and Globals.aiAmount == 5) or (not firstRound and Globals.playerAmount == 5):
-			saveRound = true
-
-	await playing()
-
-# Turn-based logic
-func process_round_winner():
-	if cardSumP1 > cardSumP2:
-		Globals.healthP2 -= 1
-	elif cardSumP2 > cardSumP1:
-		Globals.healthP1 -= 1
-	get_node("/root/Main/GameManager").reset_round()
-
-func callingCroupier():
-	callCroupier.emit()
-	print("GameManager: Croupier done")
-
-func callingPlayer():
-	callPlayer.emit()
-	while Globals.playerTurn:
-		await get_tree().process_frame
-	print("GameManager: Player is done!")
-
-func callingAI():
-	callAI.emit()
-	while Globals.aiTurn:
-		await get_tree().process_frame
-	print("GameManager: AI done")
-	Globals.aiFinished = false
-
-# Manage a full turn
-func playing():
-	callingCroupier()
-
-	if ownsTurn:
-		await callingAI()
-	else:
-		await callingPlayer()
-
-	turnNumber += 1
-	ownsTurn = !ownsTurn
-	await game_logic()

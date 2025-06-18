@@ -1,4 +1,4 @@
 extends Label
 
 func _process(delta: float) -> void:
-	set_text(str(Globals.healthP1))
+	set_text(str(Globals.playerHP))

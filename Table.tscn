@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=16 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -13,8 +13,6 @@
 [ext_resource type="Script" uid="uid://ddimr2wheyrh4" path="res://Scripts/Labels/AI/aiHP.gd" id="10_ugpjo"]
 [ext_resource type="Script" uid="uid://biixoi4puv1vu" path="res://Scripts/Labels/AI/aiTurn.gd" id="11_6ulvv"]
 [ext_resource type="Texture2D" uid="uid://cssa3hn7jc1t6" path="res://Assets/maxresdefault-752548946.jpg" id="12_6ulvv"]
-[ext_resource type="AudioStream" uid="uid://d1y38x1mlrw5g" path="res://Assets/Sound/death.mp3" id="13_x72e7"]
-[ext_resource type="AudioStream" uid="uid://cwn2fm4lc0vd5" path="res://Assets/Sound/gunshot.mp3" id="14_hbdwd"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
 radius = 38.2884
@@ -58,11 +56,11 @@ position = Vector2(672, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
 [node name="place8" type="CollisionShape2D" parent="Spawns"]
-position = Vector2(958, 547)
+position = Vector2(960, 545)
 shape = SubResource("CircleShape2D_cwtje")
 
 [node name="place9" type="CollisionShape2D" parent="Spawns"]
-position = Vector2(1255, 547)
+position = Vector2(1249, 547)
 shape = SubResource("CircleShape2D_cwtje")
 
 [node name="place10" type="CollisionShape2D" parent="Spawns"]
@@ -103,32 +101,46 @@ position = Vector2(382, 878)
 
 [node name="DropZone2" parent="drop_zone" instance=ExtResource("7_pr2o7")]
 position = Vector2(673, 879)
+hand_index = 2
 
 [node name="DropZone3" parent="drop_zone" instance=ExtResource("7_pr2o7")]
 position = Vector2(960, 883)
+hand_index = 3
 
 [node name="DropZone4" parent="drop_zone" instance=ExtResource("7_pr2o7")]
 position = Vector2(1247, 881)
+hand_index = 4
 
 [node name="DropZone5" parent="drop_zone" instance=ExtResource("7_pr2o7")]
 position = Vector2(1537, 883)
+hand_index = 5
 
 [node name="drop_zone_ai" type="Node" parent="."]
 
 [node name="DropZone6" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
 position = Vector2(384, 204)
+hand_index = 6
+is_player_zone = false
 
 [node name="DropZone7" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
 position = Vector2(671, 200)
+hand_index = 7
+is_player_zone = false
 
 [node name="DropZone8" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
 position = Vector2(960, 202)
+hand_index = 8
+is_player_zone = false
 
 [node name="DropZone9" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
 position = Vector2(1252, 202)
+hand_index = 9
+is_player_zone = false
 
 [node name="DropZone10" parent="drop_zone_ai" instance=ExtResource("7_pr2o7")]
 position = Vector2(1544, 202)
+hand_index = 10
+is_player_zone = false
 
 [node name="playerLabels" type="Node" parent="."]
 
@@ -217,14 +229,6 @@ script = ExtResource("4_et4xf")
 
 [node name="AI" type="Node" parent="."]
 script = ExtResource("5_626q0")
-
-[node name="Sounds" type="Node" parent="."]
-
-[node name="deathsound" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("13_x72e7")
-
-[node name="shot" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("14_hbdwd")
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
