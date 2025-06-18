@@ -10,7 +10,7 @@ func spin_revolver():
 	revolver_chambers[bullet_index] = true
 	current_chamber = 0
 	print("Revolver loaded. Bullet is in chamber", bullet_index + 1)
-		
+var _mouse_inside := false
 var playerPickedCard := false
 var croupierTurn = false
 var playerTurn = false
@@ -22,26 +22,14 @@ var playerAmount = 0
 var aiAmount = 0
 var playerHP = 3
 var aiHP = 3
-var playerHand = {
-	1: {"placement": 1, "card": ""},
-	2: {"placement": 2, "card": ""},
-	3: {"placement": 3, "card": ""},
-	4: {"placement": 4, "card": ""},
-	5: {"placement": 5, "card": ""}
-}
-var aiHand = {
-	1: {"placement": 11, "card": ""},
-	2: {"placement": 12, "card": ""},
-	3: {"placement": 13, "card": ""},
-	4: {"placement": 14, "card": ""},
-	5: {"placement": 15, "card": ""}
-}
+var playerHand = []
+var aiHand = []
 var aiFinished = false
 var cardPos = {}
 var centerHand = {
-	1: {"placement": 6, "card": ""},
-	2: {"placement": 7, "card": ""}, 
-	3: {"placement": 8, "card": ""},
+	1: {"placement": 1, "card": ""},
+	2: {"placement": 2, "card": ""}, 
+	3: {"placement": 3, "card": ""},
 }
 var centerCards = 0
 var centerGive = 0

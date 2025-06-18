@@ -1,75 +1,75 @@
+class_name Card
 extends Area2D
 
-@export_enum("player", "ai") var card_owner := "player"
-const DropZone := preload("res://Scripts/drop_zone.gd")
+@export var drag_enabled: bool = true
 
-var dragging := false
-var drag_offset := Vector2.ZERO
-var current_drop_zone: Area2D = null
-var last_valid_position: Vector2 = Vector2.ZERO
+var _dragging := false
+var _drag_offset := Vector2.ZERO
+var _mouse_inside := false
+var _original_position := Vector2.ZERO
+static var _hovered_card: Card = null
+static var _z_counter := 1  # Tracks the top z_index
 
 func _ready():
-	last_valid_position = global_position
 	input_pickable = true
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
+	_original_position = global_position  # Save start position
 
-func _input_event(viewport: Viewport, event: InputEvent, shape_idx: int) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Globals.playerTurn:
-		dragging = event.pressed
-		drag_offset = global_position - get_global_mouse_position()
-		z_index = 100 if dragging else 1
-		if not dragging:
-			_try_snap_to_drop_zone()
+func _on_mouse_entered():
+	_mouse_inside = true
+	_hovered_card = self
+
+func _on_mouse_exited():
+	_mouse_inside = false
+	if _hovered_card == self:
+		_hovered_card = null
+
+func _input_event(viewport, event, shape_idx):
+	if not drag_enabled or _hovered_card != self:
+		return
+
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
+		_start_drag(event.position)
+	elif event is InputEventScreenTouch and event.pressed:
+		_start_drag(event.position)
+
+func _unhandled_input(event):
+	if _dragging:
+		if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed) \
+		or (event is InputEventScreenTouch and not event.pressed):
+			_stop_drag()
 
 func _process(_delta):
-	if dragging:
-		global_position = get_global_mouse_position() + drag_offset
+	if _dragging:
+		global_position = get_global_mouse_position() - _drag_offset
 
-func _try_snap_to_drop_zone():
-	for area in get_overlapping_areas():
-		if area is DropZone and area.is_player_zone:
-			if area.occupied and area.occupying_card != self:
-				continue
+func _start_drag(mouse_position: Vector2):
+	_dragging = true
+	_drag_offset = mouse_position - global_position
+	_z_counter += 1
+	z_index = _z_counter  # Bring to front
 
-			if current_drop_zone and current_drop_zone != area:
-				current_drop_zone.occupied = false
-				current_drop_zone.occupying_card = null
+func _stop_drag():
+	_dragging = false
 
-			global_position = area.global_position
-			last_valid_position = global_position
-			current_drop_zone = area
-			area.occupied = true
-			area.occupying_card = self
+	var space_state = get_world_2d().direct_space_state
+	var query := PhysicsPointQueryParameters2D.new()
+	query.position = global_position
+	query.collide_with_areas = true
+	query.exclude = [self]
 
-			_update_hand_assignment()
-			_reparent_to_player()
-			Globals.playerTurn = false
-			return
+	var result = space_state.intersect_point(query)
 
-	# Fallback to last valid
-	global_position = last_valid_position
+	var dropped_in_hand := false
 
-func _update_hand_assignment():
-	var name = self.name
-	for i in Globals.playerHand:
-		if Globals.playerHand[i]["card"] == name:
-			Globals.playerHand[i]["card"] = ""
-	for i in Globals.playerHand:
-		if Globals.playerHand[i]["card"] == "":
-			Globals.playerHand[i]["card"] = name
-			break
-	for k in Globals.centerHand:
-		if Globals.centerHand[k]["card"] == name:
-			Globals.centerHand[k]["card"] = ""
+	for res in result:
+		if res.collider and res.collider.has_method("is_player_hand_area") and res.collider.is_player_hand_area():
+			if not Globals.playerHand.has(name):
+				Globals.playerHand.append(name)
+				print("Card dropped in player hand:", name)
+			dropped_in_hand = true
 			break
 
-func _reparent_to_player():
-	var player_node = get_node_or_null("/root/Main/Player")
-	if player_node:
-		get_parent().remove_child(self)
-		player_node.add_child(self)
-
-func _exit_tree():
-	if current_drop_zone:
-		current_drop_zone.occupied = false
-		current_drop_zone.occupying_card = null
-		current_drop_zone = null
+	if not dropped_in_hand:
+		global_position = _original_position  # Snap back

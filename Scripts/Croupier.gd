@@ -3,6 +3,8 @@ extends Node
 var shuffled_deck: Array = []
 var card_scene := preload("res://Scenes/Card.tscn")
 
+
+
 func _on_game_manager_call_croupier() -> void:
 	Globals.croupierTurn = true
 	print("Croupier: Start")
@@ -42,11 +44,11 @@ func _display_center_cards() -> void:
 			card.name = card_name
 			card.get_node("CardSprite").texture = load(Globals.cardDict[card_name]["image_path"])
 			card.scale = Vector2(0.38, 0.38)
-			var adjust_key = key + 6
-			if adjust_key in Globals.positions_dict:
-				var pos = Globals.positions_dict[adjust_key]
+			if key in Globals.positions_dict:
+				var pos = Globals.positions_dict[key]
 				card.position = Vector2(pos["posx"], pos["posy"])
 			add_child(card)
+
 
 func _remove_used_cards_from_deck() -> void:
 	for card_name in Globals.newcardGive:

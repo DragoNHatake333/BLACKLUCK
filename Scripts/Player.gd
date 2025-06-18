@@ -72,8 +72,7 @@ func _process(_delta: float) -> void:
 	var total := 0
 	var count := 0
 
-	for i in Globals.playerHand:
-		var card_name = Globals.playerHand[i]["card"]
+	for card_name in Globals.playerHand:
 		if card_name != "":
 			count += 1
 			if Globals.fullDeck.has(card_name):
