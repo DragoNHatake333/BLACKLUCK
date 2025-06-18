@@ -60,16 +60,3 @@ func _stop_drag():
 	query.exclude = [self]
 
 	var result = space_state.intersect_point(query)
-
-	var dropped_in_hand := false
-
-	for res in result:
-		if res.collider and res.collider.has_method("is_player_hand_area") and res.collider.is_player_hand_area():
-			if not Globals.playerHand.has(name):
-				Globals.playerHand.append(name)
-				print("Card dropped in player hand:", name)
-			dropped_in_hand = true
-			break
-
-	if not dropped_in_hand:
-		global_position = _original_position  # Snap back
