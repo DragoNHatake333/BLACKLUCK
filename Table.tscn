@@ -135,14 +135,17 @@ shape = SubResource("RectangleShape2D_ugpjo")
 [node name="place1" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(672, 547)
 shape = SubResource("CircleShape2D_cwtje")
+disabled = true
 
 [node name="place2" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(960, 545)
 shape = SubResource("CircleShape2D_cwtje")
+disabled = true
 
 [node name="place3" type="CollisionShape2D" parent="Spawns"]
 position = Vector2(1249, 547)
 shape = SubResource("CircleShape2D_cwtje")
+disabled = true
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]

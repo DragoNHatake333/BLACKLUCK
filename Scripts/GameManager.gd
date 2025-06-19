@@ -85,7 +85,6 @@ func process_round_winner():
 		Globals.aiHP -= 1
 	elif Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
-	get_node("/root/Main/GameManager").reset_round()
 
 # Manage a full turn
 func playing():

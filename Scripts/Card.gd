@@ -1,62 +1,56 @@
-class_name Card
 extends Area2D
 
-@export var drag_enabled: bool = true
+var card_drag: Node2D = null
+var drag_offset := Vector2.ZERO
+var card_in_area = false
+var original_pos = 0
 
-var _dragging := false
-var _drag_offset := Vector2.ZERO
-var _mouse_inside := false
-var _original_position := Vector2.ZERO
-static var _hovered_card: Card = null
-static var _z_counter := 1  # Tracks the top z_index
 
-func _ready():
-	input_pickable = true
-	mouse_entered.connect(_on_mouse_entered)
-	mouse_exited.connect(_on_mouse_exited)
-	_original_position = global_position  # Save start position
+func _ready() -> void:
+	original_pos = global_position
 
-func _on_mouse_entered():
-	_mouse_inside = true
-	_hovered_card = self
+func _process(delta: float) -> void:
+	if card_drag and card_drag is Node2D:
+		var mouse_pos = get_global_mouse_position()
+		card_drag.global_position = mouse_pos + drag_offset
 
-func _on_mouse_exited():
-	_mouse_inside = false
-	if _hovered_card == self:
-		_hovered_card = null
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
+		if event.pressed:
+			var card = raycast()
+			if card:
+				card_drag = card
+				drag_offset = card.global_position - get_global_mouse_position()
+		else:
+			card_drag = null
+		if card_in_area == false:
+			self.position = original_pos
 
-func _input_event(viewport, event, shape_idx):
-	if not drag_enabled or _hovered_card != self:
-		return
-
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed:
-		_start_drag(event.position)
-	elif event is InputEventScreenTouch and event.pressed:
-		_start_drag(event.position)
-
-func _unhandled_input(event):
-	if _dragging:
-		if (event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and not event.pressed) \
-		or (event is InputEventScreenTouch and not event.pressed):
-			_stop_drag()
-
-func _process(_delta):
-	if _dragging:
-		global_position = get_global_mouse_position() - _drag_offset
-
-func _start_drag(mouse_position: Vector2):
-	_dragging = true
-	_drag_offset = mouse_position - global_position
-	_z_counter += 1
-	z_index = _z_counter  # Bring to front
-
-func _stop_drag():
-	_dragging = false
-
+func raycast() -> Node2D:
 	var space_state = get_world_2d().direct_space_state
-	var query := PhysicsPointQueryParameters2D.new()
-	query.position = global_position
-	query.collide_with_areas = true
-	query.exclude = [self]
+	var parameters = PhysicsPointQueryParameters2D.new()
+	parameters.position = get_global_mouse_position()
+	parameters.collide_with_areas = true
+	parameters.collision_mask = 1
+	var result = space_state.intersect_point(parameters)
+	if result.size() > 0:
+		var collider = result[0].collider
+		if collider is Area2D:
+			return collider
+	return null
 
-	var result = space_state.intersect_point(query)
+var is_self_hovered := false
+
+func _on_mouse_entered() -> void:
+	if Globals.is_card_hover == false:
+		self.scale = Vector2(0.42, 0.42)
+		self.z_index = 2
+		Globals.is_card_hover = true
+		is_self_hovered = true
+
+func _on_mouse_exited() -> void:
+	if is_self_hovered:
+		self.scale = Vector2(0.38, 0.38)
+		self.z_index = 1
+		Globals.is_card_hover = false
+		is_self_hovered = false

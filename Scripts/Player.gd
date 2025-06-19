@@ -19,7 +19,7 @@ func _on_button_pressed() -> void:
 
 	if has_bullet:
 		Globals.playerHP -= 1
-		get_node(GAME_MANAGER_PATH).reset_round()
+		Globals.spin_revolver()
 	else:
 		print("Click. Chamber was empty.")
 
