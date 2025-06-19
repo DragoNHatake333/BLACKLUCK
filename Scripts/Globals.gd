@@ -4,6 +4,7 @@ extends Node
 var revolver_chambers := []
 var current_chamber := 0
 var is_card_hover = false
+var card_in_area = false
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]

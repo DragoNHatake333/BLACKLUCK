@@ -47,7 +47,7 @@ func _reset_center_cards() -> void:
 	Globals.centerHand.clear()
 	for i in range(1, 4):
 		Globals.centerHand[i] = {
-			"placement": i + 5,  # Maps to 6, 7, 8
+			"placement": i,  # Maps to 6, 7, 8
 			"card": ""
 		}
 
@@ -64,9 +64,8 @@ func _on_game_manager_call_player() -> void:
 	while Globals.playerTurn:
 		await get_tree().process_frame
 
-	print(Globals.playerHand)
+	
 	print("Player: Player is finished!")
-	print(Globals.playerSum)
 
 func _process(_delta: float) -> void:
 	var total := 0

@@ -1,10 +1,12 @@
 extends Area2D
 
+#region vars
 var card_drag: Node2D = null
 var drag_offset := Vector2.ZERO
 var card_in_area = false
 var original_pos = 0
-
+var is_self_hovered := false
+#endregion
 
 func _ready() -> void:
 	original_pos = global_position
@@ -23,23 +25,24 @@ func _input(event: InputEvent) -> void:
 				drag_offset = card.global_position - get_global_mouse_position()
 		else:
 			card_drag = null
-		if card_in_area == false:
+		if Globals.card_in_area == false:
 			self.position = original_pos
+		else:
+			pass
 
 func raycast() -> Node2D:
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()
 	parameters.position = get_global_mouse_position()
 	parameters.collide_with_areas = true
-	parameters.collision_mask = 1
+	parameters.collision_mask = 1  # ensure this matches the card's layer
 	var result = space_state.intersect_point(parameters)
 	if result.size() > 0:
-		var collider = result[0].collider
-		if collider is Area2D:
-			return collider
+		for hit in result:
+			var collider = hit.collider
+			if collider.is_in_group("Card"):
+				return collider
 	return null
-
-var is_self_hovered := false
 
 func _on_mouse_entered() -> void:
 	if Globals.is_card_hover == false:
