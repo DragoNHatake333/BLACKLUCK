@@ -42,7 +42,7 @@ func _display_center_cards() -> void:
 		if card_name in Globals.cardDict:
 			var card = card_scene.instantiate()
 			card.name = card_name
-			card.get_node("CardSprite").texture = load(Globals.cardDict[card_name]["image_path"])
+			card.get_node("CardImage").texture = load(Globals.cardDict[card_name]["image_path"])
 			card.scale = Vector2(0.38, 0.38)
 			if key in Globals.positions_dict:
 				var pos = Globals.positions_dict[key]

@@ -4,7 +4,6 @@ extends Node
 var revolver_chambers := []
 var current_chamber := 0
 var is_card_hover = false
-var card_in_area = false
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
@@ -28,11 +27,7 @@ var playerHand = []
 var aiHand = []
 var aiFinished = false
 var cardPos = {}
-var centerHand = {
-	1: {"placement": 1, "card": ""},
-	2: {"placement": 2, "card": ""}, 
-	3: {"placement": 3, "card": ""},
-}
+var centerHand = []
 var centerCards = 0
 var centerGive = 0
 var newcardGive = []

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=16 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -11,9 +11,8 @@
 [ext_resource type="Script" uid="uid://dbq6tb2gtd1lc" path="res://Scripts/Labels/Player/CardsSumLabel.gd" id="8_wmey4"]
 [ext_resource type="Script" uid="uid://ddimr2wheyrh4" path="res://Scripts/Labels/AI/aiHP.gd" id="10_ugpjo"]
 [ext_resource type="Script" uid="uid://biixoi4puv1vu" path="res://Scripts/Labels/AI/aiTurn.gd" id="11_6ulvv"]
+[ext_resource type="PackedScene" uid="uid://dpcil7r5f7a2k" path="res://Card.tscn" id="12_6ulvv"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="12_x72e7"]
-[ext_resource type="PackedScene" uid="uid://dlpo3snxu2gq4" path="res://Scenes/CardSlot.tscn" id="14_hbdwd"]
-[ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="14_rspgj"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_amdel"]
 
@@ -135,25 +134,10 @@ disabled = true
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("12_x72e7")
 
-[node name="CenterHand" type="Node2D" parent="."]
-script = ExtResource("14_rspgj")
+[node name="Card" parent="CardManager" instance=ExtResource("12_6ulvv")]
+position = Vector2(485, 578)
 
-[node name="iaHand" type="Node2D" parent="."]
-
-[node name="CardSlot" parent="iaHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(384, 197)
-
-[node name="CardSlot2" parent="iaHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(672, 200)
-
-[node name="CardSlot3" parent="iaHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(960, 198)
-
-[node name="CardSlot4" parent="iaHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(1246, 200)
-
-[node name="CardSlot5" parent="iaHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(1536, 197)
+[node name="Card2" parent="CardManager" instance=ExtResource("12_6ulvv")]
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]

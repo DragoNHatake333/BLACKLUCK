@@ -45,7 +45,7 @@ func _ready() -> void:
 	randomize()
 	Globals.spin_revolver()
 	spawns()
-	game_logic()
+	#game_logic()
 	
 func spawns():
 	for i in range(1, 4):
