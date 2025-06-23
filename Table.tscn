@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=20 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
@@ -14,11 +14,14 @@
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="12_x72e7"]
 [ext_resource type="PackedScene" uid="uid://dlpo3snxu2gq4" path="res://Scenes/CardSlot.tscn" id="14_hbdwd"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="14_rspgj"]
+[ext_resource type="Script" uid="uid://bas6nkpltdexr" path="res://Scripts/Deck.gd" id="15_mysi6"]
+[ext_resource type="Texture2D" uid="uid://lmq2ywiwpv2b" path="res://Assets/Deck.png" id="16_vn8b1"]
+[ext_resource type="Script" uid="uid://bnq3r07d80fuy" path="res://Scripts/InputManager.gd" id="17_dqdhh"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_amdel"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_cwtje"]
-radius = 38.2884
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r8my"]
+size = Vector2(178, 262)
 
 [node name="Main" type="Node2D"]
 
@@ -115,23 +118,6 @@ script = ExtResource("4_et4xf")
 [node name="AI" type="Node" parent="."]
 script = ExtResource("5_626q0")
 
-[node name="Spawns" type="Area2D" parent="."]
-
-[node name="place1" type="CollisionShape2D" parent="Spawns"]
-position = Vector2(672, 547)
-shape = SubResource("CircleShape2D_cwtje")
-disabled = true
-
-[node name="place2" type="CollisionShape2D" parent="Spawns"]
-position = Vector2(960, 545)
-shape = SubResource("CircleShape2D_cwtje")
-disabled = true
-
-[node name="place3" type="CollisionShape2D" parent="Spawns"]
-position = Vector2(1249, 547)
-shape = SubResource("CircleShape2D_cwtje")
-disabled = true
-
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("12_x72e7")
 
@@ -154,6 +140,54 @@ position = Vector2(1246, 200)
 
 [node name="CardSlot5" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(1536, 197)
+
+[node name="playerHand" type="Node2D" parent="."]
+position = Vector2(0, 682)
+
+[node name="CardSlot6" parent="playerHand" instance=ExtResource("14_hbdwd")]
+position = Vector2(384, 197)
+
+[node name="CardSlot7" parent="playerHand" instance=ExtResource("14_hbdwd")]
+position = Vector2(672, 200)
+
+[node name="CardSlot8" parent="playerHand" instance=ExtResource("14_hbdwd")]
+position = Vector2(960, 198)
+
+[node name="CardSlot9" parent="playerHand" instance=ExtResource("14_hbdwd")]
+position = Vector2(1246, 200)
+
+[node name="CardSlot10" parent="playerHand" instance=ExtResource("14_hbdwd")]
+position = Vector2(1536, 197)
+
+[node name="Deck" type="Node2D" parent="."]
+z_index = -2
+position = Vector2(1774, 524)
+script = ExtResource("15_mysi6")
+
+[node name="Sprite2D" type="Sprite2D" parent="Deck"]
+z_index = -2
+texture = ExtResource("16_vn8b1")
+
+[node name="Area2D" type="Area2D" parent="Deck"]
+z_index = -2
+collision_layer = 128
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
+z_index = -2
+shape = SubResource("RectangleShape2D_3r8my")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Deck"]
+z_index = -2
+offset_left = -86.0
+offset_top = -129.0
+scale = Vector2(2, 2)
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="InputManager" type="Node2D" parent="."]
+script = ExtResource("17_dqdhh")
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]

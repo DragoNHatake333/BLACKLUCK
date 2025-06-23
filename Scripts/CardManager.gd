@@ -7,40 +7,43 @@ var screenSize
 var cardBeingDrag
 var is_hovering_on_card
 var center_hand_reference
+const DEFAULT_CARD_MOVE_SPEED = 0.1
+
+var drag_offset := Vector2.ZERO
 
 func _ready() -> void:
 	screenSize = get_viewport_rect().size
 	center_hand_reference = $"../CenterHand"
+	$"../InputManager".connect("left_mouse_button_released", on_left_click_released)
+
+func on_left_click_released():
+	if cardBeingDrag:
+		finish_drag()
 
 func _process(delta: float) -> void:
 	if cardBeingDrag:
 		var mouse_pos = get_global_mouse_position()
-		cardBeingDrag.position = Vector2(clamp(mouse_pos.x, 0, screenSize.x), clamp(mouse_pos.y, 0, screenSize.y))
-
-func _input(event: InputEvent) -> void:
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
-		if event.pressed:
-			var card = raycast()
-			if card:
-				start_drag(card)
-		else:
-			if cardBeingDrag:
-				finish_drag()
+		var new_pos = mouse_pos + drag_offset
+		cardBeingDrag.global_position = Vector2(
+			clamp(new_pos.x, 0, screenSize.x),
+			clamp(new_pos.y, 0, screenSize.y)
+		)
 
 func start_drag(card):
 	cardBeingDrag = card
+	drag_offset = card.global_position - get_global_mouse_position()
 	card.scale = Vector2(1, 1)
-	
+
 func finish_drag():
 	cardBeingDrag.scale = Vector2(1.05, 1.05)
 	var card_slot_found = raycast_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		center_hand_reference.remove_card_from_hand(cardBeingDrag)
-		cardBeingDrag.position = card_slot_found.position
+		cardBeingDrag.global_position = card_slot_found.global_position
 		cardBeingDrag.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 	else:
-		center_hand_reference.add_card_to_hand(cardBeingDrag)
+		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
 	cardBeingDrag = null
 	
 func raycast():
