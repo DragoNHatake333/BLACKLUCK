@@ -1,4 +1,4 @@
 extends Label
 
 func _process(delta: float) -> void:
-	set_text(str(Globals.playerTurn))
+	set_text(str(Globals.turn))

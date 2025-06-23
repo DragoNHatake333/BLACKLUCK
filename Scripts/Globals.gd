@@ -5,6 +5,8 @@ var revolver_chambers := []
 var current_chamber := 0
 var is_card_hover = false
 
+var turn
+var cards_in_center_hand = 0
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
@@ -14,9 +16,6 @@ func spin_revolver():
 	print("Revolver loaded. Bullet is in chamber", bullet_index + 1)
 var _mouse_inside := false
 var playerPickedCard := false
-var croupierTurn = false
-var playerTurn = false
-var aiTurn = false
 var pressed_revolver = false
 var playerSum = 0
 var aiSum = 0

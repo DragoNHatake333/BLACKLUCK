@@ -1,8 +1,9 @@
 extends Node2D
 
 const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
-const CARD_DRAW_SPEED = 0.2
-var cards_in_center_hand = 0
+const CARD_DRAW_SPEED = 0.5
+const cards_that_shoud_be_in_center = 3
+var cards_to_deal = 0
 
 var centerDeck = [
 	"ace_of_clubs", "2_of_clubs", "3_of_clubs", "4_of_clubs", "5_of_clubs", "6_of_clubs", "7_of_clubs", "8_of_clubs", "9_of_clubs", "10_of_clubs",
@@ -18,16 +19,21 @@ var centerDeck = [
 	"jack_of_spades", "queen_of_spades", "king_of_spades"
 ]
 
+func _on_game_manager_call_deck() -> void:
+	print("Deck called!")
+	centerDeck.shuffle()
+	if Globals.cards_in_center_hand != cards_that_shoud_be_in_center:
+		cards_to_deal = cards_that_shoud_be_in_center - Globals.cards_in_center_hand
+		draw_card(cards_to_deal)
+
 
 func _ready() -> void:
-	centerDeck.shuffle()
 	$RichTextLabel.text = str(centerDeck.size())
-	draw_card(3)
 
 func draw_card(reps):
 	for i in reps:
-		cards_in_center_hand += 1
-		print(cards_in_center_hand)
+		Globals.cards_in_center_hand += 1
+		print(Globals.cards_in_center_hand)
 		var card_drawn_name = centerDeck[0]
 		centerDeck.erase(card_drawn_name)
 		
@@ -42,5 +48,5 @@ func draw_card(reps):
 		var card_image_path = str("res://Cards/"+card_drawn_name+".png")
 		new_card.get_node("CardImage").texture = load(card_image_path)
 		$"../CardManager".add_child(new_card)
-		new_card.name = "Card"
+		new_card.name = card_drawn_name
 		$"../CenterHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)

@@ -42,6 +42,7 @@ func finish_drag():
 		cardBeingDrag.global_position = card_slot_found.global_position
 		cardBeingDrag.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
+		card_slot_found.card_name = cardBeingDrag.name
 	else:
 		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
 	cardBeingDrag = null

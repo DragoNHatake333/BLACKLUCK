@@ -7,8 +7,7 @@ var center_screen_x
 var center_screen_y
 
 func _ready() -> void:
-	center_screen_x = get_viewport().size.x / 2
-	center_screen_y = get_viewport().size.y / 2
+	pass
 
 func add_card_to_hand(card, speed):
 	if card not in Globals.centerHand:
@@ -19,6 +18,7 @@ func add_card_to_hand(card, speed):
 
 func update_hand_positions(speed):
 	for i in range(Globals.centerHand.size()):
+		center_screen_y = get_viewport().size.y / 2
 		var new_position = Vector2(calculate_card_position(i), center_screen_y)
 		var card = Globals.centerHand[i]
 		card.position_in_hand = new_position
@@ -26,11 +26,13 @@ func update_hand_positions(speed):
 		
 func calculate_card_position(index):
 	var total_width = (Globals.centerHand.size() -1) * CARD_WIDTH
-	var x_offset = center_screen_x + index * CARD_WIDTH - total_width / 2
+	var x_offset = (get_viewport().size.x / 2) + index * CARD_WIDTH - total_width / 2
 	return x_offset
 
 func animate_card_to_position(card, new_position, speed):
 	var tween = get_tree().create_tween()
+	tween.set_ease(Tween.EASE_IN_OUT)
+	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(card, "position", new_position, speed)
 
 func remove_card_from_hand(card):

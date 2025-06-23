@@ -1,8 +1,7 @@
-[gd_scene load_steps=20 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=19 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
-[ext_resource type="Script" uid="uid://gvvf37bdvkx1" path="res://Scripts/Croupier.gd" id="3_ubgcr"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
 [ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/Labels/Player/PHPLabel.gd" id="6_amdel"]
@@ -109,9 +108,6 @@ script = ExtResource("8_rspgj")
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_w6qxh")
 
-[node name="Croupier" type="Node" parent="."]
-script = ExtResource("3_ubgcr")
-
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_et4xf")
 
@@ -128,18 +124,23 @@ script = ExtResource("14_rspgj")
 
 [node name="CardSlot" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(384, 197)
+Who_Owns = false
 
 [node name="CardSlot2" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(672, 200)
+Who_Owns = false
 
 [node name="CardSlot3" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(960, 198)
+Who_Owns = false
 
 [node name="CardSlot4" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(1246, 200)
+Who_Owns = false
 
 [node name="CardSlot5" parent="iaHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(1536, 197)
+Who_Owns = false
 
 [node name="playerHand" type="Node2D" parent="."]
 position = Vector2(0, 682)
@@ -191,6 +192,5 @@ script = ExtResource("17_dqdhh")
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
-[connection signal="callCroupier" from="GameManager" to="Croupier" method="_on_game_manager_call_croupier"]
-[connection signal="callCroupier" from="GameManager" to="Player" method="_on_game_manager_call_croupier"]
+[connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
