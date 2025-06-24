@@ -1,13 +1,15 @@
 extends Node
 
 # Game State
-var ownsTurn = false
+var ownsTurn = randi() % 2 == 0 
 var saveRound = false
 var saveRoundHappened = false
 var round_number = 0
 var endgame = false
 var winP1 = false
 var winP2 = false
+var starter = ownsTurn
+
 
 #region Signals
 # Signals and node paths
@@ -23,7 +25,7 @@ func callingDeck():
 	callDeck.emit()
 	while Globals.turn == 0:
 		await get_tree().process_frame
-	print("GameManager: Croupier done")
+	print("GameManager: Deck done")
 
 func callingPlayer():
 	callPlayer.emit()
@@ -43,46 +45,92 @@ func _ready() -> void:
 	print("GameManager: Start")
 	randomize()
 	Globals.spin_revolver()
-	game_logic()
+	await game_logic()
 
 # Main game loop
 func game_logic():
-	if Globals.playerHP <= 0:
-		print("Player dies...")
-		endgame = true
-		return
-	elif Globals.aiHP <= 0:
-		print("AI dies...")
-		endgame = true
-		return
+	while not endgame:
+		if Globals.playerHP <= 0:
+			print("Player dies...")
+			endgame = true
+			break
+		elif Globals.aiHP <= 0:
+			print("AI dies...")
+			endgame = true
+			break
+		
+		if Globals.playerAmount >= 5 or Globals.aiAmount >= 5:
+			if starter == true and Globals.aiAmount >= 5 and saveRound == false:
+				saveRound = true
+			if starter == false and Globals.playerAmount >= 5 and saveRound == false:
+				saveRound = true
+			else:
+				process_round_winner()
 
-	# Round-end logic
-	if Globals.playerAmount == 5 or Globals.aiAmount == 5:
-		if saveRound == true:
-			process_round_winner()
-			saveRound = false
-		elif (round_number == 1 and Globals.aiAmount == 5) or (round_number != 1  and Globals.playerAmount == 5):
-			saveRound = true
-
-	await playing()
+		await playing()
+		round_number += 1
 
 # Turn-based logic
 func process_round_winner():
+	get_tree().paused = true  # Pause everything before reset
+
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
+		reset_round()
 	elif Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
+		reset_round()
+
+	await get_tree().process_frame  # Let pause take effect visibly (optional)
+	get_tree().paused = false  
 
 # Manage a full turn
 func playing():
-	callingDeck()
+	Globals.turn = 0
+	await callingDeck()
 
 	if ownsTurn:
+		Globals.turn = 2
 		await callingAI()
 	else:
+		Globals.turn = 1
 		await callingPlayer()
 
 	ownsTurn = !ownsTurn
 	round_number + 1
-	print(round_number)
-	await game_logic()
+	#print(round_number)
+
+func reset_round():
+	get_tree().paused = true
+	print("Round Reset")
+	Globals.playerAmount = 0
+	Globals.playerHand.clear()
+	Globals.playerSum = 0
+	Globals.aiAmount = 0
+	Globals.aiHand.clear()
+	Globals.aiSum = 0
+	Globals.centerHand.clear()
+	Globals.cards_in_center_hand = 0
+	saveRound = false
+
+	var iaHand = get_node_or_null("../iaHand")
+	if iaHand:
+		for child in iaHand.get_children():
+			if child is CardSlot:
+				child.card_added = false
+
+	var playerHand = get_node_or_null("../playerHand")
+	if playerHand:
+		for child in playerHand.get_children():
+			if child is CardSlot:
+				child.card_added = false
+
+	var card_manager = get_node_or_null("../CardManager")
+	if card_manager:
+		for child in card_manager.get_children():
+			child.queue_free()
+
+	ownsTurn = randi() % 2 == 0 
+	Globals.spin_revolver()
+	await get_tree().process_frame  # Optional: ensure pause visually applies
+	get_tree().paused = false  

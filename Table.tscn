@@ -1,13 +1,15 @@
-[gd_scene load_steps=19 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=21 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
 [ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
+[ext_resource type="Script" uid="uid://byjh35iwrbvwr" path="res://Scripts/Labels/Player/playerAmount.gd" id="5_mysi6"]
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/Labels/Player/PHPLabel.gd" id="6_amdel"]
 [ext_resource type="Script" uid="uid://claeblc1cbfub" path="res://Scripts/Labels/Player/TurnLabel.gd" id="7_vtq4u"]
 [ext_resource type="Script" uid="uid://183maronmbmi" path="res://Scripts/Labels/AI/aiSum.gd" id="8_rspgj"]
 [ext_resource type="Script" uid="uid://dbq6tb2gtd1lc" path="res://Scripts/Labels/Player/CardsSumLabel.gd" id="8_wmey4"]
+[ext_resource type="Script" uid="uid://6pv4xdes08pl" path="res://Scripts/Labels/AI/aiAmount.gd" id="9_vn8b1"]
 [ext_resource type="Script" uid="uid://ddimr2wheyrh4" path="res://Scripts/Labels/AI/aiHP.gd" id="10_ugpjo"]
 [ext_resource type="Script" uid="uid://biixoi4puv1vu" path="res://Scripts/Labels/AI/aiTurn.gd" id="11_6ulvv"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="12_x72e7"]
@@ -70,6 +72,16 @@ horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_wmey4")
 
+[node name="playerAmount" type="Label" parent="playerLabels"]
+offset_left = 1805.0
+offset_top = 844.0
+offset_right = 1888.0
+offset_bottom = 867.0
+text = "PlayerAmount"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("5_mysi6")
+
 [node name="aiLabels" type="Node" parent="."]
 
 [node name="aiHP" type="Label" parent="aiLabels"]
@@ -104,6 +116,17 @@ text = "aiSum
 horizontal_alignment = 1
 vertical_alignment = 1
 script = ExtResource("8_rspgj")
+
+[node name="aiAmount" type="Label" parent="aiLabels"]
+offset_left = 172.0
+offset_top = 156.0
+offset_right = 265.0
+offset_bottom = 213.0
+text = "aiAmount"
+label_settings = SubResource("LabelSettings_amdel")
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("9_vn8b1")
 
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("2_w6qxh")
@@ -194,3 +217,13 @@ script = ExtResource("17_dqdhh")
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
+[connection signal="request_draw_cards" from="iaHand/CardSlot" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="iaHand/CardSlot2" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="iaHand/CardSlot3" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="iaHand/CardSlot4" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="iaHand/CardSlot5" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="playerHand/CardSlot6" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="playerHand/CardSlot7" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="playerHand/CardSlot8" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="playerHand/CardSlot9" to="Deck" method="_on_card_slot_request_draw_cards"]
+[connection signal="request_draw_cards" from="playerHand/CardSlot10" to="Deck" method="_on_card_slot_request_draw_cards"]

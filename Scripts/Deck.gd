@@ -22,9 +22,16 @@ var centerDeck = [
 func _on_game_manager_call_deck() -> void:
 	print("Deck called!")
 	centerDeck.shuffle()
-	if Globals.cards_in_center_hand != cards_that_shoud_be_in_center:
+	
+	if Globals.cards_in_center_hand < cards_that_shoud_be_in_center:
 		cards_to_deal = cards_that_shoud_be_in_center - Globals.cards_in_center_hand
 		draw_card(cards_to_deal)
+	else:
+		print("Center hand already has enough cards, no more dealt.")
+	
+	Globals.turn = 3
+	print("Cards center hand")
+	print(Globals.cards_in_center_hand)
 
 
 func _ready() -> void:
@@ -33,7 +40,6 @@ func _ready() -> void:
 func draw_card(reps):
 	for i in reps:
 		Globals.cards_in_center_hand += 1
-		print(Globals.cards_in_center_hand)
 		var card_drawn_name = centerDeck[0]
 		centerDeck.erase(card_drawn_name)
 		
@@ -50,3 +56,7 @@ func draw_card(reps):
 		$"../CardManager".add_child(new_card)
 		new_card.name = card_drawn_name
 		$"../CenterHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
+
+
+func _on_card_slot_request_draw_cards() -> void:
+	_on_game_manager_call_deck()

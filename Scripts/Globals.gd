@@ -8,6 +8,7 @@ var is_card_hover = false
 var turn
 var cards_in_center_hand = 0
 
+
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
 	var bullet_index = randi() % 6

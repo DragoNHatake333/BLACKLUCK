@@ -29,7 +29,6 @@ func _on_game_manager_call_player() -> void:
 	Globals.turn = 1
 	while Globals.turn == 1:
 		await get_tree().process_frame
-	Globals.turn = 1
 	print("Player: Player is finished!")
 
 func _process(_delta: float) -> void:
