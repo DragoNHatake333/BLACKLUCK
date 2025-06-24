@@ -72,17 +72,12 @@ func game_logic():
 
 # Turn-based logic
 func process_round_winner():
-	get_tree().paused = true  # Pause everything before reset
-
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
-		reset_round()
+		await reset_round()
 	elif Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
-		reset_round()
-
-	await get_tree().process_frame  # Let pause take effect visibly (optional)
-	get_tree().paused = false  
+		await reset_round()
 
 # Manage a full turn
 func playing():
