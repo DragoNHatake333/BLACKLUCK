@@ -20,19 +20,16 @@ var centerDeck = [
 ]
 
 func _on_game_manager_call_deck() -> void:
-	print("Deck called!")
+	print("Deck: Deck called!")
 	centerDeck.shuffle()
 	
 	if Globals.cards_in_center_hand < cards_that_shoud_be_in_center:
 		cards_to_deal = cards_that_shoud_be_in_center - Globals.cards_in_center_hand
 		draw_card(cards_to_deal)
 	else:
-		print("Center hand already has enough cards, no more dealt.")
+		print("Deck: Center hand already has enough cards, no more dealt.")
 	
-	Globals.turn = 3
-	print("Cards center hand")
-	print(Globals.cards_in_center_hand)
-
+	Globals.deckTurn = false
 
 func _ready() -> void:
 	$RichTextLabel.text = str(centerDeck.size())
@@ -56,7 +53,3 @@ func draw_card(reps):
 		$"../CardManager".add_child(new_card)
 		new_card.name = card_drawn_name
 		$"../CenterHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
-
-
-func _on_card_slot_request_draw_cards() -> void:
-	_on_game_manager_call_deck()

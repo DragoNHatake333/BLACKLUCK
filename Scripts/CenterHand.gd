@@ -30,10 +30,12 @@ func calculate_card_position(index):
 	return x_offset
 
 func animate_card_to_position(card, new_position, speed):
+	card.z_index = 4
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
 	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(card, "position", new_position, speed)
+	card.z_index = 1
 
 func remove_card_from_hand(card):
 	if card in Globals.centerHand:

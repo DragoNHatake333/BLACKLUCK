@@ -1,6 +1,5 @@
 extends Node
 
-# Game State
 var ownsTurn = randi() % 2 == 0 
 var saveRound = false
 var saveRoundHappened = false
@@ -11,15 +10,13 @@ var winP2 = false
 var starter = ownsTurn
 
 
-#region Signals
-# Signals and node paths
 signal callDeck
 signal callPlayer
 signal callAI
 var Croupier = "/root/Main/Croupier"
 var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
-#endregion
+
 #region Calls
 func callingDeck():
 	callDeck.emit()
@@ -96,8 +93,8 @@ func playing():
 	#print(round_number)
 
 func reset_round():
-	get_tree().paused = true
 	print("Round Reset")
+	#Resetting values
 	Globals.playerAmount = 0
 	Globals.playerHand.clear()
 	Globals.playerSum = 0
@@ -107,7 +104,8 @@ func reset_round():
 	Globals.centerHand.clear()
 	Globals.cards_in_center_hand = 0
 	saveRound = false
-
+	
+	#Freeing CardSlots so that new cards can be placed.
 	var iaHand = get_node_or_null("../iaHand")
 	if iaHand:
 		for child in iaHand.get_children():
@@ -120,6 +118,7 @@ func reset_round():
 			if child is CardSlot:
 				child.card_added = false
 
+	#Deleting all cards instantiated
 	var card_manager = get_node_or_null("../CardManager")
 	if card_manager:
 		for child in card_manager.get_children():
@@ -127,5 +126,4 @@ func reset_round():
 
 	ownsTurn = randi() % 2 == 0 
 	Globals.spin_revolver()
-	await get_tree().process_frame  # Optional: ensure pause visually applies
-	get_tree().paused = false  
+	print("finished")

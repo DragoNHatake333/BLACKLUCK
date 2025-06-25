@@ -1,7 +1,6 @@
 [gd_scene load_steps=21 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
-[ext_resource type="Script" uid="uid://iktvw11p384c" path="res://Scripts/GameManager.gd" id="2_w6qxh"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
 [ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
 [ext_resource type="Script" uid="uid://byjh35iwrbvwr" path="res://Scripts/Labels/Player/playerAmount.gd" id="5_mysi6"]
@@ -11,6 +10,7 @@
 [ext_resource type="Script" uid="uid://dbq6tb2gtd1lc" path="res://Scripts/Labels/Player/CardsSumLabel.gd" id="8_wmey4"]
 [ext_resource type="Script" uid="uid://6pv4xdes08pl" path="res://Scripts/Labels/AI/aiAmount.gd" id="9_vn8b1"]
 [ext_resource type="Script" uid="uid://ddimr2wheyrh4" path="res://Scripts/Labels/AI/aiHP.gd" id="10_ugpjo"]
+[ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="10_vn8b1"]
 [ext_resource type="Script" uid="uid://biixoi4puv1vu" path="res://Scripts/Labels/AI/aiTurn.gd" id="11_6ulvv"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="12_x72e7"]
 [ext_resource type="PackedScene" uid="uid://dlpo3snxu2gq4" path="res://Scenes/CardSlot.tscn" id="14_hbdwd"]
@@ -129,7 +129,7 @@ vertical_alignment = 1
 script = ExtResource("9_vn8b1")
 
 [node name="GameManager" type="Node" parent="."]
-script = ExtResource("2_w6qxh")
+script = ExtResource("10_vn8b1")
 
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_et4xf")
@@ -215,6 +215,8 @@ script = ExtResource("17_dqdhh")
 
 [connection signal="pressed" from="Revolver" to="Player" method="_on_button_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
+[connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
+[connection signal="callCountAmount" from="GameManager" to="AI" method="_on_game_manager_call_count_amount"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
 [connection signal="request_draw_cards" from="iaHand/CardSlot" to="Deck" method="_on_card_slot_request_draw_cards"]

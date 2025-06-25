@@ -14,8 +14,10 @@ func _process(delta: float) -> void:
 		var card_value = Globals.deck[card_name][0]
 		if Who_Owns:
 			Globals.playerHand.append(card_name)
+			Globals.playerTurn = false
+			Globals.aiTurn = false
 		else:
 			Globals.aiHand.append(card_name)
-		Globals.turn = 0
+			Globals.aiTurn = false
+			Globals.playerTurn = false
 		Globals.cards_in_center_hand -= 1
-		emit_signal("request_draw_cards")

@@ -1,13 +1,11 @@
 extends Node
 
 func _on_game_manager_call_ai() -> void:
-	Globals.turn = 2
-	print("AI: Start.")
-	
-	print("AI: Done.")
+	pass
+	#print("AI: Start.")
+	#print("AI: Done.")
 
-
-func _process(_delta: float) -> void:
+func _on_game_manager_call_count_amount() -> void:
 	var total := 0
 	var count := 0
 

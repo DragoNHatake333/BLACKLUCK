@@ -21,17 +21,14 @@ func _on_button_pressed() -> void:
 		Globals.playerHP -= 1
 		Globals.spin_revolver()
 	else:
-		print("Click. Chamber was empty.")
-
+		print("Player: Click. Chamber was empty.")
 
 func _on_game_manager_call_player() -> void:
-	print("Player: Start")
-	Globals.turn = 1
-	while Globals.turn == 1:
-		await get_tree().process_frame
-	print("Player: Player is finished!")
+	pass
+	#print("Player: Start")
+	#print("Player: Player is finished!")
 
-func _process(_delta: float) -> void:
+func _on_game_manager_call_count_amount() -> void:
 	var total := 0
 	var count := 0
 
@@ -45,6 +42,3 @@ func _process(_delta: float) -> void:
 
 	Globals.playerSum = total
 	Globals.playerAmount = count
-
-func _ready() -> void:
-	pass
