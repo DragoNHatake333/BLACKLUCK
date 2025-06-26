@@ -10,13 +10,14 @@ var playerTurn = false
 var aiTurn = false
 var cards_in_center_hand = 0
 
-
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
-	var bullet_index = randi() % 6
-	revolver_chambers[bullet_index] = true
+	var real_bullet = randi() % 6
+	revolver_chambers[real_bullet] = true
 	current_chamber = 0
-	print("Globals: Revolver loaded. Bullet is in chamber", bullet_index + 1)
+	print("Globals: Revolver loaded: bullet is in chamber ", real_bullet + 1, ".")
+
+
 var playerPickedCard := false
 var pressed_revolver = false
 var playerSum = 0

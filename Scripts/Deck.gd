@@ -53,3 +53,7 @@ func draw_card(reps):
 		$"../CardManager".add_child(new_card)
 		new_card.name = card_drawn_name
 		$"../CenterHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
+
+
+func _on_revolver_revolver_call_deck() -> void:
+	_on_game_manager_call_deck()

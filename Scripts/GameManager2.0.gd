@@ -6,7 +6,9 @@ var saveRoundHappened = false
 var round_number = 0
 var win #Player is true AI is false
 var starter = ownsTurn
+var checking_round_winner = false
 
+signal resetCardSlots
 signal callCountAmount
 signal callDeck
 signal callPlayer
@@ -57,26 +59,35 @@ func game_logic():
 	
 	# Check player's cards
 	if Globals.playerAmount == 5:
-		print("Player has 5 cards.")
 		if starter:  # Player's turn
 			if not saveRound:
 				saveRound = true  # Delay check
 			else:
+				checking_round_winner = true
 				check_round_winner()  # Delayed check
+				while checking_round_winner == true:
+					await get_tree().process_frame
 		else:  # AI's turn
-			check_round_winner()  # Immediate check
+			checking_round_winner = true
+			check_round_winner()  # Delayed check
+			while checking_round_winner == true:
+				await get_tree().process_frame
 
 	# Check AI's cards
 	if Globals.aiAmount == 5:
-		print("ai has 5")
 		if not starter:  # AI's turn
 			if not saveRound:
 				saveRound = true  # Delay check
 			else:
+				checking_round_winner = true
 				check_round_winner()  # Delayed check
+				while checking_round_winner == true:
+					await get_tree().process_frame
 		else:  # Player's turn
-			check_round_winner()  # Immediate check
-
+			checking_round_winner = true
+			check_round_winner()  # Delayed check
+			while checking_round_winner == true:
+				await get_tree().process_frame
 	
 	ownsTurn = !ownsTurn
 	round_number += 1
@@ -86,5 +97,28 @@ func game_won(win):
 	pass
 	
 func check_round_winner():
-	print("GameManager: Checking round winner!")
-	
+	if Globals.playerSum > Globals.aiSum:
+		Globals.aiHP -= 1
+		reset_round()
+	if Globals.aiSum > Globals.playerSum:
+		Globals.playerHP -= 1
+		reset_round()
+	else:
+		reset_round()
+
+func reset_round():
+	for i in $"../CardManager".get_children():
+		i.queue_free()
+	emit_signal("resetCardSlots")
+	Globals.playerSum = 0
+	Globals.playerHand = []
+	Globals.playerAmount = 0
+	Globals.aiSum = 0
+	Globals.aiHand = []
+	Globals.aiAmount = 0
+	Globals.cards_in_center_hand = 0
+	Globals.centerHand = []
+	saveRound = false
+	Globals.spin_revolver()
+	print("GameManager: Reset round finished!")
+	checking_round_winner = false

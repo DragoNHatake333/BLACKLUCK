@@ -11,6 +11,8 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 
 var drag_offset := Vector2.ZERO
 
+signal callCardSlot
+
 func _ready() -> void:
 	screenSize = get_viewport_rect().size
 	center_hand_reference = $"../CenterHand"
@@ -20,7 +22,7 @@ func on_left_click_released():
 	if cardBeingDrag:
 		finish_drag()
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if cardBeingDrag:
 		var mouse_pos = get_global_mouse_position()
 		var new_pos = mouse_pos + drag_offset
@@ -43,6 +45,7 @@ func finish_drag():
 		cardBeingDrag.get_node("Area2D/CollisionShape2D").disabled = true
 		card_slot_found.card_in_slot = true
 		card_slot_found.card_name = cardBeingDrag.name
+		emit_signal("callCardSlot")
 	else:
 		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
 	cardBeingDrag = null
