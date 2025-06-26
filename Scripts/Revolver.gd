@@ -3,8 +3,8 @@ extends Node
 signal revolverCallDeck
 
 func _on_pressed() -> void:
-	#if not Globals.playerTurn:
-	#	return
+	if not Globals.playerTurn:
+		return
 
 	if Globals.current_chamber >= 6:
 		print("Revolver: Empty. Spin again to reload.")
