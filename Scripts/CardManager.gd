@@ -38,6 +38,7 @@ func start_drag(card):
 
 func finish_drag():
 	cardBeingDrag.scale = Vector2(1.05, 1.05)
+
 	var card_slot_found = raycast_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		center_hand_reference.remove_card_from_hand(cardBeingDrag)

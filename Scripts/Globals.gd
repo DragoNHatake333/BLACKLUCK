@@ -9,6 +9,8 @@ var deckTurn = false
 var playerTurn = false
 var aiTurn = false
 var cards_in_center_hand = 0
+var aiWaitingRevolver = false
+
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]

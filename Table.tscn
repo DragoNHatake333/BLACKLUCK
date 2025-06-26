@@ -232,4 +232,5 @@ script = ExtResource("17_dqdhh")
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot8" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
+[connection signal="aiRevolver" from="AI" to="Revolver" method="_on_ai_ai_revolver"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]
