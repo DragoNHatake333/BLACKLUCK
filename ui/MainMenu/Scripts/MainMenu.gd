@@ -5,6 +5,7 @@ extends Control
 @onready var quit_button = $VBoxContainer/QuitButton
 @onready var settings_panel = $OptionsPanel
 @onready var menu_buttons = $VBoxContainer
+@onready var title_label = $Blackluck
 
 # Volumen
 @onready var volume_slider = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/MasterSlider
@@ -55,6 +56,7 @@ func _ready():
 # Detectar drag manualmente
 # ------------------------
 
+
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		if event.pressed and volume_slider.get_global_rect().has_point(get_global_mouse_position()):
@@ -79,7 +81,7 @@ func _process(delta):
 
 # ------------------------
 # Audio
-# ------------------------
+# ------------------------	
 
 func _on_volume_changed(value):
 	var percent = int(round(value * 100))
@@ -103,6 +105,7 @@ func _on_play_pressed():
 
 func _on_settings_pressed():
 	settings_panel.visible = true
+	title_label.visible = false
 	menu_buttons.visible = false
 
 func _on_quit_pressed():
@@ -111,7 +114,7 @@ func _on_quit_pressed():
 func _on_back_pressed():
 	settings_panel.visible = false
 	menu_buttons.visible = true
-
+	title_label.visible = true
 # ------------------------
 # Gráficos
 # ------------------------

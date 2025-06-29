@@ -1,7 +1,23 @@
-[gd_scene load_steps=3 format=3 uid="uid://by7tqp72mpn2f"]
+[gd_scene load_steps=6 format=3 uid="uid://by7tqp72mpn2f"]
 
-[ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://Menu/MScripts/MainMenu.gd" id="1_e1xpn"]
-[ext_resource type="AudioStream" uid="uid://8pgjkjjxeo5x" path="res://Menu/Menu audio/Gloom Horizon.mp3" id="2_swd6r"]
+[ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://ui/MainMenu/Scripts/MainMenu.gd" id="1_e1xpn"]
+[ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://ui/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
+[ext_resource type="AudioStream" uid="uid://8pgjkjjxeo5x" path="res://ui/MainMenu/Audio/Gloom Horizon.mp3" id="2_swd6r"]
+[ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://ui/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbqw"]
+shader = ExtResource("3_tpenk")
+shader_parameter/spin_rotation_speed = 2.0
+shader_parameter/move_speed = 7.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.7, 0, 0, 1)
+shader_parameter/colour_2 = Color(0.1, 0, 0, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 3.5
+shader_parameter/lighting = 0.4
+shader_parameter/spin_amount = 0.25
+shader_parameter/pixel_filter = 740.0
+shader_parameter/is_rotating = false
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -11,46 +27,77 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tma8a")
 script = ExtResource("1_e1xpn")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_exbqw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blackluck" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -177.5
-offset_top = -64.5
-offset_right = 177.5
-offset_bottom = 64.5
+offset_left = -301.0
+offset_top = -185.0
+offset_right = 304.0
+offset_bottom = 70.0
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.429619, 7.70092e-07, 3.60981e-07, 1)
+theme_override_font_sizes/font_size = 230
+text = "Blackluck"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367375
+anchor_top = 0.508889
+anchor_right = 0.633458
+anchor_bottom = 0.836111
+offset_left = -0.360046
+offset_top = 66.4
+offset_right = -0.23999
+offset_bottom = -66.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="PlayButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 56
 text = "Play"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 56
 text = "Settings"
 
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 56
 text = "Quit"
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 visible = false
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -246.0
-offset_top = -193.0
-offset_right = 246.0
-offset_bottom = 193.0
+anchors_preset = -1
+anchor_left = 0.372
+anchor_top = 0.321
+anchor_right = 0.628
+anchor_bottom = 0.679
+offset_left = -86.24
+offset_top = -61.68
+offset_right = 86.24
+offset_bottom = 61.68
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -60,7 +107,7 @@ layout_mode = 2
 [node name="TabContainer" type="TabContainer" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 2
-theme_override_font_sizes/font_size = 36
+theme_override_font_sizes/font_size = 46
 tab_alignment = 1
 current_tab = 0
 
@@ -76,16 +123,16 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -247.0
-offset_top = 4.0
+offset_top = 18.0
 offset_right = 246.0
-offset_bottom = 282.0
+offset_bottom = 308.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_constants/separation = 14
 
 [node name="DisplayMonitor" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "Display Monitor"
 horizontal_alignment = 1
 
@@ -96,23 +143,23 @@ size_flags_vertical = 4
 
 [node name="DisplayMonitorLeftButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "<"
 
 [node name="DisplayMonitorLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "1"
 horizontal_alignment = 1
 
 [node name="DisplayMonitorRightButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = ">"
 
 [node name="WindowMode" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "Window Mode"
 horizontal_alignment = 1
 
@@ -123,18 +170,18 @@ size_flags_vertical = 4
 
 [node name="WindowModeLeftButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "<"
 
 [node name="WindowModeLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "Fullscreen"
 horizontal_alignment = 1
 
 [node name="WindowModeRightButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = ">"
 
 [node name="ApplyContainer" type="HBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
@@ -144,7 +191,7 @@ size_flags_vertical = 4
 
 [node name="Apply" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/ApplyContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 20
+theme_override_font_sizes/font_size = 38
 text = "Apply"
 
 [node name="Audio" type="Control" parent="OptionsPanel/VBoxContainer/TabContainer"]
@@ -154,15 +201,13 @@ metadata/_tab_index = 1
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Audio"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -213.0
-offset_top = 17.0
-offset_right = 214.0
-offset_bottom = 116.0
+anchors_preset = -1
+anchor_left = 0.179
+anchor_right = 0.822
+offset_left = -85.856
+offset_top = 13.0
+offset_right = 86.192
+offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -172,7 +217,7 @@ theme_override_constants/separation = 12
 
 [node name="Master Volume" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
 layout_mode = 2
-theme_override_font_sizes/font_size = 24
+theme_override_font_sizes/font_size = 38
 text = "Master Volume"
 horizontal_alignment = 1
 
@@ -187,15 +232,15 @@ value = 1.0
 [node name="VolumeLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.37
-theme_override_font_sizes/font_size = 24
-text = "100"
+size_flags_stretch_ratio = 0.14
+theme_override_font_sizes/font_size = 38
+text = "100%"
 horizontal_alignment = 1
 
 [node name="Back" type="Button" parent="OptionsPanel/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-theme_override_font_sizes/font_size = 25
+theme_override_font_sizes/font_size = 38
 text = "Back"
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
