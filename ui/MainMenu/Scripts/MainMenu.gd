@@ -8,6 +8,7 @@ extends Control
 @onready var title_label = $Blackluck
 
 # Volumen
+@onready var click_sound = $ClickSound
 @onready var volume_slider = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/MasterSlider
 @onready var volume_label = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/VolumeLabel
 var _target_volume := 1.0
@@ -101,17 +102,23 @@ func _apply_volume(value: float):
 # ------------------------
 
 func _on_play_pressed():
+	click_sound.play()
+	await get_tree().create_timer(0.2).timeout
 	get_tree().change_scene_to_file("res://Table.tscn")
 
 func _on_settings_pressed():
+	click_sound.play()
 	settings_panel.visible = true
 	title_label.visible = false
 	menu_buttons.visible = false
 
 func _on_quit_pressed():
+	click_sound.play()
+	await get_tree().create_timer(0.2).timeout
 	get_tree().quit()
 
 func _on_back_pressed():
+	click_sound.play()
 	settings_panel.visible = false
 	menu_buttons.visible = true
 	title_label.visible = true
@@ -125,6 +132,7 @@ func _update_graphics_labels():
 	display_monitor_label.text = " %d " % [display_index + 1]
 
 func _on_apply_pressed():
+	click_sound.play()
 	match window_modes[window_mode_index]:
 		"Windowed":
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
@@ -141,12 +149,14 @@ func _on_apply_pressed():
 	_update_graphics_labels()
 
 func _on_display_monitor_left_button_pressed() -> void:
+	click_sound.play()
 	if DisplayServer.get_screen_count() <= 1:
 		return
 	display_index = max(display_index - 1, 0)
 	_update_graphics_labels()
 
 func _on_display_monitor_right_button_pressed() -> void:
+	click_sound.play()
 	var screen_count = DisplayServer.get_screen_count()
 	if screen_count <= 1:
 		return
@@ -154,9 +164,14 @@ func _on_display_monitor_right_button_pressed() -> void:
 	_update_graphics_labels()
 
 func _on_window_mode_left_button_pressed() -> void:
+	click_sound.play()
 	window_mode_index = (window_mode_index - 1 + window_modes.size()) % window_modes.size()
 	_update_graphics_labels()
 
 func _on_window_mode_right_button_pressed() -> void:
+	click_sound.play()
 	window_mode_index = (window_mode_index + 1) % window_modes.size()
 	_update_graphics_labels()
+
+func _on_tab_container_tab_changed(_tab_index: int) -> void:
+	$ClickSound.play()
