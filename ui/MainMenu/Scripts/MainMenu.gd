@@ -21,14 +21,13 @@ var _is_dragging_volume := false
 @onready var window_mode_label = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer/WindowModeLabel
 @onready var display_monitor_label = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorLabel
 @onready var apply_button = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/ApplyContainer/Apply
+@onready var display_left_button = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorLeftButton
+@onready var display_right_button = $OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorRightButton
 
 var window_modes := ["Windowed", "Fullscreen", "Borderless"]
 var window_mode_index := 1
 var display_index := 0
-
-# ------------------------
-# Ready
-# ------------------------
+var _last_screen_count := DisplayServer.get_screen_count()
 
 func _ready():
 	if OS.has_feature("web"):
@@ -41,7 +40,6 @@ func _ready():
 	volume_slider.value_changed.connect(_on_volume_changed)
 	apply_button.pressed.connect(_on_apply_pressed)
 
-	# Volumen inicial desde Project Settings
 	var vol = ProjectSettings.get_setting("application/config/volume", 0.5)
 	volume_slider.value = vol
 	_apply_volume(vol)
@@ -52,11 +50,7 @@ func _ready():
 
 	display_index = DisplayServer.window_get_current_screen()
 	_update_graphics_labels()
-
-# ------------------------
-# Detectar drag manualmente
-# ------------------------
-
+	_update_monitor_buttons()
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -65,10 +59,6 @@ func _unhandled_input(event):
 		elif not event.pressed and _is_dragging_volume:
 			_is_dragging_volume = false
 			_apply_volume(volume_slider.value)
-
-# ------------------------
-# Fade volumen si no está en drag
-# ------------------------
 
 func _process(delta):
 	if not _is_dragging_volume and abs(_current_volume - _target_volume) > 0.001:
@@ -80,9 +70,10 @@ func _process(delta):
 	AudioServer.set_bus_volume_db(0, linear_to_db(clamped_volume))
 	AudioServer.set_bus_mute(0, _current_volume <= 0.01)
 
-# ------------------------
-# Audio
-# ------------------------	
+	var current_screen_count = DisplayServer.get_screen_count()
+	if current_screen_count != _last_screen_count:
+		_last_screen_count = current_screen_count
+		_update_monitor_buttons()
 
 func _on_volume_changed(value):
 	var percent = int(round(value * 100))
@@ -96,10 +87,6 @@ func _on_volume_changed(value):
 func _apply_volume(value: float):
 	_target_volume = value
 	ProjectSettings.set_setting("application/config/volume", value)
-
-# ------------------------
-# Botones principales
-# ------------------------
 
 func _on_play_pressed():
 	click_sound.play()
@@ -122,9 +109,6 @@ func _on_back_pressed():
 	settings_panel.visible = false
 	menu_buttons.visible = true
 	title_label.visible = true
-# ------------------------
-# Gráficos
-# ------------------------
 
 func _update_graphics_labels():
 	var mode = window_modes[window_mode_index]
@@ -141,7 +125,7 @@ func _on_apply_pressed():
 			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_WINDOWED)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, true)
 		"Fullscreen":
-			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_FULLSCREEN)
+			DisplayServer.window_set_mode(DisplayServer.WINDOW_MODE_EXCLUSIVE_FULLSCREEN)
 			DisplayServer.window_set_flag(DisplayServer.WINDOW_FLAG_BORDERLESS, false)
 
 	display_index = clamp(display_index, 0, DisplayServer.get_screen_count() - 1)
@@ -150,18 +134,18 @@ func _on_apply_pressed():
 
 func _on_display_monitor_left_button_pressed() -> void:
 	click_sound.play()
-	if DisplayServer.get_screen_count() <= 1:
-		return
-	display_index = max(display_index - 1, 0)
-	_update_graphics_labels()
+	if display_index > 0:
+		display_index -= 1
+		_update_graphics_labels()
+		_update_monitor_buttons()
 
 func _on_display_monitor_right_button_pressed() -> void:
 	click_sound.play()
 	var screen_count = DisplayServer.get_screen_count()
-	if screen_count <= 1:
-		return
-	display_index = min(display_index + 1, screen_count - 1)
-	_update_graphics_labels()
+	if display_index < screen_count - 1:
+		display_index += 1
+		_update_graphics_labels()
+		_update_monitor_buttons()
 
 func _on_window_mode_left_button_pressed() -> void:
 	click_sound.play()
@@ -174,4 +158,18 @@ func _on_window_mode_right_button_pressed() -> void:
 	_update_graphics_labels()
 
 func _on_tab_container_tab_changed(_tab_index: int) -> void:
-	$ClickSound.play()
+	if $ClickSound.is_inside_tree():
+		$ClickSound.play()
+
+func _update_monitor_buttons():
+	var screen_count = DisplayServer.get_screen_count()
+
+	# Si solo hay una pantalla, desactivar ambos
+	if screen_count <= 1:
+		display_left_button.disabled = true
+		display_right_button.disabled = true
+		return
+
+	# Lógica según el índice actual
+	display_left_button.disabled = display_index <= 0
+	display_right_button.disabled = display_index >= screen_count - 1

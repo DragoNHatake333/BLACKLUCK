@@ -134,10 +134,9 @@ layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 46
 tab_alignment = 1
-current_tab = 1
+current_tab = 0
 
 [node name="Graphics" type="Control" parent="OptionsPanel/VBoxContainer/TabContainer"]
-visible = false
 layout_mode = 2
 metadata/_tab_index = 0
 
@@ -239,6 +238,7 @@ theme_override_font_sizes/font_size = 38
 text = "Apply"
 
 [node name="Audio" type="Control" parent="OptionsPanel/VBoxContainer/TabContainer"]
+visible = false
 layout_mode = 2
 metadata/_tab_index = 1
 
@@ -300,7 +300,6 @@ parameters/looping = true
 [node name="ClickSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("6_1b8fn")
 
-[connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="tab_changed" from="OptionsPanel/VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
 [connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorLeftButton" to="." method="_on_display_monitor_left_button_pressed"]
 [connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorRightButton" to="." method="_on_display_monitor_right_button_pressed"]
