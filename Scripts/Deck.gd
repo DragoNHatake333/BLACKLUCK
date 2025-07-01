@@ -27,9 +27,7 @@ func draw_card(reps):
 		Globals.centerDeck.erase(card_drawn_name)
 		
 		if Globals.centerDeck.size() == 0:
-			$Area2D/CollisionShape2D.disabled = true
-			$Sprite2D.visible = false
-			$RichTextLabel.visible = false
+			Globals.centerDeck = Globals.fullCenterDeck
 			
 		$RichTextLabel.text = str(Globals.centerDeck.size())
 		var card_scene = preload(CARD_SCENE_PATH)

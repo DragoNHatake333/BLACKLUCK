@@ -90,6 +90,7 @@ vertical_alignment = 1
 script = ExtResource("6_amdel")
 
 [node name="playerHP" type="Label" parent="playerLabels/playerHP"]
+layout_mode = 0
 offset_left = 1687.0
 offset_top = 748.0
 offset_right = 1780.0
