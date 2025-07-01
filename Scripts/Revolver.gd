@@ -23,6 +23,14 @@ func _on_pressed() -> void:
 		Globals.cards_in_center_hand = 0
 		for child in $"../CardManager".get_children():
 			if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
+				remove_child(child)
+				child.queue_free()
+		Globals.centerHand = []
+		
+	else:
+		Globals.cards_in_center_hand = 0
+		for child in $"../CardManager".get_children():
+			if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
 				print("Child name: ", child.name)
 				print("playerHand: ", Globals.playerHand)
 				print("aiHand:", Globals.aiHand)
@@ -30,8 +38,6 @@ func _on_pressed() -> void:
 				remove_child(child)
 				child.queue_free()
 		Globals.centerHand = []
-		
-	else:
 		print("Revolver: Chamber was empty.")
 		Globals.current_chamber += 1
 		Globals.aiWaitingRevolver = false

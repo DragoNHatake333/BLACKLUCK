@@ -94,7 +94,7 @@ func game_logic():
 	game_logic()
 	
 func game_won(win):
-	pass
+	print("GAME FINISHED: ", win, " wins.")
 	
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:

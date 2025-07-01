@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=23 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://0crojrbnmhvs" path="res://Scripts/Revolver.gd" id="2_dqdhh"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" uid="uid://bas6nkpltdexr" path="res://Scripts/Deck.gd" id="15_mysi6"]
 [ext_resource type="Texture2D" uid="uid://lmq2ywiwpv2b" path="res://Assets/Deck.png" id="16_vn8b1"]
 [ext_resource type="Script" uid="uid://bnq3r07d80fuy" path="res://Scripts/InputManager.gd" id="17_dqdhh"]
+[ext_resource type="Texture2D" uid="uid://cssa3hn7jc1t6" path="res://Assets/maxresdefault-752548946.jpg" id="20_3r8my"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_amdel"]
 
@@ -214,6 +215,12 @@ vertical_alignment = 1
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("17_dqdhh")
+
+[node name="Maxresdefault-752548946" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(960, 538)
+scale = Vector2(1.49766, 1.49722)
+texture = ExtResource("20_3r8my")
 
 [connection signal="pressed" from="Revolver" to="Revolver" method="_on_pressed"]
 [connection signal="revolverCallDeck" from="Revolver" to="Deck" method="_on_revolver_revolver_call_deck"]
