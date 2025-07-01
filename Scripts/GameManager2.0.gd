@@ -1,13 +1,13 @@
 extends Node
 
 var ownsTurn = randi() % 2 == 0 
-var saveRound = false
-var saveRoundHappened = false
 var round_number = 0
 var win #Player is true AI is false
 var starter = ownsTurn
 var checking_round_winner = false
-
+var returnRevovler = false
+@onready var Blackluck = $"../Blackluck"
+@onready var revolverSpin = $"../Sounds/revolverSpin"
 signal resetCardSlots
 signal callCountAmount
 signal callDeck
@@ -29,9 +29,13 @@ func game_logic():
 	if Globals.playerHP == 0:
 		win = "ai"
 		game_won(win)
+		await get_tree().process_frame
+		return
 	if Globals.aiHP == 0:
 		win = "player"
 		game_won(win)
+		await get_tree().process_frame
+		return
 	
 	print("GameManager: Deck called.")
 	Globals.deckTurn = true
@@ -46,7 +50,9 @@ func game_logic():
 		callPlayer.emit()
 		while Globals.playerTurn == true:
 			await get_tree().process_frame
-		emit_signal("callCountAmount")
+		if Globals.playerShootHimself == false:
+			emit_signal("callCountAmount")
+		Globals.playerShootHimself = false
 		print("GameManager: Player done.")
 	else:
 		print("GameManager: AI called.")
@@ -54,14 +60,16 @@ func game_logic():
 		callAI.emit()
 		while Globals.aiTurn == true:
 			await get_tree().process_frame
-		emit_signal("callCountAmount")
+		if Globals.aiShootHimself == false:
+			emit_signal("callCountAmount")
+		Globals.aiShootHimself = false
 		print("GameManager: AI done.")
 	
 	# Check player's cards
 	if Globals.playerAmount == 5:
 		if starter:  # Player's turn
-			if not saveRound:
-				saveRound = true  # Delay check
+			if not Globals.saveRound:
+				Globals.saveRound = true  # Delay check
 			else:
 				checking_round_winner = true
 				check_round_winner()  # Delayed check
@@ -76,8 +84,8 @@ func game_logic():
 	# Check AI's cards
 	if Globals.aiAmount == 5:
 		if not starter:  # AI's turn
-			if not saveRound:
-				saveRound = true  # Delay check
+			if not Globals.saveRound:
+				Globals.saveRound = true  # Delay check
 			else:
 				checking_round_winner = true
 				check_round_winner()  # Delayed check
@@ -95,6 +103,10 @@ func game_logic():
 	
 func game_won(win):
 	print("GAME FINISHED: ", win, " wins.")
+	var tween = create_tween()
+	Blackluck.text = str(win) + " wins."
+	Blackluck.visible = true
+
 	
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:
@@ -118,7 +130,9 @@ func reset_round():
 	Globals.aiAmount = 0
 	Globals.cards_in_center_hand = 0
 	Globals.centerHand = []
-	saveRound = false
+	Globals.saveRound = false
 	Globals.spin_revolver()
+	Globals.centerDeck = Globals.fullCenterDeck
+	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
 	checking_round_winner = false

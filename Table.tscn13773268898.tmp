@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=25 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://0crojrbnmhvs" path="res://Scripts/Revolver.gd" id="2_dqdhh"]
@@ -21,9 +21,6 @@
 [ext_resource type="Script" uid="uid://bnq3r07d80fuy" path="res://Scripts/InputManager.gd" id="17_dqdhh"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="20_6uslf"]
 [ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://ui/MainMenu/Fonts/Verve.ttf" id="21_ybnra"]
-[ext_resource type="AudioStream" uid="uid://crlvl115cjr8w" path="res://Assets/Sound/yesShot.mp3" id="22_ybnra"]
-[ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="23_2yg4l"]
-[ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="24_2yg4l"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0qrb"]
 shader = ExtResource("20_6uslf")
@@ -43,7 +40,6 @@ size = Vector2(178, 262)
 [node name="Main" type="Node2D"]
 
 [node name="Blackluck" type="Label" parent="."]
-visible = false
 modulate = Color(0, 0, 0, 1)
 z_index = 500
 material = SubResource("ShaderMaterial_o0qrb")
@@ -261,17 +257,6 @@ vertical_alignment = 1
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("17_dqdhh")
-
-[node name="Sounds" type="Node" parent="."]
-
-[node name="yesBullet" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("22_ybnra")
-
-[node name="noBullet" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("23_2yg4l")
-
-[node name="revolverSpin" type="AudioStreamPlayer" parent="Sounds"]
-stream = ExtResource("24_2yg4l")
 
 [connection signal="drawCards" from="Revolver" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="playerShootHimself" from="Revolver" to="GameManager" method="reset_round_revolver"]

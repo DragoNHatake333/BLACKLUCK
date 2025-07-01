@@ -35,6 +35,7 @@ func start_drag(card):
 	cardBeingDrag = card
 	drag_offset = card.global_position - get_global_mouse_position()
 	card.scale = Vector2(1, 1)
+	card.z_index = 25
 
 func finish_drag():
 	cardBeingDrag.scale = Vector2(1.05, 1.05)

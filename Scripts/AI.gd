@@ -5,7 +5,12 @@ var selectedCard = []
 var checking_center_cards = false
 var selected_index = null
 var to_player_slot = false
-signal aiRevolver
+var revolverPressed = false
+signal drawCards
+signal aiShootHimself
+@onready var noBullet = $"../Sounds/noBullet"
+@onready var yesBullet = $"../Sounds/yesBullet"
+@onready var revolverSpin = $"../Sounds/revolverSpin"
 
 func _on_game_manager_call_ai() -> void:
 	print("AI: Start!")
@@ -33,11 +38,13 @@ func _on_game_manager_call_ai() -> void:
 			selectedCard.append(card_name)
 			to_player_slot = true
 			break
-		elif not card_value >= 10 or card_value <= 4:
-			Globals.aiWaitingRevolver = true
+		elif (not (card_value >= 10 and card_value <= 4)) and revolverPressed == false:
 			ai_calling_revolver()
-			while Globals.aiWaitingRevolver == true:
-				await get_tree().process_frame
+			return
+		else:
+			selectedCard.append(card_name)
+			to_player_slot = randi() % 2 == 0
+			
 	
 	if selectedCard:
 		for i in Globals.centerHand.size():
@@ -51,10 +58,12 @@ func _on_game_manager_call_ai() -> void:
 
 	var free_slots = []
 	if Globals.playerAmount == 5:
+		to_player_slot = false
 		for i in $"../iaHand".get_children():
 			if i.get("card_in_slot") == false:
 				free_slots.append(i)
 	elif Globals.aiAmount == 5:
+		to_player_slot = true
 		for i in $"../playerHand".get_children():
 			if i.get("card_in_slot") == false:
 				free_slots.append(i)
@@ -79,14 +88,17 @@ func _on_game_manager_call_ai() -> void:
 		tween.set_ease(Tween.EASE_IN_OUT)
 		tween.set_trans(Tween.TRANS_QUART)
 		tween.tween_property(selected_card_node, "position", slot_position, randf_range(0.3,1))
-		
+		await tween.finished
 
 		Globals.centerHand.remove_at(selected_index)
-		Globals.aiHand.append(selectedCard[0])
+		if to_player_slot == true:
+			Globals.playerHand.append(selectedCard[0])
+		else:
+			Globals.aiHand.append(selectedCard[0])
 		Globals.cards_in_center_hand -= 1
 	else:
 		print("No free slots available or selected card not found.")
-
+	
 	print("AI: Finished!")
 	Globals.aiTurn = false
 
@@ -99,12 +111,46 @@ func check_center_cards():
 			filteredCenterHand[card_name] = card_value
 		else:
 			print("Card data not found for:", card_name)
-
+	
+	revolverPressed = false
 	checking_center_cards = false
 
 func ai_calling_revolver():
-	print("Revolver logic called.")
-	emit_signal("aiRevolver")
+	print("AI: Revolver!")
+	if revolverPressed == false:
+		if Globals.aiTurn == true:
+			if Globals.revolver_chambers[Globals.current_chamber]:
+				yesBullet.play()
+				await yesBullet.finished
+				Globals.spin_revolver()
+				revolverSpin.play()
+				Globals.cards_in_center_hand = 0
+				for child in $"../CardManager".get_children():
+					if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
+						remove_child(child)
+						child.queue_free()
+				Globals.centerHand = []
+				Globals.aiShootHimself = true
+				Globals.playerAmount = 5
+				Globals.aiSum = 0
+				Globals.playerSum = 1
+				Globals.aiAmount = 5
+				Globals.saveRound = true
+				Globals.aiTurn = false
+			else:
+				noBullet.play()
+				Globals.cards_in_center_hand = 0
+				for child in $"../CardManager".get_children():
+					if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
+						remove_child(child)
+						child.queue_free()
+				Globals.centerHand = []
+				Globals.current_chamber += 1
+				emit_signal("drawCards")
+				_on_game_manager_call_ai()
+				revolverPressed = true
+		else:
+			return
 
 func _on_game_manager_call_count_amount() -> void:
 	var total := 0

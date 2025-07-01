@@ -25,4 +25,4 @@ func _process(_delta: float) -> void:
 func _on_game_manager_reset_card_slots() -> void:
 	card_name = null
 	card_added = null
-	card_in_slot = null
+	card_in_slot = false
