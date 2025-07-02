@@ -8,10 +8,14 @@ var cardBeingDrag
 var is_hovering_on_card
 var center_hand_reference
 const DEFAULT_CARD_MOVE_SPEED = 0.1
+@export var angle_x_max: float = 15.0
+@export var angle_y_max: float = 15.0
+@export var max_offset_shadow: float = 50.0
 
 var drag_offset := Vector2.ZERO
 
 signal callCardSlot
+var mouse_pos = get_global_mouse_position()
 
 func _ready() -> void:
 	screenSize = get_viewport_rect().size
@@ -23,8 +27,8 @@ func on_left_click_released():
 		finish_drag()
 
 func _process(_delta: float) -> void:
+	mouse_pos = get_global_mouse_position()
 	if cardBeingDrag:
-		var mouse_pos = get_global_mouse_position()
 		var new_pos = mouse_pos + drag_offset
 		cardBeingDrag.global_position = Vector2(
 			clamp(new_pos.x, 0, screenSize.x),
@@ -106,8 +110,14 @@ func on_hovered_off_card(card):
 
 func highlight_card(card, hovered):
 	if hovered:
-		card.scale = Vector2(1.05, 1.05)
+		var tween_hover = create_tween()
+		tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+		tween_hover.tween_property(card, "scale", Vector2(1.05, 1.05), 0.3)
+		#card.scale = Vector2(1.05, 1.05)
 		card.z_index = 2
 	else:
-		card.scale = Vector2(1, 1)
-		card.z_index = 1
+		var tween_hover = create_tween()
+		tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+		tween_hover.tween_property(card, "scale", Vector2(1, 1), 0.3)
+		#card.scale = Vector2(1.05, 1.05)
+		card.z_index = 2

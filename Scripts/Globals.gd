@@ -63,6 +63,8 @@ var centerHand = []
 var centerCards = 0
 var centerGive = 0
 var newcardGive = []
+
+
 var deck = {
 	"ace_of_clubs": [1, "res://Cards/ace_of_clubs.png"],
 	"2_of_clubs": [2, "res://Cards/2_of_clubs.png"],

@@ -66,37 +66,13 @@ func game_logic():
 		print("GameManager: AI done.")
 	
 	# Check player's cards
-	if Globals.playerAmount == 5:
-		if starter:  # Player's turn
-			if not Globals.saveRound:
-				Globals.saveRound = true  # Delay check
-			else:
-				checking_round_winner = true
-				check_round_winner()  # Delayed check
-				while checking_round_winner == true:
-					await get_tree().process_frame
-		else:  # AI's turn
-			checking_round_winner = true
-			check_round_winner()  # Delayed check
-			while checking_round_winner == true:
-				await get_tree().process_frame
+	if Globals.playerAmount == 5 and Globals.aiAmount == 5:
+		checking_round_winner = true
+		check_round_winner()  # Delayed check
+		while checking_round_winner == true:
+			await get_tree().process_frame
 
-	# Check AI's cards
-	if Globals.aiAmount == 5:
-		if not starter:  # AI's turn
-			if not Globals.saveRound:
-				Globals.saveRound = true  # Delay check
-			else:
-				checking_round_winner = true
-				check_round_winner()  # Delayed check
-				while checking_round_winner == true:
-					await get_tree().process_frame
-		else:  # Player's turn
-			checking_round_winner = true
-			check_round_winner()  # Delayed check
-			while checking_round_winner == true:
-				await get_tree().process_frame
-	
+					
 	ownsTurn = !ownsTurn
 	round_number += 1
 	game_logic()

@@ -33,7 +33,7 @@ func animate_card_to_position(card, new_position, speed):
 	card.z_index = 4
 	var tween = get_tree().create_tween()
 	tween.set_ease(Tween.EASE_IN_OUT)
-	tween.set_trans(Tween.TRANS_QUAD)
+	tween.set_trans(Tween.TRANS_QUART)
 	tween.tween_property(card, "position", new_position, speed)
 	card.z_index = 1
 
