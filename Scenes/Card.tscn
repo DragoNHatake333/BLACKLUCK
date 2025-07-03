@@ -14,25 +14,20 @@ shader_parameter/x_rot = 0.0
 shader_parameter/inset = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u4fkt"]
-size = Vector2(200, 288)
+size = Vector2(184.5, 270)
 
 [node name="Card" type="Node2D"]
-position = Vector2(1760, 542)
+position = Vector2(2144, 524)
 script = ExtResource("1_3p273")
 
 [node name="CardImage" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_3m7nw")
-scale = Vector2(0.4, 0.4)
-texture = ExtResource("1_dd2wi")
-
-[node name="Shadow" type="Sprite2D" parent="."]
-modulate = Color(0, 0, 0, 0.380392)
-self_modulate = Color(0, 0, 0, 1)
-show_behind_parent = true
-scale = Vector2(0.4, 0.4)
+position = Vector2(-0.25, -0.874984)
+scale = Vector2(0.375, 0.375)
 texture = ExtResource("1_dd2wi")
 
 [node name="Area2D" type="Area2D" parent="."]
+position = Vector2(-0.500031, 0.310013)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_u4fkt")

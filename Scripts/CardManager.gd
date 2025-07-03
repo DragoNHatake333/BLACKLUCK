@@ -13,9 +13,8 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 @export var max_offset_shadow: float = 50.0
 
 var drag_offset := Vector2.ZERO
-
+var mouse_pos
 signal callCardSlot
-var mouse_pos = get_global_mouse_position()
 
 func _ready() -> void:
 	screenSize = get_viewport_rect().size
@@ -111,13 +110,11 @@ func on_hovered_off_card(card):
 func highlight_card(card, hovered):
 	if hovered:
 		var tween_hover = create_tween()
-		tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+		tween_hover.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 		tween_hover.tween_property(card, "scale", Vector2(1.05, 1.05), 0.3)
-		#card.scale = Vector2(1.05, 1.05)
 		card.z_index = 2
 	else:
 		var tween_hover = create_tween()
-		tween_hover = create_tween().set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
+		tween_hover.set_ease(Tween.EASE_OUT).set_trans(Tween.TRANS_QUART)
 		tween_hover.tween_property(card, "scale", Vector2(1, 1), 0.3)
-		#card.scale = Vector2(1.05, 1.05)
 		card.z_index = 2

@@ -3,7 +3,6 @@ extends Node2D
 signal hovered
 signal hovered_off
 @export var max_offset_shadow: float = 50.0
-@onready var shadow = $Shadow
 var position_in_hand
 var hovered_shadow = false
 

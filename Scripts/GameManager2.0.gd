@@ -28,12 +28,12 @@ func game_logic():
 	print("GameManager: Logic start.")
 	if Globals.playerHP == 0:
 		win = "ai"
-		game_won(win)
+		game_won()
 		await get_tree().process_frame
 		return
 	if Globals.aiHP == 0:
 		win = "player"
-		game_won(win)
+		game_won()
 		await get_tree().process_frame
 		return
 	
@@ -77,9 +77,8 @@ func game_logic():
 	round_number += 1
 	game_logic()
 	
-func game_won(win):
+func game_won():
 	print("GAME FINISHED: ", win, " wins.")
-	var tween = create_tween()
 	Blackluck.text = str(win) + " wins."
 	Blackluck.visible = true
 

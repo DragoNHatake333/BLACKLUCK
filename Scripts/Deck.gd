@@ -27,7 +27,6 @@ func draw_card(reps):
 		Globals.cards_in_center_hand += 1
 		var card_drawn_name = Globals.centerDeck[0]
 		Globals.centerDeck.erase(card_drawn_name)
-		
 		$RichTextLabel.text = str(Globals.centerDeck.size())
 		var card_scene = preload(CARD_SCENE_PATH)
 		var new_card = card_scene.instantiate()

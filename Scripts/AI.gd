@@ -7,7 +7,6 @@ var selected_index = null
 var to_player_slot = false
 var revolverPressed = false
 signal drawCards
-signal aiShootHimself
 @onready var noBullet = $"../Sounds/noBullet"
 @onready var yesBullet = $"../Sounds/yesBullet"
 @onready var revolverSpin = $"../Sounds/revolverSpin"
@@ -124,10 +123,10 @@ func ai_calling_revolver():
 				await yesBullet.finished
 				Globals.spin_revolver()
 				revolverSpin.play()
-				Globals.cards_in_center_hand = 0
-				for child in $"../CardManager".get_children():
+				var card_manager = $"../CardManager"
+				for child in card_manager.get_children():
 					if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
-						remove_child(child)
+						card_manager.remove_child(child)
 						child.queue_free()
 				Globals.centerHand = []
 				Globals.aiShootHimself = true
@@ -142,7 +141,7 @@ func ai_calling_revolver():
 				Globals.cards_in_center_hand = 0
 				for child in $"../CardManager".get_children():
 					if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
-						remove_child(child)
+						$"../CardManager".remove_child(child)
 						child.queue_free()
 				Globals.centerHand = []
 				Globals.current_chamber += 1

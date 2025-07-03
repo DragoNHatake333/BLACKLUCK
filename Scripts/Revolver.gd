@@ -1,7 +1,6 @@
 extends Node
 
 signal drawCards
-signal playerShootHimself
 @onready var noBullet = $"../Sounds/noBullet"
 @onready var yesBullet = $"../Sounds/yesBullet"
 @onready var revolverSpin = $"../Sounds/revolverSpin"
@@ -71,7 +70,7 @@ func _on_pressed():
 				Globals.cards_in_center_hand = 0
 				for child in $"../CardManager".get_children():
 					if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
-						remove_child(child)
+						$"../CardManager".remove_child(child)
 						child.queue_free()
 				Globals.centerHand = []
 				Globals.current_chamber += 1
