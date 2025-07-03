@@ -43,6 +43,7 @@ func game_logic():
 	while Globals.deckTurn == true:
 		await get_tree().process_frame
 	print("GameManager: Deck done.")
+	await get_tree().create_timer(0.5).timeout
 	
 	if ownsTurn:
 		print("GameManager: Player called.")

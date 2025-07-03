@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=30 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
 [ext_resource type="Script" uid="uid://0crojrbnmhvs" path="res://Scripts/Revolver.gd" id="2_dqdhh"]
@@ -17,10 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://dlpo3snxu2gq4" path="res://Scenes/CardSlot.tscn" id="14_hbdwd"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="14_rspgj"]
 [ext_resource type="Script" uid="uid://bas6nkpltdexr" path="res://Scripts/Deck.gd" id="15_mysi6"]
+[ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_ntuk0"]
 [ext_resource type="Texture2D" uid="uid://lmq2ywiwpv2b" path="res://Assets/Deck.png" id="16_vn8b1"]
 [ext_resource type="Script" uid="uid://bnq3r07d80fuy" path="res://Scripts/InputManager.gd" id="17_dqdhh"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="20_6uslf"]
 [ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://ui/MainMenu/Fonts/Verve.ttf" id="21_ybnra"]
+[ext_resource type="Script" uid="uid://bxw3gjsidrrb0" path="res://Scripts/SoundManager.gd" id="22_y0bfp"]
 [ext_resource type="AudioStream" uid="uid://crlvl115cjr8w" path="res://Assets/Sound/yesShot.mp3" id="22_ybnra"]
 [ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="23_2yg4l"]
 [ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="24_2yg4l"]
@@ -219,6 +221,9 @@ script = ExtResource("10_vn8b1")
 [node name="Player" type="Node" parent="."]
 script = ExtResource("4_et4xf")
 
+[node name="Terminator" type="Node" parent="."]
+script = ExtResource("15_ntuk0")
+
 [node name="AI" type="Node" parent="."]
 script = ExtResource("5_626q0")
 
@@ -254,13 +259,13 @@ Who_Owns = false
 position = Vector2(3, 352)
 
 [node name="CardSlot6" parent="playerHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(376, 526)
+position = Vector2(382, 529)
 
 [node name="CardSlot7" parent="playerHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(673, 526)
 
 [node name="CardSlot8" parent="playerHand" instance=ExtResource("14_hbdwd")]
-position = Vector2(953, 529)
+position = Vector2(959, 529)
 
 [node name="CardSlot9" parent="playerHand" instance=ExtResource("14_hbdwd")]
 position = Vector2(1247, 530)
@@ -300,6 +305,7 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("17_dqdhh")
 
 [node name="Sounds" type="Node" parent="."]
+script = ExtResource("22_y0bfp")
 
 [node name="yesBullet" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("22_ybnra")
@@ -313,6 +319,7 @@ stream = ExtResource("24_2yg4l")
 [connection signal="drawCards" from="Revolver" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="pressed" from="Revolver" to="Revolver" method="_on_pressed"]
 [connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
+[connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
 [connection signal="callCountAmount" from="GameManager" to="AI" method="_on_game_manager_call_count_amount"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
@@ -327,5 +334,4 @@ stream = ExtResource("24_2yg4l")
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot8" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
-[connection signal="drawCards" from="AI" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]

@@ -4,6 +4,7 @@ const CARD_SCENE_PATH = "res://Scenes/Card.tscn"
 const CARD_DRAW_SPEED = 0.5
 const cards_that_shoud_be_in_center = 3
 var cards_to_deal = 0
+var drawing_cards = false
 
 func _on_game_manager_call_deck() -> void:
 	print("Deck: Deck called!")
@@ -11,10 +12,12 @@ func _on_game_manager_call_deck() -> void:
 	
 	if Globals.cards_in_center_hand < cards_that_shoud_be_in_center:
 		cards_to_deal = cards_that_shoud_be_in_center - Globals.cards_in_center_hand
+		drawing_cards = true
 		draw_card(cards_to_deal)
+		while drawing_cards == true:
+			await get_tree().process_frame
 	else:
 		print("Deck: Center hand already has enough cards, no more dealt.")
-	
 	Globals.deckTurn = false
 
 func _ready() -> void:
@@ -35,3 +38,4 @@ func draw_card(reps):
 		$"../CardManager".add_child(new_card)
 		new_card.name = card_drawn_name
 		$"../CenterHand".add_card_to_hand(new_card, CARD_DRAW_SPEED)
+	drawing_cards = false
