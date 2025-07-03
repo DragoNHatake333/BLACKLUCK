@@ -25,7 +25,7 @@ func _ready() -> void:
 
 func draw_card(reps):
 	for i in reps:
-		if Globals.centerDeck.size() == 0:
+		if Globals.centerDeck.size() == 1:
 			Globals.centerDeck = Globals.fullCenterDeck
 		Globals.cards_in_center_hand += 1
 		var card_drawn_name = Globals.centerDeck[0]

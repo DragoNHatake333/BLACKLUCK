@@ -21,7 +21,8 @@ signal callSoundManager(sound)
 
 func _on_game_manager_call_ai() -> void:
 	print("AI: Start!")
-	
+	await get_tree().create_timer(randf_range(1.0, 3.0)).timeout
+	print(Globals.current_chamber)
 	filteredCenterHand = {}
 	selectedCard = []
 	checking_center_cards = false
@@ -44,7 +45,7 @@ func _on_game_manager_call_ai() -> void:
 	if Globals.playerAmount == 5 or Globals.aiAmount == 5:
 		if Globals.playerAmount == 5 and Globals.aiAmount == 4:
 			if (highestCard["value"] + Globals.aiSum) > Globals.playerSum:
-				give_card("ai", "highestCard")
+				give_card("ai", highestCard["name"])
 				return
 			elif not (highestCard["value"] + Globals.aiSum) > Globals.playerSum and revolverPressed == false:
 				call_revolver()
@@ -89,9 +90,9 @@ func _on_game_manager_call_ai() -> void:
 	normal_play()
 			
 func normal_play():
-	if lowestCard["value"] <= 3:
+	if lowestCard["value"] == 1:
 		give_card("player", lowestCard["name"])
-	elif highestCard["value"] >= 10:
+	elif highestCard["value"] == 13:
 		give_card("ai", highestCard["name"])
 	elif lowestCard["value"] >= 4 and highestCard["value"] <= 6:
 		if Globals.current_chamber <= 3 and revolverPressed == false:
@@ -114,8 +115,7 @@ func check_center_cards():
 			filteredCenterHand[card_name] = card_value
 		else:
 			print("Card data not found for:", card_name)
-	
-	revolverPressed = false
+
 	checking_center_cards = false
 
 func check_hl_cards():
@@ -156,6 +156,7 @@ func give_card(who, which):
 			selected_card_node = card
 			selected_index = i
 			break
+
 	var free_slots = []
 	if who == "ai":
 		for i in $"../iaHand".get_children():
@@ -166,9 +167,18 @@ func give_card(who, which):
 			if i.get("card_in_slot") == false:
 				free_slots.append(i)
 	
+
+	if free_slots.size() == 0:
+		if who == "ai":
+			give_card("player", lowestCard["name"])
+			return
+		elif who == "player":
+			give_card("ai", highestCard["name"])
+			return
+	
 	var chosen_slot = free_slots[randi() % free_slots.size()]
 	var slot_position = chosen_slot.global_position
-
+	
 	chosen_slot.card_in_slot = true
 	selected_card_node.get_node("Area2D/CollisionShape2D").disabled = true
 	var tween = get_tree().create_tween()
@@ -178,17 +188,20 @@ func give_card(who, which):
 	tween.tween_property(selected_card_node, "position", slot_position, randf_range(0.3,1))
 	await tween.finished
 
-
+	print(selectedCard)
 	
 	Globals.centerHand.remove_at(selected_index)
-	if which == "player":
-		Globals.playerHand.append(selectedCard[0])
-	elif which == "ai":
-		Globals.aiHand.append(selectedCard[0])
+	if who == "player":
+		Globals.playerHand.append(which)
+	elif who == "ai":
+		Globals.aiHand.append(which)
 	Globals.cards_in_center_hand -= 1
+	
+	await get_tree().create_timer(0.5).timeout
 	
 	print("AI: Finished!")
 	Globals.aiTurn = false
+	revolverPressed = false
 	
 func call_revolver():
 	print("AI: Revolver!")
@@ -224,3 +237,17 @@ func call_revolver():
 				revolverPressed = true
 		else:
 			return
+
+func _on_game_manager_call_count_amount() -> void:
+	var total := 0
+	var count := 0
+
+	for card_name in Globals.aiHand:
+		if card_name != "":
+			count += 1
+			if Globals.FULLDECK.has(card_name):
+				total += Globals.FULLDECK[card_name][0]
+			else:
+				print("Card not found in fullDeck:", card_name)
+	Globals.aiSum = total
+	Globals.aiAmount = count

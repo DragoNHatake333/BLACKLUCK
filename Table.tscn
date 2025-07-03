@@ -322,6 +322,7 @@ stream = ExtResource("24_2yg4l")
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
 [connection signal="callCountAmount" from="GameManager" to="AI" method="_on_game_manager_call_count_amount"]
+[connection signal="callCountAmount" from="GameManager" to="Terminator" method="_on_game_manager_call_count_amount"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot" method="_on_game_manager_reset_card_slots"]
@@ -334,4 +335,5 @@ stream = ExtResource("24_2yg4l")
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot8" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
+[connection signal="drawCards" from="Terminator" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]
