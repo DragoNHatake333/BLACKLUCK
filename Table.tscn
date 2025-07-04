@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=35 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Texture2D" uid="uid://b2r20oei4ghmx" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="1_0mf7u"]
 [ext_resource type="Texture2D" uid="uid://x50ye5erfsvu" path="res://Assets/MESA.png" id="1_std8q"]
@@ -28,6 +28,8 @@
 [ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="23_2yg4l"]
 [ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="24_2yg4l"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="27_w3877"]
+[ext_resource type="Texture2D" uid="uid://huas2sfu7lpi" path="res://Assets/hand-on-flat-surface-1632654-1891602768.png" id="29_ontce"]
+[ext_resource type="Script" uid="uid://cy2we1q47a06f" path="res://hand.gd" id="30_s7xlw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("27_w3877")
@@ -44,7 +46,7 @@ shader_parameter/aberation_amount = 0.5
 shader_parameter/roll_line_amount = 0.3
 shader_parameter/roll_speed = 0.502
 shader_parameter/scan_line_strength = -8.0
-shader_parameter/pixel_strength = 0.0
+shader_parameter/pixel_strength = -4.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_o0qrb"]
 shader = ExtResource("20_6uslf")
@@ -75,9 +77,9 @@ grow_horizontal = 0
 theme_override_font_sizes/font_size = 29
 text = "Revolver"
 script = ExtResource("2_dqdhh")
-metadata/_edit_use_anchors_ = true
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(960, 540)
 scale = Vector2(3.81693, 3.81693)
 color = Color(1, 0.229536, 0.174185, 1)
@@ -357,6 +359,17 @@ stream = ExtResource("23_2yg4l")
 
 [node name="revolverSpin" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("24_2yg4l")
+
+[node name="hand" type="Sprite2D" parent="."]
+modulate = Color(0.74558, 0.74558, 0.74558, 1)
+z_index = 4096
+position = Vector2(1091, 1058)
+rotation = -1.70945
+scale = Vector2(0.649, 0.649)
+texture = ExtResource("29_ontce")
+script = ExtResource("30_s7xlw")
+
+[node name="handrigidbody" type="Node2D" parent="."]
 
 [connection signal="drawCards" from="Revolver" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="pressed" from="Revolver" to="Revolver" method="_on_pressed"]
