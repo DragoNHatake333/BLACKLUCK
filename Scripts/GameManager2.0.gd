@@ -83,7 +83,6 @@ func game_won():
 	Blackluck.text = str(win) + " wins."
 	Blackluck.visible = true
 
-	
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
@@ -113,3 +112,11 @@ func reset_round():
 	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
 	checking_round_winner = false
+
+func _process(delta: float) -> void:
+	if Globals.playerHP == 3:
+		$"../PointLight2D".color = "ff3f30"
+	if Globals.playerHP == 2:
+		$"../PointLight2D".color = "ff3629"
+	if Globals.playerHP == 1:
+		$"../PointLight2D".color = "b70000"
