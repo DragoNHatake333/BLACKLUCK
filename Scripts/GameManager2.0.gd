@@ -95,6 +95,7 @@ func check_round_winner():
 		reset_round()
 
 func reset_round():
+	var ownsTurn = randi() % 2 == 0 
 	for i in $"../CardManager".get_children():
 		i.queue_free()
 	emit_signal("resetCardSlots")
