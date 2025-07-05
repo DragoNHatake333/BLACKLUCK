@@ -1,0 +1,11 @@
+Model Information:
+* title:	Revolver
+* source:	https://sketchfab.com/3d-models/revolver-130b638be70948dcb7cc18ce5a78bf97
+* author:	Nicolas Gerard (https://sketchfab.com/dhaimadoshi)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Revolver" (https://sketchfab.com/3d-models/revolver-130b638be70948dcb7cc18ce5a78bf97) by Nicolas Gerard (https://sketchfab.com/dhaimadoshi) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

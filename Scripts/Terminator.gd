@@ -138,8 +138,10 @@ func normal_play():
 	elif lowestCard["value"] == 9 and Globals.current_chamber >= 3:
 		give_card("ai", highestCard["name"])
 	else:
-		call_revolver()
-		
+		if revolverPressed == false:
+			call_revolver()
+		else:
+			give_card("ai", highestCard)
 func check_center_cards():
 	print("TERMINATOR: Filtering center cards")
 	for card in Globals.centerHand:
