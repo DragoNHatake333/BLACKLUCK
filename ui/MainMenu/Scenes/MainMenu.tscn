@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://ui/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
 [ext_resource type="AudioStream" uid="uid://cd74muqbnjqtb" path="res://ui/MainMenu/Audio/Night Break.mp3" id="4_b4ika"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="4_j0ggg"]
-[ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://ui/MainMenu/Fonts/Verve.ttf" id="5_j0ggg"]
+[ext_resource type="FontFile" uid="uid://gs1k7pek7mad" path="res://ui/MainMenu/Fonts/BentonModDispCond-Semibold.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://ui/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exbqw"]
@@ -61,14 +61,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -537.0
-offset_top = -242.0
-offset_right = 538.0
-offset_bottom = 114.0
+offset_left = -579.0
+offset_top = -217.0
+offset_right = 580.0
+offset_bottom = 14.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.429619, 7.70092e-07, 3.60981e-07, 1)
-theme_override_fonts/font = ExtResource("5_j0ggg")
+theme_override_fonts/font = ExtResource("5_ve1ib")
 theme_override_font_sizes/font_size = 230
 text = "BLACKLUCK"
 horizontal_alignment = 1
