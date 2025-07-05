@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d4apoikt8ox30"
-path="res://.godot/imported/Taula.png-484f7ab47a3a6d3fab38aea77783ac11.ctex"
+uid="uid://cuyafq4xnlto6"
+path="res://.godot/imported/Taula2.png-22be718739bda01996f1fec035203f1c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Taula.png"
-dest_files=["res://.godot/imported/Taula.png-484f7ab47a3a6d3fab38aea77783ac11.ctex"]
+source_file="res://Assets/table/Taula2.png"
+dest_files=["res://.godot/imported/Taula2.png-22be718739bda01996f1fec035203f1c.ctex"]
 
 [params]
 

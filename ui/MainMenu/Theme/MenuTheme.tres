@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=2 format=3 uid="uid://djopgy1a0qxka"]
 
-[ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Menu/MainMenuThemes/MenuFont/Silver.ttf" id="1_tnqgw"]
+[ext_resource type="FontFile" uid="uid://dpgqsl0q88lpt" path="res://ui/MainMenu/Fonts/CREERG__.TTF" id="1_ib1cu"]
 
 [resource]
-default_font = ExtResource("1_tnqgw")
+default_font = ExtResource("1_ib1cu")
