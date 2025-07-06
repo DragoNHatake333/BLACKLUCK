@@ -9,6 +9,26 @@ const COLLISION_MASK_DECK = 4
 var card_manager_reference
 var deck_reference
 
+
+@onready var subviewport := $"../3DViewport/SubViewportContainer/SubViewport"
+@onready var camera := $"../3DViewport/SubViewportContainer/SubViewport/Camera3D"
+@onready var light := $"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D"
+
+func _process(delta):
+	if !subviewport or !camera or !light:
+		return
+
+	var mouse_pos = subviewport.get_mouse_position()
+	var ray_origin = camera.project_ray_origin(mouse_pos)
+	var ray_direction = camera.project_ray_normal(mouse_pos)
+
+	var plane = Plane(Vector3.UP, 0)
+	var hit_pos = plane.intersects_ray(ray_origin, ray_direction)
+
+	if hit_pos != null:
+		var current_y = light.global_position.y
+		light.global_position = Vector3(hit_pos.x, current_y, hit_pos.z)
+
 func _ready() -> void:
 	card_manager_reference = $"../CardManager"
 	deck_reference = $"../Deck"

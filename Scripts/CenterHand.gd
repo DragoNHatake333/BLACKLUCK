@@ -6,8 +6,12 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 var center_screen_x
 var center_screen_y
 
-func _ready() -> void:
-	pass
+#func _process(delta: float) -> void:
+	#var mouse_pos = get_global_mouse_position()
+	#var light = $"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D"
+	#
+	#light.position.x = mouse_pos.x
+	#light.position.y = mouse_pos.y
 
 func add_card_to_hand(card, speed):
 	if card not in Globals.centerHand:
