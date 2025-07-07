@@ -1,7 +1,6 @@
 [gd_scene load_steps=40 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="4_et4xf"]
-[ext_resource type="Script" uid="uid://bt2fbj5iassx3" path="res://Scripts/AI.gd" id="5_626q0"]
 [ext_resource type="Script" uid="uid://byjh35iwrbvwr" path="res://Scripts/Labels/Player/playerAmount.gd" id="5_mysi6"]
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/Labels/Player/PHPLabel.gd" id="6_amdel"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="6_g3xc2"]
@@ -23,28 +22,29 @@
 [ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://ui/MainMenu/Fonts/Verve.ttf" id="21_ybnra"]
 [ext_resource type="Texture2D" uid="uid://ch6d7ati52dh" path="res://Assets/Slot.png" id="22_ontce"]
 [ext_resource type="Script" uid="uid://bxw3gjsidrrb0" path="res://Scripts/SoundManager.gd" id="22_y0bfp"]
-[ext_resource type="AudioStream" uid="uid://crlvl115cjr8w" path="res://Assets/Sound/yesShot.mp3" id="22_ybnra"]
 [ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="23_2yg4l"]
 [ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="24_2yg4l"]
+[ext_resource type="AudioStream" uid="uid://cwn2fm4lc0vd5" path="res://Assets/Sound/revolverShot1.mp3" id="25_ontce"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="27_w3877"]
 [ext_resource type="PackedScene" uid="uid://b7dws7ygl7jmx" path="res://Assets/Revolver/scene.gltf" id="29_g3xc2"]
-[ext_resource type="Script" uid="uid://u2ic2lherf7o" path="res://point_light_2d.gd" id="31_fib22"]
-[ext_resource type="Script" uid="uid://cf6uquyeaahc" path="res://RealRevolver.gd" id="31_s7xlw"]
+[ext_resource type="Script" uid="uid://dwith67qqvmxp" path="res://Scripts/AnimationManager.gd" id="30_ontce"]
+[ext_resource type="Script" uid="uid://u2ic2lherf7o" path="res://Scripts/point_light_2d.gd" id="31_fib22"]
+[ext_resource type="Script" uid="uid://cf6uquyeaahc" path="res://Scripts/RealRevolver.gd" id="31_s7xlw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("27_w3877")
 shader_parameter/resolution = Vector2(1920, 1080)
 shader_parameter/scan_line_amount = 0.152
 shader_parameter/warp_amount = 0.348
-shader_parameter/noise_amount = 0.03
-shader_parameter/interference_amount = 0.2
+shader_parameter/noise_amount = 0.035
+shader_parameter/interference_amount = 0.0
 shader_parameter/grille_amount = 0.1
 shader_parameter/grille_size = 1.0
 shader_parameter/vignette_amount = 0.37
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/aberation_amount = 0.5
-shader_parameter/roll_line_amount = 0.3
-shader_parameter/roll_speed = 1.0
+shader_parameter/roll_line_amount = 0.0
+shader_parameter/roll_speed = 3.8e-07
 shader_parameter/scan_line_strength = -8.0
 shader_parameter/pixel_strength = -4.0
 
@@ -268,9 +268,6 @@ script = ExtResource("4_et4xf")
 [node name="Terminator" type="Node" parent="."]
 script = ExtResource("15_ntuk0")
 
-[node name="AI" type="Node" parent="."]
-script = ExtResource("5_626q0")
-
 [node name="CardManager" type="Node2D" parent="."]
 script = ExtResource("12_x72e7")
 
@@ -391,14 +388,20 @@ script = ExtResource("17_dqdhh")
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("22_y0bfp")
 
-[node name="yesBullet" type="AudioStreamPlayer" parent="SoundManager"]
-stream = ExtResource("22_ybnra")
+[node name="revolverShot" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("25_ontce")
+volume_db = -80.0
 
 [node name="noBullet" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("23_2yg4l")
 
-[node name="revolverSpin" type="AudioStreamPlayer" parent="SoundManager"]
+[node name="revolverSpin" type="AudioStreamPlayer2D" parent="SoundManager"]
+position = Vector2(240, 474)
 stream = ExtResource("24_2yg4l")
+
+[node name="PlayerEars" type="AudioListener2D" parent="SoundManager"]
+position = Vector2(986, 1210)
+current = true
 
 [node name="3DViewport" type="Area2D" parent="."]
 z_index = -8
@@ -450,6 +453,8 @@ position = Vector2(3387, 819)
 shape = SubResource("RectangleShape2D_ontce")
 
 [node name="RevolverButton" type="Area2D" parent="."]
+collision_layer = 128
+collision_mask = 128
 script = ExtResource("31_s7xlw")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="RevolverButton"]
@@ -468,11 +473,18 @@ script = ExtResource("31_fib22")
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0, 0, 0, 1)
 
+[node name="AnimationManager" type="Node" parent="."]
+script = ExtResource("30_ontce")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+light_mask = 0
+visibility_layer = 0
+position = Vector2(960, 540)
+editor_draw_screen = false
+
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
-[connection signal="callAI" from="GameManager" to="AI" method="_on_game_manager_call_ai"]
 [connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
 [connection signal="callCountAmount" from="GameManager" to="Terminator" method="_on_game_manager_call_count_amount"]
-[connection signal="callCountAmount" from="GameManager" to="AI" method="_on_game_manager_call_count_amount"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot" method="_on_game_manager_reset_card_slots"]
@@ -485,8 +497,11 @@ color = Color(0, 0, 0, 1)
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot8" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
+[connection signal="callSoundManager" from="Terminator" to="SoundManager" method="call_sound_manager"]
 [connection signal="drawCards" from="Terminator" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]
+[connection signal="anime_playerRevolver" from="RevolverButton" to="AnimationManager" method="anime_playerRevolver"]
+[connection signal="callSoundManager" from="RevolverButton" to="SoundManager" method="call_sound_manager"]
 [connection signal="drawCards" from="RevolverButton" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="input_event" from="RevolverButton" to="RevolverButton" method="_on_input_event"]
 [connection signal="mouse_entered" from="RevolverButton" to="RevolverButton" method="_on_mouse_entered"]

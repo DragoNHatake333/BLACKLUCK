@@ -1,14 +1,20 @@
 extends Area2D
 
 signal drawCards
-var tween_tweening
+var tweenFinished = true
+signal callSoundManager(sound)
+signal anime_playerRevolver
+
 func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and Globals.playerTurn == true:
+		anime_playerRevolver.emit()
 		if Globals.playerRevolverPressed == false:
 			if Globals.playerTurn == true:
 				Globals.playerRevolverPressed = true
 				if Globals.revolver_chambers[Globals.current_chamber]:
+					emit_signal("callSoundManager","revolverShot")
 					Globals.spin_revolver()
+					emit_signal("callSoundManager","revolverSpin")
 					Globals.cards_in_center_hand = 0
 					for child in $"../CardManager".get_children():
 						if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
@@ -23,6 +29,7 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 					Globals.saveRound = true
 					Globals.playerTurn = false
 				else:
+					emit_signal("callSoundManager","noBullet")
 					Globals.cards_in_center_hand = 0
 					for child in $"../CardManager".get_children():
 						if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
@@ -42,13 +49,15 @@ func _ready():
 	base_position_y = target_node.position.y
 
 func _on_mouse_entered() -> void:
-	if not is_hovered:
-		is_hovered = true
+	if tweenFinished == true:
+		tweenFinished = false
 		var tween = create_tween()
 		tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		await tween.finished
+		tweenFinished = true
 func _on_mouse_exited() -> void:
-	if is_hovered:
-		is_hovered = false
+		tweenFinished = false
 		var tween = create_tween()
 		tween.tween_property(target_node, "position:y", base_position_y, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
+		await tween.finished
+		tweenFinished = true

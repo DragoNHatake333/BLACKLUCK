@@ -8,6 +8,7 @@ var checking_round_winner = false
 var returnRevovler = false
 @onready var Blackluck = $"../Blackluck"
 @onready var revolverSpin = $"../Sounds/revolverSpin"
+
 signal resetCardSlots
 signal callCountAmount
 signal callDeck

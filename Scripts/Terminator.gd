@@ -17,6 +17,7 @@ var card2Name
 var card3Value
 var card3Name
 var selected_card_node
+
 signal callSoundManager(sound)
 
 func _on_game_manager_call_ai() -> void:
@@ -121,19 +122,19 @@ func normal_play():
 		give_card("player", lowestCard["name"])
 	elif highestCard["value"] == 11:
 		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 4 and Globals.current_chamber >= 2:
+	elif lowestCard["value"] == 4 and Globals.current_chamber >= 2 and revolverPressed == false:
 		call_revolver()
 	elif lowestCard["value"] == 4 and not Globals.current_chamber >= 2:
 		give_card("player", lowestCard["name"])
-	elif highestCard["value"] == 10 and not Globals.current_chamber >= 2:
+	elif highestCard["value"] == 10 and not Globals.current_chamber >= 2 and revolverPressed == false:
 		call_revolver()
 	elif highestCard["value"] == 10 and Globals.current_chamber >= 2:
 		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 5 and not Globals.current_chamber >= 3:
+	elif lowestCard["value"] == 5 and not Globals.current_chamber >= 3 and revolverPressed == false:
 		call_revolver()
 	elif lowestCard["value"] == 5 and Globals.current_chamber >= 3:
 		give_card("player", lowestCard["name"])
-	elif lowestCard["value"] == 9 and not Globals.current_chamber >= 3:
+	elif lowestCard["value"] == 9 and not Globals.current_chamber >= 3 and revolverPressed == false:
 		call_revolver()
 	elif lowestCard["value"] == 9 and Globals.current_chamber >= 3:
 		give_card("ai", highestCard["name"])
@@ -246,9 +247,9 @@ func call_revolver():
 	if revolverPressed == false and Globals.aiTurn == true:
 		if Globals.revolver_chambers[Globals.current_chamber]:
 			print("TERMINATOR: Bullet found! AI shoots itself.")
-			callSoundManager.emit("yesBullet")
+			emit_signal("callSoundManager", "revolverShot")
 			Globals.spin_revolver()
-			callSoundManager.emit("revolverSpin")
+			emit_signal("callSoundManager", "revolverSpin")
 			for child in $"../CardManager".get_children():
 				if not (child.name in Globals.playerHand or child.name in Globals.aiHand):
 					child.queue_free()
@@ -262,7 +263,7 @@ func call_revolver():
 			Globals.aiTurn = false
 		else:
 			print("TERMINATOR: No bullet, survived")
-			callSoundManager.emit("noBullet")
+			emit_signal("callSoundManager", "noBullet")
 			Globals.cards_in_center_hand = 0
 			for child in $"../CardManager".get_children():
 				if child.name not in Globals.playerHand and child.name not in Globals.aiHand:

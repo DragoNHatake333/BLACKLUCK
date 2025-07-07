@@ -38,7 +38,8 @@ func draw_card(reps):
 			print("Duplicate card '%s' found, trying next draw..." % card_drawn_name)
 			# Still erase the card so we don't try it again this session
 			Globals.centerDeck.erase(card_drawn_name)
-			continue
+			_on_game_manager_call_deck()
+			return
 
 		Globals.centerDeck.erase(card_drawn_name)
 		Globals.cards_in_center_hand += 1
