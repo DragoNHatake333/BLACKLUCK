@@ -42,22 +42,17 @@ func _on_input_event(viewport: Node, event: InputEvent, shape_idx: int) -> void:
 				return
 
 @onready var target_node = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene"
-var base_position_y := 0.0
+var base_position_y = 0.0
 var is_hovered := false
 
 func _ready():
 	base_position_y = target_node.position.y
 
 func _on_mouse_entered() -> void:
-	if tweenFinished == true:
-		tweenFinished = false
-		var tween = create_tween()
-		tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
-		await tween.finished
-		tweenFinished = true
+		if not target_node.position.y == 1.0 and not Globals.isCardDragging:
+			var tween = create_tween()
+			tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
 func _on_mouse_exited() -> void:
-		tweenFinished = false
 		var tween = create_tween()
 		tween.tween_property(target_node, "position:y", base_position_y, 0.4).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_IN)
-		await tween.finished
-		tweenFinished = true
+		

@@ -23,11 +23,13 @@ func _ready() -> void:
 
 func on_left_click_released():
 	if cardBeingDrag:
+		Globals.isCardDragging = false
 		finish_drag()
 
 func _process(_delta: float) -> void:
 	mouse_pos = get_global_mouse_position()
 	if cardBeingDrag:
+		Globals.isCardDragging = true
 		var new_pos = mouse_pos + drag_offset
 		cardBeingDrag.global_position = Vector2(
 			clamp(new_pos.x, 0, screenSize.x),

@@ -51,7 +51,10 @@ func game_logic():
 		Globals.playerTurn = true
 		callPlayer.emit()
 		while Globals.playerTurn == true:
-			await get_tree().process_frame
+			if not get_tree():
+				return
+			else:
+				await get_tree().process_frame
 		if Globals.playerShootHimself == false:
 			emit_signal("callCountAmount")
 		Globals.playerShootHimself = false
@@ -61,7 +64,10 @@ func game_logic():
 		Globals.aiTurn = true
 		callAI.emit()
 		while Globals.aiTurn == true:
-			await get_tree().process_frame
+			if not get_tree():
+				return
+			else:
+				await get_tree().process_frame
 		if Globals.aiShootHimself == false:
 			emit_signal("callCountAmount")
 		Globals.aiShootHimself = false
