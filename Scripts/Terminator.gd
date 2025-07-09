@@ -109,40 +109,25 @@ func _on_game_manager_call_ai() -> void:
 	normal_play()
 			
 func normal_play():
-	print("TERMINATOR: Normal play logic triggered")
-	if lowestCard["value"] == 1:
-		give_card("player", lowestCard["name"])
-	elif highestCard["value"] == 13:
+	print("TERMINATOR: Smarter normal play logic triggered")
+
+	# Evaluate card benefits
+	var ai_benefit = highestCard["value"]
+	var player_harm = 14 - lowestCard["value"]  # Lower value = higher harm
+
+	# Decide based on which choice gives more strategic gain
+	if ai_benefit >= player_harm:
 		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 2:
+	elif player_harm > ai_benefit:
 		give_card("player", lowestCard["name"])
-	elif highestCard["value"] == 12:
-		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 3:
-		give_card("player", lowestCard["name"])
-	elif highestCard["value"] == 11:
-		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 4 and Globals.current_chamber >= 2 and revolverPressed == false:
-		call_revolver()
-	elif lowestCard["value"] == 4 and not Globals.current_chamber >= 2:
-		give_card("player", lowestCard["name"])
-	elif highestCard["value"] == 10 and not Globals.current_chamber >= 2 and revolverPressed == false:
-		call_revolver()
-	elif highestCard["value"] == 10 and Globals.current_chamber >= 2:
-		give_card("ai", highestCard["name"])
-	elif lowestCard["value"] == 5 and not Globals.current_chamber >= 3 and revolverPressed == false:
-		call_revolver()
-	elif lowestCard["value"] == 5 and Globals.current_chamber >= 3:
-		give_card("player", lowestCard["name"])
-	elif lowestCard["value"] == 9 and not Globals.current_chamber >= 3 and revolverPressed == false:
-		call_revolver()
-	elif lowestCard["value"] == 9 and Globals.current_chamber >= 3:
-		give_card("ai", highestCard["name"])
 	else:
-		if revolverPressed == false:
+		# If indecisive AND chamber is risky, maybe call the revolver
+		if Globals.current_chamber <= 3 and not revolverPressed:
 			call_revolver()
 		else:
-			give_card("ai", highestCard)
+			# Fallback: favor giving to player if slightly unsure
+			give_card("player", lowestCard["name"])
+
 func check_center_cards():
 	print("TERMINATOR: Filtering center cards")
 	for card in Globals.centerHand:

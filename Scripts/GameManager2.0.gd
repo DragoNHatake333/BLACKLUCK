@@ -7,7 +7,6 @@ var starter = ownsTurn
 var checking_round_winner = false
 var returnRevovler = false
 @onready var Blackluck = $"../Blackluck"
-@onready var revolverSpin = $"../Sounds/revolverSpin"
 
 signal resetCardSlots
 signal callCountAmount
@@ -19,6 +18,15 @@ var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
 
 func _ready() -> void:
+	Globals.playerSum = 0
+	Globals.playerHand = []
+	Globals.playerAmount = 0
+	Globals.aiSum = 0
+	Globals.aiHand = []
+	Globals.aiAmount = 0
+	Globals.cards_in_center_hand = 0
+	Globals.centerHand = []
+	Globals.saveRound = false
 	Engine.set_max_fps(240)
 	print("GameManager: Start")
 	randomize()
@@ -101,7 +109,7 @@ func check_round_winner():
 		reset_round()
 
 func reset_round():
-	var ownsTurn = randi() % 2 == 0 
+	ownsTurn = randi() % 2 == 0 
 	for i in $"../CardManager".get_children():
 		i.queue_free()
 	emit_signal("resetCardSlots")
@@ -120,7 +128,7 @@ func reset_round():
 	print("GameManager: Reset round finished!")
 	checking_round_winner = false
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Globals.playerHP == 3:
 		$"../PointLight2D".color = "ff3f30"
 	if Globals.playerHP == 2:

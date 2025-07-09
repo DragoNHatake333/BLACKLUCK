@@ -14,7 +14,7 @@ var deck_reference
 @onready var camera := $"../3DViewport/SubViewportContainer/SubViewport/Camera3D"
 @onready var light := $"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D"
 
-func _process(delta):
+func _process(_delta):
 	if !subviewport or !camera or !light:
 		return
 

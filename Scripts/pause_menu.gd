@@ -23,10 +23,10 @@ func _on_resume_pressed():
 	resume()
 
 func _on_quit_pressed():
-	get_tree().paused = false 
-	get_tree().change_scene_to_file("res://ui/MainMenu/Scenes/MainMenu.tscn")
-
-func _process(delta):
+	get_tree().paused = false
+	SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
+	
+func _process(_delta):
 	testEsc()
 
 func _on_main_menu_pressed() -> void:

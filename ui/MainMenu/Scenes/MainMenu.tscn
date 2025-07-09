@@ -51,20 +51,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-metadata/_edit_use_anchors_ = true
 
 [node name="Blackluck" type="Label" parent="."]
 material = SubResource("ShaderMaterial_ve1ib")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -579.0
-offset_top = -217.0
-offset_right = 580.0
-offset_bottom = 14.0
+anchors_preset = -1
+anchor_left = 0.198437
+anchor_top = 0.299074
+anchor_right = 0.802083
+anchor_bottom = 0.512963
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.429619, 7.70092e-07, 3.60981e-07, 1)
@@ -72,18 +67,15 @@ theme_override_fonts/font = ExtResource("5_ve1ib")
 theme_override_font_sizes/font_size = 230
 text = "BLACKLUCK"
 horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.367375
-anchor_top = 0.508889
-anchor_right = 0.633458
-anchor_bottom = 0.836111
-offset_left = -0.360046
-offset_top = 66.4
-offset_right = -0.23999
-offset_bottom = -66.0
+anchor_left = 0.367187
+anchor_top = 0.535648
+anchor_right = 0.633333
+anchor_bottom = 0.809722
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
@@ -113,16 +105,13 @@ text = "Quit"
 visible = false
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.372
-anchor_top = 0.321
-anchor_right = 0.628
-anchor_bottom = 0.679
-offset_left = -86.24
-offset_top = -61.68
-offset_right = 86.24
-offset_bottom = 61.68
+anchor_left = 0.327083
+anchor_top = 0.263889
+anchor_right = 0.672917
+anchor_bottom = 0.736111
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel"]
 texture_filter = 1
@@ -247,9 +236,9 @@ layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.179
 anchor_right = 0.822
-offset_left = -85.856
+offset_left = -204.332
 offset_top = 13.0
-offset_right = 86.192
+offset_right = 204.668
 offset_bottom = 120.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -294,6 +283,7 @@ text = "Back"
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_b4ika")
+volume_db = -13.87
 autoplay = true
 parameters/looping = true
 

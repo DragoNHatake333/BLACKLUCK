@@ -19,6 +19,7 @@ config/volume=1.0
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
+SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 
 [display]
 
@@ -33,6 +34,10 @@ window/vsync/vsync_mode=0
 
 version_control/plugin_name="GitPlugin"
 version_control/autoload_on_startup=true
+
+[editor_plugins]
+
+enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
 
 [global_group]
 

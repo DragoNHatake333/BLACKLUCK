@@ -1,5 +1,6 @@
 extends Control
 
+
 @onready var play_button = $VBoxContainer/PlayButton
 @onready var settings_button = $VBoxContainer/OptionsButton
 @onready var quit_button = $VBoxContainer/QuitButton
@@ -91,8 +92,8 @@ func _apply_volume(value: float):
 func _on_play_pressed():
 	click_sound.play()
 	await get_tree().create_timer(0.2).timeout
-	get_tree().change_scene_to_file("res://Table.tscn")
-
+	SceneManager.change_scene("res://Scenes/Table.tscn")
+	
 func _on_settings_pressed():
 	click_sound.play()
 	settings_panel.visible = true

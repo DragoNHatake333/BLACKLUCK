@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://t0s185motu2v"]
+
+[ext_resource type="PackedScene" uid="uid://by7tqp72mpn2f" path="res://ui/MainMenu/Scenes/MainMenu.tscn" id="2_occvc"]
+
+[sub_resource type="GDScript" id="GDScript_fyej0"]
+script/source = "class_name GameController extends Node
+
+@onready var world2d = $World2D
+@onready var gui = $GUI
+ 
+var current_2d_scene
+var current_gui_scene
+
+func _ready() -> void:
+	Globals.game_controller = self
+	current_gui_scene = $GUI/MainMenu
+
+func change_gui_scene(new_scene: String, delete: bool = true, keep_running: bool = false) -> void:
+	if not current_gui_scene == null:
+		if delete:
+			current_gui_scene.queue_free() #Removes node entirely
+		elif keep_running:
+			current_gui_scene.visible = false #Keeps in memory and running
+		else:
+			gui.remove_child(current_gui_scene) #Keeps in memory, does not run
+	var new = load(new_scene).instantiate()
+	gui.add_child(new)
+	current_gui_scene = new
+
+func change_2d_scene(new_scene: String, delete: bool = true, keep_running: bool = false) -> void:
+	if not current_2d_scene == null:
+		if delete:
+			current_2d_scene.queue_free() #Removes node entirely
+		elif keep_running:
+			current_2d_scene.visible = false #Keeps in memory and running
+		else:
+			world2d.remove_child(current_2d_scene) #Keeps in memory, does not run
+	var new = load(new_scene).instantiate()
+	world2d.add_child(new)
+	current_2d_scene = new
+
+func queue_free_scene(scene):
+	pass
+	#if scene == \"GUI\":
+		#current_gui_scene.queue_free()
+	#elif scene == \"2D\":
+		#current_2d_scene.queue_free()
+	
+func _on_main_menu_play_pressed() -> void:
+	queue_free_scene(\"GUI\")
+	change_2d_scene(\"res://Scenes/Table.tscn\")
+"
+
+[node name="GameController" type="Node"]
+script = SubResource("GDScript_fyej0")
+
+[node name="GUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MainMenu" parent="GUI" instance=ExtResource("2_occvc")]
+layout_mode = 1
+
+[node name="World2D" type="Node2D" parent="."]
