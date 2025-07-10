@@ -3,6 +3,9 @@ extends Node
 @onready var revolverShot = $revolverShot
 @onready var noBullet = $noBullet
 @onready var revolverSpin = $revolverSpin
+@onready var candleOff = $candleOff
+@onready var candleOffAI = $candleOffAI
+var soundPlaying = true
 
 func call_sound_manager(sound: String):
 	var sound_node = get_node(sound)
@@ -10,3 +13,7 @@ func call_sound_manager(sound: String):
 		sound_node.play()
 	else:
 		print("Invalid sound:", sound)
+
+func play_random_sound():
+	pass
+	#Here it will play a random creepy sound every now and then.

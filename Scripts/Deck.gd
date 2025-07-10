@@ -29,15 +29,15 @@ func draw_card(reps):
 
 	while drawn < reps:
 		if Globals.centerDeck.size() <= 3:
-			Globals.centerDeck = Globals.fullCenterDeck.duplicate()
-		
+			Globals.centerDeck = Globals.fullCenterDeck
+			Globals.centerDeck.shuffle()
+			
 		var card_drawn_name = Globals.centerDeck[0]
 
 		# If a card with the same name exists, skip this draw
 		if $"../CardManager".has_node(card_drawn_name):
-			print("Duplicate card '%s' found, trying next draw..." % card_drawn_name)
-			# Still erase the card so we don't try it again this session
-			Globals.centerDeck.erase(card_drawn_name)
+			Globals.centerDeck = Globals.fullCenterDeck
+			Globals.centerDeck.shuffle()
 			_on_game_manager_call_deck()
 			return
 

@@ -2,12 +2,11 @@ extends Node
 
 var ownsTurn = randi() % 2 == 0 
 var round_number = 0
-var win #Player is true AI is false
 var starter = ownsTurn
 var checking_round_winner = false
 var returnRevovler = false
 @onready var Blackluck = $"../Blackluck"
-
+var money = 0
 signal resetCardSlots
 signal callCountAmount
 signal callDeck
@@ -16,8 +15,16 @@ signal callAI
 var Deck = "/root/Main/Deck"
 var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
+signal callSoundManager
 
 func _ready() -> void:
+	$"../AiTurnLight".visible = false
+	$"../PlayerTurnLight".visible = false
+	#check_candle_lighting("restart", "ai")
+	#check_candle_lighting("restart", "player")
+	Globals.aiHP = 1
+	Globals.playerHP = 3
+	money = 0
 	Globals.canvasModulate = true
 	Globals.playerSum = 0
 	Globals.playerHand = []
@@ -37,12 +44,10 @@ func _ready() -> void:
 func game_logic():
 	print("GameManager: Logic start.")
 	if Globals.playerHP == 0:
-		win = "ai"
-		game_won()
+		game_lost()
 		await get_tree().process_frame
 		return
 	if Globals.aiHP == 0:
-		win = "player"
 		game_won()
 		await get_tree().process_frame
 		return
@@ -93,18 +98,37 @@ func game_logic():
 	ownsTurn = !ownsTurn
 	round_number += 1
 	game_logic()
+
+func game_lost():
+	print("GAME FINISHED: PLAYER LOSES")
+	Blackluck.text = "DEAD\n" + str(money) + "$"
+	Blackluck.visible = true
+	await get_tree().create_timer(5.0).timeout
+	SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
-	print("GAME FINISHED: ", win, " wins.")
-	Blackluck.text = str(win) + " wins."
+	money += 500000
+	print("GAME FINISHED: PLAYER WINS")
+	Blackluck.text = str(money) + "$"
 	Blackluck.visible = true
+	checking_round_winner = true
+	Globals.aiHP = 3
+	check_candle_lighting("restart", "ai")
+	reset_round()  # Delayed check
+	while checking_round_winner == true:
+		await get_tree().process_frame	
+	await get_tree().create_timer(5.0).timeout
+	Blackluck.visible = false
+	game_logic()
 
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
+		check_candle_lighting("check", "ai")
 		reset_round()
 	if Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
+		check_candle_lighting("check", "player")
 		reset_round()
 	else:
 		reset_round()
@@ -127,9 +151,75 @@ func reset_round():
 	Globals.centerDeck = Globals.fullCenterDeck
 	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
+	check_candle_lighting("check", "ai")
+	check_candle_lighting("check", "player")
 	checking_round_winner = false
 
+func check_candle_lighting(operation, who):
+	if operation == "check":
+		if who == "player":
+			if $"../CandleLights/PointP1".visible == true and Globals.playerHP == 2:
+				emit_signal("callSoundManager","candleOff")
+				$"../CandleLights/PointP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
+			elif $"../CandleLights/PointP2".visible == true and Globals.playerHP == 1:
+				emit_signal("callSoundManager","candleOff")
+				$"../CandleLights/PointP2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = false
+			elif $"../CandleLights/PointP3".visible == true and Globals.playerHP == 0:
+				emit_signal("callSoundManager","candleOff")
+				$"../CandleLights/PointP3".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = false
+		if who == "ai":
+			if $"../CandleLightsAI/PointA1".visible == true and Globals.aiHP == 2:
+				emit_signal("callSoundManager","candleOffAI")
+				$"../CandleLightsAI/PointA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = false
+			elif $"../CandleLightsAI/PointA2".visible == true and Globals.aiHP == 1:
+				emit_signal("callSoundManager","candleOffAI")
+				$"../CandleLightsAI/PointA2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = false
+			elif $"../CandleLightsAI/PointA3".visible == true and Globals.aiHP == 0:
+				emit_signal("callSoundManager","candleOffAI")
+				$"../CandleLightsAI/PointA3".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = false
+	elif operation == "restart":
+		if who == "ai":
+			$"../CandleLightsAI/PointA1".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = true
+			$"../CandleLightsAI/PointA2".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = true
+			$"../CandleLightsAI/PointA3".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+		if who == "player":
+			$"../CandleLights/PointP1".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = true
+			$"../CandleLights/PointP2".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = true
+			$"../CandleLights/PointP3".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+	else:
+		print("check_candle_lighting: invalid operation argument")
+
 func _process(_delta: float) -> void:
+	if Globals.aiTurn == true:
+		$"../AiTurnLight".visible = true
+		$"../PlayerTurnLight".visible = false
+	if Globals.playerTurn == true:
+		$"../PlayerTurnLight".visible = true
+		$"../AiTurnLight".visible = false
 	if Globals.canvasModulate == true:
 		$"../CanvasModulate".color = "222222"
 	elif Globals.canvasModulate == false:

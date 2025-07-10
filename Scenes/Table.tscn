@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=48 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="1_1p1yg"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
@@ -26,14 +26,16 @@
 [ext_resource type="AudioStream" uid="uid://cwn2fm4lc0vd5" path="res://Assets/Sound/revolverShot1.mp3" id="24_02xof"]
 [ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="25_nlwdp"]
 [ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="26_dvf6a"]
+[ext_resource type="AudioStream" uid="uid://b0vvuwlmp47vh" path="res://Assets/Sound/Static Motion.mp3" id="27_7xtld"]
 [ext_resource type="PackedScene" uid="uid://b7dws7ygl7jmx" path="res://Assets/Revolver/scene.gltf" id="27_be3cg"]
+[ext_resource type="AudioStream" uid="uid://brf71xbdoaj88" path="res://Assets/Sound/candleOff.mp3" id="28_1jd3i"]
 [ext_resource type="PackedScene" uid="uid://ca8tbuoptqgxo" path="res://Assets/Candle/3D Candlestick_lightning scene FBX.fbx" id="28_ov01g"]
+[ext_resource type="PackedScene" uid="uid://drj87p7oc8wht" path="res://Scenes/fire_particle.tscn" id="28_p8qel"]
 [ext_resource type="Script" uid="uid://cf6uquyeaahc" path="res://Scripts/RealRevolver.gd" id="28_t6326"]
 [ext_resource type="Script" uid="uid://u2ic2lherf7o" path="res://Scripts/point_light_2d.gd" id="29_b1apg"]
 [ext_resource type="Script" uid="uid://dwith67qqvmxp" path="res://Scripts/AnimationManager.gd" id="30_adfku"]
 [ext_resource type="PackedScene" uid="uid://cp3836185v15m" path="res://Scenes/pause_menu.tscn" id="31_tye0p"]
 [ext_resource type="Texture2D" uid="uid://b2r20oei4ghmx" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="33_y3mow"]
-[ext_resource type="Shader" uid="uid://dym0s0bfqslmr" path="res://light.gdshader" id="34_p8qel"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("1_1p1yg")
@@ -87,24 +89,9 @@ fill = 1
 fill_from = Vector2(0.5, 0.485849)
 
 [sub_resource type="Gradient" id="Gradient_p8qel"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7xtld"]
 gradient = SubResource("Gradient_p8qel")
-fill = 1
-fill_from = Vector2(0.5, 0.455556)
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_7xtld"]
-shader = ExtResource("34_p8qel")
-shader_parameter/color1 = Vector4(46.165, 0, 0, 0)
-shader_parameter/color2 = Vector4(0, 0, 0, 0)
-shader_parameter/brightness = 15.16
-shader_parameter/noise = SubResource("GradientTexture2D_7xtld")
-shader_parameter/timeOffset = 4.285
-shader_parameter/timeRate = 1.825
-shader_parameter/noiseAmmount = 0.745
-shader_parameter/offsetX = 0.795
-shader_parameter/flickerT = 1.385
 
 [node name="Main" type="Node2D"]
 
@@ -153,6 +140,7 @@ texture = ExtResource("4_p8qel")
 [node name="playerLabels" type="Node" parent="."]
 
 [node name="playerHP" type="Label" parent="playerLabels"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.034375
 anchor_top = -0.0944444
@@ -172,6 +160,7 @@ script = ExtResource("5_7xtld")
 metadata/_edit_use_anchors_ = true
 
 [node name="playerTurn" type="Label" parent="playerLabels"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.0125
 anchor_top = -0.0944444
@@ -191,6 +180,7 @@ script = ExtResource("6_1jd3i")
 metadata/_edit_use_anchors_ = true
 
 [node name="playerSum" type="Label" parent="playerLabels"]
+visible = false
 offset_left = 1714.0
 offset_top = 904.0
 offset_right = 1859.0
@@ -204,6 +194,7 @@ script = ExtResource("7_6bpmn")
 metadata/_edit_use_anchors_ = true
 
 [node name="playerAmount" type="Label" parent="playerLabels"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.0609375
 anchor_top = -0.0166667
@@ -224,6 +215,7 @@ metadata/_edit_use_anchors_ = true
 [node name="aiLabels" type="Node" parent="."]
 
 [node name="aiHP" type="Label" parent="aiLabels"]
+visible = false
 offset_left = 110.0
 offset_top = 236.0
 offset_right = 203.0
@@ -237,6 +229,7 @@ script = ExtResource("9_pea3r")
 metadata/_edit_use_anchors_ = true
 
 [node name="aiTurn" type="Label" parent="aiLabels"]
+visible = false
 offset_left = 102.0
 offset_top = 156.0
 offset_right = 195.0
@@ -250,6 +243,7 @@ script = ExtResource("10_ro21p")
 metadata/_edit_use_anchors_ = true
 
 [node name="aiSum" type="Label" parent="aiLabels"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.0546875
 anchor_top = -0.0722222
@@ -267,6 +261,7 @@ script = ExtResource("11_davux")
 metadata/_edit_use_anchors_ = true
 
 [node name="aiAmount" type="Label" parent="aiLabels"]
+visible = false
 anchors_preset = -1
 anchor_left = -0.025
 anchor_top = -0.0944444
@@ -413,10 +408,6 @@ script = ExtResource("22_82s5k")
 [node name="SoundManager" type="Node" parent="."]
 script = ExtResource("23_hfij1")
 
-[node name="revolverShot" type="AudioStreamPlayer" parent="SoundManager"]
-stream = ExtResource("24_02xof")
-volume_db = -80.0
-
 [node name="noBullet" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("25_nlwdp")
 
@@ -427,6 +418,25 @@ stream = ExtResource("26_dvf6a")
 [node name="PlayerEars" type="AudioListener2D" parent="SoundManager"]
 position = Vector2(986, 1210)
 current = true
+
+[node name="revolverShot" type="AudioStreamPlayer2D" parent="SoundManager"]
+stream = ExtResource("24_02xof")
+
+[node name="BGM" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("27_7xtld")
+volume_db = -22.148
+autoplay = true
+parameters/looping = true
+
+[node name="candleOff" type="AudioStreamPlayer2D" parent="SoundManager"]
+position = Vector2(1817, 896)
+stream = ExtResource("28_1jd3i")
+volume_db = 24.0
+
+[node name="candleOffAI" type="AudioStreamPlayer2D" parent="SoundManager"]
+position = Vector2(74, 137)
+stream = ExtResource("28_1jd3i")
+volume_db = 24.0
 
 [node name="3DViewport" type="Area2D" parent="."]
 z_index = -8
@@ -447,12 +457,16 @@ mouse_filter = 2
 [node name="SubViewport" type="SubViewport" parent="3DViewport/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-msaa_2d = 1
 msaa_3d = 1
-screen_space_aa = 1
 mesh_lod_threshold = 0.0
 size = Vector2i(1920, 1080)
 render_target_update_mode = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="3DViewport/SubViewportContainer/SubViewport"]
+transform = Transform3D(32.0308, 0, 0, 0, 25.415, 0, 0, 0, 25.415, 0, 5.64746, 0)
+material_override = SubResource("StandardMaterial3D_ontce")
+gi_mode = 2
+mesh = SubResource("PlaneMesh_ontce")
 
 [node name="Sketchfab_Scene" parent="3DViewport/SubViewportContainer/SubViewport" instance=ExtResource("27_be3cg")]
 transform = Transform3D(1.23897, 0.393642, -0.00147637, 0, 0.00487566, 1.29999, 0.393644, -1.23896, 0.00464677, -18.906, 6.699, -1.516)
@@ -470,23 +484,137 @@ shadow_bias = 2.0
 spot_range = 32.0447
 spot_angle = 63.5867
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="3DViewport/SubViewportContainer/SubViewport"]
-transform = Transform3D(32.0308, 0, 0, 0, 25.415, 0, 0, 0, 25.415, 0, 5.64746, 0)
-material_override = SubResource("StandardMaterial3D_ontce")
-mesh = SubResource("PlaneMesh_ontce")
+[node name="PlayerCandles" type="Node" parent="3DViewport/SubViewportContainer/SubViewport"]
 
-[node name="3D Candlestick_lightning scene FBX" parent="3DViewport/SubViewportContainer/SubViewport" instance=ExtResource("28_ov01g")]
-transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.146, 5.647, 8.145)
+[node name="CandleP1" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles"]
 
-[node name="SpotLight3D2" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -0.0686074, 0.997644, 0, -0.997644, -0.0686074, 19.146, 14.3557, 8.145)
+[node name="FireP1" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.0918984, 0, -0.0394295, 0, 0.1, 0, 0.0394295, 0, 0.0918984, 19.554, 8.84561, 6.18874)
+
+[node name="SpotP1" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1"]
+transform = Transform3D(0.918984, 0.393366, 0.0270515, 0, -0.0686074, 0.997644, 0.394295, -0.916819, -0.0630491, 19.6805, 8.90472, 6.22396)
 light_color = Color(0.866667, 0.227451, 0, 1)
 light_energy = 62.715
 spot_range = 12.2058
 
+[node name="CandleP1" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1" instance=ExtResource("28_ov01g")]
+transform = Transform3D(-0.058883, 0, -0.0808257, 0, 0.1, 0, 0.0808257, 0, -0.058883, 19.6805, 5.647, 6.22396)
+
+[node name="CandleP2" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles"]
+
+[node name="FireP2" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 20.2343, 8.84561, 8.37122)
+
+[node name="SpotP2" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2"]
+transform = Transform3D(1, 0, 0, 0, -0.0686074, 0.997644, 0, -0.997644, -0.0686074, 20.2343, 9.21968, 8.30925)
+light_color = Color(0.866667, 0.227451, 0, 1)
+light_energy = 62.715
+spot_range = 12.2058
+
+[node name="CandleP2" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2" instance=ExtResource("28_ov01g")]
+transform = Transform3D(-0.0997781, 0, 0.00665873, 0, 0.1, 0, -0.00665873, 0, -0.0997781, 20.2343, 5.647, 8.30925)
+
+[node name="CandleP3" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles"]
+
+[node name="FireP3" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 19.6541, 8.84561, 10.4866)
+
+[node name="SpotP3" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3"]
+transform = Transform3D(1, 0, 0, 0, -0.0686074, 0.997644, 0, -0.997644, -0.0686074, 19.7777, 8.93759, 10.3708)
+light_color = Color(0.866667, 0.227451, 0, 1)
+light_energy = 62.715
+spot_range = 12.2058
+
+[node name="CandleP3" parent="3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3" instance=ExtResource("28_ov01g")]
+transform = Transform3D(-0.085159, 0, 0.0524209, 0, 0.1, 0, -0.0524209, 0, -0.085159, 19.7777, 5.647, 10.3708)
+
+[node name="AICandles" type="Node" parent="3DViewport/SubViewportContainer/SubViewport"]
+
+[node name="CandleA1" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/AICandles"]
+
+[node name="FireA1" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -19.3752, 8.84561, -6.67156)
+visible = false
+
+[node name="SpotA1" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1"]
+transform = Transform3D(1, 0, 0, 0, -0.0686074, 0.997644, 0, -0.997644, -0.0686074, -19.2517, 8.93759, -6.78743)
+visible = false
+light_color = Color(0.866667, 0.227451, 0, 1)
+light_energy = 62.715
+spot_range = 12.2058
+
+[node name="CandleA1" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1" instance=ExtResource("28_ov01g")]
+transform = Transform3D(0.0979124, 0, -0.0203266, 0, 0.1, 0, 0.0203266, 0, 0.0979124, -19.2517, 5.647, -6.78743)
+
+[node name="CandleA2" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/AICandles"]
+
+[node name="FireA2" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, -19.8833, 8.84561, -8.95123)
+visible = false
+
+[node name="SpotA2" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2"]
+transform = Transform3D(1, 0, 0, 0, -0.0686074, 0.997644, 0, -0.997644, -0.0686074, -19.8833, 9.21968, -9.0132)
+visible = false
+light_color = Color(0.866667, 0.227451, 0, 1)
+light_energy = 62.715
+spot_range = 12.2058
+
+[node name="CandleA2" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2" instance=ExtResource("28_ov01g")]
+transform = Transform3D(0.0999198, 0, -0.00400271, 0, 0.1, 0, 0.00400271, 0, 0.0999198, -19.8833, 5.647, -9.0132)
+
+[node name="CandleA3" type="Node" parent="3DViewport/SubViewportContainer/SubViewport/AICandles"]
+
+[node name="FireA3" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3" instance=ExtResource("28_p8qel")]
+transform = Transform3D(0.0918984, 0, -0.0394295, 0, 0.1, 0, 0.0394295, 0, 0.0918984, -19.4754, 8.84561, -11.2793)
+
+[node name="SpotA3" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3"]
+transform = Transform3D(0.918984, 0.393366, 0.0270515, 0, -0.0686074, 0.997644, 0.394295, -0.916819, -0.0630491, -19.3488, 8.90472, -11.2441)
+light_color = Color(0.866667, 0.227451, 0, 1)
+light_energy = 62.715
+spot_range = 12.2058
+
+[node name="SpotA4" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3" instance=ExtResource("28_ov01g")]
+transform = Transform3D(0.0998691, 0, -0.00511508, 0, 0.1, 0, 0.00511508, 0, 0.0998691, -19.3488, 5.647, -11.2441)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="3DViewport"]
 position = Vector2(3387, 819)
 shape = SubResource("RectangleShape2D_ontce")
+
+[node name="CandleLights" type="Node" parent="."]
+
+[node name="PointP1" type="PointLight2D" parent="CandleLights"]
+position = Vector2(1859, 832)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
+
+[node name="PointP2" type="PointLight2D" parent="CandleLights"]
+position = Vector2(1843, 928)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
+
+[node name="PointP3" type="PointLight2D" parent="CandleLights"]
+position = Vector2(1863, 1044)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
+
+[node name="CandleLightsAI" type="Node" parent="."]
+
+[node name="PointA1" type="PointLight2D" parent="CandleLightsAI"]
+visible = false
+position = Vector2(67, 245)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
+
+[node name="PointA2" type="PointLight2D" parent="CandleLightsAI"]
+visible = false
+position = Vector2(52, 139)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
+
+[node name="PointA3" type="PointLight2D" parent="CandleLightsAI"]
+position = Vector2(68, 41)
+color = Color(1, 0.462745, 0.109804, 1)
+texture = ExtResource("33_y3mow")
 
 [node name="RevolverButton" type="Area2D" parent="."]
 collision_layer = 128
@@ -533,26 +661,28 @@ mouse_filter = 2
 [node name="PauseMenu" parent="EscMenu" instance=ExtResource("31_tye0p")]
 layout_mode = 1
 
-[node name="CandleLights" type="Node" parent="."]
+[node name="PlayerTurnLight" type="PointLight2D" parent="."]
+position = Vector2(960, 791)
+rotation = 1.5708
+scale = Vector2(8.985, 29.555)
+color = Color(1, 0.12549, 0, 1)
+energy = 0.94
+texture = SubResource("GradientTexture2D_7xtld")
 
-[node name="PointLight2D" type="PointLight2D" parent="CandleLights"]
-visible = false
-position = Vector2(1823, 925)
-color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
-
-[node name="ColorRect" type="ColorRect" parent="CandleLights"]
-material = SubResource("ShaderMaterial_7xtld")
-offset_left = 1729.0
-offset_top = 828.0
-offset_right = 1898.0
-offset_bottom = 998.0
+[node name="AiTurnLight" type="PointLight2D" parent="."]
+position = Vector2(960, 290)
+rotation = 4.71239
+scale = Vector2(8.985, 29.555)
+color = Color(1, 0.12549, 0, 1)
+energy = 0.94
+texture = SubResource("GradientTexture2D_7xtld")
 
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
 [connection signal="callCountAmount" from="GameManager" to="Terminator" method="_on_game_manager_call_count_amount"]
 [connection signal="callDeck" from="GameManager" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
+[connection signal="callSoundManager" from="GameManager" to="SoundManager" method="call_sound_manager"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot2" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot3" method="_on_game_manager_reset_card_slots"]
