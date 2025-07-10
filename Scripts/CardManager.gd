@@ -27,6 +27,11 @@ func on_left_click_released():
 		finish_drag()
 
 func _process(_delta: float) -> void:
+	if Globals.releaseCardMenu == true:
+		Globals.releaseCardMenu = false
+		Globals.isCardDragging = false
+		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
+		cardBeingDrag = null
 	mouse_pos = get_global_mouse_position()
 	if cardBeingDrag:
 		Globals.isCardDragging = true

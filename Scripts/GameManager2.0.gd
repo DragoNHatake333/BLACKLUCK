@@ -18,6 +18,7 @@ var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
 
 func _ready() -> void:
+	Globals.canvasModulate = true
 	Globals.playerSum = 0
 	Globals.playerHand = []
 	Globals.playerAmount = 0
@@ -129,6 +130,10 @@ func reset_round():
 	checking_round_winner = false
 
 func _process(_delta: float) -> void:
+	if Globals.canvasModulate == true:
+		$"../CanvasModulate".color = "222222"
+	elif Globals.canvasModulate == false:
+		$"../CanvasModulate".color = "ffffff"
 	if Globals.playerHP == 3:
 		$"../PointLight2D".color = "ff3f30"
 	if Globals.playerHP == 2:

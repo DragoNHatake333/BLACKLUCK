@@ -1,5 +1,7 @@
 extends Node
 
+var releaseCardMenu 
+var canvasModulate = true
 var revolver_chambers := []
 var current_chamber := 0
 var is_card_hover = false
