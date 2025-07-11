@@ -12,8 +12,15 @@ var aiTurn = false
 var cards_in_center_hand = 0
 var playerRevolverPressed = false
 var isCardDragging
+var firstRevolver = false
+signal callSoundManager
+
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
+	if firstRevolver == false:
+		firstRevolver = true
+	else:
+		emit_signal("callSoundManager", "revolverSpin")
 	var real_bullet = randi() % 6
 	revolver_chambers[real_bullet] = true
 	current_chamber = 0
