@@ -12,6 +12,15 @@ const DEFAULT_CARD_MOVE_SPEED = 0.1
 @export var angle_y_max: float = 15.0
 @export var max_offset_shadow: float = 50.0
 
+var prev_mouse_pos := Vector2.ZERO
+var drag_velocity := Vector2.ZERO
+var drag_rotation := 0.0
+var rotation_velocity := 0.0
+
+@export var max_rotation := 12.0 # Max angle in degrees
+@export var damping := 8.0 # How quickly it settles
+@export var spring_strength := 100.0
+
 var drag_offset := Vector2.ZERO
 var mouse_pos
 signal callCardSlot
@@ -29,27 +38,45 @@ func on_left_click_released():
 func _process(_delta: float) -> void:
 	if Globals.releaseCardMenu == true:
 		Globals.releaseCardMenu = false
-		Globals.isCardDragging = false
 		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
 		cardBeingDrag = null
 	mouse_pos = get_global_mouse_position()
 	if cardBeingDrag:
-		Globals.isCardDragging = true
 		var new_pos = mouse_pos + drag_offset
-		cardBeingDrag.global_position = Vector2(
+		new_pos = Vector2(
 			clamp(new_pos.x, 0, screenSize.x),
 			clamp(new_pos.y, 0, screenSize.y)
 		)
 
+		# Compute drag velocity
+		drag_velocity = (mouse_pos - prev_mouse_pos) / _delta
+		prev_mouse_pos = mouse_pos
+
+		# Apply rotation based on drag velocity
+		var target_rot = clamp(drag_velocity.x * 0.1, -max_rotation, max_rotation)
+		var spring_force = (target_rot - drag_rotation) * spring_strength
+		rotation_velocity += spring_force * _delta
+		rotation_velocity -= rotation_velocity * damping * _delta
+		drag_rotation += rotation_velocity * _delta
+
+		cardBeingDrag.global_position = new_pos
+		cardBeingDrag.rotation_degrees = drag_rotation
+
+
 func start_drag(card):
+	Globals.isCardDragging = true
+	drag_rotation = 0.0
+	rotation_velocity = 0.0
+	prev_mouse_pos = get_global_mouse_position()
 	cardBeingDrag = card
 	drag_offset = card.global_position - get_global_mouse_position()
+	card.rotation = 90
 	card.scale = Vector2(1, 1)
 	card.z_index = 25
 
 func finish_drag():
 	cardBeingDrag.scale = Vector2(1.05, 1.05)
-
+	cardBeingDrag.rotation_degrees = 0.0
 	var card_slot_found = raycast_slot()
 	if card_slot_found and not card_slot_found.card_in_slot:
 		center_hand_reference.remove_card_from_hand(cardBeingDrag)
@@ -61,7 +88,6 @@ func finish_drag():
 	else:
 		center_hand_reference.add_card_to_hand(cardBeingDrag, DEFAULT_CARD_MOVE_SPEED)
 	cardBeingDrag = null
-	
 func raycast():
 	var space_state = get_world_2d().direct_space_state
 	var parameters = PhysicsPointQueryParameters2D.new()

@@ -11,9 +11,8 @@ var playerTurn = false
 var aiTurn = false
 var cards_in_center_hand = 0
 var playerRevolverPressed = false
-var isCardDragging
+var isCardDragging = false
 var firstRevolver = false
-signal callSoundManager
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]

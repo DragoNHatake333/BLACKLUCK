@@ -5,7 +5,7 @@ const CARD_DRAW_SPEED = 0.5
 const cards_that_shoud_be_in_center = 3
 var cards_to_deal = 0
 var drawing_cards = false
-
+signal callSoundManager
 func _ready() -> void:
 	$RichTextLabel.text = str(Globals.centerDeck.size())
 
@@ -62,3 +62,9 @@ func draw_card(reps):
 		drawn += 1
 
 	drawing_cards = false
+	emit_signal("callSoundManager", "deckDeal")
+	var tween := create_tween()
+	var center := get_viewport().get_visible_rect().size / 2
+	tween.tween_property($"../SoundManager/deckDeal", "position", center, 0.3).set_trans(Tween.TRANS_SINE)
+	await get_tree().create_timer(1).timeout
+	$"../SoundManager/deckDeal".position = Vector2(2077, 525)

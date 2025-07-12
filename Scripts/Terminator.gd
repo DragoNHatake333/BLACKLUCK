@@ -22,7 +22,7 @@ signal callSoundManager(sound)
 
 func _on_game_manager_call_ai() -> void:
 	print("TERMINATOR: AI Turn Start")
-	await get_tree().create_timer(randf_range(1.0, 3.0)).timeout
+	await get_tree().create_timer(randf_range(1.0, 2.0)).timeout
 	print("TERMINATOR: Current Chamber =", Globals.current_chamber)
 
 	filteredCenterHand = {}
@@ -31,102 +31,74 @@ func _on_game_manager_call_ai() -> void:
 	selected_index = null
 	to_player_slot = false
 	selected_card_node = null
-	
+
 	checking_center_cards = true
 	print("TERMINATOR: Checking center cards")
 	check_center_cards()
 	while checking_center_cards:
 		await get_tree().process_frame
-	
+
 	checking_hl_cards = true
 	print("TERMINATOR: Checking highest/lowest card")
 	check_hl_cards()
 	while checking_hl_cards:
 		await get_tree().process_frame
-	
+
 	print("TERMINATOR: Highest card =", highestCard)
 	print("TERMINATOR: Lowest card =", lowestCard)
 
-	# Check if someone has 5 cards
-	if Globals.playerAmount == 5 or Globals.aiAmount == 5:
-		print("TERMINATOR: Someone has 5 cards - Player:", Globals.playerAmount, "AI:", Globals.aiAmount)
-		if Globals.playerAmount == 5 and Globals.aiAmount == 4:
-			if (highestCard["value"] + Globals.aiSum) > Globals.playerSum:
-				print("TERMINATOR: Giving AI highest card")
-				give_card("ai", highestCard["name"])
-				return
-			elif revolverPressed == false:
-				print("TERMINATOR: Calling revolver because AI can't win")
-				call_revolver()
-				return
-			else:
-				print("TERMINATOR: Doing normal play")
-				normal_play()
-				return
+	# More proactive revolver logic:
+	var risk_score = 0
 
-		elif Globals.playerAmount == 4 and Globals.aiAmount == 5:		
-			if not (lowestCard["value"] + Globals.playerSum) > Globals.aiSum:
-				print("TERMINATOR: Giving AI highest card because player can't win")
-				give_card("ai", highestCard["name"])
-				return
-			elif revolverPressed == false:
-				print("TERMINATOR: Calling revolver because player can win")
-				call_revolver()
-				return
-			else:
-				print("TERMINATOR: Doing normal play")
-				normal_play()
-				return
-		else:
-			if Globals.playerAmount == 5:
-				if highestCard["value"] <= 5:
-					if Globals.current_chamber >= 3:
-						print("TERMINATOR: Giving AI highest card (safe chamber)")
-						give_card("ai", highestCard["name"])
-						return
-					elif revolverPressed == false:
-						print("TERMINATOR: Calling revolver instead of risking high card")
-						call_revolver()
-						return
-					else:
-						print("TERMINATOR: Giving AI highest card (no choice)")
-						give_card("ai", highestCard["name"])
-			elif Globals.aiAmount == 5:
-				if lowestCard["value"] >= 8:
-					if Globals.current_chamber >= 3:
-						print("TERMINATOR: Giving player lowest card (safe chamber)")
-						give_card("player", lowestCard["name"])
-						return
-					elif revolverPressed == false:
-						print("TERMINATOR: Calling revolver instead of risking low card")
-						call_revolver()
-						return
-					else:
-						print("TERMINATOR: Giving player lowest card (no choice)")
-						give_card("player", lowestCard["name"])
-	
+	# Chamber > 2 is risky
+	if Globals.current_chamber <= 2:
+		risk_score -= 1
+	elif Globals.current_chamber >= 4:
+		risk_score += 2
+
+	# Compare sums, predict likely outcome
+	var ai_future_sum = Globals.aiSum + highestCard["value"]
+	var player_future_sum = Globals.playerSum + lowestCard["value"]
+
+	if ai_future_sum < Globals.playerSum:
+		risk_score += 2
+	if player_future_sum > Globals.aiSum:
+		risk_score += 1
+
+	# Pressure from card count
+	if Globals.playerAmount == 5 and Globals.aiAmount < 5:
+		risk_score += 2
+	elif Globals.aiAmount == 5 and Globals.playerAmount < 5:
+		risk_score -= 1
+
+	# If revolver not pressed and risk is too high, press it!
+	if revolverPressed == false and risk_score >= 3:
+		print("TERMINATOR: Risk score high (" + str(risk_score) + ") — Calling revolver!")
+		call_revolver()
+		return
+
+	# Otherwise, use existing logic
 	print("TERMINATOR: Defaulting to normal play")
 	normal_play()
-			
+
 func normal_play():
 	print("TERMINATOR: Smarter normal play logic triggered")
 
-	# Evaluate card benefits
 	var ai_benefit = highestCard["value"]
 	var player_harm = 14 - lowestCard["value"]  # Lower value = higher harm
 
-	# Decide based on which choice gives more strategic gain
 	if ai_benefit >= player_harm:
 		give_card("ai", highestCard["name"])
 	elif player_harm > ai_benefit:
 		give_card("player", lowestCard["name"])
 	else:
-		# If indecisive AND chamber is risky, maybe call the revolver
-		if Globals.current_chamber <= 3 and not revolverPressed:
+		# Add small randomness to simulate indecision
+		if Globals.current_chamber >= 3 and not revolverPressed and randi() % 3 == 0:
+			print("TERMINATOR: Randomized risk call — Using revolver!")
 			call_revolver()
 		else:
-			# Fallback: favor giving to player if slightly unsure
-			give_card("player", lowestCard["name"])
+			# Slight bias toward AI survival
+			give_card("ai", highestCard["name"])
 
 func check_center_cards():
 	print("TERMINATOR: Filtering center cards")
@@ -233,6 +205,7 @@ func call_revolver():
 		if Globals.revolver_chambers[Globals.current_chamber]:
 			print("TERMINATOR: Bullet found! AI shoots itself.")
 			emit_signal("callSoundManager", "revolverShot")
+			await get_tree().create_timer(1.0).timeout
 			Globals.spin_revolver()
 			emit_signal("callSoundManager", "revolverSpin")
 			for child in $"../CardManager".get_children():
