@@ -16,6 +16,7 @@ var Deck = "/root/Main/Deck"
 var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
 signal callSoundManager
+signal callAnimationManager
 
 func _ready() -> void:
 	$"../AiTurnLight".visible = false
@@ -124,11 +125,17 @@ func game_won():
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
-		check_candle_lighting("check", "ai")
+		await get_tree().create_timer(1.0).timeout
+		emit_signal("callAnimationManager", "candle", "ai")
+		await $"../AnimationManager".AnimationFinished
+		await get_tree().create_timer(1.0).timeout
 		reset_round()
 	if Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
-		check_candle_lighting("check", "player")
+		await get_tree().create_timer(1.0).timeout
+		emit_signal("callAnimationManager", "candle", "player")
+		await $"../AnimationManager".AnimationFinished
+		await get_tree().create_timer(1.0).timeout
 		reset_round()
 	else:
 		reset_round()
@@ -151,8 +158,6 @@ func reset_round():
 	Globals.centerDeck = Globals.fullCenterDeck
 	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
-	check_candle_lighting("check", "ai")
-	check_candle_lighting("check", "player")
 	checking_round_winner = false
 
 func check_candle_lighting(operation, who):
