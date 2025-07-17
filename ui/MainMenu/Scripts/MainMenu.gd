@@ -7,7 +7,7 @@ extends Control
 @onready var settings_panel = $OptionsPanel
 @onready var menu_buttons = $VBoxContainer
 @onready var title_label = $Blackluck
-
+@onready var back_button = $OptionsPanel/VBoxContainer/Back
 # Volumen
 @onready var click_sound = $ClickSound
 @onready var volume_slider = $OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer/MasterSlider
@@ -37,7 +37,7 @@ func _ready():
 	play_button.pressed.connect(_on_play_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
-	$OptionsPanel/VBoxContainer/Back.pressed.connect(_on_back_pressed)
+	back_button.pressed.connect(_on_back_pressed)
 	volume_slider.value_changed.connect(_on_volume_changed)
 	apply_button.pressed.connect(_on_apply_pressed)
 
@@ -159,8 +159,8 @@ func _on_window_mode_right_button_pressed() -> void:
 	_update_graphics_labels()
 
 func _on_tab_container_tab_changed(_tab_index: int) -> void:
-	if $ClickSound.is_inside_tree():
-		$ClickSound.play()
+	if click_sound.is_inside_tree():
+		click_sound.play()
 
 func _update_monitor_buttons():
 	var screen_count = DisplayServer.get_screen_count()
