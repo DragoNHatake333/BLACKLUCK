@@ -8,7 +8,7 @@ colors = PackedColorArray(0, 0, 0, 1, 1, 0.596078, 0.27451, 1)
 gradient = SubResource("Gradient_lhpwe")
 
 [sub_resource type="Curve" id="Curve_j7lk7"]
-_data = [Vector2(0.0153846, 0), 0.0, 0.0, 0, 0, Vector2(0.292308, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.370787), 0.0, 0.0, 0, 0]
+_data = [Vector2(0.0153846, 0), 0.0, 0.0, 0, 0, Vector2(0.0538462, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.370787), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_oe8wv"]
@@ -23,7 +23,7 @@ initial_velocity_min = 1.0
 initial_velocity_max = 4.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = 40.0
-gravity = Vector3(0, 0, 0)
+gravity = Vector3(0, 11.37, 0)
 linear_accel_min = 0.999998
 linear_accel_max = 5.0
 scale_min = 0.03
