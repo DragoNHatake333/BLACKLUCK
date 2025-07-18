@@ -17,6 +17,7 @@ func resume():
 	$AnimationPlayer.play_backwards("blur")
 	await get_tree().create_timer(0.3).timeout
 	hide()
+	Globals.isCardDragging = false
 	transitioning = false
 
 func pause():

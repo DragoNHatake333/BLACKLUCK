@@ -1,5 +1,6 @@
 extends Node
 
+var roundLoser
 var ownsTurn = randi() % 2 == 0 
 var round_number = 0
 var starter = ownsTurn
@@ -21,10 +22,8 @@ signal callAnimationManager
 func _ready() -> void:
 	$"../AiTurnLight".visible = false
 	$"../PlayerTurnLight".visible = false
-	#check_candle_lighting("restart", "ai")
-	#check_candle_lighting("restart", "player")
-	Globals.aiHP = 1
-	Globals.playerHP = 3
+	check_candle_lighting("restart", "ai")
+	check_candle_lighting("restart", "player")
 	money = 0
 	Globals.canvasModulate = true
 	Globals.playerSum = 0
@@ -37,9 +36,10 @@ func _ready() -> void:
 	Globals.centerHand = []
 	Globals.saveRound = false
 	Engine.set_max_fps(240)
-	print("GameManager: Start")
+	print("GameManager: Start") 
 	randomize()
 	Globals.spin_revolver()
+	#await 
 	game_logic()
 	
 func game_logic():
@@ -125,6 +125,7 @@ func game_won():
 func check_round_winner():
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
+		roundLoser = "ai"
 		await get_tree().create_timer(1.0).timeout
 		emit_signal("callAnimationManager", "candle", "ai")
 		await $"../AnimationManager".AnimationFinished
@@ -132,16 +133,23 @@ func check_round_winner():
 		reset_round()
 	if Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
+		roundLoser = "player"
 		await get_tree().create_timer(1.0).timeout
 		emit_signal("callAnimationManager", "candle", "player")
 		await $"../AnimationManager".AnimationFinished
 		await get_tree().create_timer(1.0).timeout
 		reset_round()
 	else:
+		roundLoser = ""
 		reset_round()
 
 func reset_round():
-	ownsTurn = randi() % 2 == 0 
+	if roundLoser == "player":
+		ownsTurn = true
+	elif roundLoser == "ai":
+		ownsTurn = false
+	else:
+		ownsTurn = randi() % 2 == 0  # fallback for ties or first round
 	for i in $"../CardManager".get_children():
 		i.queue_free()
 	emit_signal("resetCardSlots")

@@ -3,12 +3,11 @@ extends Area2D
 signal drawCards
 var tweenFinished = true
 signal callSoundManager(sound)
-signal anime_playerRevolver
+signal callAnimationManager
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Globals.playerTurn == true:
-		anime_playerRevolver.emit()
-		
+		emit_signal("callAnimationManager", "revolver", "player")
 		if Globals.playerRevolverPressed == false:
 			if Globals.playerTurn == true:
 				Globals.playerRevolverPressed = true
@@ -52,7 +51,7 @@ func _ready():
 	base_position_y = target_node.position.y
 
 func _on_mouse_entered() -> void:
-		if not target_node.position.y == 1.0 and Globals.isCardDragging == false:
+		if not target_node.position.y == 1.0 and Globals.isCardDragging == false and Globals.playerTurn == true and Globals.playerRevolverPressed == false:
 			var tween = create_tween()
 			tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			emit_signal("callSoundManager", "revolverHovered")

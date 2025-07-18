@@ -61,3 +61,5 @@ func callAnimationManager(anime, who) -> void:
 		tween2.tween_property(bgm, "volume_db", -22.148, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 		emit_signal("AnimationFinished")
+	if anime == "revolver":
+		print("Anime revolver")
