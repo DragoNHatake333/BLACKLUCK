@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://djopgy1a0qxka"]
 
-[ext_resource type="FontFile" uid="uid://burcldkyh24xv" path="res://ui/MainMenu/Fonts/HandymandiFree.ttf" id="1_ib1cu"]
+[ext_resource type="FontFile" uid="uid://ql4fexkmwn2l" path="res://ui/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf" id="1_ib1cu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_on2dp"]
 

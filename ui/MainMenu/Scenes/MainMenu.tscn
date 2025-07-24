@@ -5,7 +5,7 @@
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://ui/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
 [ext_resource type="AudioStream" uid="uid://cd74muqbnjqtb" path="res://ui/MainMenu/Audio/Night Break.mp3" id="4_b4ika"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="4_j0ggg"]
-[ext_resource type="FontFile" uid="uid://gs1k7pek7mad" path="res://ui/MainMenu/Fonts/BentonModDispCond-Semibold.otf" id="5_ve1ib"]
+[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://ui/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://ui/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exbqw"]
@@ -63,8 +63,8 @@ anchor_bottom = 0.477778
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_ve1ib")
-theme_override_font_sizes/font_size = 230
-text = "BLACKLUCK"
+theme_override_font_sizes/font_size = 320
+text = "THE BATMAN"
 horizontal_alignment = 1
 metadata/_edit_use_anchors_ = true
 
