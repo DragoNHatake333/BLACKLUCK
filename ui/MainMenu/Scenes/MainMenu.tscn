@@ -56,16 +56,19 @@ grow_vertical = 2
 material = SubResource("ShaderMaterial_ve1ib")
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.140104
-anchor_top = 0.221296
-anchor_right = 0.860416
-anchor_bottom = 0.477778
+anchor_left = 0.0619792
+anchor_top = 0.277778
+anchor_right = 0.938021
+anchor_bottom = 0.722222
+offset_right = 0.000244141
+offset_bottom = 0.000244141
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("5_ve1ib")
-theme_override_font_sizes/font_size = 320
-text = "THE BATMAN"
+theme_override_font_sizes/font_size = 411
+text = "BLACKLUCK"
 horizontal_alignment = 1
+vertical_alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=54 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="1_1p1yg"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
@@ -40,6 +40,8 @@
 [ext_resource type="AudioStream" uid="uid://bvn6j756la80m" path="res://Assets/Sound/lightOn.mp3" id="32_ro21p"]
 [ext_resource type="Texture2D" uid="uid://b2r20oei4ghmx" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="33_y3mow"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
+[ext_resource type="Script" uid="uid://7hlqppg3nsn7" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
+[ext_resource type="Texture2D" uid="uid://bt56gprbmv3ht" path="res://Assets/pedrosanchez.png" id="42_da1he"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("1_1p1yg")
@@ -707,6 +709,16 @@ texture = SubResource("GradientTexture2D_7xtld")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.310617, 0.310617, 0.310617, 1)
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("41_davux")
+
+[node name="Pedrosanchez" type="Sprite2D" parent="."]
+visible = false
+top_level = true
+position = Vector2(964.5, 544.5)
+scale = Vector2(1.60917, 1.21)
+texture = ExtResource("42_da1he")
 
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callAnimationManager" from="GameManager" to="AnimationManager" method="callAnimationManager"]
