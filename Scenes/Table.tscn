@@ -1,8 +1,8 @@
 [gd_scene load_steps=52 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="1_1p1yg"]
-[ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://ui/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
-[ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://ui/MainMenu/Fonts/Verve.ttf" id="3_y3mow"]
+[ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
+[ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://Scenes/MainMenu/Fonts/Verve.ttf" id="3_y3mow"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
 [ext_resource type="Script" uid="uid://1ox6fbdtsb42" path="res://Scripts/Labels/Player/PHPLabel.gd" id="5_7xtld"]
 [ext_resource type="Script" uid="uid://claeblc1cbfub" path="res://Scripts/Labels/Player/TurnLabel.gd" id="6_1jd3i"]

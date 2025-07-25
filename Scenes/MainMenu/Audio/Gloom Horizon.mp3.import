@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://8pgjkjjxeo5x"
+path="res://.godot/imported/Gloom Horizon.mp3-eeff477127d8c8105a28be9155c31fd5.mp3str"
+
+[deps]
+
+source_file="res://Scenes/MainMenu/Audio/Gloom Horizon.mp3"
+dest_files=["res://.godot/imported/Gloom Horizon.mp3-eeff477127d8c8105a28be9155c31fd5.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

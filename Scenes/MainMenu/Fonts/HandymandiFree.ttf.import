@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://ql4fexkmwn2l"
-path="res://.godot/imported/Screaming Chocolate Guy 2.1.ttf-e235f3f6e8c99e8c1576d9c70ec5a165.fontdata"
+uid="uid://burcldkyh24xv"
+path="res://.godot/imported/HandymandiFree.ttf-ad5dcea2d10e87fdfb3e6aef26c87b5b.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf"
-dest_files=["res://.godot/imported/Screaming Chocolate Guy 2.1.ttf-e235f3f6e8c99e8c1576d9c70ec5a165.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/HandymandiFree.ttf"
+dest_files=["res://.godot/imported/HandymandiFree.ttf-ad5dcea2d10e87fdfb3e6aef26c87b5b.fontdata"]
 
 [params]
 

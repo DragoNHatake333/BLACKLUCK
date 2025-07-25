@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://b1qnask4xa6p2"
-path="res://.godot/imported/Fiorello CG Condensed Regular.otf-7dc7a427972fe122eab1a2b00c094fd4.fontdata"
+uid="uid://bgowmjrtf4a6a"
+path="res://.godot/imported/Sicko.otf-cd65b6f6c2c636aca64093b8d57ba6df.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/Fiorello CG Condensed Regular.otf"
-dest_files=["res://.godot/imported/Fiorello CG Condensed Regular.otf-7dc7a427972fe122eab1a2b00c094fd4.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/Sicko.otf"
+dest_files=["res://.godot/imported/Sicko.otf-cd65b6f6c2c636aca64093b8d57ba6df.fontdata"]
 
 [params]
 

@@ -20,13 +20,13 @@ func _ready() -> void:
 	shadow.modulate.a = 0.0
 
 	# Random rotation tween
-	var rotation_degrees := 0.0
+	var initial_rotation_deg := 0.0
 	if randf() > 0.15:
-		rotation_degrees = randf_range(-5.0, 5.0)
+		initial_rotation_deg = randf_range(-5.0, 5.0)
 		if randf() < 0.1:
-			rotation_degrees += 180.0
+			initial_rotation_deg += 180.0
 
-	target_rotation = deg_to_rad(rotation_degrees)
+	target_rotation = deg_to_rad(initial_rotation_deg)
 	card_image.rotation = 0.0
 
 	var tween = create_tween()
@@ -40,8 +40,8 @@ func _process(_delta: float) -> void:
 	var distancex: float = global_position.x - center.x
 	var distancey: float = global_position.y - center.y
 	
-	$shadow.position.x = lerp(0.0, -sign(distancex) * max_offset_shadow, abs(distancex/(center.x))) * -1
-	$shadow.position.y = lerp(0.0, -sign(distancey) * max_offset_shadow, abs(distancey/(center.y))) * -1
+	$shadow.position.x = lerp(0.0, -sign(distancex) * max_offset_shadow, abs(distancex / center.x)) * -1
+	$shadow.position.y = lerp(0.0, -sign(distancey) * max_offset_shadow, abs(distancey / center.y)) * -1
 	
 func _on_area_2d_mouse_entered() -> void:
 	emit_signal("hovered", self)

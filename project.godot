@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 config/volume=1.0
 
+[audio]
+
+buses/default_bus_layout=""
+
 [autoload]
 
 Globals="*res://Scripts/Globals.gd"
@@ -60,6 +64,7 @@ esc={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 limits/opengl/max_renderable_lights=256
 limits/opengl/max_lights_per_object=1024

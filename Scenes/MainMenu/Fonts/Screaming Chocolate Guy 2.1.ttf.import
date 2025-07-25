@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cdwfvs2qjhtp0"
-path="res://.godot/imported/Verve.ttf-86d3df250d3270474530f6ea7eb771c5.fontdata"
+uid="uid://ql4fexkmwn2l"
+path="res://.godot/imported/Screaming Chocolate Guy 2.1.ttf-4faa6d0bc107e7878e7d4811f9309773.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/Verve.ttf"
-dest_files=["res://.godot/imported/Verve.ttf-86d3df250d3270474530f6ea7eb771c5.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf"
+dest_files=["res://.godot/imported/Screaming Chocolate Guy 2.1.ttf-4faa6d0bc107e7878e7d4811f9309773.fontdata"]
 
 [params]
 

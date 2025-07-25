@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://cd74muqbnjqtb"
+path="res://.godot/imported/Night Break.mp3-077f9f79f07daf56d105d2f3e43ae28e.mp3str"
+
+[deps]
+
+source_file="res://Scenes/MainMenu/Audio/Night Break.mp3"
+dest_files=["res://.godot/imported/Night Break.mp3-077f9f79f07daf56d105d2f3e43ae28e.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

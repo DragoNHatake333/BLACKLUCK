@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dpgqsl0q88lpt"
-path="res://.godot/imported/CREERG__.TTF-d6eda76c163991f82ed2434c38226d20.fontdata"
+uid="uid://gs1k7pek7mad"
+path="res://.godot/imported/BentonModDispCond-Semibold.otf-12e3e62f01e1a3575520a9e11d6577b2.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/CREERG__.TTF"
-dest_files=["res://.godot/imported/CREERG__.TTF-d6eda76c163991f82ed2434c38226d20.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/BentonModDispCond-Semibold.otf"
+dest_files=["res://.godot/imported/BentonModDispCond-Semibold.otf-12e3e62f01e1a3575520a9e11d6577b2.fontdata"]
 
 [params]
 

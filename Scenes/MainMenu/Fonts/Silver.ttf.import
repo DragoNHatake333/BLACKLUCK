@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://burcldkyh24xv"
-path="res://.godot/imported/HandymandiFree.ttf-480704d8e2f247429f312fa39e0b27ca.fontdata"
+uid="uid://7rmlawnyr3q5"
+path="res://.godot/imported/Silver.ttf-1e677afc9601b151ae03af0c5d752d39.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/HandymandiFree.ttf"
-dest_files=["res://.godot/imported/HandymandiFree.ttf-480704d8e2f247429f312fa39e0b27ca.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/Silver.ttf"
+dest_files=["res://.godot/imported/Silver.ttf-1e677afc9601b151ae03af0c5d752d39.fontdata"]
 
 [params]
 

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://7rmlawnyr3q5"
-path="res://.godot/imported/Silver.ttf-1092b52ac3ee82906b37d93206870f33.fontdata"
+uid="uid://dwtrr67wfr08"
+path="res://.godot/imported/Stardom-Regular.otf-34db73f92c2212c827917cf8e266f2e9.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/Silver.ttf"
-dest_files=["res://.godot/imported/Silver.ttf-1092b52ac3ee82906b37d93206870f33.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/Stardom-Regular.otf"
+dest_files=["res://.godot/imported/Stardom-Regular.otf-34db73f92c2212c827917cf8e266f2e9.fontdata"]
 
 [params]
 

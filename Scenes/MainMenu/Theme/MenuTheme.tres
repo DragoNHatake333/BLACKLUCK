@@ -1,6 +1,6 @@
 [gd_resource type="Theme" load_steps=8 format=3 uid="uid://djopgy1a0qxka"]
 
-[ext_resource type="FontFile" uid="uid://ql4fexkmwn2l" path="res://ui/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf" id="1_ib1cu"]
+[ext_resource type="FontFile" uid="uid://ql4fexkmwn2l" path="res://Scenes/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf" id="1_ib1cu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_on2dp"]
 
@@ -12,7 +12,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxycv"]
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_dey0s"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idggh"]
+bg_color = Color(0, 0, 0, 1)
 
 [resource]
 default_font = ExtResource("1_ib1cu")
@@ -23,6 +24,4 @@ Button/styles/focus = SubResource("StyleBoxEmpty_poy0d")
 Button/styles/hover = SubResource("StyleBoxEmpty_ib1cu")
 Button/styles/normal = SubResource("StyleBoxEmpty_1oae7")
 Button/styles/pressed = SubResource("StyleBoxEmpty_pxycv")
-TabContainer/colors/font_selected_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-TabContainer/colors/font_unselected_color = Color(0.666667, 0.666667, 0.666667, 1)
-TabContainer/styles/tab_focus = SubResource("StyleBoxEmpty_dey0s")
+Panel/styles/panel = SubResource("StyleBoxFlat_idggh")

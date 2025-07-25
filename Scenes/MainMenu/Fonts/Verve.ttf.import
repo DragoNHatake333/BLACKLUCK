@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://dwtrr67wfr08"
-path="res://.godot/imported/Stardom-Regular.otf-d5e199f2b8895f44794485404de84cc0.fontdata"
+uid="uid://cdwfvs2qjhtp0"
+path="res://.godot/imported/Verve.ttf-3527bc028a105b83d5df1bb88f990c57.fontdata"
 
 [deps]
 
-source_file="res://ui/MainMenu/Fonts/Stardom-Regular.otf"
-dest_files=["res://.godot/imported/Stardom-Regular.otf-d5e199f2b8895f44794485404de84cc0.fontdata"]
+source_file="res://Scenes/MainMenu/Fonts/Verve.ttf"
+dest_files=["res://.godot/imported/Verve.ttf-3527bc028a105b83d5df1bb88f990c57.fontdata"]
 
 [params]
 
