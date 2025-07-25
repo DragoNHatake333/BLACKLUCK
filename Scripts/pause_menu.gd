@@ -5,7 +5,7 @@ var transitioning := false
 func _ready() -> void:
 	hide()
 	var window = get_window()
-	window.focus_exited.connect(_on_focus_exited)
+	#window.focus_exited.connect(_on_focus_exited)
 
 func resume():
 	if transitioning:
@@ -53,10 +53,10 @@ func _on_main_menu_pressed() -> void:
 func _process(_delta):
 	testEsc()
 
-func _on_focus_exited():
-	if !get_tree().paused:
-		if Globals.isCardDragging == true:
-			Globals.releaseCardMenu = true
-		pause()
-	else:
-		pass
+#func _on_focus_exited():
+	#if !get_tree().paused:
+		#if Globals.isCardDragging == true:
+			#Globals.releaseCardMenu = true
+		#pause()
+	#else:
+		#pass

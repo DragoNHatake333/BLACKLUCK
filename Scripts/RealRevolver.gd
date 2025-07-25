@@ -7,11 +7,12 @@ signal callAnimationManager
 
 func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> void:
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and event.pressed and Globals.playerTurn == true:
-		emit_signal("callAnimationManager", "revolver", "player")
 		if Globals.playerRevolverPressed == false:
 			if Globals.playerTurn == true:
 				Globals.playerRevolverPressed = true
 				if Globals.revolver_chambers[Globals.current_chamber]:
+					emit_signal("callAnimationManager", "revolver", "player")
+					await get_tree().create_timer(9.4432).timeout
 					emit_signal("callSoundManager","revolverShot")
 					await get_tree().create_timer(1.0).timeout
 					Globals.spin_revolver()
@@ -30,6 +31,8 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					Globals.saveRound = true
 					Globals.playerTurn = false
 				else:
+					emit_signal("callAnimationManager", "revolver", "player")
+					await get_tree().create_timer(9.4432).timeout
 					emit_signal("callSoundManager","noBullet")
 					Globals.cards_in_center_hand = 0
 					for child in $"../CardManager".get_children():

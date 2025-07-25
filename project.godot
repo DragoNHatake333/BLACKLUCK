@@ -24,6 +24,7 @@ buses/default_bus_layout=""
 
 Globals="*res://Scripts/Globals.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
+DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
 
 [display]
 
@@ -42,7 +43,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/scene_manager/plugin.cfg")
+enabled=PackedStringArray("res://addons/debug_menu/plugin.cfg", "res://addons/scene_manager/plugin.cfg")
 
 [global_group]
 
@@ -66,5 +67,6 @@ esc={
 
 textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
 limits/opengl/max_renderable_lights=256
 limits/opengl/max_lights_per_object=1024

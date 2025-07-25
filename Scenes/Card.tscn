@@ -7,7 +7,7 @@
 size = Vector2(184.5, 270)
 
 [node name="Card" type="Node2D"]
-z_index = 3600
+z_index = 1
 position = Vector2(2144, 524)
 script = ExtResource("1_3p273")
 

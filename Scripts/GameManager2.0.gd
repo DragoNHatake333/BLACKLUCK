@@ -35,7 +35,7 @@ func _ready() -> void:
 	Globals.cards_in_center_hand = 0
 	Globals.centerHand = []
 	Globals.saveRound = false
-	Engine.set_max_fps(240)
+	#Engine.set_max_fps(240)
 	print("GameManager: Start") 
 	randomize()
 	Globals.spin_revolver()
