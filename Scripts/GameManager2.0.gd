@@ -35,7 +35,7 @@ func _ready() -> void:
 	Globals.cards_in_center_hand = 0
 	Globals.centerHand = []
 	Globals.saveRound = false
-	Engine.set_max_fps(240)
+	#Engine.set_max_fps(240)
 	print("GameManager: Start") 
 	randomize()
 	Globals.spin_revolver()
@@ -226,20 +226,20 @@ func check_candle_lighting(operation, who):
 	else:
 		print("check_candle_lighting: invalid operation argument")
 
-func _process(_delta: float) -> void:
-	if Globals.aiTurn == true:
-		$"../AiTurnLight".visible = true
-		$"../PlayerTurnLight".visible = false
-	if Globals.playerTurn == true:
-		$"../PlayerTurnLight".visible = true
-		$"../AiTurnLight".visible = false
-	if Globals.canvasModulate == true:
-		$"../CanvasModulate".color = "222222"
-	elif Globals.canvasModulate == false:
-		$"../CanvasModulate".color = "ffffff"
-	if Globals.playerHP == 3:
-		$"../PointLight2D".color = "ff3f30"
-	if Globals.playerHP == 2:
-		$"../PointLight2D".color = "ff3629"
-	if Globals.playerHP == 1:
-		$"../PointLight2D".color = "b70000"
+#func _process(_delta: float) -> void:
+	#if Globals.aiTurn == true:
+		#$"../AiTurnLight".visible = true
+		#$"../PlayerTurnLight".visible = false
+	#if Globals.playerTurn == true:
+		#$"../PlayerTurnLight".visible = true
+		#$"../AiTurnLight".visible = false
+	#if Globals.canvasModulate == true:
+		#$"../CanvasModulate".color = "222222"
+	#elif Globals.canvasModulate == false:
+		#$"../CanvasModulate".color = "ffffff"
+	#if Globals.playerHP == 3:
+		#$"../PointLight2D".color = "ff3f30"
+	#if Globals.playerHP == 2:
+		#$"../PointLight2D".color = "ff3629"
+	#if Globals.playerHP == 1:
+		#$"../PointLight2D".color = "b70000"

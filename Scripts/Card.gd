@@ -9,6 +9,10 @@ var position_in_hand
 var hovered_shadow = false
 var target_rotation
 
+var center
+var distancex
+var distancey
+
 @onready var shadow = $shadow
 @onready var card_image = $CardImage
 
@@ -36,9 +40,9 @@ func _ready() -> void:
 
 func _process(_delta: float) -> void:
 	$shadow.rotation = target_rotation
-	var center: Vector2 = get_viewport_rect().size / 2.0
-	var distancex: float = global_position.x - center.x
-	var distancey: float = global_position.y - center.y
+	center = get_viewport_rect().size / 2.0
+	distancex = global_position.x - center.x
+	distancey = global_position.y - center.y
 	
 	$shadow.position.x = lerp(0.0, -sign(distancex) * max_offset_shadow, abs(distancex/(center.x))) * -1
 	$shadow.position.y = lerp(0.0, -sign(distancey) * max_offset_shadow, abs(distancey/(center.y))) * -1
