@@ -1,6 +1,7 @@
 extends Node
 signal AnimationFinished
 signal callSoundManager
+var revolverPos = "player"
 
 func anime_playerRevolver() -> void:
 	pass # Replace with function body.
@@ -62,4 +63,28 @@ func callAnimationManager(anime, who) -> void:
 
 		emit_signal("AnimationFinished")
 	if anime == "revolver":
+		if who == "ai" and revolverPos == "player":
+			pass
+		if who == "ai" and revolverPos == "ai":
+			pass
+		if who == "player" and revolverPos == "player":
+			$AnimationPlayer.play("playerplayer")
+		if who == "player" and revolverPos == "ai":
+			pass
 		print("Anime revolver")
+ 
+func hideCards(what):
+	if what == "hide":
+		for i in $"../CardManager".get_children():
+			i.visible = false
+		for i in $"../iaHand".get_children():
+			i.visible = false
+		for i in $"../playerHand".get_children():
+			i.visible = false
+	elif what == "show":
+		for i in $"../CardManager".get_children():
+			i.visible = true
+		for i in $"../iaHand".get_children():
+			i.visible = true
+		for i in $"../playerHand".get_children():
+			i.visible = true
