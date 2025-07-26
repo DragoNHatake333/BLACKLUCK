@@ -5,15 +5,6 @@ var revolverPos = "player"
 @onready var revolver = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene"
 var thereWasAnimation = false
 
-func _process(delta: float) -> void:
-	if revolverPos == "player":
-		$"../RevolverButton/CollisionPolygon2D".position = Vector2(151, 274)
-		$"../RevolverButton/CollisionPolygon2D".scale = Vector2(16.1, 12.7)
-		$"../RevolverButton/CollisionPolygon2D".rotation = 0
-	elif revolverPos == "ai":
-		$"../RevolverButton/CollisionPolygon2D".position = Vector2(151, 274)
-		$"../RevolverButton/CollisionPolygon2D".scale = Vector2(16.1, 12.7)
-		$"../RevolverButton/CollisionPolygon2D".rotation = 0
 func callAnimationManager(anime, who, what) -> void:
 	if anime == "candle":
 		var tween = create_tween()
@@ -75,6 +66,9 @@ func callAnimationManager(anime, who, what) -> void:
 		Globals.STOPHOVER = true
 		print("Globals.STOPHOVER set to true")
 		
+		turnOffLightsRevolver(10)
+		await get_tree().create_timer(1.0).timeout
+		
 		if (who == "ai" and revolverPos == "player") or (who == "player" and revolverPos == "ai"):
 			print("Revolver needs to turn")
 			
@@ -123,3 +117,76 @@ func callAnimationManager(anime, who, what) -> void:
 		
 		Globals.STOPHOVER = false
 		print("Globals.STOPHOVER set to false")
+
+func turnOffLightsRevolver(timeWaiting):
+	var tween = get_tree().create_tween()
+	var bgm = $"../SoundManager/BGM"
+	tween.tween_property(bgm, "volume_db", -40, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+	
+	emit_signal("callSoundManager", "lightOff")
+	await get_tree().create_timer(0.2).timeout
+	
+	for i in $"../CardManager".get_children():
+		i.visible = false
+	for i in $"../iaHand".get_children():
+		i.visible = false
+	for i in $"../playerHand".get_children():
+		i.visible = false
+	
+	var savedColour = $"../CanvasModulate".color
+	$"../CanvasModulate".color = Color.BLACK
+	
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP2".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP2".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP3".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP3".visible = false
+
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA1".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA1".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA2".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA2".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA3".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA3".visible = false
+
+	$"../PlayerTurnLight".visible = false
+	$"../AiTurnLight".visible = false
+		
+	$"../PointLight2D".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D".visible = false
+	$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = true
+
+	await get_tree().create_timer(timeWaiting).timeout
+
+	emit_signal("callSoundManager", "lightOn")
+	await get_tree().create_timer(0.1).timeout
+
+	for i in $"../iaHand".get_children():
+		i.visible = true
+	for i in $"../playerHand".get_children():
+		i.visible = true
+
+	$"../CanvasModulate".color = savedColour
+	$"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = true
+	$"../PointLight2D".visible = true
+
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP2".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP2".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP3".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP3".visible = true
+
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA1".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA1".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA2".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA2".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotA3".visible = true
+	$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireA3".visible = true
+
+
+	# Fade BGM back in
+	var tween2 = create_tween()
+	tween2.tween_property(bgm, "volume_db", -22.148, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
