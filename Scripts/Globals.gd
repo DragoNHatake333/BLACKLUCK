@@ -1,5 +1,6 @@
 extends Node
 
+var STOPHOVER = false
 var releaseCardMenu 
 var canvasModulate = true
 var revolver_chambers := []

@@ -17,14 +17,17 @@ var card2Name
 var card3Value
 var card3Name
 var selected_card_node
-
+var countsRevolver = 0
 signal callSoundManager(sound)
+signal callAnimationManager(anime, who, what)
 
 func _on_game_manager_call_ai() -> void:
 	print("TERMINATOR: AI Turn Start")
 	await get_tree().create_timer(randf_range(1.0, 2.0)).timeout
 	print("TERMINATOR: Current Chamber =", Globals.current_chamber)
-
+	if revolverPressed == false:
+		call_revolver()
+		return
 	filteredCenterHand = {}
 	selectedCard = []
 	checking_center_cards = false
@@ -204,8 +207,8 @@ func call_revolver():
 	if revolverPressed == false and Globals.aiTurn == true:
 		if Globals.revolver_chambers[Globals.current_chamber]:
 			print("TERMINATOR: Bullet found! AI shoots itself.")
-			emit_signal("callSoundManager", "revolverShot")
-			await get_tree().create_timer(1.0).timeout
+			emit_signal("callAnimationManager", "revolver", "ai", "bullet")
+			await get_tree().create_timer(15.0).timeout
 			Globals.spin_revolver()
 			emit_signal("callSoundManager", "revolverSpin")
 			for child in $"../CardManager".get_children():
@@ -221,7 +224,8 @@ func call_revolver():
 			Globals.aiTurn = false
 		else:
 			print("TERMINATOR: No bullet, survived")
-			emit_signal("callSoundManager", "noBullet")
+			emit_signal("callAnimationManager", "revolver", "ai", "noBullet")
+			await get_tree().create_timer(15).timeout
 			Globals.cards_in_center_hand = 0
 			for child in $"../CardManager".get_children():
 				if child.name not in Globals.playerHand and child.name not in Globals.aiHand:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=59 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="1_1p1yg"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
@@ -19,6 +19,7 @@
 [ext_resource type="AudioStream" uid="uid://kqof02lmio6g" path="res://Assets/Sound/revolverMove.wav" id="25_7xtld"]
 [ext_resource type="AudioStream" uid="uid://wvsbtwejmwpi" path="res://Assets/Sound/noBullet.mp3" id="25_nlwdp"]
 [ext_resource type="AudioStream" uid="uid://cp54nt1isub87" path="res://Assets/Sound/revolverSpin.mp3" id="26_dvf6a"]
+[ext_resource type="AudioStream" uid="uid://db2etijiycswd" path="res://Assets/Sound/revolverNervous.mp3" id="27_6bpmn"]
 [ext_resource type="AudioStream" uid="uid://b0vvuwlmp47vh" path="res://Assets/Sound/Static Motion.mp3" id="27_7xtld"]
 [ext_resource type="PackedScene" uid="uid://b7dws7ygl7jmx" path="res://Assets/Revolver/scene.gltf" id="27_be3cg"]
 [ext_resource type="AudioStream" uid="uid://brf71xbdoaj88" path="res://Assets/Sound/candleOff.mp3" id="28_1jd3i"]
@@ -61,7 +62,6 @@ size = Vector2(178, 262)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ontce"]
 albedo_texture = ExtResource("4_p8qel")
-metallic = 1.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ontce"]
 
@@ -79,162 +79,6 @@ fill_from = Vector2(0.5, 0.485849)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7xtld"]
 gradient = SubResource("Gradient_p8qel")
-
-[sub_resource type="Animation" id="Animation_p8qel"]
-resource_name = "playerplayer"
-length = 10.9905
-tracks/0/type = "position_3d"
-tracks/0/imported = false
-tracks/0/enabled = false
-tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = PackedFloat32Array()
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-16.9919, -0.25, 0, 0.25, 0, -31.9099, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.7)
-}
-tracks/2/type = "bezier"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(6.72508, -0.25, 0, 0.25, 0, 6.72508, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.7)
-}
-tracks/3/type = "bezier"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(2.67328, -0.25, 0, 0.25, 0, 2.67328, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.7)
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationManager/pupila1:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(1.29, 1.83),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-288, 1078), Vector2(-309, 539)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("AnimationManager/pupila2:position")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(1.3, 1.83),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-138, -835), Vector2(-175, -283)]
-}
-tracks/6/type = "bezier"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("AnimationManager/pupila1:color:r")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.29, 1.3, 1.83, 1.84)
-}
-tracks/7/type = "bezier"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("AnimationManager/pupila1:color:g")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.29, 1.3, 1.83, 1.84)
-}
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("AnimationManager/pupila1:color:b")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.29, 1.3, 1.83, 1.84)
-}
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("AnimationManager/pupila1:color:a")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(0.533333, -0.25, 0, 0.25, 0, 0.533333, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.29, 1.3, 1.83, 1.84)
-}
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("AnimationManager/pupila2:color:r")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.3, 1.83)
-}
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("AnimationManager/pupila2:color:g")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.3, 1.83)
-}
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("AnimationManager/pupila2:color:b")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.3, 1.83)
-}
-tracks/13/type = "bezier"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("AnimationManager/pupila2:color:a")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0.533333, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(1.3, 1.83)
-}
 
 [sub_resource type="Animation" id="Animation_1jd3i"]
 length = 0.001
@@ -271,45 +115,39 @@ tracks/2/keys = {
 "points": PackedFloat32Array(2.67328, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
-tracks/3/type = "value"
+tracks/3/type = "position_3d"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("AnimationManager/pupila1:position")
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-288, 1078)]
-}
-tracks/4/type = "value"
+tracks/3/keys = PackedFloat32Array(0, 1, -16.9919, 6.72508, 2.67328)
+tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("AnimationManager/pupila2:position")
+tracks/4/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-138, -835)]
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
 }
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("AnimationManager/pupila1:color:r")
+tracks/5/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
 "handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"points": PackedFloat32Array(-2.61799, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("AnimationManager/pupila1:color:g")
+tracks/6/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:z")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -317,77 +155,442 @@ tracks/6/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+
+[sub_resource type="Animation" id="Animation_id2c4"]
+resource_name = "aiFake"
+length = 4.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoundManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.46667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["noBullet"],
+"method": &"call_sound_manager"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_da1he"]
+resource_name = "aiShot"
+length = 4.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoundManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(3.46667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": ["revolverShot"],
+"method": &"call_sound_manager"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8w7an"]
+resource_name = "playerFake"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoundManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 0, 8.33333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["heavyBreathing"],
+"method": &"call_sound_manager"
+}, {
+"args": ["revolverNervous"],
+"method": &"call_sound_manager"
+}, {
+"args": ["noBullet"],
+"method": &"call_sound_manager"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_davux"]
+resource_name = "playerShot"
+length = 10.0
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SoundManager")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-0.0333333, 0, 8.33333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": ["heavyBreathing"],
+"method": &"call_sound_manager"
+}, {
+"args": ["revolverNervous"],
+"method": &"call_sound_manager"
+}, {
+"args": ["revolverShot"],
+"method": &"call_sound_manager"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_wvbbp"]
+resource_name = "revolverInAI"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-42.153, -0.25, 0, 0.25, 0, -16.992, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(8.984, -0.25, 0, 0.25, 0, 6.725, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.4, -0.25, 0, 0.25, 0, -1.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_wpo3d"]
+resource_name = "revolverInPlayer"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-42.1534, -0.25, 0, 0.25, 0, -16.9919, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(8.984, -0.25, 0, 0.25, 0, 6.72508, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.673, -0.25, 0, 0.25, 0, 2.67328, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_ro21p"]
+resource_name = "revolverOutAI"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-16.9919, -0.25, 0, 0.25, 0, -42.153, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(8.98371, -0.25, 0, 0.25, 0, 8.984, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.39987, -0.25, 0, 0.25, 0, -1.4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_pea3r"]
+resource_name = "revolverOutPlayer"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-16.992, -0.25, 0, 0.25, 0, -42.1534, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(7.725, -0.25, 0, 0.25, 0, 8.984, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.673, -0.25, 0, 0.25, 0, 2.673, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+
+[sub_resource type="Animation" id="Animation_6bpmn"]
+resource_name = "turnAi"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-16.9919, -0.25, 0, 0.25, 0, -16.9919, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(6.72508, -0.25, 0, 0.25, 0, 8.98371, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.67328, -0.25, 0, 0.25, 0, -1.39987, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array()
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-2.61799, -0.25, 0, 0.25, 0, 1.19555, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("AnimationManager/pupila1:color:b")
+tracks/7/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:z")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 2.61799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/8/type = "bezier"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("AnimationManager/pupila1:color:a")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.533333, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+
+[sub_resource type="Animation" id="Animation_5w8et"]
+resource_name = "turnPlayer"
+tracks/0/type = "position_3d"
+tracks/0/imported = false
+tracks/0/enabled = false
+tracks/0/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array()
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-16.992, -0.25, 0, 0.25, 0, -16.992, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/9/type = "bezier"
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/path = NodePath("AnimationManager/pupila2:color:r")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(6.725, -0.25, 0, 0.25, 0, 6.725, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/10/type = "bezier"
-tracks/10/imported = false
-tracks/10/enabled = true
-tracks/10/path = NodePath("AnimationManager/pupila2:color:g")
-tracks/10/interp = 1
-tracks/10/loop_wrap = true
-tracks/10/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:position:z")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.4, -0.25, 0, 0.25, 0, 2.673, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/11/type = "bezier"
-tracks/11/imported = false
-tracks/11/enabled = true
-tracks/11/path = NodePath("AnimationManager/pupila2:color:b")
-tracks/11/interp = 1
-tracks/11/loop_wrap = true
-tracks/11/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+tracks/4/type = "rotation_3d"
+tracks/4/imported = false
+tracks/4/enabled = false
+tracks/4/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = PackedFloat32Array()
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-1.5708, -0.25, 0, 0.25, 0, 1.5708, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
-tracks/12/type = "bezier"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("AnimationManager/pupila2:color:a")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0.533333, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.19555, -0.25, 0, 0.25, 0, -2.61799, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene:rotation:z")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(2.61799, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1)
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xtld"]
 _data = {
 &"RESET": SubResource("Animation_1jd3i"),
-&"playerplayer": SubResource("Animation_p8qel")
+&"aiFake": SubResource("Animation_id2c4"),
+&"aiShot": SubResource("Animation_da1he"),
+&"playerFake": SubResource("Animation_8w7an"),
+&"playerShot": SubResource("Animation_davux"),
+&"revolverInAI": SubResource("Animation_wvbbp"),
+&"revolverInPlayer": SubResource("Animation_wpo3d"),
+&"revolverOutAI": SubResource("Animation_ro21p"),
+&"revolverOutPlayer": SubResource("Animation_pea3r"),
+&"turnAi": SubResource("Animation_6bpmn"),
+&"turnPlayer": SubResource("Animation_5w8et")
 }
 
 [node name="Main" type="Node2D"]
@@ -565,7 +768,7 @@ script = ExtResource("23_hfij1")
 
 [node name="noBullet" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("25_nlwdp")
-volume_db = -12.235
+volume_db = 1.819
 
 [node name="revolverSpin" type="AudioStreamPlayer2D" parent="SoundManager"]
 position = Vector2(240, 474)
@@ -630,6 +833,11 @@ position = Vector2(986, 1210)
 stream = ExtResource("35_1jd3i")
 pitch_scale = 0.89
 
+[node name="revolverNervous" type="AudioStreamPlayer2D" parent="SoundManager"]
+position = Vector2(-12.49, 1225.17)
+stream = ExtResource("27_6bpmn")
+panning_strength = 3.0
+
 [node name="3DViewport" type="Area2D" parent="."]
 z_index = -8
 scale = Vector2(1.005, 1.005)
@@ -662,7 +870,7 @@ material_override = SubResource("StandardMaterial3D_ontce")
 mesh = SubResource("PlaneMesh_ontce")
 
 [node name="Sketchfab_Scene" parent="3DViewport/SubViewportContainer/SubViewport" instance=ExtResource("27_be3cg")]
-transform = Transform3D(-1.12966, -0.643327, -4.18547e-08, 5.53907e-08, -1.26861e-08, -1.3, 0.643328, -1.12966, 3.84348e-08, -16.9919, 6.72508, 2.67328)
+transform = Transform3D(-1.12583, -0.650004, 2.35301e-06, 0, -4.70598e-06, -1.3, 0.650004, -1.12583, 4.0755e-06, -16.9919, 6.72508, 2.67328)
 
 [node name="Camera3D" type="Camera3D" parent="3DViewport/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24.3433, -0.172432)
@@ -674,7 +882,6 @@ light_color = Color(1, 0.64351, 0.572673, 1)
 light_energy = 16.0
 light_indirect_energy = 0.0
 light_volumetric_fog_energy = 0.0
-shadow_enabled = true
 shadow_bias = 2.0
 shadow_caster_mask = 4293918720
 spot_range = 32.0447
@@ -885,32 +1092,7 @@ libraries = {
 &"": SubResource("AnimationLibrary_7xtld")
 }
 
-[node name="pupila1" type="ColorRect" parent="AnimationManager"]
-top_level = true
-z_index = 4096
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -1248.0
-offset_top = 538.0
-offset_right = 1293.0
-offset_bottom = 1700.0
-grow_horizontal = 2
-grow_vertical = 2
-mouse_filter = 2
-color = Color(0, 0, 0, 0.533333)
-
-[node name="pupila2" type="ColorRect" parent="AnimationManager"]
-top_level = true
-z_index = 4096
-offset_left = -138.0
-offset_top = -835.0
-offset_right = 2114.0
-offset_bottom = -13.0
-mouse_filter = 2
-color = Color(0, 0, 0, 0.533333)
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationManager"]
 
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callAnimationManager" from="GameManager" to="AnimationManager" method="callAnimationManager"]
@@ -929,6 +1111,7 @@ color = Color(0, 0, 0, 0.533333)
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot8" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
+[connection signal="callAnimationManager" from="Terminator" to="AnimationManager" method="callAnimationManager"]
 [connection signal="callSoundManager" from="Terminator" to="SoundManager" method="call_sound_manager"]
 [connection signal="drawCards" from="Terminator" to="Deck" method="_on_game_manager_call_deck"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]

@@ -2,12 +2,19 @@ extends Node
 signal AnimationFinished
 signal callSoundManager
 var revolverPos = "player"
+@onready var revolver = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene"
+var thereWasAnimation = false
 
-func anime_playerRevolver() -> void:
-	pass # Replace with function body.
-
-
-func callAnimationManager(anime, who) -> void:
+func _process(delta: float) -> void:
+	if revolverPos == "player":
+		$"../RevolverButton/CollisionPolygon2D".position = Vector2(151, 274)
+		$"../RevolverButton/CollisionPolygon2D".scale = Vector2(16.1, 12.7)
+		$"../RevolverButton/CollisionPolygon2D".rotation = 0
+	elif revolverPos == "ai":
+		$"../RevolverButton/CollisionPolygon2D".position = Vector2(151, 274)
+		$"../RevolverButton/CollisionPolygon2D".scale = Vector2(16.1, 12.7)
+		$"../RevolverButton/CollisionPolygon2D".rotation = 0
+func callAnimationManager(anime, who, what) -> void:
 	if anime == "candle":
 		var tween = create_tween()
 		
@@ -63,28 +70,56 @@ func callAnimationManager(anime, who) -> void:
 
 		emit_signal("AnimationFinished")
 	if anime == "revolver":
-		if who == "ai" and revolverPos == "player":
-			pass
-		if who == "ai" and revolverPos == "ai":
-			pass
-		if who == "player" and revolverPos == "player":
-			$AnimationPlayer.play("playerplayer")
-		if who == "player" and revolverPos == "ai":
-			pass
-		print("Anime revolver")
- 
-func hideCards(what):
-	if what == "hide":
-		for i in $"../CardManager".get_children():
-			i.visible = false
-		for i in $"../iaHand".get_children():
-			i.visible = false
-		for i in $"../playerHand".get_children():
-			i.visible = false
-	elif what == "show":
-		for i in $"../CardManager".get_children():
-			i.visible = true
-		for i in $"../iaHand".get_children():
-			i.visible = true
-		for i in $"../playerHand".get_children():
-			i.visible = true
+		print("Animation: revolver")
+		thereWasAnimation = false
+		Globals.STOPHOVER = true
+		print("Globals.STOPHOVER set to true")
+		
+		if (who == "ai" and revolverPos == "player") or (who == "player" and revolverPos == "ai"):
+			print("Revolver needs to turn")
+			
+			if who == "ai" and revolverPos == "player":
+				print("Playing animation: turnAi")
+				$AnimationPlayer.play("turnAi")
+			elif who == "player" and revolverPos == "ai":
+				print("Playing animation: turnPlayer")
+				$AnimationPlayer.play("turnPlayer")
+				revolverPos = who
+			await get_tree().create_timer(1.0).timeout
+			print("Updated revolverPos to:", revolverPos)
+			thereWasAnimation = true
+			
+		if who == "ai":
+			print("Playing animation: revolverOutAI")
+			$AnimationPlayer.play("revolverOutAI")
+		if who == "player":
+			print("Playing animation: revolverOutPlayer")
+			$AnimationPlayer.play("revolverOutPlayer")
+		await get_tree().create_timer(1.0).timeout
+		if what == "Bullet":
+			print("There was a bullet!")
+			if who == "ai":
+				print("Playing animation: aiShot")
+				$AnimationPlayer.play("aiShot")
+			elif who == "player":
+				print("Playing animation: playerShot")
+				$AnimationPlayer.play("playerShot")
+		
+		if what == "noBullet":
+			print("No bullet in chamber.")
+			if who == "ai":
+				print("Playing animation: aiFake")
+				$AnimationPlayer.play("aiFake")
+			elif who == "player":
+				print("Playing animation: playerFake")
+				$AnimationPlayer.play("playerFake")
+		await get_tree().create_timer(9.0).timeout
+		if revolverPos == "ai":
+			print("Putting revolver back into AI")
+			$AnimationPlayer.play("revolverInAI")
+		elif revolverPos == "player":
+			print("Putting revolver back into Player")
+			$AnimationPlayer.play("revolverInPlayer")
+		
+		Globals.STOPHOVER = false
+		print("Globals.STOPHOVER set to false")
