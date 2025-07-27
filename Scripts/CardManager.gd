@@ -62,7 +62,6 @@ func _process(_delta: float) -> void:
 		cardBeingDrag.global_position = new_pos
 		cardBeingDrag.rotation_degrees = drag_rotation
 
-
 func start_drag(card):
 	Globals.isCardDragging = true
 	drag_rotation = 0.0

@@ -208,7 +208,7 @@ func call_revolver():
 		if Globals.revolver_chambers[Globals.current_chamber]:
 			print("TERMINATOR: Bullet found! AI shoots itself.")
 			emit_signal("callAnimationManager", "revolver", "ai", "bullet")
-			await get_tree().create_timer(15.0).timeout
+			await $"../AnimationManager".RevolverFinished
 			Globals.spin_revolver()
 			emit_signal("callSoundManager", "revolverSpin")
 			for child in $"../CardManager".get_children():
@@ -225,7 +225,7 @@ func call_revolver():
 		else:
 			print("TERMINATOR: No bullet, survived")
 			emit_signal("callAnimationManager", "revolver", "ai", "noBullet")
-			await get_tree().create_timer(15).timeout
+			await $"../AnimationManager".RevolverFinished
 			Globals.cards_in_center_hand = 0
 			for child in $"../CardManager".get_children():
 				if child.name not in Globals.playerHand and child.name not in Globals.aiHand:

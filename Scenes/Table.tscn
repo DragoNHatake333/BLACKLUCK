@@ -1,6 +1,6 @@
 [gd_scene load_steps=58 format=3 uid="uid://byadrotxvbue2"]
 
-[ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://crt_effect.gdshader" id="1_1p1yg"]
+[ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
 [ext_resource type="FontFile" uid="uid://cdwfvs2qjhtp0" path="res://Scenes/MainMenu/Fonts/Verve.ttf" id="3_y3mow"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
@@ -28,22 +28,22 @@
 [ext_resource type="Script" uid="uid://u2ic2lherf7o" path="res://Scripts/point_light_2d.gd" id="29_b1apg"]
 [ext_resource type="AudioStream" uid="uid://ydtn0tsn32ps" path="res://Assets/Sound/revolverHovered.wav" id="30_5w8et"]
 [ext_resource type="Script" uid="uid://dwith67qqvmxp" path="res://Scripts/AnimationManager.gd" id="30_adfku"]
+[ext_resource type="Texture2D" uid="uid://b2r20oei4ghmx" path="res://Assets/2d_lights_and_shadows_neutral_point_light.webp" id="31_6bpmn"]
 [ext_resource type="AudioStream" uid="uid://du3bajf8uk02a" path="res://Assets/Sound/deckDeal.wav" id="31_pea3r"]
 [ext_resource type="AudioStream" uid="uid://dmugqy73cx62" path="res://Assets/Sound/lightOff.mp3" id="31_ro21p"]
 [ext_resource type="PackedScene" uid="uid://cp3836185v15m" path="res://Scenes/pause_menu.tscn" id="31_tye0p"]
 [ext_resource type="AudioStream" uid="uid://bvn6j756la80m" path="res://Assets/Sound/lightOn.mp3" id="32_ro21p"]
-[ext_resource type="Texture2D" uid="uid://b2r20oei4ghmx" path="res://2d_lights_and_shadows_neutral_point_light.webp" id="33_y3mow"]
 [ext_resource type="AudioStream" uid="uid://d1bp6x0kbsyn3" path="res://Assets/Sound/heavyBreathing.mp3" id="35_1jd3i"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
 [ext_resource type="Script" uid="uid://7hlqppg3nsn7" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
 [ext_resource type="Texture2D" uid="uid://bt56gprbmv3ht" path="res://Assets/pedrosanchez.png" id="42_da1he"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
-shader = ExtResource("1_1p1yg")
+shader = ExtResource("1_6bpmn")
 shader_parameter/resolution = Vector2(1920, 1080)
 shader_parameter/warp_amount = 0.348
 shader_parameter/noise_amount = 0.0
-shader_parameter/vignette_amount = 0.254
+shader_parameter/vignette_amount = 0.6
 shader_parameter/vignette_intensity = 1.0
 shader_parameter/aberration_amount = 0.5
 
@@ -99,6 +99,20 @@ tracks/0/keys = {
 "method": &"call_sound_manager"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"clickFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_da1he"]
 resource_name = "aiShot"
@@ -115,6 +129,20 @@ tracks/0/keys = {
 "values": [{
 "args": ["revolverShot"],
 "method": &"call_sound_manager"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"clickFinished"],
+"method": &"emit_signal"
 }]
 }
 
@@ -141,6 +169,20 @@ tracks/0/keys = {
 "method": &"call_sound_manager"
 }]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(10),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"clickFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_davux"]
 resource_name = "playerShot"
@@ -152,17 +194,31 @@ tracks/0/path = NodePath("SoundManager")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(-0.0333333, 0, 8.33333),
+"times": PackedFloat32Array(-0.633333, -0.0333333, 8.33333),
 "transitions": PackedFloat32Array(1, 1, 1),
 "values": [{
-"args": ["heavyBreathing"],
+"args": ["revolverNervous"],
 "method": &"call_sound_manager"
 }, {
-"args": ["revolverNervous"],
+"args": ["heavyBreathing"],
 "method": &"call_sound_manager"
 }, {
 "args": ["revolverShot"],
 "method": &"call_sound_manager"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimationManager")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(10.0333),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"clickFinished"],
+"method": &"emit_signal"
 }]
 }
 
@@ -241,6 +297,20 @@ tracks/6/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(1)
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimationManager")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"inFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wpo3d"]
 resource_name = "revolverInPlayer"
@@ -283,6 +353,20 @@ tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(2.673, -0.25, 0, 0.25, 0, 2.673, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationManager")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"inFinished"],
+"method": &"emit_signal"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ro21p"]
@@ -360,6 +444,20 @@ tracks/6/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0)
 }
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("AnimationManager")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.966667),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"outFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_pea3r"]
 resource_name = "revolverOutPlayer"
@@ -402,6 +500,20 @@ tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
 "points": PackedFloat32Array(2.673, -0.25, 0, 0.25, 0, 2.673, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AnimationManager")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"outFinished"],
+"method": &"emit_signal"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_6bpmn"]
@@ -486,6 +598,20 @@ tracks/7/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimationManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"turnFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5w8et"]
 resource_name = "turnPlayer"
@@ -569,6 +695,20 @@ tracks/7/keys = {
 "points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 1)
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AnimationManager")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"turnFinished"],
+"method": &"emit_signal"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7xtld"]
 _data = {
@@ -599,6 +739,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 2
+mouse_force_pass_scroll_events = false
 
 [node name="Blackluck" type="Label" parent="."]
 visible = false
@@ -861,7 +1002,7 @@ material_override = SubResource("StandardMaterial3D_ontce")
 mesh = SubResource("PlaneMesh_ontce")
 
 [node name="Sketchfab_Scene" parent="3DViewport/SubViewportContainer/SubViewport" instance=ExtResource("27_be3cg")]
-transform = Transform3D(-1.12583, -0.650004, 2.35301e-06, 0, -4.70598e-06, -1.3, 0.650004, -1.12583, 4.0755e-06, -16.9919, 6.72508, 2.67328)
+transform = Transform3D(-1.12583, -0.650004, 2.35301e-06, 0, -4.70599e-06, -1.3, 0.650004, -1.12583, 4.0755e-06, -42.1534, 8.984, 2.673)
 
 [node name="Camera3D" type="Camera3D" parent="3DViewport/SubViewportContainer/SubViewport"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 24.3433, -0.172432)
@@ -879,16 +1020,16 @@ spot_range = 32.0447
 spot_angle = 63.5867
 
 [node name="RevolverLight" type="SpotLight3D" parent="3DViewport/SubViewportContainer/SubViewport"]
-transform = Transform3D(1, 0, 0, 0, -0.0137876, 0.999905, 0, -0.999905, -0.0137876, -17.6598, 20.7814, 0.206435)
+transform = Transform3D(1, 0, 0, 0, -0.0137876, 0.999905, 0, -0.999905, -0.0137876, -17.6598, 20.7814, 3.50764)
 light_color = Color(1, 0.64351, 0.572673, 1)
-light_energy = 100.0
+light_energy = 16.0
 light_specular = 0.667
 shadow_enabled = true
 shadow_bias = 2.0
 distance_fade_begin = 50.35
-spot_range = 19.1311
+spot_range = 17.0131
 spot_attenuation = 1.04
-spot_angle = 27.2553
+spot_angle = 25.759
 
 [node name="PlayerCandles" type="Node" parent="3DViewport/SubViewportContainer/SubViewport"]
 
@@ -978,39 +1119,52 @@ transform = Transform3D(-20.097, 0, 9.41967, 0, 22.195, 0, -9.41967, 0, -20.097,
 [node name="FireA3" parent="3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3" instance=ExtResource("28_p8qel")]
 transform = Transform3D(-0.0995234, 0, -0.00975134, 0, 0.1, 0, 0.00975134, 0, -0.0995234, -19.2981, 8.36761, -10.836)
 
+[node name="RevolverLight" type="PointLight2D" parent="."]
+position = Vector2(209.5, 572)
+scale = Vector2(2.52734, 1.60156)
+color = Color(1, 0, 0, 1)
+energy = 2.01
+texture = ExtResource("31_6bpmn")
+
 [node name="CandleLights" type="Node" parent="."]
 
 [node name="PointP1" type="PointLight2D" parent="CandleLights"]
-position = Vector2(1859, 832)
+position = Vector2(1829.33, 755.48)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="PointP2" type="PointLight2D" parent="CandleLights"]
-position = Vector2(1843, 928)
+position = Vector2(1858.75, 886.835)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="PointP3" type="PointLight2D" parent="CandleLights"]
-position = Vector2(1863, 1044)
+position = Vector2(1806.08, 1002.23)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="CandleLightsAI" type="Node" parent="."]
 
 [node name="PointA1" type="PointLight2D" parent="CandleLightsAI"]
-position = Vector2(67, 245)
+position = Vector2(135.005, 323.265)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="PointA2" type="PointLight2D" parent="CandleLightsAI"]
-position = Vector2(52, 139)
+position = Vector2(70.36, 191.43)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="PointA3" type="PointLight2D" parent="CandleLightsAI"]
-position = Vector2(68, 41)
+position = Vector2(129.755, 80.055)
 color = Color(1, 0.462745, 0.109804, 1)
-texture = ExtResource("33_y3mow")
+energy = 1.67
+texture = ExtResource("31_6bpmn")
 
 [node name="RevolverButton" type="Area2D" parent="."]
 collision_layer = 128
@@ -1062,7 +1216,7 @@ energy = 0.94
 texture = SubResource("GradientTexture2D_7xtld")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.310617, 0.310617, 0.310617, 1)
+color = Color(0.396889, 0.396889, 0.396889, 1)
 
 [node name="PedroSanchez" type="Node" parent="."]
 script = ExtResource("41_davux")
@@ -1070,6 +1224,7 @@ script = ExtResource("41_davux")
 [node name="Pedrosanchez" type="Sprite2D" parent="."]
 visible = false
 top_level = true
+z_index = 786
 position = Vector2(964.5, 544.5)
 scale = Vector2(1.60917, 1.21)
 texture = ExtResource("42_da1he")
@@ -1082,8 +1237,6 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_7xtld")
 }
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="AnimationManager"]
 
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callAnimationManager" from="GameManager" to="AnimationManager" method="callAnimationManager"]

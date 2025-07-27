@@ -52,7 +52,7 @@ material = SubResource("StandardMaterial3D_ecaqo")
 [node name="FireParticle" type="Node3D"]
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
-amount = 500
+amount = 75
 lifetime = 0.3
 randomness = 1.0
 draw_order = 3

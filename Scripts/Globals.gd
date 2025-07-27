@@ -1,5 +1,6 @@
 extends Node
 
+var is_animating
 var STOPHOVER = false
 var releaseCardMenu 
 var canvasModulate = true

@@ -171,37 +171,109 @@ func reset_round():
 func check_candle_lighting(operation, who):
 	if operation == "check":
 		if who == "player":
-			if $"../CandleLights/PointP1".visible == true and Globals.playerHP == 2:
-				emit_signal("callSoundManager","candleOff")
+			print("CHECKING PLAYER!")
+			if Globals.playerHP == 3:
+				$"../CandleLights/PointP1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = true
+				$"../CandleLights/PointP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = true
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			if Globals.playerHP == 2:
+				if $"../CandleLights/PointP1".visible == true:
+					emit_signal("callSoundManager", "candleOff")
 				$"../CandleLights/PointP1".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
-			elif $"../CandleLights/PointP2".visible == true and Globals.playerHP == 1:
-				emit_signal("callSoundManager","candleOff")
+				$"../CandleLights/PointP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = true
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			if Globals.playerHP == 1:
+				if $"../CandleLights/PointP2".visible == true:
+					emit_signal("callSoundManager", "candleOff")
+				$"../CandleLights/PointP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
 				$"../CandleLights/PointP2".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = false
-			elif $"../CandleLights/PointP3".visible == true and Globals.playerHP == 0:
-				emit_signal("callSoundManager","candleOff")
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			if Globals.playerHP == 0:
+				if $"../CandleLights/PointP3".visible == true:
+					emit_signal("callSoundManager", "candleOff")
+				$"../CandleLights/PointP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
+				$"../CandleLights/PointP2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = false
 				$"../CandleLights/PointP3".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = false
+
 		if who == "ai":
-			if $"../CandleLightsAI/PointA1".visible == true and Globals.aiHP == 2:
-				emit_signal("callSoundManager","candleOffAI")
+			print("CHECKING AI!")
+			if Globals.aiHP == 3:
+				$"../CandleLightsAI/PointA1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = true
+				$"../CandleLightsAI/PointA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = true
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			if Globals.aiHP == 2:
+				if $"../CandleLightsAI/PointA1".visible == true:
+					emit_signal("callSoundManager", "candleOffAI")
 				$"../CandleLightsAI/PointA1".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = false
-			elif $"../CandleLightsAI/PointA2".visible == true and Globals.aiHP == 1:
-				emit_signal("callSoundManager","candleOffAI")
+				$"../CandleLightsAI/PointA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = true
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			if Globals.aiHP == 1:
+				if $"../CandleLightsAI/PointA2".visible == true:
+					emit_signal("callSoundManager", "candleOffAI")
+				$"../CandleLightsAI/PointA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = false
 				$"../CandleLightsAI/PointA2".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = false
-			elif $"../CandleLightsAI/PointA3".visible == true and Globals.aiHP == 0:
-				emit_signal("callSoundManager","candleOffAI")
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			if Globals.aiHP == 0:
+				if $"../CandleLightsAI/PointA3".visible == true:
+					emit_signal("callSoundManager", "candleOffAI")
+				$"../CandleLightsAI/PointA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = false
+				$"../CandleLightsAI/PointA2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = false
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = false
 				$"../CandleLightsAI/PointA3".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = false
 				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = false
+
+		if who == "both":
+			print("CHECKING BOTH!")
+			check_candle_lighting("check", "player")
+			check_candle_lighting("check", "ai")
+			return
+
 	elif operation == "restart":
 		if who == "ai":
 			$"../CandleLightsAI/PointA1".visible = true
@@ -225,6 +297,7 @@ func check_candle_lighting(operation, who):
 			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
 	else:
 		print("check_candle_lighting: invalid operation argument")
+
 
 func _process(_delta: float) -> void:
 	if Globals.aiTurn == true:

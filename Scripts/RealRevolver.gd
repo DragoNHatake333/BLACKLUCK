@@ -12,7 +12,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 				Globals.playerRevolverPressed = true
 				if Globals.revolver_chambers[Globals.current_chamber]:
 					emit_signal("callAnimationManager", "revolver", "player", "bullet")
-					await get_tree().create_timer(12.0).timeout
+					await $"../AnimationManager".RevolverFinished
 					Globals.spin_revolver()
 					emit_signal("callSoundManager","revolverSpin")
 					Globals.cards_in_center_hand = 0
@@ -30,7 +30,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					Globals.playerTurn = false
 				else:
 					emit_signal("callAnimationManager", "revolver", "player", "noBullet")
-					await get_tree().create_timer(12).timeout
+					await $"../AnimationManager".RevolverFinished
 					Globals.cards_in_center_hand = 0
 					for child in $"../CardManager".get_children():
 						if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
@@ -52,11 +52,13 @@ func _ready():
 
 func _on_mouse_entered() -> void:
 	if Globals.STOPHOVER == false:
+		print("HOVER ENTERED!")
 		if not target_node.position.y == 1.0 and Globals.isCardDragging == false and Globals.playerTurn == true and Globals.playerRevolverPressed == false:
 			var tween = create_tween()
 			tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			emit_signal("callSoundManager", "revolverHovered")
 func _on_mouse_exited() -> void:
 	if Globals.STOPHOVER == false:
+		print("HOVER EXITED!")
 		var tween = create_tween()
 		tween.tween_property(target_node, "position:y", base_position_y, 0.4).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)

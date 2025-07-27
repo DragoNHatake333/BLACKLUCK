@@ -1,15 +1,8 @@
 extends Node
 
-const CROUPIER_PATH := "/root/Main/Croupier"
-const GAME_MANAGER_PATH := "/root/Main/GameManager"
-
-var shot: AudioStreamPlayer
-
 func _on_game_manager_call_player() -> void:
 	Globals.playerRevolverPressed = false
 	pass
-	#print("Player: Start")
-	#print("Player: Player is finished!")
 
 func _on_game_manager_call_count_amount() -> void:
 	var total := 0
