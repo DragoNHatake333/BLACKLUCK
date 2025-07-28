@@ -18,7 +18,7 @@ config/volume=1.0
 
 [audio]
 
-buses/default_bus_layout=""
+buses/default_bus_layout="uid://c0ccu255b11h3"
 
 [autoload]
 

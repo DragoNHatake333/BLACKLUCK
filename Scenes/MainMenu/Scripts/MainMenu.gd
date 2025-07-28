@@ -9,31 +9,56 @@ extends Control
 
 # Volumen
 @onready var click_sound = $ClickSound
+
 @onready var volume_slider = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer/MasterSlider
 @onready var volume_label = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer/VolumeLabel
+
+@onready var music_slider = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2/MusicSlider
+@onready var music_label = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2/MusicLabel
+
+@onready var sfx_slider = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXSlider
+@onready var sfx_label = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXLabel
+
+# Variables de control
 var _target_volume := 1.0
 var _current_volume := 1.0
 var _fade_speed := 5.0
-var _last_percent_displayed := -1
 var _is_dragging_volume := false
 
 func _ready():
 	if OS.has_feature("web"):
 		quit_button.visible = false
 
+	# Conectar botones
 	play_button.pressed.connect(_on_play_pressed)
 	settings_button.pressed.connect(_on_settings_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
 	back_button.pressed.connect(_on_back_pressed)
-	volume_slider.value_changed.connect(_on_volume_changed)
 
-	var vol = ProjectSettings.get_setting("application/config/volume", 0.5)
-	volume_slider.value = vol
-	_apply_volume(vol)
-	volume_label.text = "%d%%" % int(round(vol * 100))
-	_current_volume = vol
-	_target_volume = vol
-	_last_percent_displayed = int(round(vol * 100))
+	# Conectar sliders
+	volume_slider.value_changed.connect(_on_volume_changed)
+	music_slider.value_changed.connect(_on_music_volume_changed)
+	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
+
+	# Cargar valores guardados
+	var master = ProjectSettings.get_setting("application/config/volume", 1.0)
+	var music = ProjectSettings.get_setting("application/config/music_volume", 1.0)
+	var sfx = ProjectSettings.get_setting("application/config/sfx_volume", 1.0)
+
+	volume_slider.value = master
+	music_slider.value = music
+	sfx_slider.value = sfx
+
+	_apply_volume("Master", master)
+	_apply_volume("Music", music)
+	_apply_volume("SFX", sfx)
+
+	volume_label.text = "%d%%" % int(round(master * 100))
+	music_label.text = "%d%%" % int(round(music * 100))
+	sfx_label.text = "%d%%" % int(round(sfx * 100))
+
+	_current_volume = master
+	_target_volume = master
 
 func _unhandled_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
@@ -41,7 +66,7 @@ func _unhandled_input(event):
 			_is_dragging_volume = true
 		elif not event.pressed and _is_dragging_volume:
 			_is_dragging_volume = false
-			_apply_volume(volume_slider.value)
+			_apply_volume("Master", volume_slider.value)
 
 func _process(delta):
 	if not _is_dragging_volume and abs(_current_volume - _target_volume) > 0.001:
@@ -50,21 +75,33 @@ func _process(delta):
 		_current_volume = _target_volume
 
 	var clamped_volume = max(_current_volume, 0.01)
-	AudioServer.set_bus_volume_db(0, linear_to_db(clamped_volume))
-	AudioServer.set_bus_mute(0, _current_volume <= 0.01)
+	AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Master"), linear_to_db(clamped_volume))
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), _current_volume <= 0.01)
 
 func _on_volume_changed(value):
-	var percent = int(round(value * 100))
-	if percent != _last_percent_displayed:
-		volume_label.text = "%d%%" % percent
-		_last_percent_displayed = percent
-
+	volume_label.text = "%d%%" % int(round(value * 100))
 	if not _is_dragging_volume:
-		_apply_volume(value)
+		_target_volume = value
+		ProjectSettings.set_setting("application/config/volume", value)
 
-func _apply_volume(value: float):
-	_target_volume = value
-	ProjectSettings.set_setting("application/config/volume", value)
+func _on_music_volume_changed(value):
+	music_label.text = "%d%%" % int(round(value * 100))
+	_apply_volume("Music", value)
+	ProjectSettings.set_setting("application/config/music_volume", value)
+
+func _on_sfx_volume_changed(value):
+	sfx_label.text = "%d%%" % int(round(value * 100))
+	_apply_volume("SFX", value)
+	ProjectSettings.set_setting("application/config/sfx_volume", value)
+
+func _apply_volume(bus_name: String, value: float):
+	var index = AudioServer.get_bus_index(bus_name)
+	if index == -1:
+		push_warning("Audio bus '%s' not found!" % bus_name)
+		return
+	var db = linear_to_db(max(value, 0.01))
+	AudioServer.set_bus_volume_db(index, db)
+	AudioServer.set_bus_mute(index, value <= 0.01)
 
 func _on_play_pressed():
 	click_sound.play()
