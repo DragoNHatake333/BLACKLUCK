@@ -87,7 +87,7 @@ func callAnimationManager(anime, who, what) -> void:
 				print("Playing animation: turnPlayer")
 				$AnimationPlayer.play("turnPlayer")
 			revolverPos = who
-			print("Updated revolverPos to:", revolverPos)
+			print("Updated revolverPos to: ", revolverPos)
 			await turnFinished
 			
 		if who == "ai":
@@ -96,10 +96,10 @@ func callAnimationManager(anime, who, what) -> void:
 		elif who == "player":
 			print("Playing animation: revolverOutPlayer")
 			$AnimationPlayer.play("revolverOutPlayer")
-		
+			
 		await outFinished
 		
-		if what == "Bullet":
+		if what == "bullet":
 			print("There was a bullet!")
 			if who == "ai":
 				print("Playing animation: aiShot")
@@ -117,7 +117,9 @@ func callAnimationManager(anime, who, what) -> void:
 				print("Playing animation: playerFake")
 				$AnimationPlayer.play("playerFake")
 		
+		print("Waiting for click finished.")
 		await clickFinished
+		print("Continuing after await clickFinished.")
 		
 		if revolverPos == "ai":
 			print("Putting revolver back into AI")

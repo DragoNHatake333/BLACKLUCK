@@ -222,6 +222,7 @@ func call_revolver():
 			Globals.aiAmount = 5
 			Globals.saveRound = true
 			Globals.aiTurn = false
+			revolverPressed = true
 		else:
 			print("TERMINATOR: No bullet, survived")
 			emit_signal("callAnimationManager", "revolver", "ai", "noBullet")

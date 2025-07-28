@@ -1,0 +1,300 @@
+[gd_scene load_steps=10 format=3 uid="uid://by7tqp72mpn2f"]
+
+[ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://Scenes/MainMenu/Scripts/MainMenu.gd" id="1_e1xpn"]
+[ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
+[ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://Scenes/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
+[ext_resource type="AudioStream" uid="uid://cd74muqbnjqtb" path="res://Scenes/MainMenu/Audio/Night Break.mp3" id="4_b4ika"]
+[ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="4_j0ggg"]
+[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
+[ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_exbqw"]
+shader = ExtResource("3_tpenk")
+shader_parameter/spin_rotation_speed = 2.0
+shader_parameter/move_speed = 7.0
+shader_parameter/offset = Vector2(0, 0)
+shader_parameter/colour_1 = Color(0.7, 0, 0, 1)
+shader_parameter/colour_2 = Color(0.1, 0, 0, 1)
+shader_parameter/colour_3 = Color(0, 0, 0, 1)
+shader_parameter/contrast = 3.5
+shader_parameter/lighting = 0.4
+shader_parameter/spin_amount = 0.25
+shader_parameter/pixel_filter = 740.0
+shader_parameter/is_rotating = false
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ve1ib"]
+shader = ExtResource("4_j0ggg")
+shader_parameter/font_color = Color(0.81, 0.81, 0.81, 1)
+shader_parameter/noise_scale = 80.0
+shader_parameter/darkness = 0.4
+shader_parameter/glitch_strength = 0.01
+shader_parameter/time_slowdown = 2.5
+shader_parameter/glitch_start_time = 0.5
+shader_parameter/glitch_ramp_duration = 2.0
+
+[node name="MainMenu" type="Control"]
+process_mode = 3
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_tma8a")
+script = ExtResource("1_e1xpn")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_exbqw")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Blackluck" type="Label" parent="."]
+material = SubResource("ShaderMaterial_ve1ib")
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.0619792
+anchor_top = 0.277778
+anchor_right = 0.938021
+anchor_bottom = 0.722222
+offset_right = 0.000244141
+offset_bottom = 0.000244141
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("5_ve1ib")
+theme_override_font_sizes/font_size = 411
+text = "BLACKLUCK"
+horizontal_alignment = 1
+vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367187
+anchor_top = 0.535648
+anchor_right = 0.633333
+anchor_bottom = 0.809722
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 30
+metadata/_edit_use_anchors_ = true
+
+[node name="PlayButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 56
+text = "Play"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
+theme_override_font_sizes/font_size = 56
+text = "Settings"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
+theme_override_font_sizes/font_size = 56
+text = "Quit"
+
+[node name="OptionsPanel" type="PanelContainer" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.327083
+anchor_top = 0.263889
+anchor_right = 0.672917
+anchor_bottom = 0.736111
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel"]
+texture_filter = 1
+layout_mode = 2
+
+[node name="TabContainer" type="TabContainer" parent="OptionsPanel/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 46
+tab_alignment = 1
+current_tab = 0
+
+[node name="Graphics" type="Control" parent="OptionsPanel/VBoxContainer/TabContainer"]
+layout_mode = 2
+metadata/_tab_index = 0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -247.0
+offset_top = 18.0
+offset_right = 246.0
+offset_bottom = 308.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 14
+
+[node name="DisplayMonitor" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "Display Monitor"
+horizontal_alignment = 1
+
+[node name="DisplayMonitorVBoxContainer" type="HBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="DisplayMonitorLeftButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "<"
+
+[node name="DisplayMonitorLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "1"
+horizontal_alignment = 1
+
+[node name="DisplayMonitorRightButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = ">"
+
+[node name="WindowMode" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "Window Mode"
+horizontal_alignment = 1
+
+[node name="WindowModeVBoxContainer" type="HBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="WindowModeLeftButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "<"
+
+[node name="WindowModeLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "Fullscreen"
+horizontal_alignment = 1
+
+[node name="WindowModeRightButton" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = ">"
+
+[node name="ApplyContainer" type="HBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Apply" type="Button" parent="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/ApplyContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "Apply"
+
+[node name="Audio" type="Control" parent="OptionsPanel/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.179
+anchor_right = 0.822
+offset_left = -109.856
+offset_top = 12.0
+offset_right = 110.192
+offset_bottom = 121.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Master Volume" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "Master Volume"
+horizontal_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="VolumeLabel" type="Label" parent="OptionsPanel/VBoxContainer/TabContainer/Audio/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.44
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+horizontal_alignment = 1
+
+[node name="Back" type="Button" parent="OptionsPanel/VBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "Back"
+
+[node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_b4ika")
+volume_db = -13.87
+autoplay = true
+parameters/looping = true
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_1b8fn")
+
+[connection signal="tab_changed" from="OptionsPanel/VBoxContainer/TabContainer" to="." method="_on_tab_container_tab_changed"]
+[connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorLeftButton" to="." method="_on_display_monitor_left_button_pressed"]
+[connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/DisplayMonitorVBoxContainer/DisplayMonitorRightButton" to="." method="_on_display_monitor_right_button_pressed"]
+[connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer/WindowModeLeftButton" to="." method="_on_window_mode_left_button_pressed"]
+[connection signal="pressed" from="OptionsPanel/VBoxContainer/TabContainer/Graphics/VBoxContainer/WindowModeVBoxContainer/WindowModeRightButton" to="." method="_on_window_mode_right_button_pressed"]

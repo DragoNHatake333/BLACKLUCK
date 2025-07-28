@@ -23,6 +23,7 @@ func spin_revolver():
 	else:
 		emit_signal("callSoundManager", "revolverSpin")
 	var real_bullet = randi() % 6
+	#randi() % 6
 	revolver_chambers[real_bullet] = true
 	current_chamber = 0
 	print("Globals: Revolver loaded: bullet is in chamber ", real_bullet + 1, ".")

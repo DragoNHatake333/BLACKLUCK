@@ -52,13 +52,11 @@ func _ready():
 
 func _on_mouse_entered() -> void:
 	if Globals.STOPHOVER == false:
-		print("HOVER ENTERED!")
 		if not target_node.position.y == 1.0 and Globals.isCardDragging == false and Globals.playerTurn == true and Globals.playerRevolverPressed == false:
 			var tween = create_tween()
 			tween.tween_property(target_node, "position:y", base_position_y + 1.0, 0.4).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 			emit_signal("callSoundManager", "revolverHovered")
 func _on_mouse_exited() -> void:
 	if Globals.STOPHOVER == false:
-		print("HOVER EXITED!")
 		var tween = create_tween()
 		tween.tween_property(target_node, "position:y", base_position_y, 0.4).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_OUT)

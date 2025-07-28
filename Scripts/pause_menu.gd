@@ -45,7 +45,7 @@ func _on_resume_pressed():
 
 func _on_quit_pressed():
 	get_tree().paused = false
-	SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
+	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 
 func _on_main_menu_pressed() -> void:
 	_on_quit_pressed()
