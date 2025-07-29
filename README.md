@@ -38,7 +38,18 @@ GitHub és una plataforma per guardar i mantenir actualitzat el teu programa de 
 ### FAQ
 
 
+
 1. **Per què escrivim en anglès?** 1 - És més breu i concís, 2 - Te molta terminologia no adaptada al català, 3 - GitHub està pensat per ser utilitzada en anglès i els accents poden donar problemes. **El joc estarà en català.**
 
 
 2. **Puc descarregar el joc aquí?** No, la versió presentable del joc estarà a itch.io i es pot descarregar des de la pestanya "Descarregar" de la nostra pàgina web.
+
+
+
+
+[BLACKCLUCK](https://github.com/DragoNHatake333/BlackLuck) © 2025 by [DragoN & Zeeky](https://github.com/DragoNHatake333/BlackLuck) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)  
+![CC](https://mirrors.creativecommons.org/presskit/icons/cc.svg)
+![BY](https://mirrors.creativecommons.org/presskit/icons/by.svg)
+![NC](https://mirrors.creativecommons.org/presskit/icons/nc.svg)
+![SA](https://mirrors.creativecommons.org/presskit/icons/sa.svg)
+
