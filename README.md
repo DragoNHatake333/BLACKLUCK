@@ -46,6 +46,6 @@ GitHub és una plataforma per guardar i mantenir actualitzat el teu programa de 
 
 
 
+## License
 
-[BLACKCLUCK](https://github.com/DragoNHatake333/BlackLuck) © 2025 by [DragoN & Zeeky](https://github.com/DragoNHatake333/BlackLuck) is licensed under [CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/).
-
+This project is not open source. All rights reserved. See the [LICENSE](./LICENSE) file for details.
