@@ -25,9 +25,6 @@ func _on_game_manager_call_ai() -> void:
 	print("TERMINATOR: AI Turn Start")
 	await get_tree().create_timer(randf_range(1.0, 2.0)).timeout
 	print("TERMINATOR: Current Chamber =", Globals.current_chamber)
-	if revolverPressed == false:
-		call_revolver()
-		return
 	filteredCenterHand = {}
 	selectedCard = []
 	checking_center_cards = false

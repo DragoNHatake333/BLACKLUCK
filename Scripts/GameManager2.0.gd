@@ -6,7 +6,8 @@ var round_number = 0
 var starter = ownsTurn
 var checking_round_winner = false
 var returnRevovler = false
-@onready var Blackluck = $"../Blackluck"
+@onready var Blackluck = $"../Start/Blackluck"
+@onready var BlackBackground = $"../Start/BlackBackground"
 var money = 0
 signal resetCardSlots
 signal callCountAmount
@@ -18,13 +19,40 @@ var Player = "/root/Main/Player"
 var AI = "/root/Main/AI"
 signal callSoundManager
 signal callAnimationManager
+signal pressedContinue
+signal callTyping
+
+func _input(event):
+	if event.is_action_pressed("mouse_left"):
+		pressedContinue.emit()
 
 func _ready() -> void:
 	randomize()
-	$"../AiTurnLight".visible = false
-	$"../PlayerTurnLight".visible = false
+	$"../SoundManager/BGM".volume_db = -90
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position = Vector3(-16.99, 6.725, 2.673)
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".rotation_degrees = Vector3(90, -150, 0)
+	$"../RevolverLight".visible = false
+	$"../AiTurnLight".visible = false
+	$"../PlayerTurnLight".visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	emit_signal("callTyping")
+	Blackluck.text = "NO PUC CREURE\n QUE HAGI CAIGUT\n TAN BAIX..."
+	Blackluck.visible = true
+	BlackBackground.visible = true
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "PERO NECESSITO\n ELS DINERS"
+	await pressedContinue
+	emit_signal("callSoundManager", "lightOff")
+	$"../SoundManager/firstBGM".autoplay = false
+	$"../SoundManager/firstBGM".volume_db = -99
+	$"../Start/ShakiShaki".visible = false
+	Blackluck.visible = false
+	await get_tree().create_timer(3.0).timeout
+	emit_signal("callSoundManager", "lightOn")
+	BlackBackground.visible = false
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	$"../RevolverLight".visible = true
 	check_candle_lighting("restart", "ai")
 	check_candle_lighting("restart", "player")
 	money = 0
