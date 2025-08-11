@@ -21,40 +21,85 @@ signal callSoundManager
 signal callAnimationManager
 signal pressedContinue
 signal callTyping
-
+var blackluckspam = "BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
+"
+var start = false
 func _input(event):
-	if event.is_action_pressed("mouse_left"):
-		pressedContinue.emit()
+	if start == false:
+		if event.is_action_pressed("mouse_left"):
+			pressedContinue.emit()
+			emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
 	randomize()
-	$"../SoundManager/BGM".volume_db = -90
+	$"../CanvasLayer/ColorRect".visible = false
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position = Vector3(-16.99, 6.725, 2.673)
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".rotation_degrees = Vector3(90, -150, 0)
 	$"../RevolverLight".visible = false
 	$"../AiTurnLight".visible = false
 	$"../PlayerTurnLight".visible = false
-	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	emit_signal("callTyping")
-	Blackluck.text = "NO PUC CREURE\n QUE HAGI CAIGUT\n TAN BAIX..."
-	Blackluck.visible = true
 	BlackBackground.visible = true
-	await pressedContinue
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	await get_tree().create_timer(3.0).timeout
+	emit_signal("callSoundManager", "lightOn")
+	$"../CanvasLayer/ColorRect".visible = true
+	$"../SoundManager/firstBGM".playing = true
+	Globals.canvasModulate = false
+	await get_tree().create_timer(1.0).timeout
+	#Intro
 	emit_signal("callTyping")
-	Blackluck.text = "PERO NECESSITO\n ELS DINERS"
+	Blackluck.text = "NO PUC CREURE\n QUE HAGI CAIGUT\n TAN BAIX"
+	Blackluck.visible = true
 	await pressedContinue
+	#Second
+	emit_signal("callTyping")
+	Blackluck.text = "PERO NECESSITO\n ELS DINERS..."
+	await pressedContinue
+	#Tutorial
+	Blackluck.visible = false
+	$"../Start/Tutorial/Frame1".visible = true
+	emit_signal("callTyping")
+	$"../Start/Tutorial/Blackluck".visible = true
+	$"../Start/Tutorial/Blackluck2".visible = true
+	$"../Start/Tutorial/Blackluck3".visible = true
+	$"../Start/Tutorial/Blackluck4".visible = true
+	$"../Start/Tutorial/Blackluck5".visible = true
+	await pressedContinue
+	$"../Start/Tutorial/Frame1".visible = false
+	$"../Start/Tutorial/Blackluck".visible = false
+	$"../Start/Tutorial/Blackluck2".visible = false
+	$"../Start/Tutorial/Blackluck3".visible = false
+	$"../Start/Tutorial/Blackluck4".visible = false
+	$"../Start/Tutorial/Blackluck5".visible = false
+	#BLACKLUCK
+	Blackluck.visible = true
+	emit_signal("callTyping")
+	Blackluck.text = blackluckspam
+	await pressedContinue
+	start = true
 	emit_signal("callSoundManager", "lightOff")
 	$"../SoundManager/firstBGM".autoplay = false
-	$"../SoundManager/firstBGM".volume_db = -99
+	$"../SoundManager/firstBGM".playing = false
 	$"../Start/ShakiShaki".visible = false
 	Blackluck.visible = false
 	await get_tree().create_timer(3.0).timeout
 	emit_signal("callSoundManager", "lightOn")
 	BlackBackground.visible = false
+	Globals.canvasModulate = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$"../RevolverLight".visible = true
 	check_candle_lighting("restart", "ai")
 	check_candle_lighting("restart", "player")
+	$"../SoundManager/BGM".playing = true
 	money = 0
 	Globals.canvasModulate = true
 	Globals.playerSum = 0

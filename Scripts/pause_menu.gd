@@ -1,7 +1,7 @@
 extends Control
 
 var transitioning := false
-
+var mouse
 func _ready() -> void:
 	hide()
 	var window = get_window()
@@ -17,10 +17,15 @@ func resume():
 	$AnimationPlayer.play_backwards("blur")
 	await get_tree().create_timer(0.3).timeout
 	hide()
+	if mouse == false:
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	else:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	Globals.isCardDragging = false
 	transitioning = false
 
 func pause():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if transitioning:
 		return
 	transitioning = true
@@ -36,6 +41,10 @@ func testEsc():
 	if Input.is_action_just_pressed("esc") and !get_tree().paused:
 		if Globals.isCardDragging == true:
 			Globals.releaseCardMenu = true
+		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:
+			mouse = false
+		else:
+			mouse = true
 		pause()
 	elif Input.is_action_just_pressed("esc") and get_tree().paused:
 		resume()

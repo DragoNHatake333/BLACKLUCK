@@ -19,7 +19,7 @@ func callAnimationManager(anime, who, what) -> void:
 		
 		# Fade out BGM
 		var bgm = $"../SoundManager/BGM"
-		tween.tween_property(bgm, "volume_db", -40, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
 		emit_signal("callSoundManager", "lightOff")
 		await get_tree().create_timer(0.2).timeout
@@ -62,10 +62,17 @@ func callAnimationManager(anime, who, what) -> void:
 		$"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D".visible = true
 		$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = true
 		$"../PointLight2D".visible = true
+		
+		if Globals.playerHP == 1:
+			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/1.mp3")
+		if Globals.playerHP == 2:
+			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/2.mp3")
+		if Globals.playerHP == 1:
+			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/3.mp3")
 
 		# Fade BGM back in
 		var tween2 = create_tween()
-		tween2.tween_property(bgm, "volume_db", -22.148, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 		emit_signal("AnimationFinished")
 	if anime == "revolver":

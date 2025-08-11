@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://by7tqp72mpn2f"]
+[gd_scene load_steps=14 format=3 uid="uid://by7tqp72mpn2f"]
 
 [ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://Scenes/MainMenu/Scripts/MainMenu.gd" id="1_e1xpn"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
@@ -9,6 +9,16 @@
 [ext_resource type="Texture2D" uid="uid://di6iy63nevv6b" path="res://Assets/Options.png" id="5_nixa7"]
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
+[ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="10_nixa7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_t4xtq"]
+shader = ExtResource("10_nixa7")
+shader_parameter/brightnessMult = 4.0
+shader_parameter/wiggleMult = 0.005
+shader_parameter/chromaticAberrationOffset = 0.001
+shader_parameter/warp_amount = 0.1
+shader_parameter/vignette_amount = 1.0
+shader_parameter/vignette_radius = 0.7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exbqw"]
 shader = ExtResource("3_tpenk")
@@ -44,6 +54,22 @@ grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tma8a")
 script = ExtResource("1_e1xpn")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 4
+z_index = 4096
+material = SubResource("ShaderMaterial_t4xtq")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+metadata/_edit_use_anchors_ = true
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_exbqw")
