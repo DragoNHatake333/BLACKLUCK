@@ -21,6 +21,7 @@ signal callSoundManager
 signal callAnimationManager
 signal pressedContinue
 signal callTyping
+signal pressedSN(choice)
 var blackluckspam = "BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
@@ -38,8 +39,12 @@ func _input(event):
 			pressedContinue.emit()
 			if start == false:
 				emit_signal("callSoundManager", "crt")
-		if event.is_action_pressed("mouse_left"):
-			pressedS.emit()
+		if event.is_action_pressed("s"):
+			pressedSN.emit("s")
+			if start == false:
+				emit_signal("callSoundManager", "crt")
+		if event.is_action_pressed("n"):
+			pressedSN.emit("n")
 			if start == false:
 				emit_signal("callSoundManager", "crt")
 
@@ -188,45 +193,67 @@ func game_logic():
 func game_lost():
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	await get_tree().create_timer(3.0).timeout
 	emit_signal("callSoundManager", "lightOn")
-	$"../CanvasLayer/ColorRect".visible = true
 	$"../SoundManager/firstBGM".playing = true
+	$"../Start/ShakiShaki".visible = true
 	Globals.canvasModulate = false
-	money -= randi_range(100000, 200000)
+	money -= randi_range(100000, 150000)
 	start = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
 	Blackluck.text = "PÈRDUA\n" + str(money) + "$"
 	await pressedContinue
-	emit_signal("callTyping")
-	Blackluck.text = "DOBLAR O RES?"
-	$"../Start/S_N".visible = true
-	if in
-	
-	#print("GAME FINISHED: PLAYER LOSES")
-	#Blackluck.text = "DEAD\n" + str(money) + "$"
-	#Blackluck.visible = true
-	#await get_tree().create_timer(5.0).timeout
-	#SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
-	money += 500000
+	money += randi_range(100000, 150000)
 	print("GAME FINISHED: PLAYER WINS")
-	Blackluck.text = str(money) + "$"
+	BlackBackground.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	emit_signal("callSoundManager", "lightOn")
+	$"../SoundManager/firstBGM".playing = true
+	$"../Start/ShakiShaki".visible = true
+	Globals.canvasModulate = false
+	start = false
 	Blackluck.visible = true
-	checking_round_winner = true
-	Globals.aiHP = 3
-	check_candle_lighting("restart", "ai")
-	reset_round()  # Delayed check
-	while checking_round_winner == true:
-		await get_tree().process_frame	
-	await get_tree().create_timer(5.0).timeout
-	Blackluck.visible = false
-	game_logic()
+	emit_signal("callTyping")
+	Blackluck.text = "VICTORIA\n" + str(money) + "$"
+	await pressedContinue
+	$"../Start/S_N".visible = true
+	emit_signal("callTyping")
+	Blackluck.text = "DOBLAR O RES?"
+	# Wait until either S or N is pressed
+	var res = await pressedSN   # returns emitted args as an Array
+	var choice = res[0]
+	if choice == "n":
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		start = true
+		$"../Start/ShakiShaki".visible = false
+		SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
+	elif choice == "s":
+		checking_round_winner = true
+		Globals.aiHP = 3
+		check_candle_lighting("restart", "ai")
+		reset_round()  # Delayed check
+		while checking_round_winner == true:
+			await get_tree().process_frame	
+		await get_tree().create_timer(1.0).timeout
+		BlackBackground.visible = false
+		$"../SoundManager/firstBGM".playing = false
+		Globals.canvasModulate = true
+		Blackluck.visible = false
+		start = true
+		$"../Start/ShakiShaki".visible = false
+		$"../Start/S_N".visible = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		game_logic()
+
+var already = false
 
 func check_round_winner():
-	if Globals.playerSum > Globals.aiSum:
+	if Globals.playerSum > Globals.aiSum and already == false:
+		already = true
 		Globals.aiHP -= 1
 		roundLoser = "ai"
 		if $"../Terminator".revolverPressed == false:
@@ -235,7 +262,8 @@ func check_round_winner():
 			await $"../AnimationManager".AnimationFinished
 		await get_tree().create_timer(1.0).timeout
 		reset_round()
-	elif Globals.aiSum > Globals.playerSum:
+	elif Globals.aiSum > Globals.playerSum and already == false:
+		already = true
 		Globals.playerHP -= 1
 		roundLoser = "player"
 		if Globals.playerRevolverPressed == false:
@@ -272,6 +300,7 @@ func reset_round():
 	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
 	checking_round_winner = false
+	already = false
 
 func check_candle_lighting(operation, who):
 	if operation == "check":

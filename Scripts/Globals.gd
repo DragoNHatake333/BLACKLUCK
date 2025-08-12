@@ -23,7 +23,7 @@ func _ready() -> void:
 
 func spin_revolver():
 	revolver_chambers = [false, false, false, false, false, false]
-	var real_bullet = 0
+	var real_bullet = randi() % 6
 	#randi() % 6
 	revolver_chambers[real_bullet] = true
 	current_chamber = 0
@@ -72,8 +72,8 @@ var playerSum = 0
 var aiSum = 0
 var playerAmount = 0
 var aiAmount = 0
-var playerHP = 1
-var aiHP = 3
+var playerHP = 3
+var aiHP = 1
 var playerHand = []
 var aiHand = []
 var aiFinished = false
