@@ -50,6 +50,8 @@ func _input(event):
 
 func _ready() -> void:
 	randomize()
+	Globals.playerHP = 3
+	Globals.aiHP = 1
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
 	$"../CanvasLayer/ColorRect".visible = false

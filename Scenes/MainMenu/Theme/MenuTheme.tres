@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=8 format=3 uid="uid://djopgy1a0qxka"]
+[gd_resource type="Theme" load_steps=9 format=3 uid="uid://djopgy1a0qxka"]
 
-[ext_resource type="FontFile" uid="uid://ql4fexkmwn2l" path="res://Scenes/MainMenu/Fonts/Screaming Chocolate Guy 2.1.ttf" id="1_ib1cu"]
+[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="1_idggh"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_on2dp"]
 
@@ -12,16 +12,18 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pxycv"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_idggh"]
-bg_color = Color(0, 0, 0, 1)
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_idggh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtr0b"]
 
 [resource]
-default_font = ExtResource("1_ib1cu")
-Button/colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+default_font = ExtResource("1_idggh")
+Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0.666569, 0.666569, 0.666569, 1)
 Button/styles/disabled = SubResource("StyleBoxEmpty_on2dp")
 Button/styles/focus = SubResource("StyleBoxEmpty_poy0d")
 Button/styles/hover = SubResource("StyleBoxEmpty_ib1cu")
 Button/styles/normal = SubResource("StyleBoxEmpty_1oae7")
 Button/styles/pressed = SubResource("StyleBoxEmpty_pxycv")
-Panel/styles/panel = SubResource("StyleBoxFlat_idggh")
+Panel/styles/panel = SubResource("StyleBoxEmpty_idggh")
+PanelContainer/styles/panel = SubResource("StyleBoxEmpty_jtr0b")

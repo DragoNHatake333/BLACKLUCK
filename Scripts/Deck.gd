@@ -52,7 +52,7 @@ func draw_card(reps):
 
 		var card_scene = preload(CARD_SCENE_PATH)
 		var new_card = card_scene.instantiate()
-		var card_image_path = "res://Cards/" + card_drawn_name + ".png"
+		var card_image_path = "res://Cards2/" + card_drawn_name + ".png"
 		new_card.get_node("CardImage").texture = load(card_image_path)
 		new_card.name = card_drawn_name
 		$"../CardManager".add_child(new_card)

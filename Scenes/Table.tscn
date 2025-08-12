@@ -48,7 +48,7 @@
 [ext_resource type="AudioStream" uid="uid://cj56xb7eraww4" path="res://Assets/Sound/connectionEffect1.wav" id="35_wvbbp"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
 [ext_resource type="AudioStream" uid="uid://cnrqce8alr1wn" path="res://Assets/Sound/loops/crt2.mp3" id="38_nlvap"]
-[ext_resource type="Script" uid="uid://7hlqppg3nsn7" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
+[ext_resource type="Script" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
 [ext_resource type="Texture2D" uid="uid://bt56gprbmv3ht" path="res://Assets/pedrosanchez.png" id="42_da1he"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
