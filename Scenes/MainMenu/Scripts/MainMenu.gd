@@ -106,7 +106,7 @@ func _apply_volume(bus_name: String, value: float):
 func _on_play_pressed():
 	click_sound.play()
 	await get_tree().create_timer(0.2).timeout
-	SceneManager.change_scene("res://Scenes/Table.tscn")
+	SceneManager.change_scene("res://Scenes/loading_screen.tscn")
 
 func _on_settings_pressed():
 	click_sound.play()

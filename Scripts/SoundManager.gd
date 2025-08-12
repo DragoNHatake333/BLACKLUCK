@@ -7,6 +7,9 @@ extends Node
 @onready var candleOffAI = $candleOffAI
 var soundPlaying = true
 
+func _ready() -> void:
+	Globals.connect("callSoundManager", Callable(self, "call_sound_manager"))
+
 func call_sound_manager(sound: String):
 	if sound == "deckDeal":
 		var random = randi_range(1, 3)

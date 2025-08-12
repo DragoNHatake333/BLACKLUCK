@@ -32,15 +32,21 @@ BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK 
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 "
-var start = false
+var start = true
 func _input(event):
-	if start == false:
 		if event.is_action_pressed("mouse_left"):
 			pressedContinue.emit()
-			emit_signal("callSoundManager", "crt")
+			if start == false:
+				emit_signal("callSoundManager", "crt")
+		if event.is_action_pressed("mouse_left"):
+			pressedS.emit()
+			if start == false:
+				emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
 	randomize()
+	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
+	$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
 	$"../CanvasLayer/ColorRect".visible = false
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position = Vector3(-16.99, 6.725, 2.673)
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".rotation_degrees = Vector3(90, -150, 0)
@@ -57,6 +63,7 @@ func _ready() -> void:
 	await get_tree().create_timer(1.0).timeout
 	#Intro
 	emit_signal("callTyping")
+	start = false
 	Blackluck.text = "NO PUC CREURE\n QUE HAGI CAIGUT\n TAN BAIX"
 	Blackluck.visible = true
 	await pressedContinue
@@ -73,7 +80,9 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck3".visible = true
 	$"../Start/Tutorial/Blackluck4".visible = true
 	$"../Start/Tutorial/Blackluck5".visible = true
+	$"../Start/Tutorial/Cylinder".visible = true
 	await pressedContinue
+	$"../Start/Tutorial/Cylinder".visible = false
 	$"../Start/Tutorial/Frame1".visible = false
 	$"../Start/Tutorial/Blackluck".visible = false
 	$"../Start/Tutorial/Blackluck2".visible = false
@@ -84,8 +93,9 @@ func _ready() -> void:
 	Blackluck.visible = true
 	emit_signal("callTyping")
 	Blackluck.text = blackluckspam
-	await pressedContinue
+	await get_tree().process_frame
 	start = true
+	await pressedContinue
 	emit_signal("callSoundManager", "lightOff")
 	$"../SoundManager/firstBGM".autoplay = false
 	$"../SoundManager/firstBGM".playing = false
@@ -176,11 +186,29 @@ func game_logic():
 	game_logic()
 
 func game_lost():
-	print("GAME FINISHED: PLAYER LOSES")
-	Blackluck.text = "DEAD\n" + str(money) + "$"
+	BlackBackground.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	await get_tree().create_timer(3.0).timeout
+	emit_signal("callSoundManager", "lightOn")
+	$"../CanvasLayer/ColorRect".visible = true
+	$"../SoundManager/firstBGM".playing = true
+	Globals.canvasModulate = false
+	money -= randi_range(100000, 200000)
+	start = false
 	Blackluck.visible = true
-	await get_tree().create_timer(5.0).timeout
-	SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
+	emit_signal("callTyping")
+	Blackluck.text = "PÈRDUA\n" + str(money) + "$"
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "DOBLAR O RES?"
+	$"../Start/S_N".visible = true
+	if in
+	
+	#print("GAME FINISHED: PLAYER LOSES")
+	#Blackluck.text = "DEAD\n" + str(money) + "$"
+	#Blackluck.visible = true
+	#await get_tree().create_timer(5.0).timeout
+	#SceneManager.change_scene("res://ui/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
 	money += 500000
@@ -207,7 +235,7 @@ func check_round_winner():
 			await $"../AnimationManager".AnimationFinished
 		await get_tree().create_timer(1.0).timeout
 		reset_round()
-	if Globals.aiSum > Globals.playerSum:
+	elif Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
 		roundLoser = "player"
 		if Globals.playerRevolverPressed == false:

@@ -9,7 +9,7 @@ signal inFinished
 var revolverPos = "player"
 @onready var revolver = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene"
 var savedColour
-var bgm
+@onready var bgm = $"../SoundManager/BGM"
 var is_animating
 #@onready var revolverLight = $"../3DViewport/SubViewportContainer/SubViewport/RevolverLight"
 
@@ -18,7 +18,6 @@ func callAnimationManager(anime, who, what) -> void:
 		var tween = create_tween()
 		
 		# Fade out BGM
-		var bgm = $"../SoundManager/BGM"
 		tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		
 		emit_signal("callSoundManager", "lightOff")
@@ -63,19 +62,29 @@ func callAnimationManager(anime, who, what) -> void:
 		$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = true
 		$"../PointLight2D".visible = true
 		
-		if Globals.playerHP == 1:
+		if Globals.playerHP == 3:
 			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/1.mp3")
+			bgm.play()
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
 		if Globals.playerHP == 2:
 			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/2.mp3")
+			bgm.play()
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0030)
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.002)
 		if Globals.playerHP == 1:
 			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/3.mp3")
-
+			bgm.play()
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0045)
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.004)
+			
 		# Fade BGM back in
 		var tween2 = create_tween()
 		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 		emit_signal("AnimationFinished")
 	if anime == "revolver":
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		Globals.STOPHOVER = true
 		print("Animation: revolver")
 		print("Globals.STOPHOVER set to true")
@@ -138,10 +147,11 @@ func callAnimationManager(anime, who, what) -> void:
 		await inFinished
 		
 		print("Globals.STOPHOVER set to false")
+		await get_tree().create_timer(1.0).timeout
 		turnOnLightsRevolver()
 		emit_signal("RevolverFinished")
-		await get_tree().create_timer(1.0)
 		Globals.STOPHOVER = false
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		
 func turnOffLightsRevolver():
 	var tween = get_tree().create_tween()
@@ -212,10 +222,25 @@ func turnOnLightsRevolver():
 
 	$"../GameManager".check_candle_lighting("check", "both")
 
-
+	if Globals.playerHP == 3:
+		$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/1.mp3")
+		bgm.play()
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
+	if Globals.playerHP == 2:
+		$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/2.mp3")
+		bgm.play()
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0030)
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.002)
+	if Globals.playerHP == 1:
+		$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/3.mp3")
+		bgm.play()
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0045)
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.004)
+	
 	# Fade BGM back in
 	var tween2 = create_tween()
-	tween2.tween_property(bgm, "volume_db", -22.148, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 
 func _process(delta: float) -> void:
 	$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".position.z = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position.z

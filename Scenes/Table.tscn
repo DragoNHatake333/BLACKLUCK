@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=74 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -7,6 +7,8 @@
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
 [ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="4_8w7an"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
+[ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
+[ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
@@ -45,7 +47,7 @@
 [ext_resource type="AudioStream" uid="uid://d1bp6x0kbsyn3" path="res://Assets/Sound/heavyBreathing.mp3" id="35_1jd3i"]
 [ext_resource type="AudioStream" uid="uid://cj56xb7eraww4" path="res://Assets/Sound/connectionEffect1.wav" id="35_wvbbp"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
-[ext_resource type="AudioStream" uid="uid://bohqh1kasc5as" path="res://Assets/Sound/loops/crtclick.mp3" id="38_nlvap"]
+[ext_resource type="AudioStream" uid="uid://cnrqce8alr1wn" path="res://Assets/Sound/loops/crt2.mp3" id="38_nlvap"]
 [ext_resource type="Script" uid="uid://7hlqppg3nsn7" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
 [ext_resource type="Texture2D" uid="uid://bt56gprbmv3ht" path="res://Assets/pedrosanchez.png" id="42_da1he"]
 
@@ -1057,6 +1059,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Start" type="Node" parent="."]
 
 [node name="ShakiShaki" type="ColorRect" parent="Start"]
+visible = false
 z_index = 4096
 material = SubResource("ShaderMaterial_7pc0u")
 offset_left = -44.0
@@ -1086,7 +1089,28 @@ text = "BLACKLUCK"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 
+[node name="S_N" type="Label" parent="Start"]
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+material = SubResource("ShaderMaterial_o0qrb")
+anchors_preset = -1
+anchor_left = 0.463281
+anchor_top = 0.636736
+anchor_right = 0.536719
+anchor_bottom = 0.772847
+offset_top = 0.00500488
+offset_bottom = 0.00500488
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 150
+text = "s/n"
+horizontal_alignment = 1
+script = ExtResource("4_8w7an")
+metadata/_edit_use_anchors_ = true
+
 [node name="BlackBackground" type="ColorRect" parent="Start"]
+visible = false
 z_index = 1022
 offset_right = 1917.0
 offset_bottom = 1080.0
@@ -1108,9 +1132,11 @@ z_index = 4096
 material = SubResource("ShaderMaterial_nlvap")
 anchors_preset = -1
 anchor_left = 0.059375
-anchor_top = 0.321296
+anchor_top = 0.182125
 anchor_right = 0.447396
-anchor_bottom = 0.675
+anchor_bottom = 0.535829
+offset_top = 79.89
+offset_bottom = 79.89
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
@@ -1200,6 +1226,14 @@ text = "MÀ"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
+
+[node name="Cylinder" type="Sprite2D" parent="Start/Tutorial"]
+visible = false
+z_index = 4096
+position = Vector2(468.16, 800)
+scale = Vector2(0.65, 0.65)
+texture = ExtResource("7_33e7s")
+script = ExtResource("8_x0dtf")
 
 [node name="Mesa" type="Sprite2D" parent="."]
 visible = false

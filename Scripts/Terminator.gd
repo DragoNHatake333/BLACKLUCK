@@ -207,7 +207,6 @@ func call_revolver():
 			emit_signal("callAnimationManager", "revolver", "ai", "bullet")
 			await $"../AnimationManager".RevolverFinished
 			Globals.spin_revolver()
-			emit_signal("callSoundManager", "revolverSpin")
 			for child in $"../CardManager".get_children():
 				if not (child.name in Globals.playerHand or child.name in Globals.aiHand):
 					child.queue_free()
@@ -220,6 +219,7 @@ func call_revolver():
 			Globals.saveRound = true
 			Globals.aiTurn = false
 			revolverPressed = true
+			Globals.fakeRevolver = true
 		else:
 			print("TERMINATOR: No bullet, survived")
 			emit_signal("callAnimationManager", "revolver", "ai", "noBullet")

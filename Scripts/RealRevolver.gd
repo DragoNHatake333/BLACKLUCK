@@ -14,7 +14,6 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					emit_signal("callAnimationManager", "revolver", "player", "bullet")
 					await $"../AnimationManager".RevolverFinished
 					Globals.spin_revolver()
-					emit_signal("callSoundManager","revolverSpin")
 					Globals.cards_in_center_hand = 0
 					for child in $"../CardManager".get_children():
 						if child.name not in Globals.playerHand and child.name not in Globals.aiHand:
@@ -28,6 +27,7 @@ func _on_input_event(_viewport: Node, event: InputEvent, _shape_idx: int) -> voi
 					Globals.aiAmount = 5
 					Globals.saveRound = true
 					Globals.playerTurn = false
+					Globals.fakeRevolver = true
 				else:
 					emit_signal("callAnimationManager", "revolver", "player", "noBullet")
 					await $"../AnimationManager".RevolverFinished
