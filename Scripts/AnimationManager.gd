@@ -49,6 +49,10 @@ func callAnimationManager(anime, who, what) -> void:
 		$"../GameManager".check_candle_lighting("check", "player")
 		await get_tree().create_timer(3.0).timeout
 
+		if Globals.playerHP != 0 or Globals.aiHP != 0:
+			$"../Start/BlackBackground".visible = true
+			Globals.canvasModulate = false 
+		
 		emit_signal("callSoundManager", "lightOn")
 		await get_tree().create_timer(0.1).timeout
 
@@ -199,6 +203,10 @@ func turnOffLightsRevolver():
 	$"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D".visible = false
 	$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = true
 func turnOnLightsRevolver():
+	if Globals.playerHP != 0 or Globals.aiHP != 0:
+		$"../Start/BlackBackground".visible = true
+		Globals.canvasModulate = false 
+	
 	emit_signal("callSoundManager", "lightOn")
 	
 	await get_tree().create_timer(0.1).timeout

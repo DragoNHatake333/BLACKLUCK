@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=72 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -48,8 +48,6 @@
 [ext_resource type="AudioStream" uid="uid://cj56xb7eraww4" path="res://Assets/Sound/connectionEffect1.wav" id="35_wvbbp"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
 [ext_resource type="AudioStream" uid="uid://cnrqce8alr1wn" path="res://Assets/Sound/loops/crt2.mp3" id="38_nlvap"]
-[ext_resource type="Script" uid="uid://7hlqppg3nsn7" path="res://Scenes/pedrosanchez.gd" id="41_davux"]
-[ext_resource type="Texture2D" uid="uid://bt56gprbmv3ht" path="res://Assets/pedrosanchez.png" id="42_da1he"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("1_6bpmn")
@@ -1768,17 +1766,6 @@ texture = SubResource("GradientTexture2D_7xtld")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.396889, 0.396889, 0.396889, 1)
-
-[node name="PedroSanchez" type="Node" parent="."]
-script = ExtResource("41_davux")
-
-[node name="Pedrosanchez" type="Sprite2D" parent="."]
-visible = false
-top_level = true
-z_index = 786
-position = Vector2(964.5, 544.5)
-scale = Vector2(1.60917, 1.21)
-texture = ExtResource("42_da1he")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_right = 1922.0

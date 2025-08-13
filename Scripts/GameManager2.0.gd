@@ -33,8 +33,22 @@ BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK 
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 "
+
+var xspam = "XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
+"
+
 var start = true
 @onready var bgm = $"../SoundManager/BGM"
+var neededMoney = 400000
 
 func _input(event):
 		if event.is_action_pressed("mouse_left"):
@@ -52,8 +66,10 @@ func _input(event):
 
 func _ready() -> void:
 	randomize()
+	Globals.double = false
+	Globals.gamelost = false
 	Globals.startanim = true
-	Globals.playerHP = 3
+	Globals.playerHP = 1
 	Globals.aiHP = 1
 	bgm.play()
 	bgm.volume_db = -99
@@ -81,6 +97,9 @@ func _ready() -> void:
 	#Second
 	emit_signal("callTyping")
 	Blackluck.text = "PERO NECESSITO\n ELS DINERS..."
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "NECESSITO\n 400.000$..."
 	await pressedContinue
 	#Tutorial
 	Blackluck.visible = false
@@ -142,10 +161,12 @@ func _ready() -> void:
 func game_logic():
 	print("GameManager: Logic start.")
 	if Globals.playerHP == 0:
+		Globals.gamelost = true
 		game_lost()
 		await get_tree().process_frame
 		return
 	if Globals.aiHP == 0:
+		Globals.gamelost = true
 		game_won()
 		await get_tree().process_frame
 		return
@@ -195,6 +216,7 @@ func game_logic():
 	game_logic()
 
 func game_lost():
+	Globals.startanim = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	BlackBackground.visible = true
@@ -203,19 +225,32 @@ func game_lost():
 	$"../SoundManager/firstBGM".playing = true
 	$"../Start/ShakiShaki".visible = true
 	Globals.canvasModulate = false
-	money -= randi_range(100000, 150000)
+	if Globals.double == true:
+		money *= 2
+	else:
+		money -= randi_range(100000, 150000)
 	start = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
-	Blackluck.text = "PÈRDUA\n" + str(money) + "$"
+	Blackluck.text = xspam
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "BANC:\n" + str(money) + "$"
 	await pressedContinue
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	start = true
+	$"../Start/ShakiShaki".visible = false
+	Globals.startanim = false
 	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
+	Globals.startanim = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
-	money += randi_range(100000, 150000)
+	if Globals.double == true:
+		money *= 2
+	else:
+		money += randi_range(100000, 150000)
 	print("GAME FINISHED: PLAYER WINS")
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -225,8 +260,10 @@ func game_won():
 	Globals.canvasModulate = false
 	start = false
 	Blackluck.visible = true
+	Blackluck.text = "V"
+	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "VICTORIA\n" + str(money) + "$"
+	Blackluck.text = "BANC:\n" + str(money) + "$"
 	await pressedContinue
 	$"../Start/S_N".visible = true
 	emit_signal("callTyping")
@@ -238,6 +275,7 @@ func game_won():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		start = true
 		$"../Start/ShakiShaki".visible = false
+		Globals.startanim = false
 		SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	elif choice == "s":
 		checking_round_winner = true
@@ -256,6 +294,8 @@ func game_won():
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		var tween2 = create_tween()
 		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		Globals.startanim = false
+		Globals.double = true
 		game_logic()
 
 var already = false
@@ -265,7 +305,6 @@ func check_round_winner():
 		return
 	
 	checking_round_winner = true
-	
 	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
 		roundLoser = "ai"

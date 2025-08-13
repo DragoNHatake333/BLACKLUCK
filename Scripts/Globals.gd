@@ -18,6 +18,9 @@ var firstRevolver = false
 signal callSoundManager
 var fakeRevolver = false
 var startanim = false
+var gamelost = false
+var double = false
+
 func _ready() -> void:
 	fakeRevolver = false
 
