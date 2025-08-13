@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bt56gprbmv3ht"
-path="res://.godot/imported/pedrosanchez.png-056f84589ed1e4284136baeea419eb65.ctex"
+uid="uid://rb3abeykurc8"
+path="res://.godot/imported/sms_CA.png-3c2b8d260271acd87395a488c2f22545.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/pedrosanchez.png"
-dest_files=["res://.godot/imported/pedrosanchez.png-056f84589ed1e4284136baeea419eb65.ctex"]
+source_file="res://Assets/sms/sms_CA.png"
+dest_files=["res://.godot/imported/sms_CA.png-3c2b8d260271acd87395a488c2f22545.ctex"]
 
 [params]
 

@@ -50,6 +50,7 @@ var start = true
 @onready var bgm = $"../SoundManager/BGM"
 var neededMoney = 400000
 signal calculateDebt
+var username = ""
 
 func _input(event):
 	if event.is_action_pressed("mouse_left"):
@@ -58,6 +59,12 @@ func _input(event):
 			emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
+	if OS.has_environment("USERNAME"): # Windows
+		username = OS.get_environment("USERNAME")
+	elif OS.has_environment("USER"): # Linux / macOS
+		username = OS.get_environment("USER")
+	else:
+		username = "Player"
 	money = 0
 	randomize()
 	Globals.quietRevolver = false
@@ -86,15 +93,30 @@ func _ready() -> void:
 	#Intro
 	emit_signal("callTyping")
 	start = false
-	Blackluck.text = "NO PUC CREURE\n QUE HAGI CAIGUT\n TAN BAIX"
+	Blackluck.text = "EL TEU NOM ES\n" + str(username)
 	Blackluck.visible = true
 	await pressedContinue
 	#Second
 	emit_signal("callTyping")
-	Blackluck.text = "PERO NECESSITO\n ELS DINERS..."
+	Blackluck.text = "FA 2 MESOS\n VAS PERDRE UNA\n APOSTA IL·LEGAL"
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "NECESSITO\n 400.000$..."
+	Blackluck.text = "ARA DEUS\n 400.000$"
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "AVUI T'ARRIBAT\n UN SMS ESTRANY..."
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.visible = false
+	$"../Start/SmsCa".visible = true
+	await pressedContinue
+	$"../Start/SmsCa".visible = false
+	Blackluck.visible = true
+	emit_signal("callTyping")
+	Blackluck.text = "DECIDEIXES OBRIR\n EL LINK..."
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = blackluckspam
 	await pressedContinue
 	#Tutorial
 	Blackluck.visible = false
@@ -114,13 +136,8 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck3".visible = false
 	$"../Start/Tutorial/Blackluck4".visible = false
 	$"../Start/Tutorial/Blackluck5".visible = false
-	#BLACKLUCK
-	Blackluck.visible = true
-	emit_signal("callTyping")
-	Blackluck.text = blackluckspam
 	await get_tree().process_frame
 	start = true
-	await pressedContinue
 	emit_signal("callSoundManager", "lightOff")
 	$"../SoundManager/firstBGM".autoplay = false
 	$"../SoundManager/firstBGM".playing = false

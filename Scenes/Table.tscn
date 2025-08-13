@@ -1,4 +1,4 @@
-[gd_scene load_steps=79 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=80 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -7,6 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
 [ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="4_8w7an"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
+[ext_resource type="Texture2D" uid="uid://rb3abeykurc8" path="res://Assets/sms/sms_CA.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
@@ -1111,12 +1112,17 @@ horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 
 [node name="BlackBackground" type="ColorRect" parent="Start"]
-visible = false
 z_index = 1022
 offset_right = 1917.0
 offset_bottom = 1080.0
 color = Color(0.000113828, 0.000113828, 0.000113828, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="SmsCa" type="Sprite2D" parent="Start"]
+visible = false
+z_index = 4096
+position = Vector2(940, 540)
+texture = ExtResource("6_02xof")
 
 [node name="Tutorial" type="Node" parent="Start"]
 
