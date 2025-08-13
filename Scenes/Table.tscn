@@ -1,4 +1,4 @@
-[gd_scene load_steps=72 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=79 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -9,6 +9,11 @@
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
+[ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
+[ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="9_hfij1"]
+[ext_resource type="Script" uid="uid://ceo7fkv14pdgi" path="res://Scripts/date.gd" id="10_hfij1"]
+[ext_resource type="Script" uid="uid://djmh4vwxxtlo3" path="res://Scripts/zone.gd" id="11_02xof"]
+[ext_resource type="Script" uid="uid://c8eypwiqrmu8i" path="res://Scripts/debt.gd" id="12_nlwdp"]
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
@@ -85,6 +90,24 @@ shader_parameter/glitch_strength = 0.01
 shader_parameter/time_slowdown = 2.5
 shader_parameter/glitch_start_time = 0.5
 shader_parameter/glitch_ramp_duration = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dvf6a"]
+shader = ExtResource("2_ov01g")
+shader_parameter/font_color = Color(1, 0, 0, 1)
+shader_parameter/noise_scale = 80.0
+shader_parameter/darkness = 0.4
+shader_parameter/glitch_strength = 0.01
+shader_parameter/time_slowdown = 2.5
+shader_parameter/glitch_start_time = 0.5
+shader_parameter/glitch_ramp_duration = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_82s5k"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 20
+border_width_top = 20
+border_width_right = 20
+border_width_bottom = 20
+border_color = Color(1, 0, 0, 1)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3r8my"]
 size = Vector2(178, 262)
@@ -1087,27 +1110,6 @@ text = "BLACKLUCK"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 
-[node name="S_N" type="Label" parent="Start"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-z_index = 1023
-material = SubResource("ShaderMaterial_o0qrb")
-anchors_preset = -1
-anchor_left = 0.463281
-anchor_top = 0.636736
-anchor_right = 0.536719
-anchor_bottom = 0.772847
-offset_top = 0.00500488
-offset_bottom = 0.00500488
-grow_horizontal = 2
-grow_vertical = 0
-theme_override_fonts/font = ExtResource("3_id2c4")
-theme_override_font_sizes/font_size = 75
-text = "Sí (s) / No (n)"
-horizontal_alignment = 1
-script = ExtResource("4_8w7an")
-metadata/_edit_use_anchors_ = true
-
 [node name="BlackBackground" type="ColorRect" parent="Start"]
 visible = false
 z_index = 1022
@@ -1233,6 +1235,133 @@ position = Vector2(468.16, 800)
 scale = Vector2(0.65, 0.65)
 texture = ExtResource("7_33e7s")
 script = ExtResource("8_x0dtf")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Start"]
+visible = false
+z_index = 1066
+anchors_preset = -1
+anchor_left = 0.43125
+anchor_top = 0.592167
+anchor_right = 0.569271
+anchor_bottom = 0.706056
+offset_top = -0.00500488
+offset_bottom = -0.00500488
+theme = ExtResource("9_hfij1")
+theme_override_constants/separation = 90
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Yes" type="Button" parent="Start/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme = ExtResource("9_hfij1")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 81
+text = "Yes"
+
+[node name="No" type="Button" parent="Start/HBoxContainer"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 81
+text = "No"
+
+[node name="End" type="Node" parent="."]
+
+[node name="OSNAME" type="Label" parent="End"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+material = SubResource("ShaderMaterial_dvf6a")
+anchors_preset = -1
+anchor_left = 0.0697917
+anchor_top = 0.0796296
+anchor_right = 0.5
+anchor_bottom = 0.607407
+offset_top = 18.985
+offset_bottom = 18.985
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 170
+text = "DRAGON"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+uppercase = true
+text_direction = 2
+script = ExtResource("9_82s5k")
+metadata/_edit_use_anchors_ = true
+
+[node name="Date" type="Label" parent="End"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+material = SubResource("ShaderMaterial_dvf6a")
+anchors_preset = -1
+anchor_left = 0.584375
+anchor_top = 0.0796296
+anchor_right = 0.886979
+anchor_bottom = 0.273148
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 105
+text = "Last seen on:
+2025-08-13 14:05:42"
+horizontal_alignment = 1
+script = ExtResource("10_hfij1")
+metadata/_edit_use_anchors_ = true
+
+[node name="Zone" type="Label" parent="End"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+material = SubResource("ShaderMaterial_dvf6a")
+anchors_preset = -1
+anchor_left = 0.560417
+anchor_top = 0.273148
+anchor_right = 0.911979
+anchor_bottom = 0.662963
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 105
+text = "New York, USA
+IP:11111111111
+Lat:54.2123, Long:7.894
+"
+horizontal_alignment = 1
+script = ExtResource("11_02xof")
+metadata/_edit_use_anchors_ = true
+
+[node name="Debt" type="Label" parent="End"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+material = SubResource("ShaderMaterial_dvf6a")
+anchors_preset = -1
+anchor_top = 0.662963
+anchor_right = 0.991146
+anchor_bottom = 1.46204
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 380
+text = "DEBT: 400.000$
+"
+horizontal_alignment = 1
+script = ExtResource("12_nlwdp")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="End"]
+visible = false
+z_index = 4096
+anchors_preset = -1
+anchor_left = 0.0697917
+anchor_top = 0.0796296
+anchor_right = 0.5
+anchor_bottom = 0.607407
+theme_override_styles/panel = SubResource("StyleBoxFlat_82s5k")
+metadata/_edit_use_anchors_ = true
 
 [node name="Mesa" type="Sprite2D" parent="."]
 visible = false
@@ -1783,6 +1912,9 @@ libraries = {
 &"": SubResource("AnimationLibrary_7xtld")
 }
 
+[connection signal="button_up" from="Start/HBoxContainer/Yes" to="GameManager" method="_on_yes_button_up"]
+[connection signal="button_up" from="Start/HBoxContainer/No" to="GameManager" method="_on_no_button_up"]
+[connection signal="calculateDebt" from="GameManager" to="End/Debt" method="_on_game_manager_calculate_debt"]
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callAnimationManager" from="GameManager" to="AnimationManager" method="callAnimationManager"]
 [connection signal="callCountAmount" from="GameManager" to="Player" method="_on_game_manager_call_count_amount"]
@@ -1791,12 +1923,15 @@ libraries = {
 [connection signal="callPlayer" from="GameManager" to="Player" method="_on_game_manager_call_player"]
 [connection signal="callSoundManager" from="GameManager" to="SoundManager" method="call_sound_manager"]
 [connection signal="callTyping" from="GameManager" to="Start/Blackluck" method="_on_game_manager_call_typing"]
-[connection signal="callTyping" from="GameManager" to="Start/S_N" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck2" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck3" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck4" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck5" method="_on_game_manager_call_typing"]
+[connection signal="callTyping" from="GameManager" to="End/OSNAME" method="_on_game_manager_call_typing"]
+[connection signal="callTyping" from="GameManager" to="End/Date" method="_on_game_manager_call_typing"]
+[connection signal="callTyping" from="GameManager" to="End/Zone" method="_on_game_manager_call_typing"]
+[connection signal="callTyping" from="GameManager" to="End/Debt" method="_on_game_manager_call_typing"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot2" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot3" method="_on_game_manager_reset_card_slots"]

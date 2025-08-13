@@ -45,32 +45,27 @@ XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX X
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 "
-
+var already = false
 var start = true
 @onready var bgm = $"../SoundManager/BGM"
 var neededMoney = 400000
+signal calculateDebt
 
 func _input(event):
-		if event.is_action_pressed("mouse_left"):
-			pressedContinue.emit()
-			if start == false:
-				emit_signal("callSoundManager", "crt")
-		if event.is_action_pressed("s"):
-			pressedSN.emit("s")
-			if start == false:
-				emit_signal("callSoundManager", "crt")
-		if event.is_action_pressed("n"):
-			pressedSN.emit("n")
-			if start == false:
-				emit_signal("callSoundManager", "crt")
+	if event.is_action_pressed("mouse_left"):
+		pressedContinue.emit()
+		if start == false:
+			emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
+	money = 0
 	randomize()
+	Globals.quietRevolver = false
 	Globals.double = false
 	Globals.gamelost = false
 	Globals.startanim = true
-	Globals.playerHP = 1
-	Globals.aiHP = 1
+	Globals.playerHP = 3
+	Globals.aiHP = 3
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -141,7 +136,6 @@ func _ready() -> void:
 	check_candle_lighting("restart", "player")
 	var tween2 = create_tween()
 	tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
-	money = 0
 	Globals.canvasModulate = true
 	Globals.playerSum = 0
 	Globals.playerHand = []
@@ -161,11 +155,13 @@ func _ready() -> void:
 func game_logic():
 	print("GameManager: Logic start.")
 	if Globals.playerHP == 0:
+		Globals.quietRevolver = true
 		Globals.gamelost = true
 		game_lost()
 		await get_tree().process_frame
 		return
 	if Globals.aiHP == 0:
+		Globals.quietRevolver = true
 		Globals.gamelost = true
 		game_won()
 		await get_tree().process_frame
@@ -230,27 +226,43 @@ func game_lost():
 	else:
 		money -= randi_range(100000, 150000)
 	start = false
-	Blackluck.visible = true
+	emit_signal("calculateDebt")
 	emit_signal("callTyping")
-	Blackluck.text = xspam
+	$"../End/OSNAME".visible = true
+	$"../End/Date".visible = true
+	$"../End/Zone".visible = true
+	$"../End/Debt".visible = true
+	$"../End/Panel".visible = true
 	await pressedContinue
-	emit_signal("callTyping")
-	Blackluck.text = "BANC:\n" + str(money) + "$"
-	await pressedContinue
-	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-	start = true
-	$"../Start/ShakiShaki".visible = false
-	Globals.startanim = false
-	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
+	$"../End/OSNAME".visible = false
+	$"../End/Date".visible = false
+	$"../End/Zone".visible = false
+	$"../End/Debt".visible = false
+	$"../End/Panel".visible = false
+	if $"../End/Debt".debt < 0:
+		emit_signal("callTyping")
+		Blackluck.visible = true
+		Blackluck.text = "RUN"
+		await get_tree().create_timer(7.0).timeout
+		get_tree().quit()
+	else:
+		emit_signal("callTyping")
+		Blackluck.visible = true
+		Blackluck.text = "YOU ARE FREE"
+		await get_tree().create_timer(7.0).timeout
+		get_tree().quit()
 	
 func game_won():
+	Globals.quietRevolver = true
+	var oldmoney
 	Globals.startanim = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if Globals.double == true:
 		money *= 2
 	else:
-		money += randi_range(100000, 150000)
+		oldmoney = randi_range(100000, 150000)
+		money = oldmoney + money
 	print("GAME FINISHED: PLAYER WINS")
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -260,24 +272,52 @@ func game_won():
 	Globals.canvasModulate = false
 	start = false
 	Blackluck.visible = true
-	Blackluck.text = "V"
-	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "BANC:\n" + str(money) + "$"
+	Blackluck.text = "BANC:\n" + str(money - neededMoney) + "$"
 	await pressedContinue
-	$"../Start/S_N".visible = true
+	$"../Start/HBoxContainer".visible = true
+	$"../Start/HBoxContainer/Yes".visible = true
+	$"../Start/HBoxContainer/No".visible = true
 	emit_signal("callTyping")
 	Blackluck.text = "DOBLAR O RES?"
 	# Wait until either S or N is pressed
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var res = await pressedSN   # returns emitted args as an Array
 	var choice = res[0]
 	if choice == "n":
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
-		start = true
-		$"../Start/ShakiShaki".visible = false
-		Globals.startanim = false
-		SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Blackluck.visible = false
+		$"../Start/HBoxContainer".visible = false
+		$"../Start/HBoxContainer/Yes".visible = false
+		$"../Start/HBoxContainer/No".visible = false
+		start = false
+		emit_signal("calculateDebt")
+		emit_signal("callTyping")
+		$"../End/OSNAME".visible = true
+		$"../End/Date".visible = true
+		$"../End/Zone".visible = true
+		$"../End/Debt".visible = true
+		$"../End/Panel".visible = true
+		await pressedContinue
+		$"../End/OSNAME".visible = false
+		$"../End/Date".visible = false
+		$"../End/Zone".visible = false
+		$"../End/Debt".visible = false
+		$"../End/Panel".visible = false
+		if $"../End/Debt".debt < 0:
+			emit_signal("callTyping")
+			Blackluck.visible = true
+			Blackluck.text = "RUN"
+			await get_tree().create_timer(7.0).timeout
+			get_tree().quit()
+		else:
+			emit_signal("callTyping")
+			Blackluck.visible = true
+			Blackluck.text = "YOU ARE FREE"
+			await get_tree().create_timer(7.0).timeout
+			get_tree().quit()
 	elif choice == "s":
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
 		Globals.aiHP = 3
 		check_candle_lighting("restart", "ai")
@@ -290,15 +330,18 @@ func game_won():
 		Blackluck.visible = false
 		start = true
 		$"../Start/ShakiShaki".visible = false
-		$"../Start/S_N".visible = false
+		$"../Start/HBoxContainer".visible = false
+		$"../Start/HBoxContainer/Yes".visible = false
+		$"../Start/HBoxContainer/No".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		var tween2 = create_tween()
 		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		Globals.startanim = false
 		Globals.double = true
+		Globals.quietRevolver = false
+		emit_signal("callAnimationManager", "candle", "ai", null)
+		await $"../AnimationManager".AnimationFinished
 		game_logic()
-
-var already = false
 
 func check_round_winner():
 	if checking_round_winner:
@@ -486,7 +529,6 @@ func check_candle_lighting(operation, who):
 	else:
 		print("check_candle_lighting: invalid operation argument")
 
-
 func _process(_delta: float) -> void:
 	if Globals.aiTurn == true:
 		$"../AiTurnLight".visible = true
@@ -504,3 +546,15 @@ func _process(_delta: float) -> void:
 		$"../PointLight2D".color = "ff3629"
 	if Globals.playerHP == 1:
 		$"../PointLight2D".color = "b70000"
+
+
+func _on_yes_button_up() -> void:
+	pressedSN.emit("s")
+	if start == false:
+		emit_signal("callSoundManager", "crt")
+
+
+func _on_no_button_up() -> void:
+	pressedSN.emit("n")
+	if start == false:
+		emit_signal("callSoundManager", "crt")

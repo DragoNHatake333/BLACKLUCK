@@ -20,7 +20,7 @@ var fakeRevolver = false
 var startanim = false
 var gamelost = false
 var double = false
-
+var quietRevolver = false
 func _ready() -> void:
 	fakeRevolver = false
 
@@ -33,7 +33,7 @@ func spin_revolver():
 	print("Globals: Revolver loaded: bullet is in chamber ", real_bullet + 1, ".")
 	if Globals.firstRevolver == false:
 		Globals.firstRevolver = true
-	elif fakeRevolver == false:
+	elif fakeRevolver == false and quietRevolver == false:
 		await get_tree().create_timer(1.0).timeout
 		emit_signal("callSoundManager", "revolverSpin")
 	else:
