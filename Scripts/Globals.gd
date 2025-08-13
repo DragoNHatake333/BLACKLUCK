@@ -17,7 +17,7 @@ var isCardDragging = false
 var firstRevolver = false
 signal callSoundManager
 var fakeRevolver = false
-
+var startanim = false
 func _ready() -> void:
 	fakeRevolver = false
 

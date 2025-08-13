@@ -38,7 +38,7 @@ func pause():
 	transitioning = false
 
 func testEsc():
-	if Input.is_action_just_pressed("esc") and !get_tree().paused:
+	if Input.is_action_just_pressed("esc") and !get_tree().paused and !Globals.startanim:
 		if Globals.isCardDragging == true:
 			Globals.releaseCardMenu = true
 		if Input.get_mouse_mode() == Input.MOUSE_MODE_HIDDEN:

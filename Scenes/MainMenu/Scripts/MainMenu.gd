@@ -19,6 +19,8 @@ extends Control
 @onready var sfx_slider = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXSlider
 @onready var sfx_label = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXLabel
 
+var on_settings = false
+
 # Variables de control
 var _target_volume := 1.0
 var _current_volume := 1.0
@@ -109,19 +111,31 @@ func _on_play_pressed():
 	SceneManager.change_scene("res://Scenes/loading_screen.tscn")
 
 func _on_settings_pressed():
-	click_sound.play()
-	settings_panel.visible = true
-	title_label.visible = false
-
+	if !on_settings:
+		click_sound.play()
+		title_label.visible = false
+		settings_panel.visible = true
+		on_settings = true
+	elif on_settings:
+		click_sound.play()
+		settings_panel.visible = false
+		title_label.visible = true
+		on_settings = false
+		
 func _on_quit_pressed():
-	click_sound.play()
-	await get_tree().create_timer(0.2).timeout
-	get_tree().quit()
+	pass
+	#click_sound.play()
+	#await get_tree().create_timer(0.2).timeout
+	#get_tree().quit()
 
 func _on_back_pressed():
 	click_sound.play()
-	settings_panel.visible = false
-	title_label.visible = true
+	await get_tree().create_timer(0.2).timeout
+	get_tree().quit()
+	#ANTES DE QUE LO TOCARA YO
+	#click_sound.play()
+	#settings_panel.visible = false
+	#title_label.visible = true
 
 func _on_tab_container_tab_changed(_tab_index: int) -> void:
 	if click_sound.is_inside_tree():

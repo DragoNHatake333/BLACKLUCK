@@ -34,6 +34,8 @@ BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK 
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 "
 var start = true
+@onready var bgm = $"../SoundManager/BGM"
+
 func _input(event):
 		if event.is_action_pressed("mouse_left"):
 			pressedContinue.emit()
@@ -50,8 +52,11 @@ func _input(event):
 
 func _ready() -> void:
 	randomize()
+	Globals.startanim = true
 	Globals.playerHP = 3
 	Globals.aiHP = 1
+	bgm.play()
+	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
 	$"../CanvasLayer/ColorRect".visible = false
@@ -62,7 +67,6 @@ func _ready() -> void:
 	$"../PlayerTurnLight".visible = false
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-	await get_tree().create_timer(3.0).timeout
 	emit_signal("callSoundManager", "lightOn")
 	$"../CanvasLayer/ColorRect".visible = true
 	$"../SoundManager/firstBGM".playing = true
@@ -116,7 +120,8 @@ func _ready() -> void:
 	$"../RevolverLight".visible = true
 	check_candle_lighting("restart", "ai")
 	check_candle_lighting("restart", "player")
-	$"../SoundManager/BGM".playing = true
+	var tween2 = create_tween()
+	tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 	money = 0
 	Globals.canvasModulate = true
 	Globals.playerSum = 0
@@ -131,7 +136,7 @@ func _ready() -> void:
 	#Engine.set_max_fps(240)
 	print("GameManager: Start") 
 	Globals.spin_revolver()
-	#await 
+	Globals.startanim = false
 	game_logic()
 	
 func game_logic():
@@ -182,10 +187,7 @@ func game_logic():
 	
 	# Check player's cards
 	if Globals.playerAmount == 5 and Globals.aiAmount == 5:
-		checking_round_winner = true
-		check_round_winner()  # Delayed check
-		while checking_round_winner == true:
-			await get_tree().process_frame
+		await check_round_winner()
 
 					
 	ownsTurn = !ownsTurn
@@ -193,6 +195,8 @@ func game_logic():
 	game_logic()
 
 func game_lost():
+	var tween = get_tree().create_tween()
+	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 	emit_signal("callSoundManager", "lightOn")
@@ -209,6 +213,8 @@ func game_lost():
 	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
+	var tween = get_tree().create_tween()
+	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	money += randi_range(100000, 150000)
 	print("GAME FINISHED: PLAYER WINS")
 	BlackBackground.visible = true
@@ -240,7 +246,6 @@ func game_won():
 		reset_round()  # Delayed check
 		while checking_round_winner == true:
 			await get_tree().process_frame	
-		await get_tree().create_timer(1.0).timeout
 		BlackBackground.visible = false
 		$"../SoundManager/firstBGM".playing = false
 		Globals.canvasModulate = true
@@ -249,13 +254,19 @@ func game_won():
 		$"../Start/ShakiShaki".visible = false
 		$"../Start/S_N".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		var tween2 = create_tween()
+		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		game_logic()
 
 var already = false
 
 func check_round_winner():
-	if Globals.playerSum > Globals.aiSum and already == false:
-		already = true
+	if checking_round_winner:
+		return
+	
+	checking_round_winner = true
+	
+	if Globals.playerSum > Globals.aiSum:
 		Globals.aiHP -= 1
 		roundLoser = "ai"
 		if $"../Terminator".revolverPressed == false:
@@ -264,8 +275,7 @@ func check_round_winner():
 			await $"../AnimationManager".AnimationFinished
 		await get_tree().create_timer(1.0).timeout
 		reset_round()
-	elif Globals.aiSum > Globals.playerSum and already == false:
-		already = true
+	elif Globals.aiSum > Globals.playerSum:
 		Globals.playerHP -= 1
 		roundLoser = "player"
 		if Globals.playerRevolverPressed == false:
@@ -277,6 +287,9 @@ func check_round_winner():
 	else:
 		roundLoser = ""
 		reset_round()
+	
+	checking_round_winner = false
+	return
 
 func reset_round():
 	if roundLoser == "player":

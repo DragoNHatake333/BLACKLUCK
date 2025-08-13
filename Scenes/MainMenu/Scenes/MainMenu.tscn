@@ -37,9 +37,9 @@ shader_parameter/is_rotating = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k6ko"]
 shader = ExtResource("4_j0ggg")
-shader_parameter/font_color = Color(0.811765, 0.811765, 0.811765, 1)
+shader_parameter/font_color = Color(1, 0, 0, 1)
 shader_parameter/noise_scale = 80.0
-shader_parameter/darkness = 0.4
+shader_parameter/darkness = 0.0
 shader_parameter/glitch_strength = 0.01
 shader_parameter/time_slowdown = 2.5
 shader_parameter/glitch_start_time = 1.0
@@ -84,6 +84,7 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="QuitButton" type="Button" parent="."]
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 4
@@ -99,43 +100,22 @@ theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
 theme_override_font_sizes/font_size = 56
 icon = ExtResource("4_y4ew6")
 
-[node name="OptionsButton" type="Button" parent="."]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 6
-anchor_left = 1.0
-anchor_top = 0.5
-anchor_right = 1.0
-anchor_bottom = 0.5
-offset_left = -894.0
-offset_top = 379.0
-offset_right = -293.0
-offset_bottom = 989.0
-grow_horizontal = 0
-grow_vertical = 2
-scale = Vector2(0.21, 0.21)
-theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
-theme_override_font_sizes/font_size = 56
-
 [node name="PlayButton" type="Button" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_8k6ko")
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -768.0
-offset_top = -196.0
-offset_right = 774.0
-offset_bottom = 284.0
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.318519
+anchor_right = 0.903125
+anchor_bottom = 0.762963
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("5_ve1ib")
 theme_override_font_sizes/font_size = 490
 text = "BLACKLUCK"
+metadata/_edit_use_anchors_ = true
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 visible = false
@@ -192,9 +172,9 @@ theme_override_constants/separation = 12
 [node name="Master Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer"]
 texture_filter = 1
 layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
-text = "Master Volume"
+text = "MASTER"
 horizontal_alignment = 1
 
 [node name="MasterSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer"]
@@ -211,7 +191,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
 text = "100%"
 horizontal_alignment = 1
@@ -223,9 +203,9 @@ theme_override_constants/separation = 12
 [node name="Music Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2"]
 texture_filter = 1
 layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
-text = "Music Volume"
+text = "MUSIC"
 horizontal_alignment = 1
 
 [node name="MusicSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2"]
@@ -242,7 +222,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
 text = "100%"
 horizontal_alignment = 1
@@ -254,9 +234,9 @@ theme_override_constants/separation = 12
 [node name="SFX Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3"]
 texture_filter = 1
 layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
-text = "SFX Volume"
+text = "SFX"
 horizontal_alignment = 1
 
 [node name="SFXSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3"]
@@ -273,7 +253,7 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 35
 text = "100%"
 horizontal_alignment = 1
@@ -281,10 +261,11 @@ horizontal_alignment = 1
 [node name="Back" type="Button" parent="OptionsPanel/Panel/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
 size_flags_vertical = 10
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 38
-text = "Back"
+text = "SORTIR AL ESCRIPTORI"
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_b4ika")
@@ -303,3 +284,20 @@ position = Vector2(956, 976)
 scale = Vector2(0.364326, 0.364326)
 texture = ExtResource("3_t4xtq")
 script = ExtResource("4_qxrut")
+
+[node name="OptionsButton" type="Button" parent="."]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.465625
+anchor_top = 0.840741
+anchor_right = 0.531359
+anchor_bottom = 0.959352
+offset_right = 474.79
+offset_bottom = 481.9
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.21, 0.21)
+theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
+theme_override_font_sizes/font_size = 56
+metadata/_edit_use_anchors_ = true

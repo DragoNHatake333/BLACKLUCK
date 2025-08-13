@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cp3836185v15m"]
+[gd_scene load_steps=8 format=3 uid="uid://cp3836185v15m"]
 
 [ext_resource type="Script" uid="uid://cjog8ivxe4c6f" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://Scenes/MainMenu/Shaders/Background.gdshader" id="2_k0w1u"]
+[ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="3_1och7"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k0w1u"]
 shader = ExtResource("2_k0w1u")
@@ -106,31 +107,37 @@ metadata/_edit_use_anchors_ = true
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -237.0
-offset_top = -237.0
-offset_right = 237.0
-offset_bottom = 237.0
+anchors_preset = -1
+anchor_left = 0.376563
+anchor_top = 0.280556
+anchor_right = 0.623438
+anchor_bottom = 0.719444
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_1och7")
 metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
+alignment = 1
 
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Resume"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 106
+text = "CONTINUAR"
 
 [node name="Main Menu" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
-text = "Main Menu"
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+theme_override_font_sizes/font_size = 100
+text = "MENÚ"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
