@@ -126,16 +126,16 @@ alignment = 1
 [node name="Resume" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 106
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 80
 text = "CONTINUAR"
 
 [node name="Main Menu" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 100
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 80
 text = "MENÚ"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
