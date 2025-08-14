@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://bho8c7xff6j0g"]
+[gd_scene load_steps=9 format=3 uid="uid://bho8c7xff6j0g"]
 
 [ext_resource type="Script" uid="uid://yxjurqw5ktcp" path="res://Scripts/loading_screen.gd" id="1_1godw"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_fayou"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="2_1godw"]
 [ext_resource type="Shader" uid="uid://dxlhdtl32qx8l" path="res://Assets/Shaders/glitch.gdshader" id="4_gegoj"]
 [ext_resource type="Script" uid="uid://vp5w124kniqu" path="res://Scripts/loading_bar.gd" id="4_yisgd"]
+[ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="6_yisgd"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_m2hk5"]
 shader = ExtResource("1_fayou")
@@ -64,5 +65,12 @@ offset_right = 1917.0
 offset_bottom = 1080.0
 color = Color(0.000113828, 0.000113828, 0.000113828, 1)
 metadata/_edit_use_anchors_ = true
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="jijijagrrr" type="Sprite2D" parent="CanvasLayer2"]
+z_index = 4096
+position = Vector2(960, 540)
+texture = ExtResource("6_yisgd")
 
 [connection signal="bullet_loaded" from="." to="Cylinder" method="_on_node_2d_bullet_loaded"]

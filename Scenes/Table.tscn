@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=86 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -59,6 +59,7 @@
 [ext_resource type="AudioStream" uid="uid://bm2sw4mmyqluo" path="res://Assets/Sound/escape.mp3" id="47_dvf6a"]
 [ext_resource type="AudioStream" uid="uid://ca61uooyuuxyq" path="res://Assets/Sound/door.mp3" id="48_dvf6a"]
 [ext_resource type="AudioStream" uid="uid://sgwggglntth7" path="res://Assets/Sound/credits.mp3" id="49_be3cg"]
+[ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="60_adfku"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("1_6bpmn")
@@ -1738,6 +1739,7 @@ stream = ExtResource("48_dvf6a")
 [node name="credits" type="AudioStreamPlayer" parent="SoundManager"]
 stream = ExtResource("49_be3cg")
 volume_db = -80.0
+bus = &"Music"
 parameters/looping = true
 
 [node name="3DViewport" type="Area2D" parent="."]
@@ -2004,6 +2006,13 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_7xtld")
 }
+
+[node name="CanvasLayer2" type="CanvasLayer" parent="."]
+
+[node name="jijijagrrr" type="Sprite2D" parent="CanvasLayer2"]
+z_index = 4096
+position = Vector2(960, 540)
+texture = ExtResource("60_adfku")
 
 [connection signal="button_up" from="Start/HBoxContainer/Yes" to="GameManager" method="_on_yes_button_up"]
 [connection signal="button_up" from="Start/HBoxContainer/No" to="GameManager" method="_on_no_button_up"]
