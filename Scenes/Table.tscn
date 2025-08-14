@@ -7,13 +7,12 @@
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
 [ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="4_8w7an"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
-[ext_resource type="Texture2D" uid="uid://rb3abeykurc8" path="res://Assets/sms/sms_CA.png" id="6_02xof"]
+[ext_resource type="Texture2D" uid="uid://cj1l1m2j3fw0l" path="res://Assets/sms/smsEN.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="9_hfij1"]
 [ext_resource type="Script" uid="uid://ceo7fkv14pdgi" path="res://Scripts/date.gd" id="10_hfij1"]
-[ext_resource type="Script" uid="uid://djmh4vwxxtlo3" path="res://Scripts/zone.gd" id="11_02xof"]
 [ext_resource type="Script" uid="uid://c8eypwiqrmu8i" path="res://Scripts/debt.gd" id="12_nlwdp"]
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
@@ -54,6 +53,7 @@
 [ext_resource type="AudioStream" uid="uid://cj56xb7eraww4" path="res://Assets/Sound/connectionEffect1.wav" id="35_wvbbp"]
 [ext_resource type="PackedScene" uid="uid://1vxkhkqk4eca" path="res://Assets/candle3/candle.glb" id="36_davux"]
 [ext_resource type="AudioStream" uid="uid://cnrqce8alr1wn" path="res://Assets/Sound/loops/crt2.mp3" id="38_nlvap"]
+[ext_resource type="AudioStream" uid="uid://blyv5lxv2cunj" path="res://Assets/Sound/noescapemp3.mp3" id="46_02xof"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mf7u"]
 shader = ExtResource("1_6bpmn")
@@ -1109,6 +1109,7 @@ theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 300
 text = "BLACKLUCK"
 horizontal_alignment = 1
+uppercase = true
 script = ExtResource("4_8w7an")
 
 [node name="BlackBackground" type="ColorRect" parent="Start"]
@@ -1118,7 +1119,7 @@ offset_bottom = 1080.0
 color = Color(0.000113828, 0.000113828, 0.000113828, 1)
 metadata/_edit_use_anchors_ = true
 
-[node name="SmsCa" type="Sprite2D" parent="Start"]
+[node name="sms" type="Sprite2D" parent="Start"]
 visible = false
 z_index = 4096
 position = Vector2(940, 540)
@@ -1243,36 +1244,37 @@ texture = ExtResource("7_33e7s")
 script = ExtResource("8_x0dtf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Start"]
-visible = false
 z_index = 1066
 anchors_preset = -1
-anchor_left = 0.43125
-anchor_top = 0.592167
-anchor_right = 0.569271
-anchor_bottom = 0.706056
-offset_top = -0.00500488
-offset_bottom = -0.00500488
+anchor_left = 0.0555234
+anchor_top = 0.331398
+anchor_right = 0.956044
+anchor_bottom = 0.693435
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("9_hfij1")
 theme_override_constants/separation = 90
 alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Yes" type="Button" parent="Start/HBoxContainer"]
-visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme = ExtResource("9_hfij1")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 81
-text = "Yes"
+theme_override_font_sizes/font_size = 400
+text = "DOBLAR"
 
 [node name="No" type="Button" parent="Start/HBoxContainer"]
-visible = false
 layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_font_sizes/font_size = 81
-text = "No"
+theme_override_font_sizes/font_size = 400
+text = "SORTIR"
 
 [node name="End" type="Node" parent="."]
 
@@ -1309,36 +1311,18 @@ anchor_left = 0.584375
 anchor_top = 0.0796296
 anchor_right = 0.886979
 anchor_bottom = 0.273148
+offset_left = -81.0
+offset_top = 161.91
+offset_right = 81.0004
+offset_bottom = 211.91
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
-theme_override_font_sizes/font_size = 105
-text = "Last seen on:
+theme_override_font_sizes/font_size = 130
+text = "WENT \"MISSING\" ON:
 2025-08-13 14:05:42"
 horizontal_alignment = 1
 script = ExtResource("10_hfij1")
-metadata/_edit_use_anchors_ = true
-
-[node name="Zone" type="Label" parent="End"]
-visible = false
-modulate = Color(0, 0, 0, 1)
-z_index = 1023
-material = SubResource("ShaderMaterial_dvf6a")
-anchors_preset = -1
-anchor_left = 0.560417
-anchor_top = 0.273148
-anchor_right = 0.911979
-anchor_bottom = 0.662963
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
-theme_override_font_sizes/font_size = 105
-text = "New York, USA
-IP:11111111111
-Lat:54.2123, Long:7.894
-"
-horizontal_alignment = 1
-script = ExtResource("11_02xof")
 metadata/_edit_use_anchors_ = true
 
 [node name="Debt" type="Label" parent="End"]
@@ -1653,6 +1637,9 @@ stream = ExtResource("38_nlvap")
 volume_db = -4.685
 bus = &"SFX"
 
+[node name="noescape" type="AudioStreamPlayer" parent="SoundManager"]
+stream = ExtResource("46_02xof")
+
 [node name="3DViewport" type="Area2D" parent="."]
 z_index = -8
 scale = Vector2(1.005, 1.005)
@@ -1936,7 +1923,6 @@ libraries = {
 [connection signal="callTyping" from="GameManager" to="Start/Tutorial/Blackluck5" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="End/OSNAME" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="End/Date" method="_on_game_manager_call_typing"]
-[connection signal="callTyping" from="GameManager" to="End/Zone" method="_on_game_manager_call_typing"]
 [connection signal="callTyping" from="GameManager" to="End/Debt" method="_on_game_manager_call_typing"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="iaHand/CardSlot2" method="_on_game_manager_reset_card_slots"]

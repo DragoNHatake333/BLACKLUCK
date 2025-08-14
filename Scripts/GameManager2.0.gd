@@ -59,6 +59,7 @@ func _input(event):
 			emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
+	Globals.debtLost = false
 	if OS.has_environment("USERNAME"): # Windows
 		username = OS.get_environment("USERNAME")
 	elif OS.has_environment("USER"): # Linux / macOS
@@ -71,8 +72,8 @@ func _ready() -> void:
 	Globals.double = false
 	Globals.gamelost = false
 	Globals.startanim = true
-	Globals.playerHP = 3
-	Globals.aiHP = 3
+	Globals.playerHP = 1
+	Globals.aiHP = 1
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -98,23 +99,23 @@ func _ready() -> void:
 	await pressedContinue
 	#Second
 	emit_signal("callTyping")
-	Blackluck.text = "FA 2 MESOS\n VAS PERDRE UNA\n APOSTA IL·LEGAL"
+	Blackluck.text = "FA DOS MESOS\n VAS PERDRE UNA\n APOSTA IL·LEGAL"
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.text = "ARA DEUS\n 400.000$"
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "AVUI T'ARRIBAT\n UN SMS ESTRANY..."
+	Blackluck.text = "AHIR VAS\n RECIBIR UN SMS..."
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = false
-	$"../Start/SmsCa".visible = true
+	$"../Start/sms".visible = true
 	await pressedContinue
-	$"../Start/SmsCa".visible = false
+	$"../Start/sms".visible = false
 	Blackluck.visible = true
-	emit_signal("callTyping")
-	Blackluck.text = "DECIDEIXES OBRIR\n EL LINK..."
-	await pressedContinue
+	#emit_signal("callTyping")
+	#Blackluck.text = "DECIDEIXES OBRIR\n EL LINK..."
+	#await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.text = blackluckspam
 	await pressedContinue
@@ -238,36 +239,30 @@ func game_lost():
 	$"../SoundManager/firstBGM".playing = true
 	$"../Start/ShakiShaki".visible = true
 	Globals.canvasModulate = false
-	if Globals.double == true:
-		money *= 2
-	else:
-		money -= randi_range(100000, 150000)
+	Blackluck.visible = true
+	emit_signal("callTyping")
+	Blackluck.text = "DERROTA"
+	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.visible = true
+	Blackluck.text = "ADÈU"
+	emit_signal("callSoundManager", "noescape")
+	await pressedContinue
+	Blackluck.visible = false
 	start = false
+	Globals.debtLost = true
 	emit_signal("calculateDebt")
 	emit_signal("callTyping")
 	$"../End/OSNAME".visible = true
 	$"../End/Date".visible = true
-	$"../End/Zone".visible = true
 	$"../End/Debt".visible = true
 	$"../End/Panel".visible = true
 	await pressedContinue
 	$"../End/OSNAME".visible = false
 	$"../End/Date".visible = false
-	$"../End/Zone".visible = false
 	$"../End/Debt".visible = false
 	$"../End/Panel".visible = false
-	if $"../End/Debt".debt < 0:
-		emit_signal("callTyping")
-		Blackluck.visible = true
-		Blackluck.text = "RUN"
-		await get_tree().create_timer(7.0).timeout
-		get_tree().quit()
-	else:
-		emit_signal("callTyping")
-		Blackluck.visible = true
-		Blackluck.text = "YOU ARE FREE"
-		await get_tree().create_timer(7.0).timeout
-		get_tree().quit()
+	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
 	Globals.quietRevolver = true
@@ -278,8 +273,7 @@ func game_won():
 	if Globals.double == true:
 		money *= 2
 	else:
-		oldmoney = randi_range(100000, 150000)
-		money = oldmoney + money
+		money = randi_range(100000, 150000) + money
 	print("GAME FINISHED: PLAYER WINS")
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -290,13 +284,21 @@ func game_won():
 	start = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
-	Blackluck.text = "BANC:\n" + str(money - neededMoney) + "$"
+	Blackluck.text = "VICTÒRIA"
 	await pressedContinue
+	emit_signal("callTyping")
+	Blackluck.text = "DEUTE:\n" + str(neededMoney - money) + "$"
+	await pressedContinue
+	Blackluck.visible = false
 	$"../Start/HBoxContainer".visible = true
 	$"../Start/HBoxContainer/Yes".visible = true
 	$"../Start/HBoxContainer/No".visible = true
-	emit_signal("callTyping")
-	Blackluck.text = "DOBLAR O RES?"
+	if (neededMoney - money) >= 0:
+		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "ff0000")
+		$"../Start/HBoxContainer/No".disabled = false
+	else:
+		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "410000")
+		$"../Start/HBoxContainer/No".disabled = true
 	# Wait until either S or N is pressed
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var res = await pressedSN   # returns emitted args as an Array
@@ -312,27 +314,18 @@ func game_won():
 		emit_signal("callTyping")
 		$"../End/OSNAME".visible = true
 		$"../End/Date".visible = true
-		$"../End/Zone".visible = true
 		$"../End/Debt".visible = true
 		$"../End/Panel".visible = true
 		await pressedContinue
 		$"../End/OSNAME".visible = false
 		$"../End/Date".visible = false
-		$"../End/Zone".visible = false
 		$"../End/Debt".visible = false
 		$"../End/Panel".visible = false
-		if $"../End/Debt".debt < 0:
-			emit_signal("callTyping")
-			Blackluck.visible = true
-			Blackluck.text = "RUN"
-			await get_tree().create_timer(7.0).timeout
-			get_tree().quit()
-		else:
-			emit_signal("callTyping")
-			Blackluck.visible = true
-			Blackluck.text = "YOU ARE FREE"
-			await get_tree().create_timer(7.0).timeout
-			get_tree().quit()
+		emit_signal("callTyping")
+		Blackluck.visible = true
+		Blackluck.text = "YOU ARE FREE"
+		await get_tree().create_timer(7.0).timeout
+		get_tree().quit()
 	elif choice == "s":
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
@@ -385,10 +378,32 @@ func check_round_winner():
 		reset_round()
 	else:
 		roundLoser = ""
+		var tween = get_tree().create_tween()
+		tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		$"../SoundManager/firstBGM".autoplay = true
+		$"../SoundManager/firstBGM".playing = true
+		Globals.startanim = true
+		BlackBackground.visible = true
+		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+		Globals.canvasModulate = false
+		emit_signal("callSoundManager", "lightOff")
+		Blackluck.visible = true
+		emit_signal("callTyping")
+		Blackluck.text = "EMPAT"
+		await pressedContinue
+		checking_round_winner = false
 		reset_round()
-	
-	checking_round_winner = false
-	return
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Globals.canvasModulate = true
+		emit_signal("callSoundManager", "lightOn")
+		Blackluck.visible = false
+		BlackBackground.visible = false
+		Globals.startanim = false
+		$"../SoundManager/firstBGM".autoplay = false
+		$"../SoundManager/firstBGM".playing = false
+		var tween2 = get_tree().create_tween()
+		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		return
 
 func reset_round():
 	if roundLoser == "player":

@@ -21,6 +21,7 @@ var startanim = false
 var gamelost = false
 var double = false
 var quietRevolver = false
+var debtLost = false
 func _ready() -> void:
 	fakeRevolver = false
 

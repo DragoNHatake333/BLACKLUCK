@@ -28,6 +28,7 @@ var _fade_speed := 5.0
 var _is_dragging_volume := false
 
 func _ready():
+	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	if OS.has_feature("web"):
 		quit_button.visible = false
 
