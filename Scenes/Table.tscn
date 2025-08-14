@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=88 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -17,10 +17,11 @@
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="14_b1apg"]
-[ext_resource type="Script" path="res://Scripts/credits.gd" id="15_adfku"]
+[ext_resource type="Script" uid="uid://t87k7w2wtosv" path="res://Scripts/credits.gd" id="15_adfku"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="16_wpo3d"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="17_7pc0u"]
+[ext_resource type="Script" uid="uid://boy7byuapa1rl" path="res://Scripts/revolver.gd" id="17_j6sam"]
 [ext_resource type="PackedScene" uid="uid://dlpo3snxu2gq4" path="res://Scenes/CardSlot.tscn" id="18_nlvap"]
 [ext_resource type="Script" uid="uid://bas6nkpltdexr" path="res://Scripts/Deck.gd" id="20_33e7s"]
 [ext_resource type="AudioStream" uid="uid://1byc3gese8f" path="res://Assets/Sound/crescendo.mp3" id="20_id2c4"]
@@ -1450,6 +1451,9 @@ position = Vector2(961.5, 540.5)
 scale = Vector2(1.001, 1)
 texture = ExtResource("4_p8qel")
 
+[node name="Revolver" type="Node" parent="."]
+script = ExtResource("17_j6sam")
+
 [node name="GameManager" type="Node" parent="."]
 script = ExtResource("13_id2c4")
 
@@ -1602,6 +1606,7 @@ script = ExtResource("23_hfij1")
 [node name="revolverSpin" type="AudioStreamPlayer2D" parent="SoundManager"]
 position = Vector2(240, 474)
 stream = ExtResource("26_dvf6a")
+pitch_scale = 0.7
 bus = &"SFX"
 
 [node name="PlayerEars" type="AudioListener2D" parent="SoundManager"]
@@ -2079,6 +2084,7 @@ texture = ExtResource("61_tye0p")
 
 [connection signal="button_up" from="Start/HBoxContainer/Yes" to="GameManager" method="_on_yes_button_up"]
 [connection signal="button_up" from="Start/HBoxContainer/No" to="GameManager" method="_on_no_button_up"]
+[connection signal="callSoundManager" from="Revolver" to="SoundManager" method="call_sound_manager"]
 [connection signal="calculateDebt" from="GameManager" to="End/Debt" method="_on_game_manager_calculate_debt"]
 [connection signal="callAI" from="GameManager" to="Terminator" method="_on_game_manager_call_ai"]
 [connection signal="callAnimationManager" from="GameManager" to="AnimationManager" method="callAnimationManager"]
@@ -2107,9 +2113,11 @@ texture = ExtResource("61_tye0p")
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot9" method="_on_game_manager_reset_card_slots"]
 [connection signal="resetCardSlots" from="GameManager" to="playerHand/CardSlot10" method="_on_game_manager_reset_card_slots"]
 [connection signal="rollcredits" from="GameManager" to="End/credits" method="_on_game_manager_rollcredits"]
+[connection signal="spinRevolver" from="GameManager" to="Revolver" method="spinRevolver"]
 [connection signal="callAnimationManager" from="Terminator" to="AnimationManager" method="callAnimationManager"]
 [connection signal="callSoundManager" from="Terminator" to="SoundManager" method="call_sound_manager"]
 [connection signal="drawCards" from="Terminator" to="Deck" method="_on_game_manager_call_deck"]
+[connection signal="spinRevolver" from="Terminator" to="Revolver" method="spinRevolver"]
 [connection signal="callCardSlot" from="CardManager" to="iaHand/CardSlot" method="_on_card_manager_call_card_slot"]
 [connection signal="callSoundManager" from="Deck" to="SoundManager" method="call_sound_manager"]
 [connection signal="callAnimationManager" from="RevolverButton" to="AnimationManager" method="callAnimationManager"]
@@ -2118,4 +2126,5 @@ texture = ExtResource("61_tye0p")
 [connection signal="input_event" from="RevolverButton" to="RevolverButton" method="_on_input_event"]
 [connection signal="mouse_entered" from="RevolverButton" to="RevolverButton" method="_on_mouse_entered"]
 [connection signal="mouse_exited" from="RevolverButton" to="RevolverButton" method="_on_mouse_exited"]
+[connection signal="spinRevolver" from="RevolverButton" to="Revolver" method="spinRevolver"]
 [connection signal="callSoundManager" from="AnimationManager" to="SoundManager" method="call_sound_manager"]

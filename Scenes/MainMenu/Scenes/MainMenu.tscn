@@ -107,7 +107,6 @@ theme_override_font_sizes/font_size = 56
 icon = ExtResource("4_y4ew6")
 
 [node name="PlayButton" type="Button" parent="."]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_8k6ko")
 layout_mode = 1
@@ -124,6 +123,7 @@ text = "BLACKLUCK"
 metadata/_edit_use_anchors_ = true
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
+visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.327083

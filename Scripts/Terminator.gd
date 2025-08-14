@@ -20,6 +20,8 @@ var selected_card_node
 var countsRevolver = 0
 signal callSoundManager(sound)
 signal callAnimationManager(anime, who, what)
+signal spinRevolver
+
 
 func _on_game_manager_call_ai() -> void:
 	print("TERMINATOR: AI Turn Start")
@@ -206,7 +208,6 @@ func call_revolver():
 			print("TERMINATOR: Bullet found! AI shoots itself.")
 			emit_signal("callAnimationManager", "revolver", "ai", "bullet")
 			await $"../AnimationManager".RevolverFinished
-			Globals.spin_revolver()
 			for child in $"../CardManager".get_children():
 				if not (child.name in Globals.playerHand or child.name in Globals.aiHand):
 					child.queue_free()
@@ -219,7 +220,6 @@ func call_revolver():
 			Globals.saveRound = true
 			Globals.aiTurn = false
 			revolverPressed = true
-			Globals.fakeRevolver = true
 		else:
 			print("TERMINATOR: No bullet, survived")
 			emit_signal("callAnimationManager", "revolver", "ai", "noBullet")

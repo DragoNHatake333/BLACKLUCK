@@ -23,6 +23,8 @@ func callAnimationManager(anime, who, what) -> void:
 		emit_signal("callSoundManager", "lightOff")
 		await get_tree().create_timer(0.2).timeout
 		
+		hidePlus()
+		
 		for i in $"../CardManager".get_children():
 			i.visible = false
 		for i in $"../iaHand".get_children():
@@ -58,7 +60,9 @@ func callAnimationManager(anime, who, what) -> void:
 		
 		emit_signal("callSoundManager", "lightOn")
 		await get_tree().create_timer(0.1).timeout
-
+		
+		
+		showPlus()
 		for i in $"../iaHand".get_children():
 			i.visible = true
 		for i in $"../playerHand".get_children():
@@ -168,6 +172,7 @@ func turnOffLightsRevolver():
 	emit_signal("callSoundManager", "lightOff")
 	await get_tree().create_timer(0.2).timeout
 	
+	hidePlus()
 	for i in $"../CardManager".get_children():
 		i.visible = false
 	for i in $"../iaHand".get_children():
@@ -214,6 +219,7 @@ func turnOnLightsRevolver():
 	emit_signal("callSoundManager", "lightOn")
 	
 	await get_tree().create_timer(0.1).timeout
+	showPlus()
 	for i in $"../CardManager".get_children():
 		i.visible = true
 	for i in $"../iaHand".get_children():
@@ -253,6 +259,14 @@ func turnOnLightsRevolver():
 	# Fade BGM back in
 	var tween2 = create_tween()
 	tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+
+func hidePlus():
+	for i in $"../+ Sprites".get_children():
+			i.visible = false
+func showPlus():
+	for i in $"../+ Sprites".get_children():
+			i.visible = true
+
 
 func _process(delta: float) -> void:
 	$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".position.z = $"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position.z

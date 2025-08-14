@@ -14,32 +14,11 @@ var aiTurn = false
 var cards_in_center_hand = 0
 var playerRevolverPressed = false
 var isCardDragging = false
-var firstRevolver = false
 signal callSoundManager
-var fakeRevolver = false
 var startanim = false
-var gamelost = false
 var double = false
-var quietRevolver = false
 var debtLost = false
-func _ready() -> void:
-	fakeRevolver = false
-
-func spin_revolver():
-	revolver_chambers = [false, false, false, false, false, false]
-	var real_bullet = 0
-	#randi() % 6
-	revolver_chambers[real_bullet] = true
-	current_chamber = 0
-	print("Globals: Revolver loaded: bullet is in chamber ", real_bullet + 1, ".")
-	if Globals.firstRevolver == false:
-		Globals.firstRevolver = true
-	elif fakeRevolver == false and quietRevolver == false:
-		await get_tree().create_timer(1.0).timeout
-		emit_signal("callSoundManager", "revolverSpin")
-	else:
-		Globals.fakeRevolver = false
-
+var silentRevolver
 
 var playerShootHimself = false
 var aiShootHimself = false

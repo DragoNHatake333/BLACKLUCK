@@ -3,7 +3,7 @@ extends Node
 var roundLoser
 var ownsTurn = randi() % 2 == 0 
 var round_number = 0
-var starter = ownsTurn
+var starter
 var checking_round_winner = false
 var returnRevovler = false
 @onready var Blackluck = $"../Start/Blackluck"
@@ -22,6 +22,7 @@ signal callAnimationManager
 signal pressedContinue
 signal callTyping
 signal pressedSN(choice)
+#region spam
 var blackluckspam = "BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
@@ -33,7 +34,6 @@ BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK 
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK BLACKLUCK\n
 "
-
 var xspam = "XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
@@ -45,6 +45,7 @@ XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX X
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 XXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX XXXXXXXXX\n
 "
+#endregion
 var already = false
 var start = true
 @onready var bgm = $"../SoundManager/BGM"
@@ -52,6 +53,8 @@ var neededMoney = 400000
 signal calculateDebt
 var username = ""
 signal rollcredits
+var change_turn = "false"
+signal spinRevolver
 
 func _input(event):
 	if event.is_action_pressed("mouse_left"):
@@ -60,6 +63,7 @@ func _input(event):
 			emit_signal("callSoundManager", "crt")
 
 func _ready() -> void:
+	starter = ownsTurn
 	Globals.debtLost = false
 	if OS.has_environment("USERNAME"): # Windows
 		username = OS.get_environment("USERNAME")
@@ -67,15 +71,13 @@ func _ready() -> void:
 		username = OS.get_environment("USER")
 	else:
 		username = "Player"
-	money = 9999999
+	money = 0
 	randomize()
 	$"../Start/BlackBackground".color = Color.BLACK
-	Globals.quietRevolver = false
 	Globals.double = false
-	Globals.gamelost = false
 	Globals.startanim = true
 	Globals.playerHP = 3
-	Globals.aiHP = 1
+	Globals.aiHP = 3
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -165,21 +167,18 @@ func _ready() -> void:
 	Globals.saveRound = false
 	#Engine.set_max_fps(240)
 	print("GameManager: Start") 
-	Globals.spin_revolver()
+	spinRevolver.emit()
 	Globals.startanim = false
 	game_logic()
 	
 func game_logic():
+	change_turn = "false"
 	print("GameManager: Logic start.")
 	if Globals.playerHP == 0:
-		Globals.quietRevolver = true
-		Globals.gamelost = true
 		game_lost()
 		await get_tree().process_frame
 		return
 	if Globals.aiHP == 0:
-		Globals.quietRevolver = true
-		Globals.gamelost = true
 		game_won()
 		await get_tree().process_frame
 		return
@@ -222,9 +221,14 @@ func game_logic():
 	# Check player's cards
 	if Globals.playerAmount == 5 and Globals.aiAmount == 5:
 		await check_round_winner()
-
-					
-	ownsTurn = !ownsTurn
+		
+	if change_turn == "ai":
+		ownsTurn = false
+	elif change_turn == "player":
+		ownsTurn = true
+	else:
+		ownsTurn = !ownsTurn
+		
 	round_number += 1
 	game_logic()
 
@@ -264,7 +268,6 @@ func game_lost():
 	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
-	Globals.quietRevolver = true
 	var oldmoney
 	Globals.startanim = true
 	var tween = get_tree().create_tween()
@@ -315,19 +318,16 @@ func game_won():
 		Blackluck.text = "NO TORNIS"
 		await pressedContinue
 		$"../SoundManager/door".stop()
-		#emit_signal("calculateDebt")
-		#emit_signal("callTyping")
-		#$"../End/OSNAME".visible = true
-		#$"../End/Date".visible = true
-		#$"../End/Debt".visible = true
-		#$"../End/Panel".visible = true
-		#await pressedContinue
-		#$"../End/OSNAME".visible = false
-		#$"../End/Date".visible = false
-		#$"../End/Debt".visible = false
-		#$"../End/Panel".visible = false
 		Blackluck.visible = false
 		var tween2 = get_tree().create_tween()
+		for i in $"../CandleLights".get_children():
+			i.visible = false
+		for i in $"../CandleLightsAI".get_children():
+			i.visible = false
+		$"../PlayerTurnLight".visible = false
+		$"../AiTurnLight".visible = false
+		$"../PointLight2D".visible = false
+		$"../RevolverLight".visible = false
 		tween2.tween_property($"../Start/BlackBackground", "color", Color.WHITE, 6.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
 		$"../SoundManager/escape".play()
 		Blackluck.add_theme_color_override("font_color", "f6b400")
@@ -361,7 +361,6 @@ func game_won():
 		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		Globals.startanim = false
 		Globals.double = true
-		Globals.quietRevolver = false
 		emit_signal("callAnimationManager", "candle", "ai", null)
 		BlackBackground.visible = false
 		await $"../AnimationManager".AnimationFinished
@@ -438,10 +437,13 @@ func reset_round():
 	Globals.cards_in_center_hand = 0
 	Globals.centerHand = []
 	Globals.saveRound = false
-	Globals.spin_revolver()
+	if Globals.playerHP == 0 or Globals.aiHP == 0:
+		Globals.silentRevolver = true
+	spinRevolver.emit()
 	Globals.centerDeck = Globals.fullCenterDeck
 	Globals.centerDeck.shuffle()
 	print("GameManager: Reset round finished!")
+	change_turn = roundLoser
 	checking_round_winner = false
 	already = false
 
@@ -592,7 +594,6 @@ func _process(_delta: float) -> void:
 		$"../PointLight2D".color = "ff3629"
 	if Globals.playerHP == 1:
 		$"../PointLight2D".color = "b70000"
-
 
 func _on_yes_button_up() -> void:
 	pressedSN.emit("s")
