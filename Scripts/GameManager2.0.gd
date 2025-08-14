@@ -51,6 +51,7 @@ var start = true
 var neededMoney = 400000
 signal calculateDebt
 var username = ""
+signal rollcredits
 
 func _input(event):
 	if event.is_action_pressed("mouse_left"):
@@ -66,13 +67,14 @@ func _ready() -> void:
 		username = OS.get_environment("USER")
 	else:
 		username = "Player"
-	money = 0
+	money = 9999999
 	randomize()
+	$"../Start/BlackBackground".color = Color.BLACK
 	Globals.quietRevolver = false
 	Globals.double = false
 	Globals.gamelost = false
 	Globals.startanim = true
-	Globals.playerHP = 1
+	Globals.playerHP = 3
 	Globals.aiHP = 1
 	bgm.play()
 	bgm.volume_db = -99
@@ -105,20 +107,13 @@ func _ready() -> void:
 	Blackluck.text = "ARA DEUS\n 400.000$"
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "AHIR VAS\n RECIBIR UN SMS..."
+	Blackluck.text = "AHIR VAS\n REBRE UN SMS..."
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = false
 	$"../Start/sms".visible = true
 	await pressedContinue
 	$"../Start/sms".visible = false
-	Blackluck.visible = true
-	#emit_signal("callTyping")
-	#Blackluck.text = "DECIDEIXES OBRIR\n EL LINK..."
-	#await pressedContinue
-	emit_signal("callTyping")
-	Blackluck.text = blackluckspam
-	await pressedContinue
 	#Tutorial
 	Blackluck.visible = false
 	$"../Start/Tutorial/Frame1".visible = true
@@ -137,8 +132,12 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck3".visible = false
 	$"../Start/Tutorial/Blackluck4".visible = false
 	$"../Start/Tutorial/Blackluck5".visible = false
-	await get_tree().process_frame
+	Blackluck.visible = true
+	emit_signal("callTyping")
+	Blackluck.text = blackluckspam
+	await pressedContinue
 	start = true
+	await get_tree().process_frame
 	emit_signal("callSoundManager", "lightOff")
 	$"../SoundManager/firstBGM".autoplay = false
 	$"../SoundManager/firstBGM".playing = false
@@ -245,7 +244,7 @@ func game_lost():
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = true
-	Blackluck.text = "ADÈU"
+	Blackluck.text = "..."
 	emit_signal("callSoundManager", "noescape")
 	await pressedContinue
 	Blackluck.visible = false
@@ -293,7 +292,7 @@ func game_won():
 	$"../Start/HBoxContainer".visible = true
 	$"../Start/HBoxContainer/Yes".visible = true
 	$"../Start/HBoxContainer/No".visible = true
-	if (neededMoney - money) >= 0:
+	if (neededMoney - money) <= 0:
 		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "ff0000")
 		$"../Start/HBoxContainer/No".disabled = false
 	else:
@@ -305,27 +304,41 @@ func game_won():
 	var choice = res[0]
 	if choice == "n":
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		Blackluck.visible = false
 		$"../Start/HBoxContainer".visible = false
 		$"../Start/HBoxContainer/Yes".visible = false
 		$"../Start/HBoxContainer/No".visible = false
+		$"../SoundManager/firstBGM".playing = false
 		start = false
-		emit_signal("calculateDebt")
-		emit_signal("callTyping")
-		$"../End/OSNAME".visible = true
-		$"../End/Date".visible = true
-		$"../End/Debt".visible = true
-		$"../End/Panel".visible = true
-		await pressedContinue
-		$"../End/OSNAME".visible = false
-		$"../End/Date".visible = false
-		$"../End/Debt".visible = false
-		$"../End/Panel".visible = false
-		emit_signal("callTyping")
 		Blackluck.visible = true
-		Blackluck.text = "YOU ARE FREE"
-		await get_tree().create_timer(7.0).timeout
-		get_tree().quit()
+		emit_signal("callTyping")
+		$"../SoundManager/door".play()
+		Blackluck.text = "NO TORNIS"
+		await pressedContinue
+		$"../SoundManager/door".stop()
+		#emit_signal("calculateDebt")
+		#emit_signal("callTyping")
+		#$"../End/OSNAME".visible = true
+		#$"../End/Date".visible = true
+		#$"../End/Debt".visible = true
+		#$"../End/Panel".visible = true
+		#await pressedContinue
+		#$"../End/OSNAME".visible = false
+		#$"../End/Date".visible = false
+		#$"../End/Debt".visible = false
+		#$"../End/Panel".visible = false
+		Blackluck.visible = false
+		var tween2 = get_tree().create_tween()
+		tween2.tween_property($"../Start/BlackBackground", "color", Color.WHITE, 6.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
+		$"../SoundManager/escape".play()
+		Blackluck.add_theme_color_override("font_color", "f6b400")
+		await get_tree().create_timer(20.0).timeout
+		$"../End/credits".visible = true
+		var tween3 = get_tree().create_tween()
+		tween3.tween_property(bgm, "volume_db", 2.811, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		$"../SoundManager/credits".play()
+		emit_signal("rollcredits")
+		await pressedContinue
+		SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	elif choice == "s":
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
@@ -334,7 +347,6 @@ func game_won():
 		reset_round()  # Delayed check
 		while checking_round_winner == true:
 			await get_tree().process_frame	
-		BlackBackground.visible = false
 		$"../SoundManager/firstBGM".playing = false
 		Globals.canvasModulate = true
 		Blackluck.visible = false
@@ -350,6 +362,7 @@ func game_won():
 		Globals.double = true
 		Globals.quietRevolver = false
 		emit_signal("callAnimationManager", "candle", "ai", null)
+		BlackBackground.visible = false
 		await $"../AnimationManager".AnimationFinished
 		game_logic()
 

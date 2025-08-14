@@ -1,0 +1,115 @@
+[gd_scene load_steps=5 format=3 uid="uid://mec30viq4ajc"]
+
+[ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6uqi0"]
+[ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="2_6uqi0"]
+[ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="3_ykrsh"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g14j6"]
+shader = ExtResource("1_6uqi0")
+shader_parameter/brightnessMult = 2.0
+shader_parameter/wiggleMult = 0.0015
+shader_parameter/chromaticAberrationOffset = 0.001
+shader_parameter/warp_amount = 0.555
+shader_parameter/vignette_amount = 0.483
+shader_parameter/vignette_radius = 0.7
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+process_mode = 4
+z_index = 4096
+material = SubResource("ShaderMaterial_g14j6")
+anchors_preset = -1
+anchor_right = 1.0026
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+mouse_force_pass_scroll_events = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BlackBackground" type="ColorRect" parent="."]
+z_index = 1022
+offset_right = 1917.0
+offset_bottom = 1080.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Blackluck" type="Label" parent="."]
+modulate = Color(0, 0, 0, 1)
+z_index = 1023
+offset_left = 512.0
+offset_top = 1126.0
+offset_right = 1417.0
+offset_bottom = 5023.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("2_6uqi0")
+theme_override_font_sizes/font_size = 55
+text = "BLACKLUCK 2025
+
+UN JOC PER:
+DRAGON & ZEEKY
+
+ESPECIALMENT DEDICAT A TÚ
+
+ESPECIALS AGRAIMENTS A:
+\"FRANCHU\"
+
+JOC POSSIBLE GRÀCIES A:
+GODOT FOUNDATION & COMMUNITY
+AUDACITY
+ASEPRITE
+GITHUB
+BLENDER FOUNDATION
+FREESOUND.ORG
+
+ASSETS ON CREDITS.txt:
+
+\"Revolver\" (https://skfb.ly/BKSn) by Nicolas Gerard is licensed under Creative Commons Attribution (http://creativecommons.org/licenses/by/4.0/).
+
+Clean Revolver Reload by Dredile -- https://freesound.org/s/177863/ -- License: Creative Commons 0
+
+RemingtonGunshot.wav by fastson -- https://freesound.org/s/50618/ -- License: Attribution 3.0
+
+Revolveri, tyhjä, laukaus / Empty gun, revolver, shots, cocking, striker, interior by YleArkisto -- https://freesound.org/s/362358/ -- License: Attribution 4.0
+
+ambience_01_black.flac by A.Deathy -- https://freesound.org/s/256444/ -- License: Creative Commons 0
+
+crasy feedback loop sound experiments by vædder 500 -- https://freesound.org/s/816565/ -- License: Creative Commons 0
+
+120 BPM Industrial Ambient Loop #14032 (WAV) by looplicator -- https://freesound.org/s/810233/ -- License: Attribution 4.0
+
+75 BPM Industrial Ambient Loop #13897 (WAV) by looplicator -- https://freesound.org/s/807915/ -- License: Attribution 4.0
+
+144 BPM Industrial Ambient Loop #13637 (WAV) by looplicator -- https://freesound.org/s/798442/ -- License: Attribution 4.0
+
+Hum noise of audio device being plugged in by krakenkraft -- https://freesound.org/s/546378/ -- License: Creative Commons 0
+
+JDSherbert on itch.io
+
+Wood elements - Havoc Bazaar by Vrymaa -- https://freesound.org/s/810888/ -- License: Creative Commons 0
+
+Door knocking (Angry).wav by Macif -- https://freesound.org/s/194365/ -- License: Creative Commons 0
+
+wooden door smash open.wav by Eneasz -- https://freesound.org/s/161873/ -- License: Attribution NonCommercial 3.0
+
+Footsteps - Wood by Fewes -- https://freesound.org/s/234263/ -- License: Attribution 3.0
+
+Gunshot 4.wav by ShawnyBoy -- https://freesound.org/s/166191/ -- License: Creative Commons 0
+
+thin metal sliding door open sqeaking by kernschall -- https://freesound.org/s/411110/ -- License: Attribution 4.0
+
+20061224.forest.flac by dobroide -- https://freesound.org/s/27808/ -- License: Attribution 4.0
+
+White noise Fade In by Osvoldon -- https://freesound.org/s/541000/ -- License: Creative Commons 0
+
+horror gate.aif by Tomlija -- https://freesound.org/s/109710/ -- License: Attribution 3.0
+
+Sky Loop by FoolBoyMedia -- https://freesound.org/s/264295/ -- License: Attribution NonCommercial 4.0"
+horizontal_alignment = 1
+autowrap_mode = 3
+uppercase = true
+script = ExtResource("3_ykrsh")
+metadata/_edit_use_anchors_ = true
