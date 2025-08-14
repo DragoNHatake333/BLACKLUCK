@@ -5,7 +5,7 @@ extends Control
 @onready var quit_button = $QuitButton
 @onready var settings_panel = $OptionsPanel
 @onready var title_label = $PlayButton
-@onready var back_button = $OptionsPanel/Panel/VBoxContainer/Back
+@onready var back_button = $OptionsPanel/Panel/VBoxContainer/Quit
 
 # Volumen
 @onready var click_sound = $ClickSound

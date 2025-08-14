@@ -107,6 +107,7 @@ theme_override_font_sizes/font_size = 56
 icon = ExtResource("4_y4ew6")
 
 [node name="PlayButton" type="Button" parent="."]
+visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_8k6ko")
 layout_mode = 1
@@ -123,7 +124,6 @@ text = "BLACKLUCK"
 metadata/_edit_use_anchors_ = true
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.327083
@@ -151,7 +151,7 @@ anchor_bottom = 0.5
 offset_left = -325.001
 offset_top = -150.0
 offset_right = 331.999
-offset_bottom = 160.0
+offset_bottom = 234.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -263,7 +263,33 @@ theme_override_font_sizes/font_size = 35
 text = "100%"
 horizontal_alignment = 1
 
-[node name="Back" type="Button" parent="OptionsPanel/Panel/VBoxContainer"]
+[node name="HBoxContainer4" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
+layout_mode = 2
+
+[node name="Language" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "LANGUAGE:                        "
+horizontal_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_tma8a")
+theme_override_font_sizes/font_size = 35
+selected = 0
+item_count = 3
+popup/item_0/text = "ENGLISH"
+popup/item_0/id = 0
+popup/item_1/text = "ESPAÑOL"
+popup/item_1/id = 1
+popup/item_2/text = "CATALÀ"
+popup/item_2/id = 2
+
+[node name="Quit" type="Button" parent="OptionsPanel/Panel/VBoxContainer"]
 texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
