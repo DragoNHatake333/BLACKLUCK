@@ -79,6 +79,10 @@ n={
 ]
 }
 
+[internationalization]
+
+locale/translations=PackedStringArray("res://Assets/Translations/1TEST/Traducciones1.ca.translation", "res://Assets/Translations/1TEST/Traducciones1.en.translation", "res://Assets/Translations/1TEST/Traducciones1.es.translation")
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

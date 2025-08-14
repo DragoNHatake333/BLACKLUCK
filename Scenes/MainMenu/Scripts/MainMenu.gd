@@ -2,7 +2,7 @@ extends Control
 
 @onready var play_button = $PlayButton
 @onready var settings_button = $OptionsButton
-@onready var quit_button = $QuitButton
+@onready var quit_button = $OptionsPanel/Panel/VBoxContainer/Quit
 @onready var settings_panel = $OptionsPanel
 @onready var title_label = $PlayButton
 @onready var back_button = $OptionsPanel/Panel/VBoxContainer/Quit
@@ -18,7 +18,10 @@ extends Control
 
 @onready var sfx_slider = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXSlider
 @onready var sfx_label = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3/SFXLabel
-
+# Idioma
+@onready var language_option = $OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4/LanguageOptionsButton
+const LANGUAGE_CODES := ["en", "es", "ca"]
+const SETTINGS_FILE := "user://settings.cfg"
 var on_settings = false
 
 # Variables de control
@@ -42,6 +45,10 @@ func _ready():
 	volume_slider.value_changed.connect(_on_volume_changed)
 	music_slider.value_changed.connect(_on_music_volume_changed)
 	sfx_slider.value_changed.connect(_on_sfx_volume_changed)
+
+  # Conectar selección de idioma
+	language_option.item_selected.connect(_on_language_selected)
+	_load_saved_language()
 
 	# Cargar valores guardados
 	var master = ProjectSettings.get_setting("application/config/volume", 1.0)
@@ -141,3 +148,46 @@ func _on_back_pressed():
 func _on_tab_container_tab_changed(_tab_index: int) -> void:
 	if click_sound.is_inside_tree():
 		click_sound.play()
+
+func _on_language_selected(index: int) -> void:
+	var language: String = LANGUAGE_CODES[index]
+	_set_language(language)
+	_save_language(language)
+
+func _set_language(language: String) -> void:
+	TranslationServer.set_locale(language)
+
+
+func _save_language(language: String) -> void:
+	var cfg := ConfigFile.new()
+	cfg.set_value("Language", "language", language)
+	cfg.save(SETTINGS_FILE)
+
+func _load_saved_language() -> void:
+	var config := ConfigFile.new()
+	var err = config.load(SETTINGS_FILE)
+
+	var selected_locale: String = ""
+	var selected_index: int = -1 # Declare 'index' once here
+
+	if err != OK:
+		print("No se encontró el archivo de configuración o hubo un error al cargarlo: ", err)
+		selected_locale = OS.get_locale()
+		_set_language(selected_locale)
+		_save_language(selected_locale)
+		selected_index = LANGUAGE_CODES.find(selected_locale)
+	else:
+		selected_locale = config.get_value("Language", "language", "")
+
+		if selected_locale.is_empty():
+			selected_locale = OS.get_locale()
+			_set_language(selected_locale)
+			_save_language(selected_locale)
+		else:
+			_set_language(selected_locale)
+
+		selected_index = LANGUAGE_CODES.find(selected_locale)
+
+	# Apply the selected index to the OptionButton if found
+	if selected_index != -1:
+		language_option.select(selected_index)

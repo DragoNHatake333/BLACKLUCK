@@ -1,0 +1,10 @@
+keys,es,en,ca
+options_tag_master,GENERAL,MASTER,GENERAL
+options_tag_music,MÚSICA,MUSIC,MÚSICA
+options_tag_sfx,EFECTOS,SFX,EFECTES
+options_btn_back,ATRÄS,BACK,ENRERE
+options_btn_quit,CERRAR JUEGO,CLOSE GAME,TANCAR JOC
+options_tag_language,LENGUAJE:                        ,LANGUAGE:                        ,LLENGUATGE:                     
+options_obtn_language_es,ESPAÑOL,SPANISH,ESPANYOL
+options_obtn_language_en,INGLÉS,ENGLISH,ANGLÊS
+options_obtn_language_ca,CATALÁN,CATALAN,CATALÀ

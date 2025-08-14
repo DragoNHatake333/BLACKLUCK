@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=10 format=3 uid="uid://djopgy1a0qxka"]
+[gd_resource type="Theme" load_steps=11 format=3 uid="uid://djopgy1a0qxka"]
 
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="1_idggh"]
 
@@ -16,6 +16,8 @@
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jtr0b"]
 
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tltis"]
+
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyc16"]
 
 [resource]
@@ -30,7 +32,9 @@ Button/styles/pressed = SubResource("StyleBoxEmpty_pxycv")
 OptionButton/colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
 Panel/styles/panel = SubResource("StyleBoxEmpty_idggh")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_jtr0b")
-PopupMenu/colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+PopupMenu/colors/font_color = Color(0.67, 0.134, 0.134, 1)
+PopupMenu/colors/font_hover_color = Color(1, 1, 1, 1)
 PopupMenu/font_sizes/font_size = 35
 PopupMenu/fonts/font = ExtResource("1_idggh")
+PopupMenu/styles/hover = SubResource("StyleBoxEmpty_tltis")
 PopupMenu/styles/panel = SubResource("StyleBoxEmpty_uyc16")
