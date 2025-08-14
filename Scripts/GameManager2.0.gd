@@ -331,10 +331,10 @@ func game_won():
 		tween2.tween_property($"../Start/BlackBackground", "color", Color.WHITE, 6.0).set_trans(Tween.TRANS_QUART).set_ease(Tween.EASE_IN_OUT)
 		$"../SoundManager/escape".play()
 		Blackluck.add_theme_color_override("font_color", "f6b400")
-		await get_tree().create_timer(20.0).timeout
+		await get_tree().create_timer(10).timeout
 		$"../End/credits".visible = true
 		var tween3 = get_tree().create_tween()
-		tween3.tween_property(bgm, "volume_db", 2.811, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
+		tween3.tween_property($"../SoundManager/credits", "volume_db", 2.811, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		$"../SoundManager/credits".play()
 		emit_signal("rollcredits")
 		await pressedContinue
@@ -357,7 +357,7 @@ func game_won():
 		$"../Start/HBoxContainer/No".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		var tween2 = create_tween()
-		tween2.tween_property($"../SoundManager/credits", "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		Globals.startanim = false
 		Globals.double = true
 		Globals.quietRevolver = false
