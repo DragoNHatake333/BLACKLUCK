@@ -357,7 +357,7 @@ func game_won():
 		$"../Start/HBoxContainer/No".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		var tween2 = create_tween()
-		tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+		tween2.tween_property($"../SoundManager/credits", "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
 		Globals.startanim = false
 		Globals.double = true
 		Globals.quietRevolver = false

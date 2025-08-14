@@ -28,7 +28,8 @@ func _ready() -> void:
 	if randf() > 0.15:
 		initial_rotation_deg = randf_range(-5.0, 5.0)
 		if randf() < 0.1:
-			initial_rotation_deg += 180.0
+			#initial_rotation_deg += 180.0
+			pass
 
 	target_rotation = deg_to_rad(initial_rotation_deg)
 	card_image.rotation = 0.0
