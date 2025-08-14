@@ -43,9 +43,3 @@ GitHub és una plataforma per guardar i mantenir actualitzat el teu programa de 
 
 
 2. **Puc descarregar el joc aquí?** No, la versió presentable del joc estarà a itch.io i es pot descarregar des de la pestanya "Descarregar" de la nostra pàgina web.
-
-
-
-## License
-
-This project is not open source. All rights reserved. See the [LICENSE](./LICENSE) file for details.
