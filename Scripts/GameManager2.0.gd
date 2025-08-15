@@ -244,7 +244,7 @@ func game_lost():
 	Globals.canvasModulate = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
-	Blackluck.text = "DERROTA"
+	Blackluck.text = tr("game_text_lost")
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = true
@@ -286,10 +286,10 @@ func game_won():
 	start = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
-	Blackluck.text = "VICTÒRIA"
+	Blackluck.text = tr("game_text_win")
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "DEUTE:\n" + str(neededMoney - money) + "$"
+	Blackluck.text = tr("game_text_debt") + "\n" + str(neededMoney - money) + "$"
 	await pressedContinue
 	Blackluck.visible = false
 	$"../Start/HBoxContainer".visible = true
@@ -315,7 +315,7 @@ func game_won():
 		Blackluck.visible = true
 		emit_signal("callTyping")
 		$"../SoundManager/door".play()
-		Blackluck.text = "NO TORNIS"
+		Blackluck.text = tr("game_text_win2")
 		await pressedContinue
 		$"../SoundManager/door".stop()
 		Blackluck.visible = false
@@ -402,7 +402,7 @@ func check_round_winner():
 		emit_signal("callSoundManager", "lightOff")
 		Blackluck.visible = true
 		emit_signal("callTyping")
-		Blackluck.text = "EMPAT"
+		Blackluck.text = tr("game_text_draw")
 		await pressedContinue
 		checking_round_winner = false
 		reset_round()
