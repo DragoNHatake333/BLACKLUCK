@@ -99,6 +99,8 @@ anchor_right = 0.903125
 anchor_bottom = 0.762963
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("1_tma8a")
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("5_ve1ib")
 theme_override_font_sizes/font_size = 490
 text = "BLACKLUCK"
@@ -247,17 +249,24 @@ theme_override_font_sizes/font_size = 35
 text = "100%"
 horizontal_alignment = 1
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
+[node name="HBoxContainer5" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
-[node name="LanguageLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4"]
+[node name="LanguageLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer5"]
 texture_filter = 1
 layout_mode = 2
+size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_font_sizes/font_size = 42
 text = "options_tag_language"
 horizontal_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
 
 [node name="LanguageOptionsButton" type="OptionButton" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4"]
 layout_mode = 2

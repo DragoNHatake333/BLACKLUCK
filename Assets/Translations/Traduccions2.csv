@@ -1,0 +1,26 @@
+keys,es,en,ca
+options_tag_master,GENERAL,MASTER,GENERAL
+options_tag_music,MÚSICA,MUSIC,MÚSICA
+options_tag_sfx,EFECTOS,SFX,EFECTES
+options_btn_back,ATRÄS,BACK,ENRERE
+options_btn_quit,CERRAR JUEGO,CLOSE GAME,TANCAR JOC
+options_tag_language,LENGUAJE:,LANGUAGE:,LLENGUATGE:
+options_obtn_language_es,ESPAÑOL,SPANISH,ESPANYOL
+options_obtn_language_en,INGLÉS,ENGLISH,ANGLÊS
+options_obtn_language_ca,CATALÁN,CATALAN,CATALÀ
+start_text_1,TU NOMBRE ES:,YOUR NAME IS:,EL TEU NOM ÉS:
+start_text_2,HACE DOS MESES,TWO MONTHS AGO,FA DOS MESOS
+start_text_3,PERDISTE UNA,YOU LOST AN,VAS PERDRE UNA
+start_text_4,APUESTA ILEGAL,ILLEGAL BET,APOSTA IL·LEGAL
+start_text_5,AHORA DEBES,NOW YOU OWE,ARA DEUS
+start_text_6,400.000$,400.000$,400.000$
+start_text_7,AYER RECIBISTE,YESTERDAY YOU ,AHIR VAS
+start_text_8,UN SMS...,RECEIVED AN SMS...,REBRE UN SMS…
+game_text_lost,DERROTA,DEFEAT,DERROTA
+game_text_lost1,…,…,…
+game_text_win,VICTORIA,VICTORY,VICTÒRIA
+game_text_win2,NO VUELVAS,DON'T COME BACK,NO TORNIS
+game_text_draw,EMPATE,DRAW,EMPAT
+game_text_debt,DEUDA:,DEBT:,DEUTE:
+game_text_debt_lost,INFO. CLASIFICADA,CLASSIFIED INFO,INFO. CLASSIFICADA
+game_text_debt1,GANANCIAS:,GAINS:,GUANYS:
