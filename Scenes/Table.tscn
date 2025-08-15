@@ -1118,6 +1118,7 @@ theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 300
 text = "BLACKLUCK"
 horizontal_alignment = 1
+autowrap_mode = 3
 uppercase = true
 script = ExtResource("4_8w7an")
 
