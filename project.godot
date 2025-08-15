@@ -81,7 +81,7 @@ n={
 
 [internationalization]
 
-locale/translations=PackedStringArray("res://Assets/Translations/Traduccions2.ca.translation", "res://Assets/Translations/Traduccions2.en.translation", "res://Assets/Translations/Traduccions2.es.translation")
+locale/translations=PackedStringArray("res://Assets/Translations/Traduccions.ca.translation", "res://Assets/Translations/Traduccions.en.translation", "res://Assets/Translations/Traduccions.es.translation")
 
 [rendering]
 

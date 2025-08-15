@@ -98,18 +98,18 @@ func _ready() -> void:
 	#Intro
 	emit_signal("callTyping")
 	start = false
-	Blackluck.text = "EL TEU NOM ES\n" + str(username)
+	Blackluck.text = tr("start_text_1") + "\n" + str(username)
 	Blackluck.visible = true
 	await pressedContinue
 	#Second
 	emit_signal("callTyping")
-	Blackluck.text = "FA DOS MESOS\n VAS PERDRE UNA\n APOSTA IL·LEGAL"
+	Blackluck.text = tr("start_text_2") + "\n" + tr("start_text_3") + "\n" + tr("start_text_4")
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "ARA DEUS\n 400.000$"
+	Blackluck.text = tr("start_text_5") + "\n" + "400.000$"
 	await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "AHIR VAS\n REBRE UN SMS..."
+	Blackluck.text = tr("start_text_6") + "\n" + tr("start_text_7")
 	await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = false
