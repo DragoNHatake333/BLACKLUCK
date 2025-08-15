@@ -7,7 +7,7 @@
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
 [ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="4_8w7an"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
-[ext_resource type="Texture2D" uid="uid://cj1l1m2j3fw0l" path="res://Assets/sms/smsEN.png" id="6_02xof"]
+[ext_resource type="Texture2D" uid="uid://cu5t64l1dw1hu" path="res://Assets/sms/smsEN.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
@@ -1159,11 +1159,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "Agafa o entrega cartes per 
-aconseguir que la teva mà superi en 
-valor la del teu rival.
-
-El revòlver posibilita reiniciar el piló."
+text = "game_text_tutorial"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1182,7 +1178,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "VIDES"
+text = "game_text_tutorial_life"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1201,7 +1197,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "PILO"
+text = "game_text_tutorial_cards"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1221,7 +1217,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "REVÒLVER"
+text = "game_text_tutorial_revolver"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1240,7 +1236,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "MÀ"
+text = "game_text_tutorial_cardslot"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true

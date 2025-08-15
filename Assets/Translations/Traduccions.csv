@@ -16,10 +16,29 @@ start_text_5,AHORA DEBES:,NOW YOU OWE:,ARA DEUS:
 start_text_6,AYER RECIBISTE,YESTERDAY YOU ,AHIR VAS
 start_text_7,UN SMS...,RECEIVED AN SMS...,REBRE UN SMS...
 game_text_lost,DERROTA,DEFEAT,DERROTA
-game_text_lost1,…,…,…
 game_text_win,VICTORIA,VICTORY,VICTÒRIA
 game_text_win2,NO VUELVAS,DON'T COME BACK,NO TORNIS
 game_text_draw,EMPATE,DRAW,EMPAT
-game_text_debt,DEUDA:,DEBT:,DEUTE:
+game_text_debt,DEUDA: ,DEBT: ,DEUTE: 
 game_text_debt_lost,INFO. CLASIFICADA,CLASSIFIED INFO,INFO. CLASSIFICADA
 game_text_debt1,GANANCIAS:,GAINS:,GUANYS:
+game_text_date,DESAPARECIDO EL:,"WENT ""MISSING"" ON:",DESAPAREGUT EL:
+game_text_tutorial,"Toma o entrega cartas para
+conseguir que tu mano supere en
+valor la de tu rival.
+
+El revólver permite reiniciar la pila.","Take or give cards to make
+your hand exceed your
+rival’s hand in value.
+
+The revolver allows you to reset the pile.","Agafa o entrega cartes per 
+aconseguir que la teva mà superi en 
+valor la del teu rival.
+
+El revòlver posibilita reiniciar el piló."
+game_text_tutorial_life,VIDAS,LIVES,VIDES
+game_text_tutorial_cards,PILA,PILE,PILÓ
+game_text_tutorial_revolver,REVÓLVER,REVOLVER,REVÒLVER
+game_text_tutorial_cardslot,MANO,HAND,MÀ
+pausemenu_btn_resume,CONTINUAR,CONTINUE,CONTINUAR
+pausemenu_btn_mainmenu,MENÚ,MENU,MENÚ

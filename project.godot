@@ -81,6 +81,9 @@ n={
 
 [internationalization]
 
+locale/translation_remaps={
+"res://Assets/sms/smsEN.png": PackedStringArray("res://Assets/sms/smsCA.png:ca", "res://Assets/sms/smsES.png:es")
+}
 locale/translations=PackedStringArray("res://Assets/Translations/Traduccions.ca.translation", "res://Assets/Translations/Traduccions.en.translation", "res://Assets/Translations/Traduccions.es.translation")
 
 [rendering]

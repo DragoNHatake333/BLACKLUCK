@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rb3abeykurc8"
-path="res://.godot/imported/sms_CA.png-3c2b8d260271acd87395a488c2f22545.ctex"
+uid="uid://ckjqcy2wmdfd0"
+path="res://.godot/imported/smsCA.png-a639575ba9da12240d92c1593eb1f479.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/sms/sms_CA.png"
-dest_files=["res://.godot/imported/sms_CA.png-3c2b8d260271acd87395a488c2f22545.ctex"]
+source_file="res://Assets/sms/smsCA.png"
+dest_files=["res://.godot/imported/smsCA.png-a639575ba9da12240d92c1593eb1f479.ctex"]
 
 [params]
 
