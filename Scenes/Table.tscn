@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=91 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -9,6 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
 [ext_resource type="Texture2D" uid="uid://cu5t64l1dw1hu" path="res://Assets/sms/smsEN.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
+[ext_resource type="Texture2D" uid="uid://cv7c1ialapib6" path="res://Assets/mouseleft.png" id="7_gj4xm"]
+[ext_resource type="Script" uid="uid://bvkua11fhfx7x" path="res://Scripts/mouseleft.gd" id="8_kqm07"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="9_hfij1"]
@@ -17,7 +19,7 @@
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="14_b1apg"]
-[ext_resource type="Script" path="res://Scripts/credits.gd" id="15_adfku"]
+[ext_resource type="Script" uid="uid://t87k7w2wtosv" path="res://Scripts/credits.gd" id="15_adfku"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="16_wpo3d"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="17_7pc0u"]
@@ -1090,6 +1092,7 @@ metadata/_edit_use_anchors_ = true
 [node name="Start" type="Node" parent="."]
 
 [node name="ShakiShaki" type="ColorRect" parent="Start"]
+visible = false
 z_index = 4096
 material = SubResource("ShaderMaterial_7pc0u")
 offset_left = -44.0
@@ -1135,6 +1138,14 @@ visible = false
 z_index = 4096
 position = Vector2(940, 540)
 texture = ExtResource("6_02xof")
+
+[node name="mouseleft" type="Sprite2D" parent="Start"]
+visible = false
+z_index = 4096
+position = Vector2(1800, 1000)
+scale = Vector2(4.485, 4.485)
+texture = ExtResource("7_gj4xm")
+script = ExtResource("8_kqm07")
 
 [node name="Tutorial" type="Node" parent="Start"]
 

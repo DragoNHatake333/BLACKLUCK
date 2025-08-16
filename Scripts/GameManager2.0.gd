@@ -96,25 +96,32 @@ func _ready() -> void:
 	Globals.canvasModulate = false
 	await get_tree().create_timer(1.0).timeout
 	#Intro
+	mouseOn()
 	emit_signal("callTyping")
 	start = false
 	Blackluck.text = tr("start_text_1") + "\n" + str(username)
 	Blackluck.visible = true
 	await pressedContinue
+	Blackluck.autowrap_mode = TextServer.AUTOWRAP_OFF
 	#Second
+	mouseOn()
 	emit_signal("callTyping")
 	Blackluck.text = tr("start_text_2") + "\n" + tr("start_text_3") + "\n" + tr("start_text_4")
 	await pressedContinue
+	mouseOn()
 	emit_signal("callTyping")
 	Blackluck.text = tr("start_text_5") + "\n" + "400.000$"
 	await pressedContinue
+	mouseOn()
 	emit_signal("callTyping")
 	Blackluck.text = tr("start_text_6") + "\n" + tr("start_text_7")
 	await pressedContinue
+	mouseOn()
 	emit_signal("callTyping")
 	Blackluck.visible = false
 	$"../Start/sms".visible = true
 	await pressedContinue
+	mouseOn()
 	$"../Start/sms".visible = false
 	#Tutorial
 	Blackluck.visible = false
@@ -127,6 +134,7 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck5".visible = true
 	$"../Start/Tutorial/Cylinder".visible = true
 	await pressedContinue
+	mouseOn()
 	$"../Start/Tutorial/Cylinder".visible = false
 	$"../Start/Tutorial/Frame1".visible = false
 	$"../Start/Tutorial/Blackluck".visible = false
@@ -136,10 +144,9 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck5".visible = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
-	Blackluck.autowrap_mode = TextServer.AUTOWRAP_OFF
 	Blackluck.text = blackluckspam
 	await pressedContinue
-	Blackluck.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
+	mouseOn()
 	start = true
 	await get_tree().process_frame
 	emit_signal("callSoundManager", "lightOff")
@@ -171,6 +178,8 @@ func _ready() -> void:
 	print("GameManager: Start") 
 	spinRevolver.emit()
 	Globals.startanim = false
+	mouseleft.visible = false
+	mouseleftstop = true
 	game_logic()
 	
 func game_logic():
@@ -593,14 +602,23 @@ func _process(_delta: float) -> void:
 		$"../PointLight2D".color = "ff3629"
 	if Globals.playerHP == 1:
 		$"../PointLight2D".color = "b70000"
+	if mouseleftstop == true:
+		mouseleft.visible = false
 
 func _on_yes_button_up() -> void:
 	pressedSN.emit("s")
 	if start == false:
 		emit_signal("callSoundManager", "crt")
 
-
 func _on_no_button_up() -> void:
 	pressedSN.emit("n")
 	if start == false:
 		emit_signal("callSoundManager", "crt")
+
+@onready var mouseleft = $"../Start/mouseleft"
+var mouseleftstop = false
+
+func mouseOn():
+	mouseleft.visible = false
+	await get_tree().create_timer(5.0).timeout
+	mouseleft.visible = true

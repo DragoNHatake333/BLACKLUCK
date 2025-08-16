@@ -14,7 +14,10 @@ config/name="BlackLuck"
 run/main_scene="uid://by7tqp72mpn2f"
 config/features=PackedStringArray("4.4", "Forward Plus")
 boot_splash/bg_color=Color(0, 0, 0, 1)
-config/icon="res://icon.svg"
+boot_splash/show_image=false
+boot_splash/fullsize=false
+boot_splash/use_filter=false
+config/icon="uid://cbg2sx3nl1yye"
 config/volume=1.0
 
 [audio]
