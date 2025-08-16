@@ -42,3 +42,5 @@ game_text_tutorial_revolver,REVÓLVER,REVOLVER,REVÒLVER
 game_text_tutorial_cardslot,MANO,HAND,MÀ
 pausemenu_btn_resume,CONTINUAR,CONTINUE,CONTINUAR
 pausemenu_btn_mainmenu,MENÚ,MENU,MENÚ
+game_text_win_yes,DOBLAR,DOUBLE,DOBLAR
+game_text_win_no,SALIR,LEAVE,SORTIR
