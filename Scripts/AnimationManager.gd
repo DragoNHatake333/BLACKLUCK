@@ -46,10 +46,78 @@ func callAnimationManager(anime, who, what) -> void:
 		$"../3DViewport/SubViewportContainer/SubViewport/SpotLight3D".visible = false
 		$"../3DViewport/SubViewportContainer/SubViewport/RevolverLight".visible = false
 
-		await get_tree().create_timer(1.0).timeout
-		$"../GameManager".check_candle_lighting("check", "ai")
-		$"../GameManager".check_candle_lighting("check", "player")
-		await get_tree().create_timer(3.0).timeout
+		if who == "ai":
+			$"../CandleLights/PointP1".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = false
+			$"../CandleLights/PointP2".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = false
+			$"../CandleLights/PointP3".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = false
+			await get_tree().create_timer(1.0).timeout
+			$"../GameManager".check_candle_lighting("check", "ai")
+			await get_tree().create_timer(3.0).timeout
+			if Globals.playerHP == 3:
+				$"../CandleLights/PointP1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/FireP1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP1/SpotP1".visible = true
+				$"../CandleLights/PointP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = true
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			elif Globals.playerHP == 2:
+				$"../CandleLights/PointP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/FireP2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP2/SpotP2".visible = true
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			elif Globals.playerHP == 1:
+				$"../CandleLights/PointP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/FireP3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/PlayerCandles/CandleP3/SpotP3".visible = true
+			else:
+				pass			
+		elif who == "player":
+			$"../CandleLightsAI/PointA1".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = false
+			$"../CandleLightsAI/PointA2".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = false
+			$"../CandleLightsAI/PointA3".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = false
+			$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = false
+			await get_tree().create_timer(1.0).timeout
+			$"../GameManager".check_candle_lighting("check", "player")
+			await get_tree().create_timer(3.0).timeout
+			if Globals.aiHP == 3:
+				$"../CandleLightsAI/PointA1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/FireA1".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA1/SpotA1".visible = true
+				$"../CandleLightsAI/PointA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = true
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			elif Globals.aiHP == 2:
+				$"../CandleLightsAI/PointA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/FireA2".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA2/SpotA2".visible = true
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			elif Globals.aiHP == 1:
+				$"../CandleLightsAI/PointA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/FireA3".visible = true
+				$"../3DViewport/SubViewportContainer/SubViewport/AICandles/CandleA3/SpotA3".visible = true
+			else:
+				pass
 
 		if Globals.playerHP == 0 or Globals.aiHP == 0:
 			$"../Start/BlackBackground".visible = true
@@ -81,7 +149,7 @@ func callAnimationManager(anime, who, what) -> void:
 		if Globals.playerHP == 2:
 			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/2.mp3")
 			bgm.play()
-			$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0030)
+			$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0025)
 			$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.002)
 		if Globals.playerHP == 1:
 			$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/3.mp3")
@@ -248,7 +316,7 @@ func turnOnLightsRevolver():
 	if Globals.playerHP == 2:
 		$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/2.mp3")
 		bgm.play()
-		$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0030)
+		$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0025)
 		$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.002)
 	if Globals.playerHP == 1:
 		$"../SoundManager/BGM".stream = load("res://Assets/Sound/loops/3.mp3")

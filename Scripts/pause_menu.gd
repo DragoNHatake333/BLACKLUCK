@@ -32,7 +32,7 @@ func pause():
 	transitioning = true
 	show()
 	Globals.canvasModulate = false
-	await get_tree().create_timer(0.01).timeout
+	#await get_tree().create_timer(0.01).timeout
 	get_tree().paused = true
 	$AnimationPlayer.play("blur")
 	await get_tree().create_timer(0.3).timeout

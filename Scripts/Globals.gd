@@ -1,5 +1,8 @@
 extends Node
 
+func _ready() -> void:
+	self.process_mode = Node.PROCESS_MODE_ALWAYS
+
 var is_animating
 var STOPHOVER = false
 var releaseCardMenu 

@@ -77,7 +77,7 @@ func _ready() -> void:
 	Globals.double = false
 	Globals.startanim = true
 	Globals.playerHP = 3
-	Globals.aiHP = 1
+	Globals.aiHP = 3
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -136,8 +136,10 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck5".visible = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
+	Blackluck.autowrap_mode = TextServer.AUTOWRAP_OFF
 	Blackluck.text = blackluckspam
 	await pressedContinue
+	Blackluck.autowrap_mode = TextServer.AUTOWRAP_WORD_SMART
 	start = true
 	await get_tree().process_frame
 	emit_signal("callSoundManager", "lightOff")
@@ -242,10 +244,10 @@ func game_lost():
 	$"../SoundManager/firstBGM".playing = true
 	$"../Start/ShakiShaki".visible = true
 	Globals.canvasModulate = false
-	Blackluck.visible = true
-	emit_signal("callTyping")
-	Blackluck.text = tr("game_text_lost")
-	await pressedContinue
+	#Blackluck.visible = true
+	#emit_signal("callTyping")
+	#Blackluck.text = tr("game_text_lost")
+	#await pressedContinue
 	emit_signal("callTyping")
 	Blackluck.visible = true
 	Blackluck.text = "..."
@@ -585,10 +587,6 @@ func _process(_delta: float) -> void:
 	if Globals.playerTurn == true:
 		$"../PlayerTurnLight".visible = true
 		$"../AiTurnLight".visible = false
-	if Globals.canvasModulate == true:
-		$"../CanvasModulate".color = "222222"
-	elif Globals.canvasModulate == false:
-		$"../CanvasModulate".color = "ffffff"
 	if Globals.playerHP == 3:
 		$"../PointLight2D".color = "ff3f30"
 	if Globals.playerHP == 2:
