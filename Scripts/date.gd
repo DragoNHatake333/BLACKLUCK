@@ -3,7 +3,7 @@ extends Label
 func _ready() -> void:
 	var date_str = Time.get_datetime_string_from_system() 
 	# "2025-08-13 14:05:42"
-	self.text = 'DESAPAREGUT EL:\n' + date_str
+	self.text = tr("game_text_date") + "\n" + date_str
 
 func _on_game_manager_call_typing() -> void:
 	var tween: Tween = create_tween()

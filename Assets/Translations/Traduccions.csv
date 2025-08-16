@@ -18,7 +18,7 @@ start_text_7,UN SMS...,RECEIVED AN SMS...,REBRE UN SMS...
 game_text_lost,DERROTA,DEFEAT,DERROTA
 game_text_win,VICTORIA,VICTORY,VICTÒRIA
 game_text_win2,NO VUELVAS,DON'T COME BACK,NO TORNIS
-game_text_draw,EMPATE,DRAW,EMPAT
+game_text_draw,EMPATE,TIE,EMPAT
 game_text_debt,DEUDA: ,DEBT: ,DEUTE: 
 game_text_debt_lost,INFO. CLASIFICADA,CLASSIFIED INFO,INFO. CLASSIFICADA
 game_text_debt1,GANANCIAS:,GAINS:,GUANYS:

@@ -17,7 +17,7 @@
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="14_b1apg"]
-[ext_resource type="Script" uid="uid://t87k7w2wtosv" path="res://Scripts/credits.gd" id="15_adfku"]
+[ext_resource type="Script" path="res://Scripts/credits.gd" id="15_adfku"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="16_wpo3d"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="17_7pc0u"]
