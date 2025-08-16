@@ -354,7 +354,7 @@ func game_won():
 	elif choice == "s":
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
-		Globals.aiHP = 1
+		Globals.aiHP = 3
 		Globals.playerHP = 3
 		check_candle_lighting("restart", "ai")
 		reset_round()  # Delayed check
