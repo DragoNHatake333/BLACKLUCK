@@ -77,7 +77,7 @@ func _ready() -> void:
 	Globals.double = false
 	Globals.startanim = true
 	Globals.playerHP = 3
-	Globals.aiHP = 1
+	Globals.aiHP = 3
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -364,7 +364,7 @@ func game_won():
 		$"../Start/Owe".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
-		Globals.aiHP = 1
+		Globals.aiHP = 3
 		Globals.playerHP = 3
 		check_candle_lighting("restart", "ai")
 		reset_round()  # Delayed check
