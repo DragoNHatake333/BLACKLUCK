@@ -1,15 +1,16 @@
-[gd_scene load_steps=15 format=3 uid="uid://by7tqp72mpn2f"]
+[gd_scene load_steps=16 format=3 uid="uid://by7tqp72mpn2f"]
 
 [ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://Scenes/MainMenu/Scripts/MainMenu.gd" id="1_e1xpn"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="3_t4xtq"]
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://Scenes/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
 [ext_resource type="AudioStream" uid="uid://cd74muqbnjqtb" path="res://Scenes/MainMenu/Audio/Night Break.mp3" id="4_b4ika"]
-[ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="4_j0ggg"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="4_qxrut"]
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
+[ext_resource type="Shader" uid="uid://bd3f84fyfi7fm" path="res://Scenes/MainMenu/Shaders/BlacklucktitleVARIABLE.gdshader" id="6_t4xtq"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="10_nixa7"]
+[ext_resource type="Script" uid="uid://cw4twseba12np" path="res://Scenes/MainMenu/Scripts/options_button.gd" id="12_qxrut"]
 [ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="12_t4xtq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t4xtq"]
@@ -36,14 +37,14 @@ shader_parameter/pixel_filter = 740.0
 shader_parameter/is_rotating = false
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8k6ko"]
-shader = ExtResource("4_j0ggg")
-shader_parameter/font_color = Color(0.46, 0, 0, 1)
+shader = ExtResource("6_t4xtq")
 shader_parameter/noise_scale = 80.0
 shader_parameter/darkness = 0.0
 shader_parameter/glitch_strength = 0.01
 shader_parameter/time_slowdown = 2.5
 shader_parameter/glitch_start_time = 1.0
 shader_parameter/glitch_ramp_duration = 2.0
+shader_parameter/tint = Color(1, 1, 1, 1)
 
 [node name="MainMenu" type="Control"]
 process_mode = 3
@@ -53,6 +54,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+size_flags_vertical = 4
 theme = ExtResource("1_tma8a")
 script = ExtResource("1_e1xpn")
 
@@ -92,19 +94,24 @@ grow_vertical = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_8k6ko")
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.318519
-anchor_right = 0.903125
-anchor_bottom = 0.762963
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -771.0
+offset_top = -240.0
+offset_right = 771.0
+offset_bottom = 240.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("1_tma8a")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+theme_override_colors/font_color = Color(0.458824, 0, 0, 1)
 theme_override_fonts/font = ExtResource("5_ve1ib")
 theme_override_font_sizes/font_size = 490
 text = "BLACKLUCK"
-metadata/_edit_use_anchors_ = true
+icon_alignment = 1
 
 [node name="OptionsPanel" type="PanelContainer" parent="."]
 visible = false
@@ -347,4 +354,8 @@ grow_vertical = 2
 scale = Vector2(0.21, 0.21)
 theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
 theme_override_font_sizes/font_size = 56
+script = ExtResource("12_qxrut")
 metadata/_edit_use_anchors_ = true
+
+[connection signal="mouse_entered" from="OptionsButton" to="OptionsButton" method="_on_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsButton" to="OptionsButton" method="_on_mouse_exited"]

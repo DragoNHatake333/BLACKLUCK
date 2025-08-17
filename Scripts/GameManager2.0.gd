@@ -1,7 +1,7 @@
 extends Node
 
 var roundLoser
-var ownsTurn = randi() % 2 == 0 
+var ownsTurn = true
 var round_number = 0
 var starter
 var checking_round_winner = false
@@ -436,7 +436,7 @@ func reset_round():
 	elif roundLoser == "ai":
 		ownsTurn = false
 	else:
-		ownsTurn = randi() % 2 == 0  # fallback for ties or first round
+		ownsTurn = true
 	for i in $"../CardManager".get_children():
 		i.queue_free()
 	emit_signal("resetCardSlots")
