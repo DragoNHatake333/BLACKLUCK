@@ -279,14 +279,14 @@ func game_lost():
 	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
-	var oldmoney
+	var moneywon = randi_range(100000, 150000)
 	Globals.startanim = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if Globals.double == true:
 		money *= 2
 	else:
-		money = randi_range(100000, 150000) + money
+		money = moneywon + money
 	print("GAME FINISHED: PLAYER WINS")
 	BlackBackground.visible = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -296,11 +296,11 @@ func game_won():
 	Globals.canvasModulate = false
 	start = false
 	Blackluck.visible = true
+	#emit_signal("callTyping")
+	#Blackluck.text = tr("game_text_win")
+	#await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = tr("game_text_win")
-	await pressedContinue
-	emit_signal("callTyping")
-	Blackluck.text = tr("game_text_debt") + "\n" + str(neededMoney - money) + "$"
+	Blackluck.text = "+" + str(moneywon) + "$"
 	await pressedContinue
 	Blackluck.visible = false
 	$"../Start/HBoxContainer".visible = true
@@ -312,6 +312,7 @@ func game_won():
 	else:
 		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "410000")
 		$"../Start/HBoxContainer/No".disabled = true
+		$"../Start/Owe".text = tr("game_text_owing") + "\n" + str(neededMoney-money) + "$"
 	# Wait until either S or N is pressed
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var res = await pressedSN   # returns emitted args as an Array
