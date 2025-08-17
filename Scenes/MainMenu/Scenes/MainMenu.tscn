@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
 [ext_resource type="Shader" uid="uid://bd3f84fyfi7fm" path="res://Scenes/MainMenu/Shaders/BlacklucktitleVARIABLE.gdshader" id="6_t4xtq"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="10_nixa7"]
-[ext_resource type="Script" uid="uid://cw4twseba12np" path="res://Scenes/MainMenu/Scripts/options_button.gd" id="12_qxrut"]
+[ext_resource type="Script" path="res://Scenes/MainMenu/Scripts/options_button.gd" id="12_qxrut"]
 [ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="12_t4xtq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t4xtq"]
