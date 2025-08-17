@@ -1,4 +1,4 @@
-[gd_scene load_steps=91 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=92 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -85,7 +85,7 @@ shader_parameter/shake_color_rate = 0.01
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q2skg"]
 shader = ExtResource("2_ov01g")
-shader_parameter/font_color = Color(0.46, 0.05, 0.05, 1)
+shader_parameter/font_color = Color(1, 0, 0, 1)
 shader_parameter/noise_scale = 80.0
 shader_parameter/darkness = 0.4
 shader_parameter/glitch_strength = 0.01
@@ -101,6 +101,16 @@ shader_parameter/darkness = 0.4
 shader_parameter/glitch_strength = 0.01
 shader_parameter/time_slowdown = 2.5
 shader_parameter/glitch_start_time = 0.5
+shader_parameter/glitch_ramp_duration = 2.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gj4xm"]
+shader = ExtResource("2_ov01g")
+shader_parameter/font_color = Color(0.625597, 0.625597, 0.625597, 1)
+shader_parameter/noise_scale = 80.0
+shader_parameter/darkness = 0.4
+shader_parameter/glitch_strength = 0.01
+shader_parameter/time_slowdown = 2.5
+shader_parameter/glitch_start_time = 1.0
 shader_parameter/glitch_ramp_duration = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dvf6a"]
@@ -1126,6 +1136,7 @@ uppercase = true
 script = ExtResource("4_8w7an")
 
 [node name="BlackBackground" type="ColorRect" parent="Start"]
+visible = false
 z_index = 1022
 offset_right = 1917.0
 offset_bottom = 1080.0
@@ -1261,6 +1272,7 @@ texture = ExtResource("7_33e7s")
 script = ExtResource("8_x0dtf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Start"]
+visible = false
 z_index = 1066
 anchors_preset = -1
 anchor_left = 0.0555234
@@ -1275,6 +1287,7 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Yes" type="Button" parent="Start/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -1282,21 +1295,23 @@ theme = ExtResource("9_hfij1")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 400
-text = "DOUBLE"
+text = "game_text_win_yes"
 
 [node name="No" type="Button" parent="Start/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(1, 0, 0, 1)
 theme_override_font_sizes/font_size = 400
-text = "LEAVE"
+text = "game_text_win_no"
 
 [node name="Owe" type="Label" parent="Start"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 z_index = 4096
-material = SubResource("ShaderMaterial_nlvap")
+material = SubResource("ShaderMaterial_gj4xm")
 anchors_preset = -1
 anchor_left = 0.610919
 anchor_top = 0.626907
@@ -1306,6 +1321,7 @@ offset_top = 0.00500488
 offset_bottom = 0.00500488
 grow_horizontal = 2
 grow_vertical = 2
+theme_override_colors/font_color = Color(0.254902, 0, 0, 1)
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
 text = "DEUDA RESTANTE
@@ -1409,10 +1425,10 @@ text = "BLACKLUCK 2025
 UN JOC PER:
 DRAGON & ZEEKY
 
-ESPECIALMENT DEDICAT A TÚ
+ESPECIALMENT DEDICAT A TOTS ELS JUGADORS
 
 ESPECIALS AGRAIMENTS A:
-\"FRANCHU\"
+\"38\"
 
 JOC POSSIBLE GRÀCIES A:
 GODOT FOUNDATION & COMMUNITY

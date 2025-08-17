@@ -5,7 +5,7 @@ var firstRevolver = true
 
 func spinRevolver():
 	Globals.revolver_chambers = [false, false, false, false, false, false]
-	var real_bullet = randi() % 6
+	var real_bullet = 0
 	#randi() % 6
 	Globals.revolver_chambers[real_bullet] = true
 	Globals.current_chamber = 0

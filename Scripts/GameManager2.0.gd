@@ -77,7 +77,7 @@ func _ready() -> void:
 	Globals.double = false
 	Globals.startanim = true
 	Globals.playerHP = 3
-	Globals.aiHP = 3
+	Globals.aiHP = 1
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
@@ -284,7 +284,9 @@ func game_won():
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 	if Globals.double == true:
+		moneywon = money * 2
 		money *= 2
+		
 	else:
 		money = moneywon + money
 	print("GAME FINISHED: PLAYER WINS")
@@ -309,26 +311,30 @@ func game_won():
 	if (neededMoney - money) <= 0:
 		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "ff0000")
 		$"../Start/HBoxContainer/No".disabled = false
+		$"../Start/Owe".visible = false
 	else:
 		$"../Start/HBoxContainer/No".add_theme_color_override("font_color", "410000")
 		$"../Start/HBoxContainer/No".disabled = true
+		$"../Start/Owe".visible = true
+		#$"../Start/Owe".add_theme_color_override("font_color", "410000")
 		$"../Start/Owe".text = tr("game_text_owing") + "\n" + str(neededMoney-money) + "$"
 	# Wait until either S or N is pressed
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var res = await pressedSN   # returns emitted args as an Array
 	var choice = res[0]
 	if choice == "n":
+		start = true
+		$"../Start/Owe".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		$"../Start/HBoxContainer".visible = false
 		$"../Start/HBoxContainer/Yes".visible = false
 		$"../Start/HBoxContainer/No".visible = false
 		$"../SoundManager/firstBGM".playing = false
-		start = false
 		Blackluck.visible = true
 		emit_signal("callTyping")
 		$"../SoundManager/door".play()
 		Blackluck.text = tr("game_text_win2")
-		await pressedContinue
+		await get_tree().create_timer(7.0).timeout
 		$"../SoundManager/door".stop()
 		Blackluck.visible = false
 		var tween2 = get_tree().create_tween()
@@ -350,12 +356,15 @@ func game_won():
 		tween3.tween_property($"../SoundManager/credits", "volume_db", 2.811, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
 		$"../SoundManager/credits".play()
 		emit_signal("rollcredits")
+		await get_tree().create_timer(10.0).timeout
+		start = false
 		await pressedContinue
 		SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	elif choice == "s":
+		$"../Start/Owe".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
 		checking_round_winner = true
-		Globals.aiHP = 3
+		Globals.aiHP = 1
 		Globals.playerHP = 3
 		check_candle_lighting("restart", "ai")
 		reset_round()  # Delayed check
