@@ -64,6 +64,9 @@ func _save_settings():
 	cfg.set_value("Language", "language", LANGUAGE_CODES[language_option.get_selected_id()])
 	cfg.save(SETTINGS_FILE)
 
+#función para normalizar locale (ej. "ca_ES" -> "ca")
+func _normalize_locale(locale: String) -> String:
+	return locale.substr(0, 2)
 
 func _load_settings():
 	var cfg := ConfigFile.new()
@@ -88,9 +91,10 @@ func _load_settings():
 		_current_volume = master
 		_target_volume = master
 
-		# Idioma
-		_set_language(language)
-		var idx = LANGUAGE_CODES.find(language)
+		# Idioma (normalización)
+		var lang = _normalize_locale(language)
+		_set_language(lang)
+		var idx = LANGUAGE_CODES.find(lang)
 		if idx != -1:
 			language_option.select(idx)
 	else:
@@ -98,7 +102,17 @@ func _load_settings():
 		volume_slider.value = 1.0
 		music_slider.value = 1.0
 		sfx_slider.value = 1.0
-		_set_language(OS.get_locale())
+	# Idioma (normalización)
+		var sys_lang = _normalize_locale(OS.get_locale())
+		_set_language(sys_lang)
+
+		var idx = LANGUAGE_CODES.find(sys_lang)
+		if idx != -1:
+			language_option.select(idx)
+		else:
+			# Si no está en tu lista, pon inglés por defecto
+			language_option.select(0)
+
 		_save_settings()
 
 
