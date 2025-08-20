@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://by7tqp72mpn2f"]
+[gd_scene load_steps=17 format=3 uid="uid://by7tqp72mpn2f"]
 
 [ext_resource type="Script" uid="uid://kctelgqtvonw" path="res://Scenes/MainMenu/Scripts/MainMenu.gd" id="1_e1xpn"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
@@ -9,6 +9,7 @@
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
 [ext_resource type="Shader" uid="uid://bd3f84fyfi7fm" path="res://Scenes/MainMenu/Shaders/BlacklucktitleVARIABLE.gdshader" id="6_t4xtq"]
+[ext_resource type="PackedScene" uid="uid://d1a3navgfevsn" path="res://Scenes/settings_menu.tscn" id="8_qxrut"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="10_nixa7"]
 [ext_resource type="Script" uid="uid://cw4twseba12np" path="res://Scenes/MainMenu/Scripts/options_button.gd" id="12_qxrut"]
 [ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="12_t4xtq"]
@@ -113,213 +114,19 @@ theme_override_font_sizes/font_size = 490
 text = "BLACKLUCK"
 icon_alignment = 1
 
-[node name="OptionsPanel" type="PanelContainer" parent="."]
+[node name="OptionsPanel" parent="." instance=ExtResource("8_qxrut")]
 visible = false
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.327083
-anchor_top = 0.447222
-anchor_right = 0.672917
-anchor_bottom = 0.736111
-offset_left = -6.0
-offset_top = -97.0
-offset_right = -6.00012
-offset_bottom = -97.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("1_tma8a")
-
-[node name="Panel" type="Panel" parent="OptionsPanel"]
-layout_mode = 2
-theme = ExtResource("1_tma8a")
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/Panel"]
-texture_filter = 1
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -325.001
-offset_top = -150.0
-offset_right = 331.999
-offset_bottom = 258.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="Audio" type="Control" parent="OptionsPanel/Panel/VBoxContainer"]
-layout_mode = 2
-
-[node name="VBoxContainer" type="VBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio"]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.179
-anchor_right = 0.822
-offset_left = -109.855
-offset_top = 16.0
-offset_right = 110.193
-offset_bottom = 159.0
-grow_horizontal = 2
-grow_vertical = 2
-
-[node name="HBoxContainer" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Master Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "options_tag_master"
-horizontal_alignment = 1
-
-[node name="MasterSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-size_flags_stretch_ratio = 3.12
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="VolumeLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "100%"
-horizontal_alignment = 1
-
-[node name="HBoxContainer2" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="Music Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "options_tag_music"
-horizontal_alignment = 1
-
-[node name="MusicSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-size_flags_stretch_ratio = 3.15
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="MusicLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer2"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "100%"
-horizontal_alignment = 1
-
-[node name="HBoxContainer3" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 12
-
-[node name="SFX Volume" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3"]
-texture_filter = 1
-layout_mode = 2
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "options_tag_sfx"
-horizontal_alignment = 1
-
-[node name="SFXSlider" type="HSlider" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3"]
-layout_mode = 2
-size_flags_horizontal = 3
-size_flags_vertical = 4
-size_flags_stretch_ratio = 3.42
-max_value = 1.0
-step = 0.01
-value = 1.0
-
-[node name="SFXLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer3"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 10
-size_flags_stretch_ratio = 0.44
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-text = "100%"
-horizontal_alignment = 1
-
-[node name="HBoxContainer5" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="LanguageLabel" type="Label" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer5"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 42
-text = "options_tag_language"
-horizontal_alignment = 1
-
-[node name="HBoxContainer4" type="HBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-
-[node name="LanguageOptionsButton" type="OptionButton" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer/HBoxContainer4"]
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 4
-theme = ExtResource("1_tma8a")
-theme_override_colors/font_focus_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
-alignment = 1
-selected = 0
-item_count = 3
-popup/item_0/text = "options_obtn_language_en"
-popup/item_0/id = 0
-popup/item_1/text = "options_obtn_language_es"
-popup/item_1/id = 1
-popup/item_2/text = "options_obtn_language_ca"
-popup/item_2/id = 2
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="OptionsPanel/Panel/VBoxContainer/Audio"]
-visible = false
-layout_mode = 2
-offset_left = 235.001
-offset_top = 306.0
-offset_right = 429.001
-offset_bottom = 344.0
-size_flags_horizontal = 4
-size_flags_vertical = 8
-
-[node name="Back" type="Button" parent="OptionsPanel/Panel/VBoxContainer/Audio/VBoxContainer2"]
-visible = false
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 38
-text = "options_btn_back"
-
-[node name="Quit" type="Button" parent="OptionsPanel/Panel/VBoxContainer"]
-texture_filter = 1
-layout_mode = 2
-size_flags_horizontal = 4
-size_flags_vertical = 10
-theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 38
-text = "options_btn_quit"
+layout_mode = 0
+anchors_preset = 0
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 0.0
+offset_right = 0.0
+offset_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
 
 [node name="MenuMusicPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_b4ika")
@@ -334,7 +141,7 @@ bus = &"SFX"
 
 [node name="Cylinder" type="Sprite2D" parent="."]
 z_index = 4096
-position = Vector2(956, 976)
+position = Vector2(960, 976)
 scale = Vector2(0.364326, 0.364326)
 texture = ExtResource("3_t4xtq")
 script = ExtResource("4_qxrut")
@@ -343,10 +150,10 @@ script = ExtResource("4_qxrut")
 texture_filter = 1
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.465625
-anchor_top = 0.840741
-anchor_right = 0.531359
-anchor_bottom = 0.959352
+anchor_left = 0.467188
+anchor_top = 0.844445
+anchor_right = 0.532921
+anchor_bottom = 0.963056
 offset_right = 474.79
 offset_bottom = 481.9
 grow_horizontal = 0

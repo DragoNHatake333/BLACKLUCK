@@ -1,0 +1,198 @@
+[gd_scene load_steps=3 format=3 uid="uid://d1a3navgfevsn"]
+
+[ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_icv2g"]
+[ext_resource type="Script" uid="uid://dwdrnhhe8aus6" path="res://Scripts/settings_menu.gd" id="2_8ef0u"]
+
+[node name="OptionsPanel" type="PanelContainer"]
+anchors_preset = -1
+anchor_left = 0.327083
+anchor_top = 0.447222
+anchor_right = 0.672917
+anchor_bottom = 0.736111
+offset_top = -97.0
+offset_right = -0.00012207
+offset_bottom = -97.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme = ExtResource("1_icv2g")
+script = ExtResource("2_8ef0u")
+metadata/_edit_use_anchors_ = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 2
+theme = ExtResource("1_icv2g")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -325.001
+offset_top = -150.0
+offset_right = 331.999
+offset_bottom = 258.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Panel/VBoxContainer"]
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Master Volume" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "options_tag_master"
+horizontal_alignment = 1
+
+[node name="MasterSlider" type="HSlider" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.12
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="VolumeLabel" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.44
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+horizontal_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="Music Volume" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "options_tag_music"
+horizontal_alignment = 1
+
+[node name="MusicSlider" type="HSlider" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.15
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicLabel" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.44
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+horizontal_alignment = 1
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 12
+
+[node name="SFX Volume" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "options_tag_sfx"
+horizontal_alignment = 1
+
+[node name="SFXSlider" type="HSlider" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+size_flags_stretch_ratio = 3.42
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXLabel" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer3"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 10
+size_flags_stretch_ratio = 0.44
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+text = "100%"
+horizontal_alignment = 1
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LanguageLabel" type="Label" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer5"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 42
+text = "options_tag_language"
+horizontal_alignment = 1
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="LanguageOptionsButton" type="OptionButton" parent="Panel/VBoxContainer/VBoxContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_icv2g")
+theme_override_colors/font_focus_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 35
+alignment = 1
+selected = 0
+item_count = 3
+popup/item_0/text = "options_obtn_language_en"
+popup/item_0/id = 0
+popup/item_1/text = "options_obtn_language_es"
+popup/item_1/id = 1
+popup/item_2/text = "options_obtn_language_ca"
+popup/item_2/id = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="Panel/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+alignment = 1
+
+[node name="Space" type="Label" parent="Panel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 140
+
+[node name="Back" type="Button" parent="Panel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "options_btn_back"
+
+[node name="Quit" type="Button" parent="Panel/VBoxContainer/VBoxContainer/VBoxContainer2"]
+texture_filter = 1
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 10
+theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
+theme_override_font_sizes/font_size = 38
+text = "options_btn_quit"
