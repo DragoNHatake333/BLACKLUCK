@@ -41,7 +41,6 @@ func _ready():
 
 	# Conectar selección de idioma
 	language_option.item_selected.connect(_on_language_selected)
-
 	# Conectar el botón de regreso de la configuración
 	back_button.pressed.connect(_on_back_pressed)
 	quit_button.pressed.connect(_on_quit_pressed)
@@ -161,6 +160,7 @@ func _apply_volume(bus_name: String, value: float):
 #   BOTONES (específicos de SettingsMenu)
 # ==========================
 func _on_back_pressed():
+	click_sound.play()
 	# Puedes emitir una señal aquí para que el MainMenu o PauseMenu sepan que la configuración se cerró
 	settings_closed.emit()
 	queue_free() # Elimina esta escena de la jerarquía cuando se presiona el botón de regreso
@@ -169,6 +169,7 @@ func _on_back_pressed():
 #   IDIOMA
 # ==========================
 func _on_language_selected(index: int) -> void:
+	click_sound.play()
 	var language: String = LANGUAGE_CODES[index]
 	_set_language(language)
 	_save_settings()

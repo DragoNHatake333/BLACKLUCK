@@ -3,8 +3,8 @@ options_tag_master,GENERAL,MASTER,GENERAL
 options_tag_music,MÚSICA,MUSIC,MÚSICA
 options_tag_sfx,EFECTOS,SFX,EFECTES
 options_btn_back,ATRÁS,BACK,ENRERE
-options_btn_quit,CERRAR JUEGO,CLOSE GAME,TANCAR JOC
-options_tag_language,LENGUAJE:,LANGUAGE:,LLENGUATGE:
+options_btn_quit,SALIR DEL JUEGO,QUIT GAME,SORTIR DEL JOC
+options_tag_language,IDIOMA:,LANGUAGE:,IDIOMA:
 options_obtn_language_es,ESPAÑOL,SPANISH,ESPANYOL
 options_obtn_language_en,INGLÉS,ENGLISH,ANGLÈS
 options_obtn_language_ca,CATALÁN,CATALAN,CATALÀ
@@ -21,21 +21,21 @@ game_text_win2,NO VUELVAS,DON'T COME BACK,NO TORNIS
 game_text_draw,EMPATE,TIE,EMPAT
 game_text_debt,DEUDA: ,DEBT: ,DEUTE: 
 game_text_debt_lost,INFO. CLASIFICADA,CLASSIFIED INFO,INFO. CLASSIFICADA
-game_text_debt1,GANANCIAS:,GAINS:,GUANYS:
+game_text_debt1,GANANCIAS:,EARNINGS:,GUANYS:
 game_text_date,DESAPARECIDO EL:,"WENT ""MISSING"" ON:",DESAPAREGUT EL:
 game_text_tutorial,"Toma o entrega cartas para
 conseguir que tu mano supere en
 valor la de tu rival.
 
-El revólver permite reiniciar la pila.","Take or give cards to make
+El revólver te permite reiniciar la pila.","Take or give cards to make
 your hand exceed your
 rival’s hand in value.
 
-The revolver allows you to reset the pile.","Agafa o entrega cartes per 
+The revolver lets you reset the pile.","Agafa o entrega cartes per 
 aconseguir que la teva mà superi en 
 valor la del teu rival.
 
-El revòlver posibilita reiniciar el piló."
+El revòlver et permet reiniciar el piló."
 game_text_tutorial_life,VIDAS,LIVES,VIDES
 game_text_tutorial_cards,PILA,PILE,PILÓ
 game_text_tutorial_revolver,REVÓLVER,REVOLVER,REVÒLVER
