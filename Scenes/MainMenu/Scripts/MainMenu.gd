@@ -31,28 +31,17 @@ func _on_play_pressed():
 
 
 func _on_settings_pressed():
-	if current_settings_menu_instance == null:
 		click_sound.play()
-		# Ocultar elementos del menú principal si es necesario
 		play_button.hide()
 		settings_button.hide()
-		title_label.hide() # Oculta el título si está en el mismo nodo PlayButton.
-		settings_button_sprite.hide() #Oculta el sprite del boton de config
+		title_label.hide() 
+		settings_button_sprite.hide()
 		# Instancia la escena de configuración y añádela al árbol
 		current_settings_menu_instance = settings_menu_scene.instantiate()
 		add_child(current_settings_menu_instance)
 
-		# Centrar el menú de configuración
-		current_settings_menu_instance.set_anchors_and_offsets_preset(Control.PRESET_CENTER)
-		current_settings_menu_instance.set_position(
-			current_settings_menu_instance.get_position() - current_settings_menu_instance.get_size() / 2
-		)
-
 		# Conectar la señal settings_closed para saber cuándo se cierra
 		current_settings_menu_instance.settings_closed.connect(_on_settings_menu_closed)
-	else:
-		# Si ya está abierto, puedes ignorar el clic o volver a ocultarlo si lo prefieres
-		print("Settings menu already open.")
 
 
 
