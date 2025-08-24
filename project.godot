@@ -29,6 +29,7 @@ buses/default_bus_layout="uid://c0ccu255b11h3"
 Globals="*res://Scripts/Globals.gd"
 SceneManager="*res://addons/scene_manager/SceneManager.tscn"
 DebugMenu="*res://addons/debug_menu/debug_menu.tscn"
+CursorGlobals="*res://Scripts/cursor_globals.gd"
 
 [display]
 
