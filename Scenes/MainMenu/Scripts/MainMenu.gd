@@ -38,6 +38,7 @@ func _on_settings_pressed():
 		settings_button_sprite.hide()
 		# Instancia la escena de configuración y añádela al árbol
 		current_settings_menu_instance = settings_menu_scene.instantiate()
+		current_settings_menu_instance.from_pause = false
 		add_child(current_settings_menu_instance)
 
 		# Conectar la señal settings_closed para saber cuándo se cierra
@@ -48,7 +49,7 @@ func _on_settings_pressed():
 
 
 # Función para cuando el menú de configuración se cierra
-func _on_settings_menu_closed():
+func _on_settings_menu_closed(_reopen_pause: bool):
 	current_settings_menu_instance = null # Limpiar la referencia
 	# Mostrar los elementos del menú principal de nuevo
 	play_button.show()

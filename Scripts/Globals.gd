@@ -2,6 +2,61 @@ extends Node
 
 func _ready() -> void:
 	self.process_mode = Node.PROCESS_MODE_ALWAYS
+	load_settings()
+### CAMBIO: Variables para audio y config
+const SETTINGS_FILE := "user://settings.cfg"
+var language := OS.get_locale().substr(0, 2)   # idioma actual
+const LANGUAGE_CODES := ["en", "es", "ca"]
+var master_volume := 1.0
+var music_volume := 1.0
+var sfx_volume := 1.0
+
+# =======================
+# FUNCIONES DE AUDIO
+# =======================
+### CAMBIO: funciones para aplicar, guardar y cargar volumen y idioma
+func apply_all_volumes():
+	_apply_volume("Master", master_volume)
+	_apply_volume("Music", music_volume)
+	_apply_volume("SFX", sfx_volume)
+
+func _apply_volume(bus_name: String, value: float):
+	var idx = AudioServer.get_bus_index(bus_name)
+	if idx == -1: 
+		push_warning("Audio bus '%s' not found!" % bus_name)
+		return
+	var db = linear_to_db(max(value, 0.01))
+	AudioServer.set_bus_volume_db(idx, db)
+	AudioServer.set_bus_mute(idx, value <= 0.01)
+
+func save_settings():
+	var cfg = ConfigFile.new()
+	cfg.set_value("Audio", "master", master_volume)
+	cfg.set_value("Audio", "music", music_volume)
+	cfg.set_value("Audio", "sfx", sfx_volume)
+	cfg.set_value("Language", "language", language)
+	cfg.save(SETTINGS_FILE)
+
+func load_settings():
+	var cfg = ConfigFile.new()
+	if cfg.load(SETTINGS_FILE) == OK:
+		master_volume = cfg.get_value("Audio", "master", 1.0)
+		music_volume = cfg.get_value("Audio", "music", 1.0)
+		sfx_volume = cfg.get_value("Audio", "sfx", 1.0)
+		language = cfg.get_value("Language", "language", OS.get_locale().substr(0,2))
+	apply_all_volumes()
+	apply_language()
+func apply_language():
+	var lang2 := language.substr(0, 2)
+	if lang2 not in LANGUAGE_CODES:
+		lang2 = "en"
+	language = lang2
+	TranslationServer.set_locale(language)
+
+func set_language(lang: String):
+	language = lang.substr(0, 2)
+	apply_language()
+	save_settings()
 
 var is_animating
 var STOPHOVER = false

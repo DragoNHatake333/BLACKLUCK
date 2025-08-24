@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cp3836185v15m"]
+[gd_scene load_steps=9 format=3 uid="uid://cp3836185v15m"]
 
 [ext_resource type="Script" uid="uid://cjog8ivxe4c6f" path="res://Scripts/pause_menu.gd" id="1_k0w1u"]
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://Scenes/MainMenu/Shaders/Background.gdshader" id="2_k0w1u"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="3_1och7"]
+[ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="4_bpi0q"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k0w1u"]
 shader = ExtResource("2_k0w1u")
@@ -149,6 +150,10 @@ text = "pausemenu_btn_mainmenu"
 libraries = {
 &"": SubResource("AnimationLibrary_bpi0q")
 }
+
+[node name="ClickSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_bpi0q")
+bus = &"SFX"
 
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/Main Menu" to="." method="_on_main_menu_pressed"]
