@@ -328,6 +328,7 @@ func game_won():
 	var res = await pressedSN   # returns emitted args as an Array
 	var choice = res[0]
 	if choice == "n":
+		$"../Start/ShakiShaki".visible = false
 		start = true
 		$"../Start/Owe".visible = false
 		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
@@ -355,7 +356,6 @@ func game_won():
 		$"../SoundManager/escape".play()
 		Blackluck.add_theme_color_override("font_color", "f6b400")
 		await get_tree().create_timer(10).timeout
-		$"../Start/ShakiShaki".visible = false
 		$"../End/credits".visible = true
 		var tween3 = get_tree().create_tween()
 		tween3.tween_property($"../SoundManager/credits", "volume_db", 2.811, 5.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
