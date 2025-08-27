@@ -125,22 +125,28 @@ func _ready() -> void:
 	$"../Start/sms".visible = false
 	#Tutorial
 	Blackluck.visible = false
+	$"../Start/Tutorial/Frame1".visible = true
 	emit_signal("callTyping")
-	$"../Start/Tutorial/BlackluckP1".visible = true
+	$"../Start/Tutorial/Blackluck".visible = true
+	$"../Start/Tutorial/Blackluck2".visible = true
+	$"../Start/Tutorial/Blackluck3".visible = true
+	$"../Start/Tutorial/Blackluck4".visible = true
+	$"../Start/Tutorial/Blackluck5".visible = true
 	await pressedContinue
 	mouseOn()
-	$"../Start/Tutorial/BlackluckP1".visible = false
-	$"../Start/Tutorial/BlackluckP2".visible = true
 	emit_signal("callTyping")
+	$"../Start/Tutorial/TutoRevolver".visible = true
+	$"../Start/Tutorial/Cylinder".visible = true
+	$"../Start/Tutorial/Frame1".visible = false
+	$"../Start/Tutorial/Blackluck".visible = false
+	$"../Start/Tutorial/Blackluck2".visible = false
+	$"../Start/Tutorial/Blackluck3".visible = false
+	$"../Start/Tutorial/Blackluck4".visible = false
+	$"../Start/Tutorial/Blackluck5".visible = false
 	await pressedContinue
 	mouseOn()
-	$"../Start/Tutorial/BlackluckP2".visible = false
-	$"../Start/Tutorial/BlackluckP3".visible = true
-	emit_signal("callTyping")
-	await pressedContinue
-	$"../Start/Tutorial/BlackluckP3".visible = false
-	mouseOn()
-	$"../Start/Tutorial/BlackluckP3".visible = false
+	$"../Start/Tutorial/Cylinder".visible = false
+	$"../Start/Tutorial/TutoRevolver".visible = false
 	Blackluck.visible = true
 	emit_signal("callTyping")
 	Blackluck.text = blackluckspam
