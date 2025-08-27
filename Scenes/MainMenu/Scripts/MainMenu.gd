@@ -4,7 +4,6 @@ extends Control
 @onready var play_button = $PlayButton
 @onready var settings_button = $OptionsButton
 @onready var title_label = $PlayButton # Asumo que es el mismo nodo PlayButton el que muestra el título
-@onready var settings_button_sprite = $Cylinder
 @onready var click_sound = $ClickSound
 
 var settings_menu_scene = preload("res://Scenes/settings_menu.tscn") # Carga previa de la escena de configuración
@@ -35,7 +34,6 @@ func _on_settings_pressed():
 		play_button.hide()
 		settings_button.hide()
 		title_label.hide() 
-		settings_button_sprite.hide()
 		# Instancia la escena de configuración y añádela al árbol
 		current_settings_menu_instance = settings_menu_scene.instantiate()
 		current_settings_menu_instance.from_pause = false
@@ -55,4 +53,3 @@ func _on_settings_menu_closed(_reopen_pause: bool):
 	play_button.show()
 	settings_button.show()
 	title_label.show() # Muestra el título de nuevo
-	settings_button_sprite.show() #Muestra el sprite del boton de config
