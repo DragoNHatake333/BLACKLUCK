@@ -64,8 +64,6 @@ func _input(event):
 
 func _ready() -> void:
 	starter = ownsTurn
-	Globals.canvasModulate = true
-	$"../Start/BlackBackground".visible = true
 	Globals.debtLost = false
 	if OS.has_environment("USERNAME"): # Windows
 		username = OS.get_environment("USERNAME")
@@ -73,103 +71,105 @@ func _ready() -> void:
 		username = OS.get_environment("USER")
 	else:
 		username = "Player"
-	randomize()
-	Globals.double = false
-	Globals.playerHP = 3
 	money = 0
+	randomize()
+	$"../Start/BlackBackground".color = Color.BLACK
+	Globals.double = false
+	Globals.startanim = true
+	Globals.playerHP = 3
 	Globals.aiHP = 3
 	bgm.play()
 	bgm.volume_db = -99
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("wiggleMult", 0.0015)
 	$"../CanvasLayer/ColorRect".material.set_shader_parameter("chromaticAberrationOffset", 0.001)
+	$"../CanvasLayer/ColorRect".visible = false
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".position = Vector3(-16.99, 6.725, 2.673)
 	$"../3DViewport/SubViewportContainer/SubViewport/Sketchfab_Scene".rotation_degrees = Vector3(90, -150, 0)
-	if Globals.firstanim == true:
-		Globals.startanim = true
-		$"../Start/BlackBackground".color = Color.BLACK
-		$"../CanvasLayer/ColorRect".visible = false
-		$"../RevolverLight".visible = false
-		$"../AiTurnLight".visible = false
-		$"../PlayerTurnLight".visible = false
-		BlackBackground.visible = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
-		emit_signal("callSoundManager", "lightOn")
-		$"../CanvasLayer/ColorRect".visible = true
-		$"../SoundManager/firstBGM".playing = true
-		Globals.canvasModulate = false
-		await get_tree().create_timer(1.0).timeout
-		#Intro
-		mouseOn()
-		emit_signal("callTyping")
-		start = false
-		Blackluck.text = tr("start_text_1") + "\n" + str(username)
-		Blackluck.visible = true
-		await pressedContinue
-		Blackluck.autowrap_mode = TextServer.AUTOWRAP_OFF
-		#Second
-		mouseOn()
-		emit_signal("callTyping")
-		Blackluck.text = tr("start_text_2") + "\n" + tr("start_text_3") + "\n" + tr("start_text_4")
-		await pressedContinue
-		mouseOn()
-		emit_signal("callTyping")
-		Blackluck.text = tr("start_text_5") + "\n" + "400.000$"
-		await pressedContinue
-		mouseOn()
-		emit_signal("callTyping")
-		Blackluck.text = tr("start_text_6") + "\n" + tr("start_text_7")
-		await pressedContinue
-		mouseOn()
-		emit_signal("callTyping")
-		Blackluck.visible = false
-		$"../Start/sms".visible = true
-		await pressedContinue
-		mouseOn()
-		$"../Start/sms".visible = false
-		#Tutorial
-		Blackluck.visible = false
-		$"../Start/Tutorial/Frame1".visible = true
-		emit_signal("callTyping")
-		$"../Start/Tutorial/Blackluck".visible = true
-		$"../Start/Tutorial/Blackluck2".visible = true
-		$"../Start/Tutorial/Blackluck3".visible = true
-		$"../Start/Tutorial/Blackluck4".visible = true
-		$"../Start/Tutorial/Blackluck5".visible = true
-		await pressedContinue
-		mouseOn()
-		emit_signal("callTyping")
-		$"../Start/Tutorial/TutoRevolver".visible = true
-		$"../Start/Tutorial/Cylinder".visible = true
-		$"../Start/Tutorial/Frame1".visible = false
-		$"../Start/Tutorial/Blackluck".visible = false
-		$"../Start/Tutorial/Blackluck2".visible = false
-		$"../Start/Tutorial/Blackluck3".visible = false
-		$"../Start/Tutorial/Blackluck4".visible = false
-		$"../Start/Tutorial/Blackluck5".visible = false
-		await pressedContinue
-		mouseOn()
-		$"../Start/Tutorial/Cylinder".visible = false
-		$"../Start/Tutorial/TutoRevolver".visible = false
-		Blackluck.visible = true
-		emit_signal("callTyping")
-		Blackluck.text = blackluckspam
-		await pressedContinue
-		mouseOn()
-		start = true
-		await get_tree().process_frame
-		emit_signal("callSoundManager", "lightOff")
-		$"../SoundManager/firstBGM".autoplay = false
-		$"../SoundManager/firstBGM".playing = false
-		$"../Start/ShakiShaki".visible = false
-		Blackluck.visible = false
-		await get_tree().create_timer(3.0).timeout
-		Globals.firstanim = true
+	$"../RevolverLight".visible = false
+	$"../AiTurnLight".visible = false
+	$"../PlayerTurnLight".visible = false
+	BlackBackground.visible = true
+	Input.set_mouse_mode(Input.MOUSE_MODE_HIDDEN)
+	emit_signal("callSoundManager", "lightOn")
+	$"../CanvasLayer/ColorRect".visible = true
+	$"../SoundManager/firstBGM".playing = true
+	Globals.canvasModulate = false
+	await get_tree().create_timer(1.0).timeout
+	#Intro
+	mouseOn()
+	emit_signal("callTyping")
+	start = false
+	Blackluck.text = tr("start_text_1") + "\n" + str(username)
+	Blackluck.visible = true
+	await pressedContinue
+	Blackluck.autowrap_mode = TextServer.AUTOWRAP_OFF
+	#Second
+	mouseOn()
+	emit_signal("callTyping")
+	Blackluck.text = tr("start_text_2") + "\n" + tr("start_text_3") + "\n" + tr("start_text_4")
+	await pressedContinue
+	mouseOn()
+	emit_signal("callTyping")
+	Blackluck.text = tr("start_text_5") + "\n" + "400.000$"
+	await pressedContinue
+	mouseOn()
+	emit_signal("callTyping")
+	Blackluck.text = tr("start_text_6") + "\n" + tr("start_text_7")
+	await pressedContinue
+	mouseOn()
+	emit_signal("callTyping")
+	Blackluck.visible = false
+	$"../Start/sms".visible = true
+	await pressedContinue
+	mouseOn()
+	$"../Start/sms".visible = false
+	#Tutorial
+	Blackluck.visible = false
+	$"../Start/Tutorial/Frame1".visible = true
+	emit_signal("callTyping")
+	$"../Start/Tutorial/Blackluck".visible = true
+	$"../Start/Tutorial/Blackluck2".visible = true
+	$"../Start/Tutorial/Blackluck3".visible = true
+	$"../Start/Tutorial/Blackluck4".visible = true
+	$"../Start/Tutorial/Blackluck5".visible = true
+	await pressedContinue
+	mouseOn()
+	emit_signal("callTyping")
+	$"../Start/Tutorial/TutoRevolver".visible = true
+	$"../Start/Tutorial/Cylinder".visible = true
+	$"../Start/Tutorial/Frame1".visible = false
+	$"../Start/Tutorial/Blackluck".visible = false
+	$"../Start/Tutorial/Blackluck2".visible = false
+	$"../Start/Tutorial/Blackluck3".visible = false
+	$"../Start/Tutorial/Blackluck4".visible = false
+	$"../Start/Tutorial/Blackluck5".visible = false
+	await pressedContinue
+	mouseOn()
+	$"../Start/Tutorial/Cylinder".visible = false
+	$"../Start/Tutorial/TutoRevolver".visible = false
+	Blackluck.visible = true
+	emit_signal("callTyping")
+	Blackluck.text = blackluckspam
+	await pressedContinue
+	mouseOn()
+	start = true
+	await get_tree().process_frame
+	emit_signal("callSoundManager", "lightOff")
+	$"../SoundManager/firstBGM".autoplay = false
+	$"../SoundManager/firstBGM".playing = false
+	$"../Start/ShakiShaki".visible = false
+	Blackluck.visible = false
+	await get_tree().create_timer(3.0).timeout
+	emit_signal("callSoundManager", "lightOn")
+	BlackBackground.visible = false
+	Globals.canvasModulate = true
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	$"../RevolverLight".visible = true
 	check_candle_lighting("restart", "ai")
 	check_candle_lighting("restart", "player")
 	var tween2 = create_tween()
 	tween2.tween_property(bgm, "volume_db", -15.215, 1.5).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN)
+	Globals.canvasModulate = true
 	Globals.playerSum = 0
 	Globals.playerHand = []
 	Globals.playerAmount = 0
@@ -185,9 +185,6 @@ func _ready() -> void:
 	Globals.startanim = false
 	mouseleft.visible = false
 	mouseleftstop = true
-	await get_tree().create_timer(1.0).timeout
-	$"../Start/BlackBackground".visible = false
-	emit_signal("callSoundManager", "lightOn")
 	game_logic()
 	
 func game_logic():
