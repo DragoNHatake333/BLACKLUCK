@@ -123,7 +123,7 @@ var centerHand = []
 var centerCards = 0
 var centerGive = 0
 var newcardGive = []
-
+var firstanim = false
 
 var deck = {
 	"ace_of_clubs": [1, "res://Cards/ace_of_clubs.png"],
