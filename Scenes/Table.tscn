@@ -1,4 +1,4 @@
-[gd_scene load_steps=92 format=3 uid="uid://byadrotxvbue2"]
+[gd_scene load_steps=90 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
@@ -28,7 +28,6 @@
 [ext_resource type="Script" uid="uid://bas6nkpltdexr" path="res://Scripts/Deck.gd" id="20_33e7s"]
 [ext_resource type="AudioStream" uid="uid://1byc3gese8f" path="res://Assets/Sound/crescendo.mp3" id="20_id2c4"]
 [ext_resource type="AudioStream" uid="uid://4h3558jbo0fv" path="res://Assets/Sound/loops/1.mp3" id="21_7pc0u"]
-[ext_resource type="Texture2D" uid="uid://lmq2ywiwpv2b" path="res://Assets/Deck.png" id="21_x0dtf"]
 [ext_resource type="Script" uid="uid://bnq3r07d80fuy" path="res://Scripts/InputManager.gd" id="22_82s5k"]
 [ext_resource type="Script" uid="uid://bxw3gjsidrrb0" path="res://Scripts/SoundManager.gd" id="23_hfij1"]
 [ext_resource type="AudioStream" uid="uid://cwn2fm4lc0vd5" path="res://Assets/Sound/revolverShot1.mp3" id="24_02xof"]
@@ -130,9 +129,6 @@ border_width_top = 20
 border_width_right = 20
 border_width_bottom = 20
 border_color = Color(1, 0, 0, 1)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_3r8my"]
-size = Vector2(178, 262)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ontce"]
 albedo_texture = ExtResource("4_p8qel")
@@ -1616,29 +1612,6 @@ texture = ExtResource("24_tye0p")
 z_index = -2
 position = Vector2(2075, 518)
 script = ExtResource("20_33e7s")
-
-[node name="Sprite2D" type="Sprite2D" parent="Deck"]
-z_index = -2
-texture = ExtResource("21_x0dtf")
-
-[node name="Area2D" type="Area2D" parent="Deck"]
-z_index = -2
-collision_layer = 128
-collision_mask = 128
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Deck/Area2D"]
-z_index = -2
-shape = SubResource("RectangleShape2D_3r8my")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="Deck"]
-z_index = -2
-offset_left = -86.0
-offset_top = -129.0
-scale = Vector2(2, 2)
-text = "0"
-horizontal_alignment = 1
-vertical_alignment = 1
-metadata/_edit_use_anchors_ = true
 
 [node name="InputManager" type="Node2D" parent="."]
 script = ExtResource("22_82s5k")

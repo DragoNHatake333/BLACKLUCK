@@ -1,8 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://byadrotxvbue2"]
-
-[ext_resource type="Script" path="res://Scripts/Crupier.gd" id="1_cvahq"]
-
-[node name="Node2D" type="Node2D"]
-
-[node name="Crupier" type="Node" parent="."]
-script = ExtResource("1_cvahq")

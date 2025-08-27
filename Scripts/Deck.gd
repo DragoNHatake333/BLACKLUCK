@@ -6,8 +6,6 @@ const cards_that_shoud_be_in_center = 3
 var cards_to_deal = 0
 var drawing_cards = false
 signal callSoundManager
-func _ready() -> void:
-	$RichTextLabel.text = str(Globals.centerDeck.size())
 
 func _on_game_manager_call_deck() -> void:
 	print("Deck: Deck called!")
@@ -48,11 +46,10 @@ func draw_card(reps):
 		var card_drawn_name = Globals.centerDeck[0]
 		Globals.centerDeck.erase(card_drawn_name)
 		Globals.cards_in_center_hand += 1
-		$RichTextLabel.text = str(Globals.centerDeck.size())
 
 		var card_scene = preload(CARD_SCENE_PATH)
 		var new_card = card_scene.instantiate()
-		var card_image_path = "res://Cards2/" + card_drawn_name + ".png"
+		var card_image_path = "res://Cards/" + card_drawn_name + ".png"
 		new_card.get_node("CardImage").texture = load(card_image_path)
 		new_card.name = card_drawn_name
 		$"../CardManager".add_child(new_card)
