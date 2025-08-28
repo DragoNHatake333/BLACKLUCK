@@ -1,7 +1,6 @@
 [gd_scene load_steps=90 format=3 uid="uid://byadrotxvbue2"]
 
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
-[ext_resource type="Texture2D" uid="uid://bjrjocgf4xqbj" path="res://Assets/bitmap.png" id="2_7pc0u"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
 [ext_resource type="Shader" uid="uid://dxlhdtl32qx8l" path="res://Assets/Shaders/glitch.gdshader" id="2_wpo3d"]
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
@@ -10,16 +9,17 @@
 [ext_resource type="Texture2D" uid="uid://cu5t64l1dw1hu" path="res://Assets/sms/smsEN.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Texture2D" uid="uid://cv7c1ialapib6" path="res://Assets/mouseleft.png" id="7_gj4xm"]
-[ext_resource type="Script" path="res://Scripts/mouseleft.gd" id="8_kqm07"]
+[ext_resource type="Script" uid="uid://bvkua11fhfx7x" path="res://Scripts/mouseleft.gd" id="8_kqm07"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="9_hfij1"]
+[ext_resource type="Texture2D" uid="uid://see78urwc0kp" path="res://Assets/Tuto.png" id="9_l5dr1"]
 [ext_resource type="Script" uid="uid://ceo7fkv14pdgi" path="res://Scripts/date.gd" id="10_hfij1"]
 [ext_resource type="Script" uid="uid://c8eypwiqrmu8i" path="res://Scripts/debt.gd" id="12_nlwdp"]
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="14_b1apg"]
-[ext_resource type="Script" path="res://Scripts/credits.gd" id="15_adfku"]
+[ext_resource type="Script" uid="uid://t87k7w2wtosv" path="res://Scripts/credits.gd" id="15_adfku"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="16_wpo3d"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="17_7pc0u"]
@@ -1132,7 +1132,6 @@ uppercase = true
 script = ExtResource("4_8w7an")
 
 [node name="BlackBackground" type="ColorRect" parent="Start"]
-visible = false
 z_index = 1022
 offset_right = 1917.0
 offset_bottom = 1080.0
@@ -1148,7 +1147,7 @@ texture = ExtResource("6_02xof")
 [node name="mouseleft" type="Sprite2D" parent="Start"]
 visible = false
 z_index = 4096
-position = Vector2(1759.12, 960.435)
+position = Vector2(1806.51, 982.2)
 scale = Vector2(6.915, 6.915)
 texture = ExtResource("7_gj4xm")
 script = ExtResource("8_kqm07")
@@ -1158,8 +1157,9 @@ script = ExtResource("8_kqm07")
 [node name="Frame1" type="Sprite2D" parent="Start/Tutorial"]
 visible = false
 z_index = 4095
-position = Vector2(960, 540)
-texture = ExtResource("2_7pc0u")
+position = Vector2(1361.75, 540)
+scale = Vector2(1.08, 1.08)
+texture = ExtResource("9_l5dr1")
 
 [node name="Blackluck" type="Label" parent="Start/Tutorial"]
 visible = false
@@ -1220,15 +1220,19 @@ modulate = Color(0, 0, 0, 1)
 z_index = 4096
 material = SubResource("ShaderMaterial_nlvap")
 anchors_preset = -1
-anchor_left = 0.545313
-anchor_top = 0.12037
-anchor_right = 0.60625
-anchor_bottom = 0.188889
+anchor_left = 0.509503
+anchor_top = 0.134838
+anchor_right = 0.600648
+anchor_bottom = 0.203357
+offset_left = -15.0
+offset_top = 26.11
+offset_right = 15.0
+offset_bottom = 26.11
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "game_text_tutorial_life"
+text = "REVOLVER"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1239,15 +1243,16 @@ modulate = Color(0, 0, 0, 1)
 z_index = 4096
 material = SubResource("ShaderMaterial_nlvap")
 anchors_preset = -1
-anchor_left = 0.719271
-anchor_top = 0.148148
-anchor_right = 0.780208
-anchor_bottom = 0.216667
+anchor_left = 0.643005
+anchor_top = 0.0871065
+anchor_right = 0.778422
+anchor_bottom = 0.226921
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "game_text_tutorial_cards"
+text = "MANO
+RIVAL"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1258,16 +1263,15 @@ modulate = Color(0, 0, 0, 1)
 z_index = 4096
 material = SubResource("ShaderMaterial_nlvap")
 anchors_preset = -1
-anchor_left = 0.528646
-anchor_top = 0.750926
-anchor_right = 0.635417
-anchor_bottom = 0.819444
-offset_left = 6.10352e-05
+anchor_left = 0.596518
+anchor_top = 0.783306
+anchor_right = 0.703289
+anchor_bottom = 0.851824
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "game_text_tutorial_revolver"
+text = "MANO"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true
@@ -1278,15 +1282,37 @@ modulate = Color(0, 0, 0, 1)
 z_index = 4096
 material = SubResource("ShaderMaterial_nlvap")
 anchors_preset = -1
-anchor_left = 0.696354
-anchor_top = 0.858333
-anchor_right = 0.803125
-anchor_bottom = 0.926852
+anchor_left = 0.831919
+anchor_top = 0.790944
+anchor_right = 0.93869
+anchor_bottom = 0.859463
+offset_top = 0.00500488
+offset_bottom = 0.00500488
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_fonts/font = ExtResource("3_id2c4")
 theme_override_font_sizes/font_size = 75
-text = "game_text_tutorial_cardslot"
+text = "VIDA"
+horizontal_alignment = 1
+script = ExtResource("4_8w7an")
+metadata/_edit_use_anchors_ = true
+
+[node name="Blackluck6" type="Label" parent="Start/Tutorial"]
+visible = false
+modulate = Color(0, 0, 0, 1)
+z_index = 4096
+material = SubResource("ShaderMaterial_nlvap")
+anchors_preset = -1
+anchor_left = 0.777292
+anchor_top = 0.155824
+anchor_right = 0.884063
+anchor_bottom = 0.224343
+offset_bottom = -1.52588e-05
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_font_sizes/font_size = 75
+text = "CENTRO"
 horizontal_alignment = 1
 script = ExtResource("4_8w7an")
 metadata/_edit_use_anchors_ = true

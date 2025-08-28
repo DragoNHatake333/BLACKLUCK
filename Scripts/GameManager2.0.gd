@@ -132,6 +132,7 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck3".visible = true
 	$"../Start/Tutorial/Blackluck4".visible = true
 	$"../Start/Tutorial/Blackluck5".visible = true
+	$"../Start/Tutorial/Blackluck6".visible = true
 	await pressedContinue
 	mouseOn()
 	emit_signal("callTyping")
@@ -143,6 +144,7 @@ func _ready() -> void:
 	$"../Start/Tutorial/Blackluck3".visible = false
 	$"../Start/Tutorial/Blackluck4".visible = false
 	$"../Start/Tutorial/Blackluck5".visible = false
+	$"../Start/Tutorial/Blackluck6".visible = false
 	await pressedContinue
 	mouseOn()
 	$"../Start/Tutorial/Cylinder".visible = false
