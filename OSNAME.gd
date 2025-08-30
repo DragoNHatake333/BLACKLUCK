@@ -5,7 +5,7 @@ var username
 
 
 func _ready() -> void:
-	var username = ""
+	username = ""
 	if OS.has_environment("USERNAME"): # Windows
 		username = OS.get_environment("USERNAME")
 	elif OS.has_environment("USER"): # Linux / macOS

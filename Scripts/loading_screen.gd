@@ -12,8 +12,8 @@ signal bullet_loaded(step: int)
 
 var bullet_step = 0
 
-func _process(delta: float) -> void:
-	var scene_load = ResourceLoader.load_threaded_get_status(sceneName, progress)
+func _process(_delta: float) -> void:
+	scene_load = ResourceLoader.load_threaded_get_status(sceneName, progress)
 	var pct = progress[0]  # 0.0 to 1.0
 
 	var target_step = int(floor(pct * 6))  # 0 to 6

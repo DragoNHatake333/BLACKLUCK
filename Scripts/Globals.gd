@@ -72,7 +72,6 @@ var aiTurn = false
 var cards_in_center_hand = 0
 var playerRevolverPressed = false
 var isCardDragging = false
-signal callSoundManager
 var startanim = false
 var double = false
 var debtLost = false

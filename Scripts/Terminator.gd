@@ -18,9 +18,7 @@ var card3Value
 var card3Name
 var selected_card_node
 var countsRevolver = 0
-signal callSoundManager(sound)
 signal callAnimationManager(anime, who, what)
-signal spinRevolver
 
 
 func _on_game_manager_call_ai() -> void:
