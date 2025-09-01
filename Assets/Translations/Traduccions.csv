@@ -23,22 +23,33 @@ game_text_debt,DEUDA: ,DEBT: ,DEUTE:
 game_text_debt_lost,INFO. CLASIFICADA,CLASSIFIED INFO,INFO. CLASSIFICADA
 game_text_debt1,GANANCIAS:,EARNINGS:,GUANYS:
 game_text_date,DESAPARECIDO EL:,"WENT ""MISSING"" ON:",DESAPAREGUT EL:
-game_text_tutorial,"Toma o entrega cartas para
-conseguir que tu mano supere en
-valor la de tu rival.
+game_text_tutorial,"Para ganar, debes conseguir que la suma de tus cartas sea mayor que la del rival arrastrando cartas del centro hacia cualquier mano.
 
-El revólver te permite reiniciar la pila.","Take or give cards to make
-your hand exceed your
-rival’s hand in value.
+Cuando ambos tenéis cinco cartas se determina el ganador.","To win, you must ensure that the sum of your cards is greater than that of your opponent by dragging cards from the centre to either hand.
 
-The revolver lets you reset the pile.","Agafa o entrega cartes per 
-aconseguir que la teva mà superi en 
-valor la del teu rival.
+When both players have five cards, the winner is determined.","Per a guanyar, has d'aconseguir que la suma de les teves cartes sigui major que la del rival arrossegant cartes del centre cap a qualsevol mà.
 
-El revòlver et permet reiniciar el piló."
+Quan tots dos teniu cinc cartes es determina el guanyador."
+game_text_tutorial2,"El revolver está cargado al azar con 1 bala.
+
+Una vez por turno puedes arriesgarte a dispararte, si sobrevives se reinician las cartas del centro.
+
+Cada tiro fallido acerca más la bala. El revolver solo se reinicia al final de la ronda.","The revolver is randomly loaded with 1 bullet.
+
+Once per turn, you can risk shooting yourself. If you survive, the cards in the centre are reset.
+
+Each missed shot brings the bullet closer. The revolver is only reset at the end of the round.","El revòlver està carregat a l'atzar amb 1 bala.
+
+Una vegada per torn pots arriscar-te a disparar-te, si sobrevius es reinicien les cartes del centre.
+
+Cada tir fallit acosta més la bala. El revòlver només es reinicia al final de la ronda."
 game_text_tutorial_life,VIDAS,LIVES,VIDES
-game_text_tutorial_cards,PILA,PILE,PILÓ
+game_text_tutorial_center,CENTRO,CENTRE,CENTRE
 game_text_tutorial_revolver,REVÓLVER,REVOLVER,REVÒLVER
+game_text_tutorial_rival_cardslot,"MANO
+RIVAL","RIVAL
+HAND","MÀ
+RIVAL"
 game_text_tutorial_cardslot,MANO,HAND,MÀ
 pausemenu_btn_resume,CONTINUAR,CONTINUE,CONTINUAR
 pausemenu_btn_mainmenu,MENÚ,MENU,MENÚ
