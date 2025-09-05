@@ -1,7 +1,7 @@
 keys,es,en,ca
 options_tag_master,GENERAL,MASTER,GENERAL
 options_tag_music,MÚSICA,MUSIC,MÚSICA
-options_tag_sfx,EFECTOS,SFX,EFECTES
+options_tag_sfx,EFECTOS,SFX    ,EFECTES
 options_btn_back,ATRÁS,BACK,ENRERE
 options_btn_quit,SALIR DEL JUEGO,QUIT GAME,SORTIR DEL JOC
 options_tag_language,IDIOMA:,LANGUAGE:,IDIOMA:

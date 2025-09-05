@@ -2,13 +2,13 @@
 extends PanelContainer
 
 # Volumen
-@onready var volume_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer/MasterSlider
+@onready var volume_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer/Control/MasterSlider
 @onready var volume_label = $Panel/VBoxContainer/VBoxContainer/HBoxContainer/VolumeLabel
 
-@onready var music_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer2/MusicSlider
+@onready var music_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer2/Control/MusicSlider
 @onready var music_label = $Panel/VBoxContainer/VBoxContainer/HBoxContainer2/MusicLabel
 
-@onready var sfx_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer3/SFXSlider
+@onready var sfx_slider = $Panel/VBoxContainer/VBoxContainer/HBoxContainer3/Control/SFXSlider
 @onready var sfx_label = $Panel/VBoxContainer/VBoxContainer/HBoxContainer3/SFXLabel
 @onready var click_sound = $"../ClickSound"
 

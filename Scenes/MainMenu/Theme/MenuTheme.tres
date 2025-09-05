@@ -1,6 +1,8 @@
-[gd_resource type="Theme" load_steps=11 format=3 uid="uid://djopgy1a0qxka"]
+[gd_resource type="Theme" load_steps=13 format=3 uid="uid://djopgy1a0qxka"]
 
 [ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="1_idggh"]
+[ext_resource type="Texture2D" uid="uid://cfv6pjn8k4xmx" path="res://Assets/Slider icon 2.png" id="1_jtr0b"]
+[ext_resource type="Texture2D" uid="uid://dp7ax8styswui" path="res://Assets/Slider icon 3.png" id="1_uyc16"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_on2dp"]
 
@@ -29,6 +31,9 @@ Button/styles/focus = SubResource("StyleBoxEmpty_poy0d")
 Button/styles/hover = SubResource("StyleBoxEmpty_ib1cu")
 Button/styles/normal = SubResource("StyleBoxEmpty_1oae7")
 Button/styles/pressed = SubResource("StyleBoxEmpty_pxycv")
+HSlider/icons/grabber = ExtResource("1_uyc16")
+HSlider/icons/grabber_disabled = null
+HSlider/icons/grabber_highlight = ExtResource("1_jtr0b")
 OptionButton/colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
 Panel/styles/panel = SubResource("StyleBoxEmpty_idggh")
 PanelContainer/styles/panel = SubResource("StyleBoxEmpty_jtr0b")
