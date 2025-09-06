@@ -4,9 +4,9 @@
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_tma8a"]
 [ext_resource type="Shader" uid="uid://cirolil5iq67l" path="res://Scenes/MainMenu/Shaders/Background.gdshader" id="3_tpenk"]
 [ext_resource type="AudioStream" uid="uid://cd74muqbnjqtb" path="res://Scenes/MainMenu/Audio/Night Break.mp3" id="4_b4ika"]
-[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="5_ve1ib"]
 [ext_resource type="AudioStream" uid="uid://bouadfgtppss7" path="res://Scenes/MainMenu/UI AUDIO/529123__mattruthsound__chair-straining-under-stress-percussion.wav" id="6_1b8fn"]
 [ext_resource type="Shader" uid="uid://bd3f84fyfi7fm" path="res://Scenes/MainMenu/Shaders/BlacklucktitleVARIABLE.gdshader" id="6_t4xtq"]
+[ext_resource type="FontFile" uid="uid://cobatu4nnafm8" path="res://Scenes/MainMenu/Fonts/Humane-ExtraBold.otf" id="7_nixa7"]
 [ext_resource type="PackedScene" uid="uid://d1a3navgfevsn" path="res://Scenes/settings_menu.tscn" id="8_qxrut"]
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="10_nixa7"]
 [ext_resource type="Texture2D" uid="uid://csut1hjmdqoso" path="res://Assets/jijijjagrrrrr.png" id="12_t4xtq"]
@@ -108,8 +108,8 @@ grow_vertical = 2
 theme = ExtResource("1_tma8a")
 theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/font_color = Color(0.458824, 0, 0, 1)
-theme_override_fonts/font = ExtResource("5_ve1ib")
-theme_override_font_sizes/font_size = 490
+theme_override_fonts/font = ExtResource("7_nixa7")
+theme_override_font_sizes/font_size = 580
 text = "BLACKLUCK"
 icon_alignment = 1
 
@@ -154,6 +154,7 @@ grow_horizontal = 0
 grow_vertical = 2
 scale = Vector2(0.21, 0.21)
 theme_override_colors/font_color = Color(0.46, 0.046, 0.046, 1)
+theme_override_fonts/font = ExtResource("7_nixa7")
 theme_override_font_sizes/font_size = 350
 text = "options_btn"
 script = SubResource("GDScript_nixa7")

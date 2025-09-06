@@ -286,7 +286,7 @@ func game_lost():
 	SceneManager.change_scene("res://Scenes/MainMenu/Scenes/MainMenu.tscn")
 	
 func game_won():
-	var moneywon = randi_range(100000, 150000)
+	var moneywon = 100000
 	Globals.startanim = true
 	var tween = get_tree().create_tween()
 	tween.tween_property(bgm, "volume_db", -100, 1.0).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_OUT)
@@ -309,7 +309,7 @@ func game_won():
 	#Blackluck.text = tr("game_text_win")
 	#await pressedContinue
 	emit_signal("callTyping")
-	Blackluck.text = "+" + str(moneywon) + "$"
+	Blackluck.text = "+" + format_money(moneywon) + "$"
 	await pressedContinue
 	Blackluck.visible = false
 	$"../Start/HBoxContainer".visible = true
@@ -324,7 +324,7 @@ func game_won():
 		$"../Start/HBoxContainer/No".disabled = true
 		$"../Start/Owe".visible = true
 		#$"../Start/Owe".add_theme_color_override("font_color", "410000")
-		$"../Start/Owe".text = tr("game_text_owing") + "\n" + str(neededMoney-money) + "$"
+		$"../Start/Owe".text = tr("game_text_owing") + "\n" + format_money(neededMoney-money) + "$"
 	# Wait until either S or N is pressed
 	Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 	var res = await pressedSN   # returns emitted args as an Array
@@ -639,3 +639,14 @@ func mouseOn():
 	mouseleft.visible = false
 	await get_tree().create_timer(5.0).timeout
 	mouseleft.visible = true
+
+func format_money(value: int) -> String:
+	var s := str(value)
+	var result := ""
+	var count := 0
+	for i in range(s.length() - 1, -1, -1):
+		result = s[i] + result
+		count += 1
+		if count % 3 == 0 and i != 0:
+			result = "." + result
+	return result

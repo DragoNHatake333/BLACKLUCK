@@ -3,23 +3,23 @@
 [ext_resource type="Shader" uid="uid://dfvihl7peqgch" path="res://Assets/Shaders/crt_effect.gdshader" id="1_6bpmn"]
 [ext_resource type="Shader" uid="uid://bwqbejaosf0t4" path="res://Scenes/MainMenu/Shaders/Blacklucktitle.gdshader" id="2_ov01g"]
 [ext_resource type="Shader" uid="uid://dxlhdtl32qx8l" path="res://Assets/Shaders/glitch.gdshader" id="2_wpo3d"]
-[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="3_id2c4"]
 [ext_resource type="Script" uid="uid://dqars3ne13xxf" path="res://Scripts/typing.gd" id="4_8w7an"]
 [ext_resource type="Texture2D" uid="uid://osq8j671cuba" path="res://Assets/table/Taula9.png" id="4_p8qel"]
 [ext_resource type="Texture2D" uid="uid://cu5t64l1dw1hu" path="res://Assets/sms/smsEN.png" id="6_02xof"]
 [ext_resource type="Texture2D" uid="uid://0av7meevi7r1" path="res://Assets/Screenshot_20250812_114606.png" id="7_33e7s"]
 [ext_resource type="Texture2D" uid="uid://cv7c1ialapib6" path="res://Assets/mouseleft.png" id="7_gj4xm"]
-[ext_resource type="Script" uid="uid://bvkua11fhfx7x" path="res://Scripts/mouseleft.gd" id="8_kqm07"]
+[ext_resource type="Script" path="res://Scripts/mouseleft.gd" id="8_kqm07"]
 [ext_resource type="Script" uid="uid://dqe7imqd76k5i" path="res://Scripts/cylinder.gd" id="8_x0dtf"]
 [ext_resource type="Script" uid="uid://b8efxlgx1esl3" path="res://OSNAME.gd" id="9_82s5k"]
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="9_hfij1"]
 [ext_resource type="Texture2D" uid="uid://see78urwc0kp" path="res://Assets/Tuto.png" id="9_l5dr1"]
+[ext_resource type="FontFile" uid="uid://cobatu4nnafm8" path="res://Scenes/MainMenu/Fonts/Humane-ExtraBold.otf" id="10_gj4xm"]
 [ext_resource type="Script" uid="uid://ceo7fkv14pdgi" path="res://Scripts/date.gd" id="10_hfij1"]
 [ext_resource type="Script" uid="uid://c8eypwiqrmu8i" path="res://Scripts/debt.gd" id="12_nlwdp"]
 [ext_resource type="Script" uid="uid://c1fpwwp36lmg2" path="res://Scripts/GameManager2.0.gd" id="13_id2c4"]
 [ext_resource type="Script" uid="uid://dephdxcef2x4o" path="res://Scripts/Player.gd" id="14_8w7an"]
 [ext_resource type="FontFile" uid="uid://7rmlawnyr3q5" path="res://Scenes/MainMenu/Fonts/Silver.ttf" id="14_b1apg"]
-[ext_resource type="Script" uid="uid://t87k7w2wtosv" path="res://Scripts/credits.gd" id="15_adfku"]
+[ext_resource type="Script" path="res://Scripts/credits.gd" id="15_adfku"]
 [ext_resource type="Script" uid="uid://bgera035t6kqr" path="res://Scripts/Terminator.gd" id="15_wvbbp"]
 [ext_resource type="Script" uid="uid://d01ni6kk5f72" path="res://Scripts/CardManager.gd" id="16_wpo3d"]
 [ext_resource type="Script" uid="uid://baicvcewbvcdf" path="res://Scripts/CenterHand.gd" id="17_7pc0u"]
@@ -1123,7 +1123,7 @@ offset_bottom = 233.665
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(1, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 300
 text = "+123490$"
 horizontal_alignment = 1
@@ -1176,7 +1176,7 @@ offset_top = 94.98
 offset_bottom = 94.98
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial"
 horizontal_alignment = 2
@@ -1199,7 +1199,7 @@ offset_top = 77.0
 offset_bottom = -77.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial2"
 horizontal_alignment = 2
@@ -1224,7 +1224,7 @@ offset_right = 15.0
 offset_bottom = 26.11
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial_revolver"
 horizontal_alignment = 1
@@ -1243,7 +1243,7 @@ anchor_right = 0.778422
 anchor_bottom = 0.226921
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial_rival_cardslot"
 horizontal_alignment = 1
@@ -1262,7 +1262,7 @@ anchor_right = 0.703289
 anchor_bottom = 0.851824
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial_cardslot"
 horizontal_alignment = 1
@@ -1283,7 +1283,7 @@ offset_top = 0.00500488
 offset_bottom = 0.00500488
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial_life"
 horizontal_alignment = 1
@@ -1303,7 +1303,7 @@ anchor_bottom = 0.224343
 offset_bottom = -1.52588e-05
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "game_text_tutorial_center"
 horizontal_alignment = 1
@@ -1369,7 +1369,7 @@ offset_bottom = 0.00500488
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.254902, 0, 0, 1)
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 75
 text = "DEUDA RESTANTE
 400.000$"
@@ -1393,7 +1393,7 @@ anchor_right = 0.5
 anchor_bottom = 0.607407
 offset_top = 18.985
 offset_bottom = 18.985
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 170
 text = "DRAGON"
 horizontal_alignment = 1
@@ -1420,7 +1420,7 @@ offset_right = 81.0004
 offset_bottom = 211.91
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 130
 text = "WENT \"MISSING\" ON:
 2025-08-13 14:05:42"
@@ -1437,7 +1437,7 @@ anchors_preset = -1
 anchor_top = 0.662963
 anchor_right = 0.991146
 anchor_bottom = 1.46204
-theme_override_fonts/font = ExtResource("3_id2c4")
+theme_override_fonts/font = ExtResource("10_gj4xm")
 theme_override_font_sizes/font_size = 380
 text = "DEBT: 400.000$
 "

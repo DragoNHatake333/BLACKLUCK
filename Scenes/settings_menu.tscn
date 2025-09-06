@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1a3navgfevsn"]
+[gd_scene load_steps=4 format=3 uid="uid://d1a3navgfevsn"]
 
 [ext_resource type="Theme" uid="uid://djopgy1a0qxka" path="res://Scenes/MainMenu/Theme/MenuTheme.tres" id="1_icv2g"]
 [ext_resource type="Script" uid="uid://dwdrnhhe8aus6" path="res://Scripts/settings_menu.gd" id="2_8ef0u"]
+[ext_resource type="FontFile" uid="uid://cobatu4nnafm8" path="res://Scenes/MainMenu/Fonts/Humane-ExtraBold.otf" id="3_7y5a0"]
 
 [node name="OptionsPanel" type="PanelContainer"]
 anchors_preset = -1
@@ -49,7 +50,8 @@ theme_override_constants/separation = 12
 texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_tag_master"
 horizontal_alignment = 1
 
@@ -60,7 +62,7 @@ layout_mode = 2
 layout_mode = 2
 offset_left = 11.0
 offset_top = 1.0
-offset_right = 251.0
+offset_right = 247.0
 offset_bottom = 17.0
 scale = Vector2(1.995, 1.995)
 size_flags_horizontal = 3
@@ -77,7 +79,8 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "100%"
 horizontal_alignment = 1
 
@@ -89,7 +92,8 @@ theme_override_constants/separation = 12
 texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_tag_music"
 horizontal_alignment = 1
 
@@ -100,7 +104,7 @@ layout_mode = 2
 layout_mode = 2
 offset_left = 11.0
 offset_top = 1.0
-offset_right = 256.0
+offset_right = 247.0
 offset_bottom = 17.0
 scale = Vector2(1.995, 1.995)
 size_flags_horizontal = 3
@@ -117,7 +121,8 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "100%"
 horizontal_alignment = 1
 
@@ -129,7 +134,8 @@ theme_override_constants/separation = 12
 texture_filter = 1
 layout_mode = 2
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_tag_sfx"
 horizontal_alignment = 1
 
@@ -140,7 +146,7 @@ layout_mode = 2
 layout_mode = 2
 offset_left = 11.0
 offset_top = 1.0
-offset_right = 256.0
+offset_right = 249.0
 offset_bottom = 17.0
 scale = Vector2(1.995, 1.995)
 size_flags_horizontal = 3
@@ -157,7 +163,8 @@ layout_mode = 2
 size_flags_horizontal = 10
 size_flags_stretch_ratio = 0.44
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "100%"
 horizontal_alignment = 1
 
@@ -171,7 +178,8 @@ texture_filter = 1
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 42
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_tag_language"
 horizontal_alignment = 1
 
@@ -186,7 +194,8 @@ size_flags_horizontal = 4
 size_flags_vertical = 4
 theme = ExtResource("1_icv2g")
 theme_override_colors/font_focus_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 35
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 alignment = 1
 selected = 0
 item_count = 3
@@ -212,7 +221,8 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 38
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_btn_back"
 
 [node name="Quit" type="Button" parent="Panel/VBoxContainer/VBoxContainer/VBoxContainer2"]
@@ -221,5 +231,6 @@ layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 10
 theme_override_colors/font_color = Color(0.458824, 0.0470588, 0.0470588, 1)
-theme_override_font_sizes/font_size = 38
+theme_override_fonts/font = ExtResource("3_7y5a0")
+theme_override_font_sizes/font_size = 50
 text = "options_btn_quit"
