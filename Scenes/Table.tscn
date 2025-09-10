@@ -1132,6 +1132,7 @@ uppercase = true
 script = ExtResource("4_8w7an")
 
 [node name="BlackBackground" type="ColorRect" parent="Start"]
+visible = false
 z_index = 1022
 offset_right = 1917.0
 offset_bottom = 1080.0
@@ -1318,6 +1319,7 @@ texture = ExtResource("7_33e7s")
 script = ExtResource("8_x0dtf")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Start"]
+visible = false
 z_index = 1066
 anchors_preset = -1
 anchor_left = 0.0555234
@@ -1332,6 +1334,7 @@ alignment = 1
 metadata/_edit_use_anchors_ = true
 
 [node name="Yes" type="Button" parent="Start/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -1342,6 +1345,7 @@ theme_override_font_sizes/font_size = 400
 text = "game_text_win_yes"
 
 [node name="No" type="Button" parent="Start/HBoxContainer"]
+visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
@@ -1351,6 +1355,7 @@ theme_override_font_sizes/font_size = 400
 text = "game_text_win_no"
 
 [node name="Owe" type="Label" parent="Start"]
+visible = false
 modulate = Color(0, 0, 0, 1)
 z_index = 4096
 material = SubResource("ShaderMaterial_gj4xm")
