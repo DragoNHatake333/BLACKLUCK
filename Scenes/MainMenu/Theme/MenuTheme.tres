@@ -1,6 +1,5 @@
-[gd_resource type="Theme" load_steps=15 format=3 uid="uid://djopgy1a0qxka"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://djopgy1a0qxka"]
 
-[ext_resource type="FontFile" uid="uid://b1qnask4xa6p2" path="res://Scenes/MainMenu/Fonts/Fiorello CG Condensed Regular.otf" id="1_idggh"]
 [ext_resource type="Texture2D" uid="uid://cfv6pjn8k4xmx" path="res://Assets/Slider icon 2.png" id="1_jtr0b"]
 [ext_resource type="FontFile" uid="uid://cobatu4nnafm8" path="res://Scenes/MainMenu/Fonts/Humane-ExtraBold.otf" id="1_tltis"]
 [ext_resource type="Texture2D" uid="uid://dp7ax8styswui" path="res://Assets/Slider icon 3.png" id="1_uyc16"]
@@ -25,7 +24,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_uyc16"]
 
 [resource]
-default_font = ExtResource("1_idggh")
+default_font = ExtResource("1_tltis")
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/colors/font_hover_color = Color(0.666569, 0.666569, 0.666569, 1)
 Button/fonts/font = ExtResource("1_tltis")
