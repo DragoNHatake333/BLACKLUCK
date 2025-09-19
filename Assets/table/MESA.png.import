@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://x50ye5erfsvu"
 path.s3tc="res://.godot/imported/MESA.png-ec41ace44e2949ad49a2f5d70b1d5f28.s3tc.ctex"
+path.etc2="res://.godot/imported/MESA.png-ec41ace44e2949ad49a2f5d70b1d5f28.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Assets/table/MESA.png"
-dest_files=["res://.godot/imported/MESA.png-ec41ace44e2949ad49a2f5d70b1d5f28.s3tc.ctex"]
+dest_files=["res://.godot/imported/MESA.png-ec41ace44e2949ad49a2f5d70b1d5f28.s3tc.ctex", "res://.godot/imported/MESA.png-ec41ace44e2949ad49a2f5d70b1d5f28.etc2.ctex"]
 
 [params]
 
