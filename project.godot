@@ -18,6 +18,8 @@ boot_splash/show_image=false
 boot_splash/fullsize=false
 boot_splash/use_filter=false
 config/icon="uid://cbg2sx3nl1yye"
+config/macos_native_icon="uid://cbg2sx3nl1yye"
+config/windows_native_icon="uid://cbg2sx3nl1yye"
 config/volume=1.0
 
 [audio]
