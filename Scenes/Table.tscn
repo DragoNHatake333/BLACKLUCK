@@ -99,7 +99,7 @@ shader_parameter/noise_scale = 80.0
 shader_parameter/darkness = 0.4
 shader_parameter/glitch_strength = 0.01
 shader_parameter/time_slowdown = 2.5
-shader_parameter/glitch_start_time = 0.5
+shader_parameter/glitch_start_time = 1e+07
 shader_parameter/glitch_ramp_duration = 2.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gj4xm"]
